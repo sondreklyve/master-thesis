@@ -4,49 +4,51 @@
 
 \begin{document}
 
-\input{title.tex}
+%\input{title.tex}
 
-\frontmatter
+%\frontmatter
 
-\begin{abstract}
-Neutron stars contain matter at extremely high densities, where both general relativity and
-quantum many-body physics are required to describe their structure. In this project, we study
-how different models of dense matter affect the relation between the mass and radius of a
-neutron star. The analysis is based on the Tolman–Oppenheimer–Volkoff equations, which are solved
-numerically for various equations of state.
+% \begin{abstract}
+% Neutron stars contain matter at extremely high densities, where both general relativity and
+% quantum many-body physics are required to describe their structure. In this project, we study
+% how different models of dense matter affect the relation between the mass and radius of a
+% neutron star. The analysis is based on the Tolman–Oppenheimer–Volkoff equations, which are solved
+% numerically for various equations of state.
 
-We first consider a simple model, namely an ideal, non-interacting Fermi gas. This illustrates how
-degeneracy pressure can counteract gravitational collapse, while also demonstrating the limitations
-of such idealised descriptions when confronted with observed neutron-star properties.
-Building on this, the main part of the project develops an interacting model for nucleons and
-leptons in equilibrium. The interactions are described through self-consistent meson fields,
-leading to a more realistic equation of state, which is combined with a standard crust
-model before being used in the numerical stellar calculations.
+% We first consider a simple model, namely an ideal, non-interacting Fermi gas. This illustrates how
+% degeneracy pressure can counteract gravitational collapse, while also demonstrating the limitations
+% of such idealised descriptions when confronted with observed neutron-star properties.
+% Building on this, the main part of the project develops an interacting model for nucleons and
+% leptons in equilibrium. The interactions are described through self-consistent meson fields,
+% leading to a more realistic equation of state, which is combined with a standard crust
+% model before being used in the numerical stellar calculations.
 
-The resulting mass–radius relations yield radii typical of neutron stars,
-but they do not support the heaviest observed stars and show clear differences from current
-astronomical constraints. This demonstrates that while the interacting model improves upon the
-ideal, non-interacting Fermi gas description, it remains incomplete at the highest densities.
+% The resulting mass–radius relations yield radii typical of neutron stars,
+% but they do not support the heaviest observed stars and show clear differences from current
+% astronomical constraints. This demonstrates that while the interacting model improves upon the
+% ideal, non-interacting Fermi gas description, it remains incomplete at the highest densities.
 
-Overall, the project presents a coherent path from ideal models to a description of interacting
-dense matter and shows the need for more advanced equations of state in order to reproduce
-the full range of observed neutron-star properties.
-\end{abstract}
+% Overall, the project presents a coherent path from ideal models to a description of interacting
+% dense matter and shows the need for more advanced equations of state in order to reproduce
+% the full range of observed neutron-star properties.
+% \end{abstract}
 
-\tableofcontents
+% \tableofcontents
 
 \mainmatter
 
-\input{chapters/introduction.tex}
-\input{chapters/tov.tex}
-\input{chapters/ideal_fermi_gas.tex}
-\input{chapters/ideal_neutron_stars.tex}
-\input{chapters/npemu_model.tex}
-\input{chapters/conclusion.tex}
+\input{part2/introduction.tex}
+\input{part2/qft.tex}
+% \input{part1/introduction.tex}
+% \input{part1/tov.tex}
+% \input{part1/ideal_fermi_gas.tex}
+% \input{part1/ideal_neutron_stars.tex}
+% \input{part1/npemu_model.tex}
+% \input{part1/conclusion.tex}
 
-\appendix
-\input{appendix/gr_basics.tex}
-\input{appendix/numerics.tex}
+% \appendix
+% \input{appendix/gr_basics.tex}
+% \input{appendix/numerics.tex}
 
 \printbibliography
 
