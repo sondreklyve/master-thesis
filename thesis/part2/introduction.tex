@@ -15,7 +15,7 @@ by the Tolman–Oppenheimer–Volkoff (TOV) equations \cite{tolman1939,oppenheim
 These equations relate the pressure, energy density, and enclosed mass of the star
 under the assumption of hydrostatic equilibrium. In order to solve them, one must
 specify an equation of state (EoS) for dense matter. The EoS encodes assumptions
-about the microscopic constituents of the star and their interactions, and it is
+about the matter content of the star and their interactions, and it is
 the primary source of theoretical uncertainty in neutron-star modelling.
 
 Early neutron-star models employed simple equations of state based on ideal,
@@ -28,8 +28,8 @@ essential for a realistic description of dense matter.
 
 Including interactions between nucleons leads to significantly stiffer equations
 of state and substantially higher maximum masses. Models that treat neutrons and
-protons as interacting particles, supplemented by leptons to ensure charge
-neutrality and equilibrium, represent a clear improvement over idealized Fermi-gas
+protons as interacting particles, supplemented with leptons to ensure charge
+neutrality and $\beta$-equilibrium, represent a clear improvement over idealized Fermi-gas
 descriptions. Such interacting models are capable of producing neutron stars with
 masses closer to those observed in nature. However, even these more realistic
 descriptions remain uncertain at the highest densities and often struggle to
@@ -37,38 +37,85 @@ reproduce the full range of current observational constraints. This issue was
 demonstrated explicitly in the project thesis (Part~I), where we looked at the
 $npe\mu$ model for matter. It was shown that,
 despite significant improvement over idealized models, the predicted mass-radius
-still do not align with well-measured neutron stars.
+relations still do not align with well-measured neutron stars.
 
-The persistence of these discrepancies suggests that further improvements to the
+A more detailed description of dense hadronic matter is provided by the
+Akmal--Pandharipande--Ravenhall (APR) equation of state, which is based on
+realistic two- and three-nucleon interactions constrained by nucleon--nucleon
+scattering data and many-body calculations \cite{Akmal1998}. When three-nucleon
+forces and leading relativistic corrections are included, the APR model can
+support neutron stars with maximum masses above two solar masses, placing it
+among the stiffest purely hadronic equations of state. However, this stiffness
+comes at a cost: at the highest densities, the model approaches or exceeds
+limits set by causality, as the speed of sound can become comparable to or larger
+than the speed of light. This highlights a general issue faced by very stiff
+hadronic equations of state: while they can reproduce large neutron-star
+masses, their behavior at extreme densities becomes increasingly uncertain.
+As a result, even advanced hadronic models such as APR do not fully resolve the
+tension between theoretical consistency and observational constraints, and
+they motivate the exploration of alternative descriptions of dense matter at
+the highest densities.
+
+The persistence of these discrepancies suggests that further improvements of the
 equation of state are required. One possible direction is that the relevant
 degrees of freedom at the highest densities differ qualitatively from those of
 ordinary nuclear matter. The development of quantum chromodynamics (QCD) in the
 early 1970s, as the fundamental theory of the strong interaction, provided a
 microscopic description of hadrons in terms of quarks and gluons
-\cite{GrossWilczek1973}. This, in turn, opened the possibility of considering
-regimes in which quark degrees of freedom are no longer confined inside hadrons,
-but appear explicitly in bulk matter.
+\cite{GrossWilczek1973}. This, in turn, opened the possibility of considering 
+regimes in which quark degrees of freedom are no longer confined in hadronic
+bound states, but instead play a direct role in the description of bulk matter.
 
-Shortly after the formulation of QCD emerged the idea that
-matter at sufficiently high density might undergo a transition from a hadronic
-description to one in terms of deconfined quarks. Early studies in the 1970s and
-1980s examined the implications of such a transition for compact stars, leading
-to the proposal of new classes of stellar objects
-\cite{Itoh1970,Bodmer1971,Witten1984}. Within this framework, neutron stars may
-contain cores of deconfined quark matter, commonly referred to as hybrid stars,
-or, in more speculative scenarios, be composed entirely of quark matter, giving
-rise to quark or strange stars.
+Shortly after the formulation of quantum chromodynamics (QCD) in the early
+1970s, the idea emerged that matter at sufficiently high density might undergo a
+transition from a hadronic description to one in terms of deconfined quarks.
+Early studies in the 1970s and 1980s explored the implications of such a
+transition for compact stars, leading to the proposal of new classes of stellar
+objects \cite{Itoh1970,Bodmer1971,Witten1984}. Within this framework, neutron
+stars may contain cores of deconfined quark matter, commonly referred to as
+hybrid stars, or, in more speculative scenarios, be composed entirely of quark
+matter, giving rise to quark or strange stars.
 
-A theoretical description of these possibilities requires a framework that goes
-beyond phenomenological models of hadronic matter. Quantum field theory provides
-the natural language for matter at a fundamental
-level, with QCD as the underlying theory governing the
+A closely related idea is the strange matter hypothesis, originally proposed by
+Bodmer and later developed by Witten \cite{Bodmer1971,Witten1984}. In this
+scenario, bulk quark matter containing up, down, and strange quarks could have
+a lower energy per baryon than ordinary nuclear matter. If this were the case,
+the hadronic matter observed in nuclei and neutron stars would not represent
+the absolute ground state of the strong interaction, but rather a very
+long-lived, metastable phase. Neutron stars provide one of the few environments
+in the present universe where conditions might allow such a phase to form, due
+to their extremely high central densities. Depending on the details of the
+transition, this could lead either to stars with quark cores or to stars
+composed entirely of strange quark matter, commonly referred to as strange
+stars \cite{glendenning2000}.
+
+If strange quark matter were absolutely stable, an important consequence would
+be that the formation of a sufficiently large region of strange matter inside a
+neutron star could trigger the conversion of the surrounding hadronic matter.
+In this case, the star would not remain a hybrid object but could instead
+convert almost entirely into a strange star. Although the dynamics of such a
+conversion process are uncertain and model dependent, this possibility makes
+strange stars qualitatively different from ordinary neutron stars and hybrid
+stars. One proposed observational way to distinguish between these scenarios is
+through rapid rotation. Strange stars are self-bound by the strong interaction,
+rather than being bound by gravity alone, and may therefore be able to rotate
+faster than neutron stars without shedding mass. The discovery of a pulsar with
+a rotation period shorter than what is theoretically possible for a neutron
+star would be difficult to explain within purely hadronic models and would
+provide strong evidence in favor of a strange star interpretation
+\cite{glendenning2000}.
+
+A theoretical description of these possibilities calls for models that go
+beyond purely hadronic descriptions of dense matter. While hadronic models are
+commonly formulated within quantum field theory, they describe matter in terms
+of composite bound states. A more fundamental description is provided by QCD,
+which is the underlying theory governing the
 interactions between quarks and gluons \cite{PeskinSchroeder1995}. While QCD is
 well established as the correct microscopic theory of the strong interaction,
 its direct application to the high-density, low-temperature regime relevant for
 neutron stars remains notoriously challenging. As a result, first-principles
 calculations in this domain are limited, and one must instead rely on
-approximate approaches. This has motivated the development of effective theories
+approximate approaches. This has motivated the development of effective models
 inspired by QCD, which aim to capture the relevant degrees of freedom and
 symmetry properties of strongly interacting matter while remaining tractable
 \cite{glendenning2000}. Such approaches provide a practical starting point for

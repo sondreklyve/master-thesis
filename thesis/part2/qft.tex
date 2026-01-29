@@ -3,9 +3,9 @@
 
 Quantum field theory (QFT) provides the modern theoretical framework for
 describing elementary particles and their interactions. It underlies the
-Standard Model of particle physics and plays a central role not only in
-high-energy physics, but also in condensed matter theory and the physics of
-many-body systems. In the context of dense matter and compact stars, QFT offers
+Standard Model of particle physics and plays a central role in both
+high-energy physics and condensed matter theory. 
+In the context of dense matter and compact stars, QFT offers
 a natural language for describing interacting particles at high densities and
 for connecting microscopic physics to macroscopic quantities
 \cite{PeskinSchroeder1995,Weinberg1995}.
@@ -21,35 +21,40 @@ mechanics with special relativity at the level of single-particle wavefunctions
 lead to conceptual and physical inconsistencies
 \cite{BjorkenDrell1964}.
 
-These issues can be illustrated with simple thought experiments. An
-example is the relativistic boosting of a particle confined
-to a box. When such a system is analyzed in a highly boosted reference frame,
-quantum fluctuations in momentum lead to large fluctuations in energy that
-cannot be consistently interpreted within ordinary quantum mechanics. In
-particular, the appearance of energy fluctuations associated with the vacuum
-indicates the need for a framework in which particle creation and annihilation
-are allowed and the vacuum itself carries dynamical degrees of freedom. This
-example provides a concrete and physically transparent motivation for QFT \cite{Vutha_2013}.
+These issues can be illustrated with simple thought experiments that expose a
+tension between quantum mechanics and special relativity. One such
+example is provided by a particle confined to a box that is observed from a
+highly boosted reference frame \cite{Vutha_2013}. In the rest frame of the box,
+the ground state has a well-defined energy, even though the particle’s momentum
+fluctuates due to confinement. When the system is viewed from a relativistically
+boosted frame, these momentum fluctuations are converted into fluctuations in
+the particle’s energy. As a result, a state that is an energy eigenstate in one
+inertial frame acquires an energy uncertainty in another. Within ordinary
+quantum mechanics, this leads to a conceptual problem: energy fluctuations imply
+a finite lifetime and an exchange of energy, yet the vacuum is not treated as a
+dynamical object and cannot act as a reservoir. There is therefore no consistent
+way to interpret these fluctuations within the Schrödinger framework alone.
 
-QFT resolves these problems by promoting particles to
-excitations of underlying quantum fields that extend throughout space and time.
-In this framework, each particle species is associated with a corresponding
-field, and particles appear as localized excitations of that field. The field
-theoretic description naturally incorporates special relativity and provides a
-consistent treatment of processes in which particle number is not conserved.
-It also offers a fundamental explanation for the existence of identical
-particles: particles of the same type are identical because they arise from the
-same underlying quantum field \cite{Weinberg1995}.
+Quantum field theory resolves this difficulty by allowing particle number to
+change and by treating the vacuum as an active part of the theory. In QFT,
+particles are not fundamental objects but appear as excitations of underlying
+quantum fields that extend throughout space and time. This framework naturally
+incorporates special relativity and provides a consistent description of
+processes involving particle creation and annihilation. It also offers a simple
+explanation for the existence of identical particles: particles of the same type
+are identical because they arise as excitations of the same underlying field
+\cite{Weinberg1995}. In this way, QFT provides a coherent resolution of the
+conflict encountered in relativistic quantum mechanics.
 
-One of the most successful realizations of QFT is quantum
+One of the most successful realizations of quantum field theory is quantum
 electrodynamics (QED), the relativistic field theory of electrons and photons.
 QED is among the most precisely tested theories in physics, with experimental
-measurements agreeing with theoretical predictions to remarkable accuracy. Its
-success provides strong evidence that quantum fields, rather than particles
-alone, constitute the fundamental degrees of freedom of nature
-\cite{PeskinSchroeder1995}. More generally, QFT provides a
-unified framework in which quantum mechanics and special relativity are combined
-in a consistent and predictive manner.
+measurements agreeing with theoretical predictions to remarkable accuracy.
+This level of agreement illustrates the effectiveness of quantum field theory
+as a framework for describing fundamental interactions beyond a purely
+particle-based picture \cite{PeskinSchroeder1995}. More generally, QFT provides
+a unified framework in which quantum mechanics and special relativity are
+combined in a consistent manner.
 
 For the study of dense matter, QFT is particularly useful
 because it allows interactions, symmetries, and conservation laws to be treated
@@ -64,11 +69,12 @@ later in the thesis.
 \section{Bridging quantum mechanics and field theory}
 \label{sec:bridging_qm_qft}
 
-In this section we briefly introduce the conceptual and mathematical framework
-that connects ordinary quantum mechanics to QFT. The emphasis
-is on the path-integral formulation, which generalizes naturally from systems
-with finitely many degrees of freedom to relativistic fields and provides a
-convenient starting point for the description of interacting matter.
+In this section we briefly introduce the conceptual and mathematical frameworks
+that connect ordinary quantum mechanics to QFT. 
+The emphasis is on the path-integral formulation. This approach generalizes
+naturally from systems with a fixed number of degrees of freedom to
+relativistic fields and provides a convenient starting point for describing
+interacting matter.
 
 \subsection*{Action principle and path integrals in quantum mechanics}
 
@@ -163,208 +169,225 @@ where $J(x)$ is a spacetime-dependent source. As in quantum mechanics, all
 time-ordered correlation functions of the field can be obtained by functional
 differentiation with respect to $J(x)$. In particular, the two-point function
 plays the role of the propagator and describes how field fluctuations propagate
-through spacetime.
+in spacetime.
 
 The path-integral formulation provides a unified and flexible framework for
 QFT. It treats space and time on an equal footing, makes the
-role of symmetries transparent, and generalizes naturally to systems with many
+role of spacetime symmetries transparent, and generalizes naturally to systems with many
 interacting degrees of freedom. For these reasons, it will serve as the primary
 language for the scalar field theories discussed in the following sections and
 for the effective models of dense matter introduced later in this thesis
 \cite{PeskinSchroeder1995,Weinberg1995}.
 
-% \section{Free scalar field}
-% \label{sec:free_scalar_field}
+\section{Free scalar field}
+\label{sec:free_scalar_field}
 
-% We now turn to the simplest example of a relativistic quantum field theory: a
-% real scalar field. Despite its simplicity, this theory already illustrates
-% many of the structural features common to more realistic models, including the
-% role of symmetries, conserved currents, and propagators. It also provides a
-% natural starting point for introducing interactions in a controlled way.
+We now turn to the simplest example of a relativistic quantum field theory: a
+real scalar field. Despite its simplicity, this theory already illustrates
+many of the structural features common to more realistic models, including the
+role of symmetries, conserved currents, and propagators. It also provides a
+natural starting point for introducing interactions in a controlled way.
 
-% \subsection*{Classical scalar field}
+\subsection*{Classical scalar field}
 
-% A real scalar field $\phi(x)$ is a real-valued function defined on spacetime,
-% where $x=(t,\mathbf{x})$. The dynamics of a free relativistic scalar field are
-% specified by the Lagrangian density
-% \begin{equation}
-% \mathcal{L}_0
-% = \frac{1}{2}\partial_\mu \phi\, \partial^\mu \phi
-% - \frac{1}{2} m^2 \phi^2 ,
-% \end{equation}
-% where $m$ is a mass parameter and natural units $\hbar=c=1$ are used. The action
-% is obtained by integrating the Lagrangian density over spacetime,
-% \begin{equation}
-% S_0[\phi] = \int d^4x \, \mathcal{L}_0 .
-% \end{equation}
+A real scalar field $\phi(x)$ is a real-valued function defined on spacetime,
+where $x=(t,\mathbf{x})$. The dynamics of a free relativistic scalar field are
+specified by the Lagrangian density
+\begin{equation}
+\mathcal{L}_0
+= \frac{1}{2}\partial_\mu \phi\, \partial^\mu \phi
+- \frac{1}{2} m^2 \phi^2 ,
+\end{equation}
+where $m$ is a mass parameter and natural units $\hbar=c=1$ are used. The action
+is obtained by integrating the Lagrangian density over spacetime,
+\begin{equation}
+S_0[\phi] = \int d^4x \, \mathcal{L}_0 .
+\end{equation}
 
-% Varying the action with respect to the field yields the Euler--Lagrange equation
-% \begin{equation}
-% \frac{\partial \mathcal{L}_0}{\partial \phi}
-% - \partial_\mu
-% \frac{\partial \mathcal{L}_0}{\partial(\partial_\mu\phi)} = 0 ,
-% \end{equation}
-% which leads to the Klein--Gordon equation
-% \begin{equation}
-% (\Box + m^2)\phi(x) = 0 ,
-% \end{equation}
-% where $\Box = \partial_\mu\partial^\mu$ is the d'Alembert operator. This equation
-% describes a relativistic scalar particle of mass $m$.
+Varying the action with respect to the field yields the Euler--Lagrange equation
+\begin{equation}
+\frac{\partial \mathcal{L}_0}{\partial \phi}
+- \partial_\mu
+\frac{\partial \mathcal{L}_0}{\partial(\partial_\mu\phi)} = 0 ,
+\end{equation}
+which leads to the Klein--Gordon equation
+\begin{equation}
+(\Box + m^2)\phi(x) = 0 ,
+\end{equation}
+where $\Box = \partial_\mu\partial^\mu$ is the d'Alembert operator.
 
-% \subsection*{Symmetries and Noether's theorem}
+The Klein--Gordon equation is the simplest relativistic wave equation for a
+scalar field. Due to the linearity of the free theory, the field can be
+decomposed into independent modes, each of which evolves separately. At the
+classical level, each such mode behaves like a harmonic oscillator with a
+well-defined frequency. Since the quantum harmonic oscillator is a standard and
+well-understood system, this structure provides a direct link between the
+classical field description and its quantum counterpart. In this way, the free
+scalar field can be viewed as a collection of independent quantum oscillators,
+and particles emerge naturally as excitations of the field \cite{Kachelriess2017}.
 
-% The action $S_0[\phi]$ possesses several continuous symmetries. Of particular
-% importance are spacetime translations,
-% \begin{equation}
-% x^\mu \rightarrow x^\mu + a^\mu ,
-% \end{equation}
-% under which the field transforms as $\phi(x)\rightarrow \phi(x-a)$. According
-% to Noether's theorem, every continuous symmetry of the action gives rise to a
-% conserved current \cite{Noether1918,Weinberg1995}. For spacetime translations,
-% the associated conserved quantity is the energy--momentum tensor,
-% \begin{equation}
-% T^{\mu\nu}
-% = \partial^\mu \phi\, \partial^\nu \phi
-% - g^{\mu\nu}\mathcal{L}_0 ,
-% \end{equation}
-% which satisfies the conservation law $\partial_\mu T^{\mu\nu}=0$ when the
-% equations of motion are fulfilled. The conserved charges obtained by integrating
-% $T^{0\nu}$ over space correspond to the total energy and momentum of the field.
+\subsection*{Symmetries and Noether's theorem}
 
-% The connection between symmetries and conservation laws provided by Noether's
-% theorem plays a central role in quantum field theory. In later chapters, it
-% will be used to identify conserved charges associated with internal symmetries
-% and to motivate the introduction of chemical potentials in field-theoretic
-% descriptions of dense matter.
+The action $S_0[\phi]$ possesses several continuous symmetries. Of particular
+importance are spacetime translations,
+\begin{equation}
+x^\mu \rightarrow x^\mu + a^\mu ,
+\end{equation}
+under which the field transforms as $\phi(x)\rightarrow \phi(x-a)$. According
+to Noether's theorem, every continuous symmetry of the action gives rise to a
+conserved current \cite{Noether1918,Weinberg1995}. This result establishes a
+direct and general connection between symmetry principles and conservation
+laws, independent of the specific form of the dynamics.
 
-% \subsection*{Free scalar quantum field and generating functional}
+For spacetime translations, the associated conserved quantity is the
+energy--momentum tensor,
+\begin{equation}
+T^{\mu\nu}
+= \partial^\mu \phi\, \partial^\nu \phi
+- g^{\mu\nu}\mathcal{L}_0 ,
+\end{equation}
+which satisfies the local conservation law $\partial_\mu T^{\mu\nu}=0$ when the
+equations of motion are fulfilled. The conserved charges obtained by integrating
+$T^{0\nu}$ over space correspond to the total energy and momentum of the field.
+These quantities generate time and space translations and play a central role
+in the relativistic description of field dynamics \cite{Pauli1941}.
 
-% The quantum theory of the free scalar field is defined through the path
-% integral. Introducing a spacetime-dependent source $J(x)$, the generating
-% functional is given by
-% \begin{equation}
-% Z_0[J] =
-% \int \mathcal{D}\phi\,
-% \exp\!\left[i\left(
-% S_0[\phi] + \int d^4x\, J(x)\phi(x)
-% \right)\right].
-% \end{equation}
-% Because the action is quadratic in the field, the functional integral is
-% Gaussian and can be evaluated exactly. While the explicit calculation will not
-% be carried out here, its structure implies that all correlation functions can be
-% expressed in terms of the two-point function.
+Noether's theorem is a cornerstone of quantum field theory. Beyond spacetime
+symmetries, the same principle applies to internal symmetries, leading to
+conserved charges that strongly constrain the dynamics of interacting systems.
 
-% The time-ordered two-point correlation function,
-% \begin{equation}
-% D_F(x-y)
-% = \langle T\,\phi(x)\phi(y)\rangle ,
-% \end{equation}
-% is known as the Feynman propagator. It describes the propagation of field
-% fluctuations between spacetime points $x$ and $y$. Formally, the propagator is
-% the Green's function of the Klein--Gordon operator,
-% \begin{equation}
-% (\Box_x + m^2) D_F(x-y) = -i\,\delta^{(4)}(x-y) .
-% \end{equation}
-% All higher-order correlation functions of the free theory can be obtained by
-% functional differentiation of $Z_0[J]$ with respect to the source $J(x)$.
+\subsection*{Free scalar quantum field and generating functional}
 
-% The free scalar field thus provides a complete and exactly solvable example of a
-% relativistic quantum field theory. Its simplicity makes it an ideal laboratory
-% for introducing interactions and symmetry-breaking mechanisms, which will be
-% the focus of the next section.
+The quantum theory of the free scalar field is defined through the path
+integral. Introducing a spacetime-dependent source $J(x)$, the generating
+functional is given by
+\begin{equation}
+Z_0[J] =
+\int \mathcal{D}\phi\,
+\exp\!\left[i\left(
+S_0[\phi] + \int d^4x\, J(x)\phi(x)
+\right)\right].
+\end{equation}
+The source $J(x)$ is a classical auxiliary field that allows correlation
+functions of $\phi(x)$ to be generated by functional differentiation. In this
+sense, the generating functional provides a compact way of organizing the
+dynamical content of the theory \cite{Schwinger1951,FeynmanHibbs1965}.
 
-% \section{Interacting scalar fields: the \texorpdfstring{$\phi^4$}{phi4} theory}
-% \label{sec:phi4_theory}
+Because the action is quadratic in the field, the functional integral is
+Gaussian and can be evaluated exactly. While the explicit calculation will not
+be carried out here, its structure implies that all correlation functions of the
+free theory can be reduced to combinations of the two-point function \cite{Kachelriess2017}.
 
-% Having established the basic framework for free scalar fields, we now introduce
-% interactions in the simplest possible setting. The interacting scalar field
-% theory with a quartic self-interaction, commonly referred to as $\phi^4$ theory,
-% serves as a prototypical example for studying the effects of interactions and
-% spontaneous symmetry breaking in quantum field theory. Although highly
-% idealized, this model captures several structural features that also appear in
-% more realistic theories of strongly interacting matter.
+The time-ordered two-point correlation function,
+\begin{equation}
+D_F(x-y)
+= \langle T\,\phi(x)\phi(y)\rangle ,
+\end{equation}
+is known as the Feynman propagator. It describes the propagation of field
+fluctuations between spacetime points $x$ and $y$ and plays a central role in
+perturbative calculations. Formally, the propagator is the Green's function of
+the Klein--Gordon operator,
+\begin{equation}
+(\Box_x + m^2) D_F(x-y) = -i\,\delta^{(4)}(x-y) .
+\end{equation}
+All higher-order correlation functions of the free theory can be obtained by
+functional differentiation of $Z_0[J]$ with respect to the source $J(x)$.
 
-% \subsection*{Lagrangian and symmetries}
+\section{Interacting scalar fields: the \texorpdfstring{$\phi^4$}{phi4} theory}
+\label{sec:phi4_theory}
 
-% The Lagrangian density of the interacting scalar field is given by
-% \begin{equation}
-% \mathcal{L}
-% = \frac{1}{2}\partial_\mu \phi\,\partial^\mu \phi
-% - \frac{1}{2} m^2 \phi^2
-% - \frac{\lambda}{4!}\,\phi^4 ,
-% \end{equation}
-% where $\lambda$ is a real coupling constant. For $\lambda>0$, the interaction
-% term ensures that the energy of the system is bounded from below.
+Having established the basic framework for free scalar fields, we now introduce
+interactions in the simplest possible setting. The interacting scalar field
+theory with a quartic self-interaction, commonly referred to as $\phi^4$ theory,
+provides a minimal extension of the free theory in which genuine interaction
+effects appear. Even in this simple model, interactions lead to nonlinear
+dynamics, a modification of propagators, and a nontrivial vacuum structure.
+Moreover, $\phi^4$ theory offers a transparent and controlled setting in which
+spontaneous symmetry breaking can be examined explicitly. Concepts such as
+degenerate vacuum states and fluctuations around a chosen ground state arise
+naturally in this context. These ideas reappear in more realistic descriptions
+of strongly interacting matter and motivate the use of $\phi^4$ theory as a
+starting point for developing intuition and establishing notation before
+turning to more complex field-theoretic models.
 
-% The theory is invariant under the discrete transformation
-% \begin{equation}
-% \phi(x) \rightarrow -\phi(x) ,
-% \end{equation}
-% which corresponds to a $\mathbb{Z}_2$ symmetry of the action. This symmetry plays
-% a central role in the discussion of spontaneous symmetry breaking.
+\subsection*{Lagrangian and symmetries}
 
-% \subsection*{Classical potential and vacuum structure}
+The Lagrangian density of the interacting scalar field is given by
+\begin{equation}
+\mathcal{L}
+= \frac{1}{2}\partial_\mu \phi\,\partial^\mu \phi
+- \frac{1}{2} m^2 \phi^2
+- \frac{\lambda}{4!}\,\phi^4 ,
+\end{equation}
+where $\lambda$ is a real coupling constant. For $\lambda>0$, the interaction
+term ensures that the energy of the system is bounded from below.
 
-% For static and spatially uniform field configurations, the dynamics of the
-% theory are governed by the classical potential
-% \begin{equation}
-% V(\phi)
-% = \frac{1}{2} m^2 \phi^2
-% + \frac{\lambda}{4!}\,\phi^4 .
-% \end{equation}
-% The vacuum of the theory corresponds to the field configuration that minimizes
-% this potential.
+The theory is invariant under the discrete transformation
+\begin{equation}
+\phi(x) \rightarrow -\phi(x) ,
+\end{equation}
+which corresponds to a $\mathbb{Z}_2$ symmetry of the action. This symmetry
+reflects the fact that the Lagrangian depends only on even powers of the field
+and therefore treats positive and negative values of $\phi$ equally.
 
-% If $m^2>0$, the potential has a single minimum at $\phi=0$, and the $\mathbb{Z}_2$
-% symmetry is realized trivially. In contrast, if $m^2<0$, the potential takes the
-% form of a double well with two degenerate minima located at
-% \begin{equation}
-% \phi = \pm v, \qquad
-% v = \sqrt{\frac{6|m^2|}{\lambda}} .
-% \end{equation}
-% In this case, the ground state of the theory is not invariant under the
-% $\mathbb{Z}_2$ symmetry of the Lagrangian.
+\subsection*{Classical potential, vacuum structure, and symmetry breaking}
 
-% \subsection*{Spontaneous symmetry breaking}
+For static and spatially uniform field configurations, the dynamics of the
+theory are governed by the classical potential
+\begin{equation}
+V(\phi)
+= \frac{1}{2} m^2 \phi^2
++ \frac{\lambda}{4!}\,\phi^4 .
+\end{equation}
+The vacuum of the theory corresponds to the field configuration that minimizes
+this potential. Restricting to uniform fields is sufficient for determining the
+vacuum structure. The gradient terms increase the energy and therefore do not
+contribute to the lowest-energy state.
 
-% When the system selects one of the two degenerate minima as its vacuum state,
-% the discrete symmetry $\phi\rightarrow-\phi$ is said to be spontaneously broken.
-% Although the Lagrangian remains symmetric, the vacuum does not share this
-% symmetry. This phenomenon is referred to as spontaneous symmetry breaking and
-% occurs whenever the ground state of a system has a lower symmetry than the
-% underlying equations of motion.
+If $m^2>0$, the potential has a single minimum at $\phi=0$, and the
+$\mathbb{Z}_2$ symmetry of the Lagrangian is realized trivially. In contrast, if
+$m^2<0$, the potential takes the form of a double well with two degenerate minima
+located at
+\begin{equation}
+\phi = \pm v, \qquad
+v = \sqrt{\frac{6|m^2|}{\lambda}} .
+\end{equation}
+Although the Lagrangian remains invariant under the transformation
+$\phi \rightarrow -\phi$, the ground state of the theory is not. In this case,
+the system must select one of the two minima as its vacuum state, and the
+$\mathbb{Z}_2$ symmetry is said to be spontaneously broken.
 
-% To study fluctuations around a chosen vacuum, one writes the field as
-% \begin{equation}
-% \phi(x) = v + \eta(x) ,
-% \end{equation}
-% where $\eta(x)$ describes small fluctuations about the vacuum expectation value
-% $v$. Substituting this expression into the Lagrangian and expanding in powers of
-% $\eta$ yields a new Lagrangian for the fluctuation field. To quadratic order,
-% one finds a mass term for $\eta$ with
-% \begin{equation}
-% m_\eta^2 = 2|m^2| ,
-% \end{equation}
-% indicating that the excitations around the vacuum correspond to massive scalar
-% particles.
+Figure~\ref{fig:phi4_potential} illustrates this qualitative change in the vacuum
+structure: for $m^2>0$ the potential has a single minimum at $\phi=0$, while for
+$m^2<0$ it develops two degenerate minima at $\phi=\pm v$.
 
-% This simple example illustrates how interactions can dynamically generate mass
-% scales and nontrivial vacuum structure, even when the original Lagrangian
-% contains only a small number of parameters.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/qft/symmetry_breaking.pdf}
+  \caption{Classical $\phi^4$ potential
+  $V(\phi)=\frac{1}{2}m^2\phi^2+\frac{\lambda}{4!}\phi^4$ for $\lambda>0$.
+  For $m^2>0$ the vacuum is at $\phi=0$. For $m^2<0$ the potential becomes a
+  double well with degenerate minima at $\phi=\pm v$, where
+  $v=\sqrt{6|m^2|/\lambda}$.}
+  \label{fig:phi4_potential}
+\end{figure}
 
-% \subsection*{Interpretation and relevance}
+To study fluctuations around a chosen vacuum, the field is written as
+\begin{equation}
+\phi(x) = v + \eta(x) ,
+\end{equation}
+where $\eta(x)$ describes small deviations from the vacuum expectation value
+$v$. Substituting this expression into the Lagrangian and expanding in powers of
+$\eta$ yields an effective theory for the fluctuation field. To quadratic order,
+one finds a mass term
+\begin{equation}
+m_\eta^2 = 2|m^2| ,
+\end{equation}
+showing that excitations around the vacuum correspond to massive scalar
+particles.
 
-% Although $\phi^4$ theory is not intended as a realistic model of particle
-% physics, it plays an important conceptual role. It provides a minimal setting
-% in which interactions, symmetry, and vacuum structure can be analyzed
-% explicitly. In particular, it demonstrates how spontaneous symmetry breaking
-% arises from the interplay between the form of the potential and the symmetries
-% of the action.
-
-% These ideas extend far beyond scalar field theory. In more realistic models,
-% such as those used to describe strongly interacting matter, scalar fields often
-% serve as effective degrees of freedom associated with order parameters of
-% symmetry-breaking transitions. The $\phi^4$ theory thus serves as a useful
-% prototype for understanding the structure of effective field-theoretic models
-% employed later in this thesis, including those inspired by quantum
-% chromodynamics.
+No massless mode appears in this example, since the broken symmetry is discrete
+rather than continuous. The $\mathbb{Z}_2$ symmetry relates the two degenerate
+vacuums but does not generate a continuous family of equivalent ground states.
+This distinguishes the present case from theories with continuous symmetries,
+where spontaneous symmetry breaking leads to massless excitations.
