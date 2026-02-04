@@ -198,7 +198,7 @@ specified by the Lagrangian density
 = \frac{1}{2}\partial_\mu \phi\, \partial^\mu \phi
 - \frac{1}{2} m^2 \phi^2 ,
 \end{equation}
-where $m$ is a mass parameter and natural units $\hbar=c=1$ are used. The action
+where $m$ is a mass parameter. The action
 is obtained by integrating the Lagrangian density over spacetime,
 \begin{equation}
 S_0[\phi] = \int d^4x \, \mathcal{L}_0 .
@@ -216,7 +216,7 @@ which leads to the Klein--Gordon equation
 \end{equation}
 where $\Box = \partial_\mu\partial^\mu$ is the d'Alembert operator.
 
-The Klein--Gordon equation is the simplest relativistic wave equation for a
+The Klein--Gordon equation is the relativistic wave equation for a
 scalar field. Due to the linearity of the free theory, the field can be
 decomposed into independent modes, each of which evolves separately. At the
 classical level, each such mode behaves like a harmonic oscillator with a
@@ -228,37 +228,70 @@ and particles emerge naturally as excitations of the field \cite{Kachelriess2017
 
 \subsection*{Symmetries and Noether's theorem}
 
-The action $S_0[\phi]$ possesses several continuous symmetries. Of particular
-importance are spacetime translations,
+A central organizing principle in field theory is the role of symmetries.
+Symmetries of the action constrain the dynamics and lead directly to conserved
+quantities. For the free scalar field, the most important symmetries are those
+associated with spacetime itself.
+
+The action $S_0[\phi]$ is invariant under spacetime translations,
 \begin{equation}
 x^\mu \rightarrow x^\mu + a^\mu ,
 \end{equation}
-under which the field transforms as $\phi(x)\rightarrow \phi(x-a)$. According
-to Noether's theorem, every continuous symmetry of the action gives rise to a
-conserved current \cite{Noether1918,Weinberg1995}. This result establishes a
-direct and general connection between symmetry principles and conservation
-laws, independent of the specific form of the dynamics.
+where $a^\mu$ is a constant four-vector. Physically, this symmetry expresses the
+homogeneity of spacetime: the laws of physics are the same at all points in
+space and time. Under an infinitesimal translation, the field transforms as
+\begin{equation}
+\phi(x) \rightarrow \phi(x-a)
+\qquad \Rightarrow \qquad
+\delta\phi(x) = -a^\nu \partial_\nu \phi(x) .
+\end{equation}
+Since the Lagrangian density $\mathcal{L}_0$ depends on the field and its
+derivatives but not explicitly on the spacetime coordinates $x^\mu$, the action
+remains unchanged under this transformation.
 
-For spacetime translations, the associated conserved quantity is the
-energy--momentum tensor,
+According to Noether's theorem, every continuous symmetry of the action gives
+rise to a conserved current \cite{Noether1918,Weinberg1995}. Applied to spacetime
+translations, this theorem leads to the conservation of energy and momentum. The
+corresponding conserved current is the energy--momentum tensor,
 \begin{equation}
 T^{\mu\nu}
 = \partial^\mu \phi\, \partial^\nu \phi
-- g^{\mu\nu}\mathcal{L}_0 ,
+- g^{\mu\nu}\mathcal{L}_0 .
 \end{equation}
-which satisfies the local conservation law $\partial_\mu T^{\mu\nu}=0$ when the
-equations of motion are fulfilled. The conserved charges obtained by integrating
-$T^{0\nu}$ over space correspond to the total energy and momentum of the field.
-These quantities generate time and space translations and play a central role
-in the relativistic description of field dynamics \cite{Pauli1941}.
+Using the equations of motion, one finds that this tensor satisfies the local
+conservation law
+\begin{equation}
+\partial_\mu T^{\mu\nu} = 0 .
+\end{equation}
 
-Noether's theorem is a cornerstone of quantum field theory. Beyond spacetime
-symmetries, the same principle applies to internal symmetries, leading to
-conserved charges that strongly constrain the dynamics of interacting systems.
+The energy--momentum tensor $T^{\mu\nu}$ has a clear physical interpretation.
+Its components describe how energy and momentum are distributed in spacetime
+and how they flow through space. In particular, the components $T^{0\nu}$ play a
+special role. Integrating them over space defines conserved quantities,
+\begin{equation}
+P^\nu = \int d^3x \, T^{0\nu} ,
+\end{equation}
+which are constant in time as a consequence of the conservation law
+$\partial_\mu T^{\mu\nu}=0$.
+
+The quantity $P^0$ corresponds to the total energy of the field configuration,
+while the spatial components $P^i$ correspond to the total momentum. These
+conserved quantities are directly associated with spacetime translation
+symmetry: conservation of energy follows from invariance under time
+translations, and conservation of momentum follows from invariance under spatial
+translations. In this way, the energy--momentum tensor provides the concrete link
+between spacetime symmetries and conserved physical quantities
+\cite{Pauli1941}.
+
+Noether's theorem thus provides a direct link between symmetry and conservation
+laws in QFT. While spacetime symmetries lead to conservation of
+energy and momentum, the same reasoning applies to internal symmetries, which
+give rise to conserved charges that play a crucial role in interacting field
+theories and in the description of many-body systems.
 
 \subsection*{Free scalar quantum field and generating functional}
 
-The quantum theory of the free scalar field is defined through the path
+The quantum theory of a free scalar field is defined through the path
 integral. Introducing a spacetime-dependent source $J(x)$, the generating
 functional is given by
 \begin{equation}
@@ -269,24 +302,30 @@ S_0[\phi] + \int d^4x\, J(x)\phi(x)
 \right)\right].
 \end{equation}
 The source $J(x)$ is a classical auxiliary field that allows correlation
-functions of $\phi(x)$ to be generated by functional differentiation. In this
+functions of $\phi(x)$ to be calculated by functional differentiation. In this
 sense, the generating functional provides a compact way of organizing the
 dynamical content of the theory \cite{Schwinger1951,FeynmanHibbs1965}.
 
 Because the action is quadratic in the field, the functional integral is
 Gaussian and can be evaluated exactly. While the explicit calculation will not
 be carried out here, its structure implies that all correlation functions of the
-free theory can be reduced to combinations of the two-point function \cite{Kachelriess2017}.
+free theory can be reduced to combinations of the two-point function
+\cite{Kachelriess2017}.
 
 The time-ordered two-point correlation function,
 \begin{equation}
 D_F(x-y)
 = \langle T\,\phi(x)\phi(y)\rangle ,
 \end{equation}
-is known as the Feynman propagator. It describes the propagation of field
-fluctuations between spacetime points $x$ and $y$ and plays a central role in
-perturbative calculations. Formally, the propagator is the Green's function of
-the Klein--Gordon operator,
+is known as the Feynman propagator. Here, $T$ denotes the time-ordering
+operator, which arranges the field operators such that those evaluated at later
+times appear to the left. Time ordering ensures a causal definition of
+correlation functions and is essential in QFT,
+where field operators at different spacetime points do not generally commute.
+The propagator describes the propagation of field fluctuations between
+spacetime points $x$ and $y$ and plays a central role in perturbative
+calculations. Formally, it is the Green's function of the Klein--Gordon
+operator,
 \begin{equation}
 (\Box_x + m^2) D_F(x-y) = -i\,\delta^{(4)}(x-y) .
 \end{equation}
@@ -299,7 +338,7 @@ functional differentiation of $Z_0[J]$ with respect to the source $J(x)$.
 Having established the basic framework for free scalar fields, we now introduce
 interactions in the simplest possible setting. The interacting scalar field
 theory with a quartic self-interaction, commonly referred to as $\phi^4$ theory,
-provides a minimal extension of the free theory in which genuine interaction
+provides a minimal extension of the free theory in which interaction
 effects appear. Even in this simple model, interactions lead to nonlinear
 dynamics, a modification of propagators, and a nontrivial vacuum structure.
 Moreover, $\phi^4$ theory offers a transparent and controlled setting in which
@@ -338,6 +377,7 @@ theory are governed by the classical potential
 V(\phi)
 = \frac{1}{2} m^2 \phi^2
 + \frac{\lambda}{4!}\,\phi^4 .
+\label{eq:classic_potential}
 \end{equation}
 The vacuum of the theory corresponds to the field configuration that minimizes
 this potential. Restricting to uniform fields is sufficient for determining the
@@ -350,7 +390,7 @@ $m^2<0$, the potential takes the form of a double well with two degenerate minim
 located at
 \begin{equation}
 \phi = \pm v, \qquad
-v = \sqrt{\frac{6|m^2|}{\lambda}} .
+v = \sqrt{\frac{-6m^2}{\lambda}} .
 \end{equation}
 Although the Lagrangian remains invariant under the transformation
 $\phi \rightarrow -\phi$, the ground state of the theory is not. In this case,
@@ -368,23 +408,52 @@ $m^2<0$ it develops two degenerate minima at $\phi=\pm v$.
   $V(\phi)=\frac{1}{2}m^2\phi^2+\frac{\lambda}{4!}\phi^4$ for $\lambda>0$.
   For $m^2>0$ the vacuum is at $\phi=0$. For $m^2<0$ the potential becomes a
   double well with degenerate minima at $\phi=\pm v$, where
-  $v=\sqrt{6|m^2|/\lambda}$.}
+  $v=\sqrt{-6m^2/\lambda}$.}
   \label{fig:phi4_potential}
 \end{figure}
 
-To study fluctuations around a chosen vacuum, the field is written as
+To study quantum fluctuations around a chosen vacuum, the field is written as
 \begin{equation}
 \phi(x) = v + \eta(x) ,
 \end{equation}
-where $\eta(x)$ describes small deviations from the vacuum expectation value
-$v$. Substituting this expression into the Lagrangian and expanding in powers of
-$\eta$ yields an effective theory for the fluctuation field. To quadratic order,
-one finds a mass term
+where $v$ is the vacuum expectation value that minimizes the classical
+potential and $\eta(x)$ describes small fluctuations about this vacuum. The
+Lagrangian can then be expanded in powers of $\eta$.
+
+Inserting $\phi=v+\eta$ into the potential in \eqref{eq:classic_potential},
+and expanding about $\phi=v$ gives
 \begin{equation}
-m_\eta^2 = 2|m^2| ,
+V(v+\eta)
+= V(v)
++ \left.\frac{dV}{d\phi}\right|_{\phi=v}\eta
++ \frac{1}{2}\left.\frac{d^2V}{d\phi^2}\right|_{\phi=v}\eta^2
++ \mathcal{O}(\eta^3).
 \end{equation}
-showing that excitations around the vacuum correspond to massive scalar
-particles.
+Since $v$ is a minimum of the potential, the first derivative vanishes,
+\begin{equation}
+\left.\frac{dV}{d\phi}\right|_{\phi=v} = 0 ,
+\end{equation}
+and the linear term in $\eta$ drops out. The quadratic term determines the mass
+of the fluctuation field. Evaluating the second derivative yields
+\begin{equation}
+\left.\frac{d^2V}{d\phi^2}\right|_{\phi=v}
+= m^2 + \frac{\lambda}{2}v^2 = -2m^2 ,
+\end{equation}
+where in the last step the relation $v^2=-6m^2/\lambda$ has been used.
+The expanded Lagrangian therefore contains a quadratic term of the form
+\begin{equation}
+-\frac{1}{2} m_\eta^2\,\eta^2 ,
+\end{equation}
+with
+\begin{equation}
+m_\eta^2 = -2m^2 = 2|m^2| .
+\end{equation}
+
+This shows explicitly that fluctuations around the chosen vacuum correspond to
+massive scalar excitations. The appearance of this mass is a direct consequence
+of the curvature of the potential at the minimum and illustrates how a
+nontrivial vacuum structure dynamically determines the properties of physical
+excitations.
 
 No massless mode appears in this example, since the broken symmetry is discrete
 rather than continuous. The $\mathbb{Z}_2$ symmetry relates the two degenerate
