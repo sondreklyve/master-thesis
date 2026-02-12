@@ -50,6 +50,10 @@ plt.yticks(fontsize=14)
 plt.legend(fontsize=13, frameon=True)
 plt.grid(True, linestyle=":", alpha=0.5)
 
+ax = plt.gca()
+ax.tick_params(axis='both', which='both',
+               labelbottom=False, labelleft=False)
+
 plt.tight_layout()
 # plt.savefig("phi4_potential.pdf", dpi=300)
 plt.show()
