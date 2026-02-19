@@ -225,8 +225,9 @@ projection operators
 P_{L,R} = \frac{1}{2}(1 \mp \gamma^5),
 \label{eq:projection_operators}
 \end{equation}
-where $\gamma^5$ satisfies $(\gamma^5)^2 = 1$ and anticommutes with the
-Dirac matrices $\gamma^\mu$. These operators possess several important
+where $\gamma^5$ satisfies $(\gamma^5)^2 = 1$, with $1$ understood as
+the identity operator in Dirac space, and anticommutes with the Dirac
+matrices $\gamma^\mu$. These operators possess several important
 properties.
 
 First, they are \emph{projection operators}, meaning that applying
@@ -350,13 +351,22 @@ limit $M \to 0$.
 
 At the quantum level, the axial $U(1)_A$ symmetry is further broken by
 the axial anomaly, which arises from the non-invariance of the path
-integral measure under axial transformations and is related to
-topologically nontrivial gluon configurations
-\cite{Adler1969,BellJackiw1969}. As a result, $U(1)_A$ is not an exact
-symmetry of QCD even in the chiral limit. In the present work, we
-neglect the effects of the axial anomaly and focus on the non-Abelian
-chiral symmetry, which plays the central role in the construction of
-the Quark--Meson model.
+integral measure under axial transformations in the presence of gauge
+fields \cite{Adler1969,BellJackiw1969}. Although the classical QCD
+Lagrangian is invariant under $U(1)_A$ in the chiral limit, quantum
+effects generate a nonvanishing divergence of the axial current,
+proportional to $G^A_{\mu\nu}\tilde G^{A\,\mu\nu}$. This contribution
+is associated with topologically nontrivial gluon configurations,
+such as instantons, and leads to an explicit breaking of the
+$U(1)_A$ symmetry \cite{tHooft1976}. 
+
+As a consequence, $U(1)_A$ is not an exact symmetry of QCD even when
+the quark masses vanish. Phenomenologically, this anomaly explains,
+for example, why the $\eta'$ meson is much heavier than would be
+expected from naive chiral symmetry arguments. In the present work,
+we neglect the effects of the axial anomaly and focus on the
+non-Abelian $SU(2)_L \times SU(2)_R$ symmetry, which plays the
+central role in the construction of the Quark--Meson model.
 
 Collecting the non-Abelian chiral rotations and the vector and axial
 phase symmetries at the classical level, the global symmetry group of
@@ -380,7 +390,7 @@ explicitly. The strength of both spontaneous and explicit symmetry
 breaking is governed by a small set of parameters in the mesonic
 sector, making their effects straightforward to identify and vary.
 The structure of the model is therefore fixed primarily by symmetry
-considerations, which strongly constrain the form of the allowed
+considerations, which constrain the form of the allowed
 interaction terms.
 
 The simplest fermion bilinear that couples left- and right-handed
@@ -395,12 +405,22 @@ back to the linear sigma model of Gell-Mann and L\'evy
 
 Concretely, one introduces a real scalar field $\sigma$ and a triplet
 of real pseudoscalar fields
-$\boldsymbol{\pi} = (\pi_1,\pi_2,\pi_3)$. These fields are interpreted
-as effective collective degrees of freedom associated with chiral
-symmetry breaking and its excitations. They do not correspond to
-elementary fields in the QCD Lagrangian, but are effective variables
-introduced to represent the dominant low-energy dynamics in a manner
-consistent with the underlying symmetries of the theory.
+$\boldsymbol{\pi} = (\pi_1,\pi_2,\pi_3)$. These fields represent
+color-singlet mesonic degrees of freedom and are to be interpreted as
+effective hadronic excitations of QCD at low energies. In this sense,
+they play a role analogous to protons and neutrons in ordinary
+low-temperature nuclear matter: they are not fundamental quark and
+gluon fields, but composite, confined objects that constitute the
+relevant physical degrees of freedom in the infrared regime.
+
+In particular, the pion fields correspond to the light pseudoscalar
+mesons associated with spontaneous chiral symmetry breaking, while the
+$\sigma$ field describes the corresponding scalar excitation. They do
+not appear as elementary fields in the QCD Lagrangian, but emerge as
+collective modes of the strongly interacting quark–gluon system. Their
+masses are therefore of hadronic origin, set by the scale of chiral
+symmetry breaking and confinement, rather than by the bare quark mass
+parameters of QCD.
 
 It is convenient to organize the mesonic fields into a matrix-valued
 field in flavor space,
@@ -425,7 +445,7 @@ provides a natural and symmetry-consistent way of coupling quark
 fields to the mesonic degrees of freedom.
 
 \section{The Two-Flavor Quark-Meson Lagrangian}
-Having identified the allowed interaction structure, one may now
+Having identified the allowed interaction terms, one may now
 construct the Lagrangian density of the two-flavor Quark--Meson model.
 It consists of three distinct parts: a fermionic kinetic term, a
 chirally invariant Yukawa interaction between quarks and mesons, and
@@ -443,58 +463,77 @@ and ensures the correct transformation properties under parity and
 chiral symmetry.
 
 The matrix-valued field $\Sigma$, defined in \eqref{eq:sigma_def},
-transforms under $SU(2)_L \times SU(2)_R$ as
+transforms under global $SU(2)_L \times SU(2)_R$ rotations as
 \begin{equation}
-\Sigma \rightarrow U_L \Sigma U_R^\dagger .
+\Sigma \;\longrightarrow\; U_L \Sigma U_R^\dagger ,
+\qquad
+U_L \in SU(2)_L, \quad U_R \in SU(2)_R .
 \end{equation}
-With this transformation rule, the combination $\Sigma^\dagger \Sigma$
-is invariant under chiral rotations. As a consequence, any function
-constructed from $\Sigma^\dagger \Sigma$ alone automatically respects
-the global $SU(2)_L \times SU(2)_R$ symmetry.
+Chiral invariants must therefore be constructed from quantities that
+are unchanged under this transformation. Since
+\begin{equation}
+\Sigma^\dagger \Sigma
+\;\longrightarrow\;
+U_R (\Sigma^\dagger \Sigma) U_R^\dagger ,
+\end{equation}
+its trace is invariant,
+\begin{equation}
+\mathrm{Tr}(\Sigma^\dagger \Sigma)
+\;\longrightarrow\;
+\mathrm{Tr}(\Sigma^\dagger \Sigma),
+\end{equation}
+where we have used the cyclic property of the trace.
+More generally, all invariant operators in the mesonic sector can be
+constructed from traces of products of $\Sigma$ and $\Sigma^\dagger$.
 
-The kinetic term of the mesonic fields is therefore uniquely fixed by
-symmetry to be
+The mesonic kinetic term is uniquely fixed by this symmetry structure
+and can be written compactly as
 \begin{equation}
 \mathcal{L}_{\mathrm{kin}}^{\mathrm{mes}}
-= \frac{1}{2} \, \partial_\mu \sigma \, \partial^\mu \sigma
-+ \frac{1}{2} \, \partial_\mu \boldsymbol{\pi} \cdot \partial^\mu \boldsymbol{\pi}
-= \frac{1}{2} \, \mathrm{Tr}\!\left(
+=
+\frac{1}{2}\,\mathrm{Tr}\!\left(
 \partial_\mu \Sigma^\dagger \partial^\mu \Sigma
 \right),
 \end{equation}
-since derivatives act locally and do not interfere with the global
-chiral transformation properties of $\Sigma$.
+which is invariant under global chiral rotations.
 
-The remaining freedom resides in the choice of the mesonic potential.
-Requiring locality and renormalizability restricts the potential to a
-polynomial of finite order in the fields. In four spacetime
-dimensions, this implies that interaction terms of order higher than
-four are nonrenormalizable and are therefore omitted at this stage.
-The potential must furthermore be constructed from chiral invariants,
-which limits the allowed terms to combinations of
-$\mathrm{Tr}(\Sigma^\dagger \Sigma)$ and its powers.
+The remaining freedom lies in the choice of the mesonic potential.
+Locality and renormalizability in four spacetime dimensions restrict
+the potential to operators of mass dimension four or less.
+Furthermore, the potential must be constructed from chiral invariants,
+which limits the allowed structures to traces of products of
+$\Sigma^\dagger \Sigma$.
 
 At quadratic order, the only invariant is
 \begin{equation}
 \mathrm{Tr}(\Sigma^\dagger \Sigma)
-= \sigma^2 + \boldsymbol{\pi}^2 .
+=
+\sigma^2 + \boldsymbol{\pi}^2 .
 \end{equation}
-At quartic order, two distinct invariants may be written,
+At quartic order, two seemingly independent invariants can be formed,
 \begin{equation}
 \left[\mathrm{Tr}(\Sigma^\dagger \Sigma)\right]^2,
 \qquad
-\mathrm{Tr}(\Sigma^\dagger \Sigma \Sigma^\dagger \Sigma) .
+\mathrm{Tr}(\Sigma^\dagger \Sigma \Sigma^\dagger \Sigma).
 \end{equation}
-For $SU(2)$, however, these two structures are not independent, but
-are proportional to one another as a consequence of trace identities
-specific to $2\times2$ matrices. As a result, only a single quartic
-interaction term is required in the two-flavor case. (This
-simplification does not persist for larger symmetry groups, where
-multiple independent quartic invariants may appear.)
+For $2\times2$ matrices, however, these structures are not
+independent. The Cayley--Hamilton theorem implies that any power of a
+$2\times2$ matrix can be expressed in terms of the matrix itself and
+the identity \cite{HornJohnson2012, PeskinSchroeder1995}.
+As a consequence, the two quartic invariants above are
+proportional to one another in the two-flavor case. Only a single
+independent quartic coupling is therefore required.
+
+This simplification is special to $SU(2)$. For three flavors, where
+$\Sigma$ is a $3\times3$ matrix transforming under
+$SU(3)_L \times SU(3)_R$, the two quartic structures are 
+independent. In that case the Cayley--Hamilton relation for $3\times3$
+matrices does not reduce one quartic invariant to the other, and both
+must be included in the most general renormalizable potential.
 
 Including also a linear term that explicitly breaks chiral symmetry,
 the most general renormalizable mesonic potential consistent with
-$SU(2)_L \times SU(2)_R$ symmetry may be written as
+$SU(2)_L \times SU(2)_R$ symmetry at tree level may be written as
 \begin{equation}
 V(\sigma,\boldsymbol{\pi}) =
 \frac{m^2}{2}(\sigma^2 + \boldsymbol{\pi}^2)
@@ -502,13 +541,14 @@ V(\sigma,\boldsymbol{\pi}) =
 - h\,\sigma .
 \label{eq:mesonic_potential}
 \end{equation}
-The parameters $m^2$ and $\lambda$ determine the shape of the
-potential, while the linear term proportional to $h$ introduces
-explicit chiral symmetry breaking, mimicking the effect of finite
-light-quark masses in QCD. In the limit $h \to 0$, the potential
-depends only on the invariant combination $\sigma^2 +
-\boldsymbol{\pi}^2$ and is fully symmetric under
-$SU(2)_L \times SU(2)_R$ transformations.
+The parameters $m^2$ and $\lambda$ determine the overall shape of the
+potential. The linear term proportional to $h$ explicitly breaks
+chiral symmetry and mimics the effect of finite light-quark masses in
+QCD. In the chiral limit $h \to 0$, the potential depends only on the
+invariant combination $\sigma^2 + \boldsymbol{\pi}^2$ and exhibits the
+degenerate Mexican-hat structure. For $h \neq 0$, the term $-h\sigma$
+tilts the hat, lifting the degeneracy of the minima and selecting a
+unique vacuum configuration.
 
 Each term in the Quark--Meson Lagrangian thus has a clear origin. The
 Yukawa interaction provides a chirally invariant mechanism for
@@ -519,42 +559,83 @@ structure of the model is therefore fixed almost entirely by symmetry
 and renormalizability, in accordance with the general philosophy of
 effective field theory \cite{WeinbergEFT}.
 
-The vacuum configuration is determined by minimizing the classical
-potential $V$ with respect to the mesonic fields. In the chiral limit
-$h=0$, the stationary conditions are obtained from
+To analyze the vacuum structure we work at tree level and neglect
+quantum fluctuations. The mesonic fields are decomposed into a
+spacetime-independent background part and fluctuations,
 \begin{equation}
-\frac{\partial V}{\partial \sigma}
-= m^2 \sigma + \lambda \sigma(\sigma^2 + \boldsymbol{\pi}^2) = 0 ,
+\sigma(x) = \sigma_0 + \tilde{\sigma}(x),
+\qquad
+\boldsymbol{\pi}(x) = \boldsymbol{\pi}_0 + \tilde{\boldsymbol{\pi}}(x).
+\label{eq:quantum_and_constant}
 \end{equation}
-with analogous equations for the pion fields. Two qualitatively
+The constants $\sigma_0$ and $\boldsymbol{\pi}_0$ denote the classical
+background fields, while $\tilde{\sigma}(x)$ and
+$\tilde{\boldsymbol{\pi}}(x)$ describe fluctuations about the vacuum.
+By definition, the background fields coincide with the vacuum
+expectation values,
+\begin{equation}
+\langle \sigma \rangle = \sigma_0,
+\qquad
+\langle \boldsymbol{\pi} \rangle = \boldsymbol{\pi}_0 .
+\end{equation}
+In the classical approximation adopted here, the fluctuations are
+ignored when determining the ground state. The vacuum configuration is
+therefore obtained by minimizing the classical potential
+$V(\sigma_0,\boldsymbol{\pi}_0)$ with respect to the background fields.
+
+In the chiral limit $h=0$, the stationary conditions follow from
+\begin{equation}
+\frac{\partial V}{\partial \sigma_0}
+= m^2 \sigma_0 + \lambda \sigma_0(\sigma_0^2 + \boldsymbol{\pi}_0^2)
+= 0 ,
+\end{equation}
+with analogous equations for the pion components. Two qualitatively
 distinct regimes arise, depending on the sign of $m^2$.
 
 If $m^2>0$, the potential has a unique minimum at
 \begin{equation}
-\sigma = 0, \qquad \boldsymbol{\pi}=0 .
+\sigma_0 = 0, \qquad \boldsymbol{\pi}_0=0 .
 \end{equation}
-The vacuum expectation values of all fields therefore vanish, and the
-ground state is invariant under the full
-$SU(2)_L \times SU(2)_R$ symmetry of the Lagrangian. In this case the
-symmetry is said to be realized in the Wigner--Weyl (or linear) mode
-\cite{WeinbergQFT}. Concretely, this means that the symmetry
-transformations leave the vacuum unchanged, and the excitations of the
-theory can be classified according to representations of the symmetry
-group. States related by chiral transformations are degenerate in
-mass, and no additional massless modes appear in the spectrum.
+The vacuum expectation values therefore vanish, and the ground state
+is invariant under the full $SU(2)_L \times SU(2)_R$ symmetry of the
+Lagrangian. In this case the symmetry is realized in the
+Wigner--Weyl (linear) mode \cite{WeinbergQFT}: the symmetry generators
+annihilate the vacuum, the spectrum organizes into chiral multiplets,
+and no additional massless modes appear.
 
 If $m^2<0$, the stationary condition becomes
 \begin{equation}
-\sigma^2 + \boldsymbol{\pi}^2
+\sigma_0^2 + \boldsymbol{\pi}_0^2
 = -\frac{m^2}{\lambda},
 \end{equation}
-so that the minima form a continuous three-dimensional sphere in
-field space. The potential acquires the characteristic Mexican-hat
-shape shown in Fig.~\ref{fig:mexican_hat}. Although the Lagrangian
-remains invariant under $SU(2)_L \times SU(2)_R$, the vacuum is no
-longer unique. This situation corresponds to the
-Nambu--Goldstone realization of the symmetry
-\cite{Nambu1961,Goldstone1961}.
+so that the minima form a three-dimensional sphere in field space.
+Since the four real fields
+$(\sigma_0,\pi_{0,1},\pi_{0,2},\pi_{0,3})$ span $\mathbb{R}^4$,
+the set of minima defines a three-sphere
+\begin{equation}
+S^3 \subset \mathbb{R}^4 ,
+\end{equation}
+known as the \emph{vacuum manifold}. The vacuum is therefore not
+unique, but consists of a degenerate family of ground states related
+by chiral transformations.
+
+Figure~\ref{fig:mexican_hat} illustrates this structure in the chiral
+limit $h \to 0$. For visualization only a single pion direction is
+shown, so the vacuum manifold appears as a circle $S^1$. In the full
+two-flavor theory, however, the pion field has three components and
+the true vacuum manifold is the three-sphere $S^3$ described above.
+
+The geometry of the vacuum manifold determines the spectrum of small
+fluctuations. Tangential fluctuations — motion along $S^3$ — leave the
+value of the potential unchanged to quadratic order. The potential has
+vanishing curvature in these directions, which implies massless modes
+in the chiral limit. These tangential excitations correspond to the
+three pion fields and reflect the three broken axial generators.
+
+In contrast, radial fluctuations change the value of
+$\sigma_0^2 + \boldsymbol{\pi}_0^2$ and move the system away from the
+vacuum manifold. The potential has nonzero curvature in this direction,
+which generates a finite mass for the radial fluctuation $\tilde{\sigma}(x)$.
 
 \begin{figure}[ht]
 \centering
@@ -564,86 +645,142 @@ of degenerate minima reflects spontaneous symmetry breaking.}
 \label{fig:mexican_hat}
 \end{figure}
 
-The degeneracy of the minima implies that the symmetry of the
-Lagrangian is not reflected in a unique ground state. A specific
-vacuum must therefore be chosen. Without loss of generality one may
-select
+Although the Lagrangian remains invariant under
+$SU(2)_L \times SU(2)_R$, a specific ground state must be selected.
+Without loss of generality one may choose the vacuum to lie entirely
+in the $\sigma_0$ direction,
 \begin{equation}
-\langle \sigma \rangle = v, \qquad
-\langle \boldsymbol{\pi} \rangle = 0 ,
+\sigma_0 = v,
+\qquad
+\boldsymbol{\pi}_0 = 0.
 \end{equation}
-with
+Since all points on the vacuum manifold are related by chiral
+transformations, this choice corresponds merely to a convenient
+orientation in field space. The constant $v$ therefore denotes the
+vacuum expectation value of the scalar field in this chosen basis,
+$\langle \sigma \rangle = v$.
+
+In the chiral limit $h=0$, the magnitude satisfies
 \begin{equation}
 v^2 = -\frac{m^2}{\lambda}.
 \end{equation}
-The parameter $v$ is the vacuum expectation value of the scalar
-field and serves as an order parameter for chiral symmetry breaking.
-A nonvanishing value $v\neq0$ signals that the symmetry is broken,
-whereas $v=0$ corresponds to the symmetric phase.
+The parameter $v$ serves as an order parameter for chiral symmetry
+breaking: $v \neq 0$ signals the broken phase, whereas $v=0$
+corresponds to the symmetric phase.
 
-The chosen vacuum is invariant only under transformations satisfying
-$U_L = U_R$, which form the vector subgroup $SU(2)_V$. The symmetry-breaking
+The chosen vacuum is invariant only under transformations with
+$U_L = U_R$, forming the vector subgroup $SU(2)_V$. The symmetry-breaking
 pattern is therefore
 \begin{equation}
 SU(2)_L \times SU(2)_R
 \longrightarrow
 SU(2)_V .
 \end{equation}
-The original group has six generators, while the unbroken subgroup has
-three. The remaining three generators are broken.
+Since the original group has six generators and the unbroken subgroup
+has three, three generators are spontaneously broken.
 
-Goldstone's theorem states that for every spontaneously broken
-continuous global symmetry generator, there exists a massless scalar
-mode in the spectrum \cite{Goldstone1961,
-GoldstoneSalamWeinberg1962,WeinbergQFT}. These modes correspond to
-fluctuations along the flat directions of the potential, i.e.\ along
-the valley of degenerate minima. In the present case, the three broken
-axial generators give rise to three massless excitations, which are
-identified with the pion fields in the chiral limit. The $\sigma$
-field, in contrast, describes radial fluctuations orthogonal to the
-valley and is therefore massive.
+Goldstone's theorem states that in a relativistic, Lorentz-invariant
+quantum field theory, every spontaneously broken continuous global
+symmetry generator gives rise to a massless scalar mode in the
+spectrum \cite{Goldstone1961,
+GoldstoneSalamWeinberg1962,WeinbergQFT}. For the breaking pattern
+$SU(2)_L \times SU(2)_R \to SU(2)_V$, this yields three massless
+pion modes in the chiral limit. The fluctuation $\tilde{\sigma}(x)$
+corresponds to the radial excitation and is massive already at tree level.
 
-When explicit symmetry breaking is included ($h\neq0$), the situation
-changes. The linear term in the potential tilts the Mexican-hat
-structure and lifts the degeneracy of the minima, selecting a unique
-vacuum along the $\sigma$ direction, as illustrated in
+When explicit symmetry breaking is included ($h\neq0$), the linear
+term tilts the potential and removes the degeneracy of the vacuum,
+selecting a unique minimum along the $\sigma_0$ direction, as shown in
 Fig.~\ref{fig:tilt_profile}.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/quark_meson/tilt_profile.pdf}
-\caption{Potential profile along the $\pi=0$ direction for $h\neq0$.
-The degeneracy of the Mexican-hat minimum is lifted and a unique
-vacuum is selected.}
+\caption{Potential profile along the $\mathbf{\pi}_0=0$ direction for $h\neq0$.
+The degeneracy of the Mexican-hat minimum is lifted.}
 \label{fig:tilt_profile}
 \end{figure}
 
-The stationary (tree-level gap) equation now becomes
+When explicit symmetry breaking is included ($h\neq0$), the vacuum
+expectation value $v$ is determined from the stationary (tree-level
+gap) equation
 \begin{equation}
-m^2 v + \lambda v^3 - h = 0 .
+\left.\frac{\partial V}{\partial \sigma_0}\right|_{\sigma_0=v,\,
+\boldsymbol{\pi}_0=0}
+=
+m^2 v + \lambda v^3 - h
+=
+0 .
+\label{eq:gap_equation}
 \end{equation}
-Expanding around the vacuum,
+This condition ensures that the linear terms in the fluctuation fields
+vanish when the scalar field is expanded about the vacuum.
+
+For the pion fields one finds
 \begin{equation}
-\sigma(x) = v + \tilde{\sigma}(x),
+m_\pi^2
+=
+\left.
+\frac{\partial^2 V}{\partial \pi_{0,i}^2}
+\right|_{\sigma_0=v,\boldsymbol{\pi}_0=0}
+=
+m^2 + \lambda v^2 .
+\label{eq:mpi_intermediate}
 \end{equation}
-and retaining quadratic terms yields
+At this stage the mass still depends explicitly on $m^2$ and $v$.
+However, using the gap equation \eqref{eq:gap_equation} one may rewrite
 \begin{equation}
-m_\pi^2 = \frac{h}{v},
-\qquad
-m_\sigma^2 = m^2 + 3\lambda v^2 .
+m^2 + \lambda v^2 = \frac{h}{v},
 \end{equation}
-The pion fields therefore acquire a finite mass proportional to the
-explicit symmetry-breaking parameter $h$. They are no longer exact
-Goldstone bosons but pseudo-Goldstone bosons. In this situation the
-sharp second-order phase transition present in the chiral limit is
-replaced by a smooth crossover.
+so that the squared pion mass takes the compact form
+\begin{equation}
+m_\pi^2 = \frac{h}{v}.
+\label{eq:mpi_final}
+\end{equation}
+
+This expression makes the role of explicit symmetry breaking
+transparent. In the strict chiral limit $h\to0$, the stationary
+condition implies
+\begin{equation}
+m^2 + \lambda v^2 = 0 ,
+\end{equation}
+and therefore
+\begin{equation}
+m_\pi^2 = 0 .
+\end{equation}
+The pions are then exact massless Goldstone bosons, corresponding to
+fluctuations tangential to the vacuum manifold.
+
+For nonzero $h$, the degeneracy of the vacuum is lifted and the
+potential acquires a small curvature along the previously flat
+directions. The pion fields therefore become massive, but remain light
+if $h$ is small. They are thus identified as pseudo-Goldstone bosons.
+
+The squared mass of the radial fluctuation $\tilde{\sigma}$ follows from
+\begin{equation}
+m_\sigma^2
+=
+\left.
+\frac{\partial^2 V}{\partial \sigma_0^2}
+\right|_{\sigma_0=v,\boldsymbol{\pi}_0=0}
+=
+m^2 + 3\lambda v^2 .
+\end{equation}
+Unlike the pion mass, this expression does not vanish in the chiral
+limit. $\tilde{\sigma}$ describes radial fluctuations orthogonal to
+the vacuum manifold, where the potential has nonzero curvature already
+at $h=0$. Consequently, the radial fluctuation $\tilde{\sigma}(x)$ 
+remains massive even in the exactly symmetric Lagrangian.
+
+The mass spectrum therefore directly reflects the geometry of the
+vacuum manifold: tangential directions correspond to (pseudo-)Goldstone
+modes, while the radial direction corresponds to a massive scalar
+excitation.
 
 The nonvanishing vacuum expectation value also has direct consequences
-for the quark sector. After shifting the scalar field according to
-\begin{equation}
-\sigma(x) = v + \tilde{\sigma}(x),
-\end{equation}
-the Yukawa interaction term becomes
+for the quark sector. 
+After choosing the vacuum $\sigma_0=v$, the decomposition is
+$\sigma(x)=v+\tilde{\sigma}(x)$, and the Yukawa interaction term becomes
 \begin{equation}
 - g \bar q \sigma q
 =
@@ -656,7 +793,7 @@ that the quark fields acquire an effective mass
 M_q = g v .
 \end{equation}
 Importantly, this mass is not inserted by hand in the Lagrangian. The
-Yukawa interaction itself is chirally invariant, but once the vacuum
+Yukawa interaction itself is chirally invariant, but once the field
 develops a nonzero expectation value $v$, the interaction generates a
 term proportional to $\bar q q$, which is not invariant under axial
 transformations. In this way, the symmetry of the Lagrangian is

@@ -34,8 +34,8 @@ plt.figure(figsize=(8,5.5))
 plt.plot(sigma, Vvals, color=color_pos, linewidth=2.2)
 plt.scatter(sigma_min, 0.0, color="black", s=40, zorder=5)
 
-plt.xlabel(r"$\sigma \ (\pi=0)$", fontsize=18)
-plt.ylabel(r"$V(\sigma,\pi=0)$", fontsize=18)
+plt.xlabel(r"$\sigma_0 \ (\pi_0=0)$", fontsize=18)
+plt.ylabel(r"$V(\sigma_0,\pi_0=0)$", fontsize=18)
 plt.title(r"Tilted Quark--Meson Potential ($h \neq 0$)", fontsize=20)
 
 plt.grid(True, linestyle=":", alpha=0.6)

@@ -39,18 +39,11 @@ ax.set_proj_type("ortho")
 # smooth surface with subtle mesh lines
 surf = ax.plot_surface(
     sigma, pi, Z,
-    cmap="viridis",
+    cmap="viridis_r",
     linewidth=0.3,
     edgecolor=(0.2,0.2,0.2,0.25),
     antialiased=True
 )
-
-# clean circular rim
-theta = np.linspace(0, 2*np.pi, 600)
-rim_x = Rmax*np.cos(theta)
-rim_y = Rmax*np.sin(theta)
-rim_z = (V_r(Rmax, m2, lam)-Vmin)*np.ones_like(theta)
-ax.plot(rim_x, rim_y, rim_z, color="black", linewidth=1.0)
 
 # remove default box
 ax.set_axis_off()
@@ -76,9 +69,9 @@ ax.plot([0,  arrow/2], [0, 0], [z_len, z_len-arrow], color="black", linewidth=1.
 ax.plot([0, -arrow/2], [0, 0], [z_len, z_len-arrow], color="black", linewidth=1.2)
 
 # labels
-ax.text(axis_len, -0.05, 0.3, r"$\sigma$", fontsize=15)
-ax.text(0, axis_len*0.95, 0.25, r"$\pi$", fontsize=15)
-ax.text(0, 0, z_len*1.08, r"$V(\sigma,\pi)$", fontsize=15)
+ax.text(axis_len, -0.15, 0.3, r"$\sigma_0$", fontsize=15)
+ax.text(0, axis_len*0.95, 0.25, r"$\pi_0$", fontsize=15)
+ax.text(0, 0, z_len*1.08, r"$V(\sigma_0,\pi_0)$", fontsize=15)
 
 ax.view_init(elev=25, azim=40)
 
