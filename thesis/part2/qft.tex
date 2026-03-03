@@ -460,3 +460,195 @@ rather than continuous. The $\mathbb{Z}_2$ symmetry relates the two degenerate
 vacuums but does not generate a continuous family of equivalent ground states.
 This distinguishes the present case from theories with continuous symmetries,
 where spontaneous symmetry breaking leads to massless excitations.
+
+\section{On-shell renormalization in \texorpdfstring{$\phi^4$}{phi4} theory}
+\label{sec:phi4_onshell_example}
+
+We now illustrate dimensional regularization and on-shell
+renormalization in a concrete example.
+For a general introduction to the concepts used in the following
+we refer to Appendix~\ref{app:renormalization}.
+In the present section we focus exclusively on the explicit
+one-loop computation and the practical implementation of the
+on-shell conditions.
+
+We consider real scalar $\phi^4$ theory and work to first order in the
+coupling constant $\lambda$.
+At this order in perturbation theory, the only correction to the
+two-point function arises from the one-loop tadpole diagram shown in
+Fig.~\ref{fig:tadpole}.
+This diagram contributes to the 1PI
+self-energy $\Sigma(p^2)$, which encodes loop corrections to the
+inverse propagator.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  \begin{feynman}
+    \diagram [large, horizontal=a to c, layered layout] {
+      a -- [edge label=\(p\)]
+      b [dot] -- [edge label=\(p\)]
+      c
+    };
+    \def\R{0.8}
+    \path (b) ++(90:\R) coordinate (loopcenter);
+    \draw (loopcenter) circle (\R);
+    \node at ($(loopcenter)+(0,\R+0.25)$) {\(k\)};
+  \end{feynman}
+\end{tikzpicture}
+\caption{One-loop tadpole contribution to the 1PI two-point function
+in $\phi^4$ theory. The loop momentum is denoted $k$, while $p$
+is the external momentum.}
+\label{fig:tadpole}
+\end{figure}
+
+Using the momentum-space Feynman rules summarized in
+Appendix~\ref{app:renormalization}, the amputated 1PI contribution reads
+\begin{equation}
+-i\,\Sigma_{\text{1-loop}}(p^2)
+=
+\left(-i\lambda\right)\frac{1}{2}
+\int\!\frac{d^4k}{(2\pi)^4}
+\frac{i}{k^2 - m^2 + i\epsilon}.
+\label{eq:tadpole_selfenergy_start}
+\end{equation}
+The factor $-i\lambda$ arises from the quartic interaction vertex,
+and the propagator inside the loop contributes the factor
+$i/(k^2-m^2+i\epsilon)$.
+The overall factor $1/2$ is the symmetry factor of the diagram,
+reflecting the indistinguishability of the two internal lines attached
+to the vertex.
+
+An important feature of the tadpole diagram is that no external
+momentum flows through the loop.
+The loop integral therefore depends only on the integration momentum $k$,
+and not on the external momentum $p$.
+Consequently, at this order the self-energy is independent of $p^2$,
+\begin{equation}
+\Sigma_{\text{1-loop}}(p^2) = \Sigma_{\text{1-loop}} .
+\end{equation}
+This momentum independence will play a central role when imposing the
+on-shell renormalization conditions below.
+
+The integral in \eqref{eq:tadpole_selfenergy_start} is ultraviolet
+divergent.
+The divergence originates from the region of large loop momentum,
+$k^2 \to \infty$.
+To make the expression well defined, we regulate it using dimensional
+regularization, analytically continuing the integral to
+$d=4-2\epsilon$ spacetime dimensions.
+A renormalization scale $\mu$ is introduced so that the coupling
+remains dimensionless away from four dimensions.
+
+Employing the standard result quoted in
+Appendix~\ref{app:renormalization} (see Eq.~\eqref{eq:I1_pole}),
+\begin{equation}
+\mu^{2\epsilon}
+\int\!\frac{d^dk}{(2\pi)^d}
+\frac{i}{k^2 - m^2 + i\epsilon}
+=
+\frac{i m^2}{16\pi^2}
+\left[
+\frac{1}{\epsilon}
++ \ln\!\left(\frac{\mu^2}{m^2}\right)
++ \text{finite}
+\right],
+\end{equation}
+we obtain
+\begin{equation}
+\Sigma_{\text{1-loop}}
+=
+\frac{\lambda m^2}{32\pi^2}
+\left[
+\frac{1}{\epsilon}
++ \ln\!\left(\frac{\mu^2}{m^2}\right)
++ \text{finite}
+\right].
+\end{equation}
+The pole term $1/\epsilon$ signals the ultraviolet divergence of the
+loop integral.
+The logarithmic term depends on the renormalization scale $\mu$,
+while the remaining finite part depends on the precise subtraction
+convention adopted.
+At this stage the theory still contains a divergence, which must be
+removed by renormalization.
+
+The bare and renormalized quantities are related by
+\begin{equation}
+\phi_0 = Z^{1/2}\phi,
+\qquad
+m_0^2 = m^2 + \delta m^2.
+\end{equation}
+Here $Z = 1 + \delta Z$ defines the field-strength renormalization
+constant, and $\delta m^2$ is the mass counterterm.
+Inserting these relations into the Lagrangian and expanding to first
+order in the counterterms generates additional quadratic interaction
+terms.
+In momentum space these contributions modify the two-point function
+according to
+\begin{equation}
+\Sigma_{\text{ct}}(p^2)
+=
+\delta Z\,p^2
+-
+\delta m^2.
+\label{eq:selfenergy_counterterm_stripped}
+\end{equation}
+The term proportional to $p^2$ originates from the kinetic
+counterterm, while the constant term arises from the mass
+counterterm.
+
+The renormalized self-energy is therefore given by
+\begin{equation}
+\Sigma_{\text{ren}}(p^2)
+=
+\Sigma_{\text{1-loop}}
++
+\delta Z\,p^2
+-
+\delta m^2.
+\end{equation}
+The counterterms are now chosen so that physical conditions on the
+propagator are satisfied.
+
+In the on-shell scheme, the physical mass is defined as the location
+of the pole of the full propagator, and the residue at that pole is
+required to be unity.
+These requirements ensure that the parameter $m$ corresponds directly
+to the physical particle mass and that the field is canonically
+normalized.
+They translate into the conditions
+\begin{align}
+\Sigma_{\text{ren}}(m^2) &= 0, \\
+\left.\frac{d\Sigma_{\text{ren}}(p^2)}{dp^2}\right|_{p^2=m^2} &= 0.
+\end{align}
+
+Since the tadpole contribution is independent of $p^2$,
+\begin{equation}
+\frac{d\Sigma_{\text{1-loop}}}{dp^2}=0,
+\end{equation}
+and therefore the residue condition immediately implies
+\begin{equation}
+\delta Z = 0
+\qquad \text{at } \mathcal{O}(\lambda).
+\end{equation}
+Thus, at one-loop order in $\phi^4$ theory the field-strength does
+not receive a correction in the on-shell scheme.
+
+The mass condition then fixes the remaining counterterm,
+\begin{equation}
+\delta m^2
+=
+\Sigma_{\text{1-loop}}.
+\end{equation}
+The mass counterterm exactly cancels the entire one-loop contribution.
+
+Thus, at one-loop order the on-shell scheme subtracts the complete
+tadpole correction to the two-point function.
+The ultraviolet divergence contained in the $1/\epsilon$ term is
+absorbed into the redefinition of the mass parameter,
+and the propagator retains its pole at $p^2 = m^2$ with unit residue.
+This explicit example shows in practice how divergences arising from
+loop integrals are removed by renormalization while preserving the
+physical interpretation of the mass and the normalization of the
+field.
