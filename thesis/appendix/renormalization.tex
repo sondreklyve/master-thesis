@@ -10,7 +10,7 @@ In this appendix we review the basic framework underlying ultraviolet
 divergences, dimensional regularization, and renormalization in
 perturbative quantum field theory.
 We discuss the structure of counterterms, the role of
-one-particle-irreducible (1PI) functions and Dyson resummation,
+one-particle-irreducible (1PI) $n$-point functions and Dyson resummation,
 and the definition of renormalization schemes, with particular
 emphasis on the $\overline{\mathrm{MS}}$ and on-shell prescriptions.
 The discussion follows standard textbook treatments,
@@ -28,7 +28,7 @@ $f(p)$ at large momentum, $p \to \infty$.
 If $f(p)$ does not fall off sufficiently fast for large momentum, the integral diverges.
 
 Divergences originating from the high-momentum region are referred to
-as \emph{ultraviolet} (UV) divergences.
+as \emph{ultraviolet} divergences.
 As a simple illustration, an integral behaving as
 \begin{equation}
 I \sim \int^{\infty} dp \, p^{n}
@@ -47,15 +47,12 @@ a cutoff scale or a shift in spacetime dimension.
 Physical quantities must not depend on this parameter once
 renormalization has been performed.
 
-Several regularization methods are commonly used in quantum field
-theory.
-In this work we employ dimensional regularization, which preserves
-Lorentz invariance and gauge symmetry and is particularly convenient
-in perturbative calculations.
-
-The basic idea of dimensional regularization is to analytically
-continue the number of spacetime dimensions away from four.
-One replaces
+Several regularization methods are commonly used in quantum field theory.
+In this thesis we employ dimensional regularization, which preserves
+Lorentz invariance and gauge symmetry and is particularly convenient in 
+perturbative calculations. The basic idea of dimensional regularization
+is to analytically continue the number of spacetime dimensions away from
+four. One replaces
 \begin{equation}
 \int \frac{d^4 p}{(2\pi)^4}
 \quad \longrightarrow \quad
@@ -65,10 +62,11 @@ One replaces
 d = 4 - 2\epsilon ,
 \end{equation}
 where $\epsilon$ is a small parameter and $\mu$ is an arbitrary mass
-scale introduced to keep the integral dimensionally constant.
+scale introduced to keep the integral dimensionally consistent,
+known as the renormalization scale.
 The original theory is recovered in the limit $\epsilon \to 0$.
 
-Within dimensional regularization, ultraviolet divergences manifest
+Within dimensional regularization, logarithmic ultraviolet divergences manifest
 themselves as poles in the continuation parameter $\epsilon$.
 To see how this arises in practice, it is useful to consider a
 standard class of Euclidean one-loop integrals.
@@ -84,11 +82,6 @@ I_\alpha(m^2)
 \label{eq:Ialpha_def}
 \end{equation}
 where $\alpha$ is a positive parameter.
-The factor $\mu^{2\epsilon}$ is introduced so that the integral
-retains the correct mass dimension when the number of spacetime
-dimensions is continued away from four.
-The scale $\mu$ is arbitrary and is referred to as the
-renormalization scale.
 
 The evaluation of \eqref{eq:Ialpha_def} proceeds by exploiting
 rotational invariance in $d$ dimensions.
@@ -124,26 +117,49 @@ The Gamma function $\Gamma(z)$ is defined for $\Re(z)>0$ by
 \end{equation}
 and extended to other complex values by analytic continuation.
 It has simple poles at $z=0,-1,-2,\ldots$.
-Ultraviolet divergences in dimensional regularization arise precisely
-from these poles when the argument of the Gamma function approaches a
-non-positive integer.
+Logarithmic ultraviolet divergences in dimensional regularization arise
+precisely from these poles when the argument of the Gamma function
+approaches a non-positive integer.
 
 To make this explicit, consider the case $\alpha=1$.
-In this case the numerator of \eqref{eq:Ialpha_gamma} contains the factor
+From the general result \eqref{eq:Ialpha_gamma} we obtain
+\begin{equation}
+I_1(m^2)
+=
+\frac{\mu^{2\epsilon}}{(4\pi)^{d/2}}
+\Gamma\!\left(1-\frac{d}{2}\right)
+\left(m^2\right)^{\frac{d}{2}-1}.
+\end{equation}
+
+For $d=4-2\epsilon$ the argument of the Gamma function becomes
 \begin{equation}
 \Gamma\!\left(1-\frac{d}{2}\right)
 =
-\Gamma(-1+\epsilon),
+\Gamma(-1+\epsilon).
 \end{equation}
-which develops a simple pole as $\epsilon \to 0$.
-Expanding around $\epsilon=0$ yields
+The Gamma function has a simple pole at negative integers, and its
+expansion around $\epsilon=0$ reads
+\begin{equation}
+\Gamma(-1+\epsilon)
+=
+-\frac{1}{\epsilon}
++\mathcal{O}(1).
+\end{equation}
+Expanding the remaining factors,
+\begin{align}
+\mu^{2\epsilon} &= 1 + 2\epsilon\ln\mu + \mathcal{O}(\epsilon^2), \\
+(4\pi)^{-d/2} &= (4\pi)^{-2}\left[1+\epsilon\ln(4\pi)+\mathcal{O}(\epsilon^2)\right], \\
+(m^2)^{\frac{d}{2}-1} &= m^2\left[1-\epsilon\ln m^2+\mathcal{O}(\epsilon^2)\right],
+\end{align}
+one finds
 \begin{equation}
 I_1(m^2)
 =
 \frac{m^2}{16\pi^2}
 \left[
 \frac{1}{\epsilon}
-+\ln\!\left(\frac{\mu^2}{m^2}\right)
++
+\ln\!\left(\frac{\mu^2}{m^2}\right)
 +\text{finite}
 \right].
 \label{eq:I1_pole}
@@ -151,16 +167,74 @@ I_1(m^2)
 
 The term proportional to $1/\epsilon$ corresponds to the logarithmic
 ultraviolet divergence that would appear in four spacetime dimensions.
-Dimensional regularization thus converts ultraviolet divergences into
-simple poles in the analytic continuation parameter $\epsilon$.
+Dimensional regularization thus converts logarithmic ultraviolet
+divergences into simple poles in the analytic continuation parameter
+$\epsilon$.
+
+In the main text we instead encounter integrals evaluated in
+$d=3-2\epsilon$ spatial dimensions. In this case the argument of the
+Gamma function becomes
+\begin{equation}
+\Gamma\!\left(\alpha-\frac{d}{2}\right)
+=
+\Gamma\!\left(\alpha-\frac{3}{2}+\epsilon\right).
+\end{equation}
+Divergences again arise whenever the argument approaches a
+non-positive integer. In particular, for $\alpha=2$ one obtains
+\begin{equation}
+\Gamma\!\left(2-\frac{d}{2}\right)
+=
+\Gamma\!\left(\frac{1}{2}+\epsilon\right),
+\end{equation}
+whose expansion generates poles in $\epsilon$ after differentiation
+with respect to $m^2$. Thus the ultraviolet divergences appearing in
+three spatial dimensions are again represented by poles in the
+continuation parameter $\epsilon$.
 
 By contrast, power divergences are not represented in the same way in
-dimensional regularization: integrals with no intrinsic scale (so-called
-scaleless integrals), such as $\int d^d p\,(p^2)^\beta$, vanish identically.
-For this reason dimensional regularization isolates the logarithmic UV
-divergences---the ones relevant for renormalization---as poles in
-$\epsilon$ in a particularly simple manner.
+dimensional regularization: integrals with no intrinsic scale
+(so-called scaleless integrals), such as
+\(
+\int d^d p\,(p^2)^\beta,
+\)
+vanish identically. For this reason dimensional regularization
+isolates the logarithmic UV divergences—the ones relevant for
+renormalization—as poles in $\epsilon$ in a particularly simple
+manner.
 
+\paragraph{Remark on $\gamma^5$ in dimensional regularization.}
+In theories involving axial
+currents, special care is required when extending the Dirac algebra to
+$d$ dimensions because the definition of $\gamma^5$ is intrinsically
+four-dimensional. In four spacetime dimensions the matrix $\gamma^5$
+is defined as
+\begin{equation}
+\gamma^5 = i\gamma^0\gamma^1\gamma^2\gamma^3 ,
+\end{equation}
+but this definition cannot be straightforwardly generalized when the
+dimension is analytically continued to $d=4-2\epsilon$. As discussed in
+the original work by 't Hooft and Veltman on dimensional regularization
+\cite{tHooftVeltman1972}, ambiguities can arise in loop integrals
+involving $\gamma^5$ because not all four-dimensional gamma-matrix
+identities remain valid in arbitrary dimensions. In practical
+applications one often assumes that $\gamma^5$ can be defined in
+$d$ dimensions such that it satisfies the usual relations
+\[
+\{\gamma^5,\gamma^\mu\}=0,
+\qquad
+(\gamma^5)^2=1,
+\]
+although these properties cannot be maintained consistently together
+with all other Dirac algebra identities outside four dimensions.
+Various prescriptions therefore exist for handling $\gamma^5$ in
+dimensional regularization, typically involving modified
+anticommutation relations or special treatment of Dirac traces.
+However, in the present calculation no $\gamma^5$ matrices appear in
+the loop integrals, and the dimensional continuation can therefore be
+performed without introducing additional prescriptions. The remaining
+Dirac identities used in the calculation, such as
+$\mathrm{Tr}\,\gamma^\mu = 0$ and
+$\mathrm{Tr}\,(\gamma^\mu\gamma^\nu)=4g^{\mu\nu}$, remain unaffected.
 \subsection*{Renormalization and counterterms}
 
 Regularization renders loop integrals finite by introducing an auxiliary
@@ -258,22 +332,70 @@ $\Gamma^{(n)}$, play a central role in renormalization theory
 
 For the two-point function, the sum of all 1PI diagrams defines
 the self-energy $\Sigma(p^2)$.
-In momentum space, the full propagator can be expressed in terms of
-the self-energy through Dyson's equation
-\cite{Dyson1949}.
-Starting from the free propagator
+Diagrammatically, the full propagator can be expressed as a series of
+repeated insertions of the one-particle-irreducible two-point function,
+as illustrated in Fig.~\ref{fig:dyson_series}. The circle labelled
+$1\mathrm{PI}$ denotes the sum of all one-particle-irreducible
+two-point diagrams. Starting from the free propagator
 \begin{equation}
 G_0(p) = \frac{i}{p^2 - m_0^2 + i\epsilon},
 \end{equation}
-successive insertions of 1PI two-point diagrams generate a geometric
-series.
-Resumming this series yields
+successive insertions of the self-energy generate a geometric series
+\begin{equation}
+G(p)
+=
+G_0(p) + G_0(p)\Sigma(p^2)G_0(p)
++ G_0(p)\Sigma(p^2)G_0(p)\Sigma(p^2)G_0(p) + \cdots .
+\end{equation}
+Resumming this series yields Dyson's equation
+\cite{Dyson1949},
 \begin{equation}
 G(p)
 =
 \frac{i}{p^2 - m_0^2 - \Sigma(p^2) + i\epsilon}.
 \label{eq:Dyson_appendix}
 \end{equation}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{feynman}
+\vertex (L1) at (-6.8,0);
+\vertex (L2) at (-4.4,0);
+\vertex[draw, circle, fill=gray!25, minimum size=12mm] (Full) at (-5.6,0) {};
+\diagram*{
+  (L1) -- (Full) -- (L2),
+};
+\node at (-3.8,0) {\(=\)};
+\vertex (a1) at (-3.2,0);
+\vertex (a2) at (-2.0,0);
+\diagram*{
+  (a1) -- (a2),
+};
+\node at (-1.4,0) {\(+\)};
+\vertex (b1) at (-0.8,0);
+\vertex (b2) at (1.2,0);
+\vertex[draw, circle, minimum size=10mm, inner sep=1pt] (Sigma1) at (0.2,0) {\(1\mathrm{PI}\)};
+\diagram*{
+  (b1) -- (Sigma1) -- (b2),
+};
+\node at (1.8,0) {\(+\)};
+\vertex (c1) at (2.4,0);
+\vertex (c2) at (5.8,0);
+\vertex[draw, circle, minimum size=10mm, inner sep=1pt] (Sigma2) at (3.4,0) {\(1\mathrm{PI}\)};
+\vertex[draw, circle, minimum size=10mm, inner sep=1pt] (Sigma3) at (4.8,0) {\(1\mathrm{PI}\)};
+\diagram*{
+  (c1) -- (Sigma2) -- (Sigma3) -- (c2),
+};
+\node at (6.6,0) {\(+\ \cdots\)};
+\end{feynman}
+\end{tikzpicture}
+\caption{Diagrammatic Dyson series for the two-point function. The
+circle labelled $1\mathrm{PI}$ represents the sum of all
+one-particle-irreducible two-point diagrams, i.e.\ the self-energy
+$\Sigma(p^2)$.}
+\label{fig:dyson_series}
+\end{figure}
 
 Equation~\eqref{eq:Dyson_appendix} shows that the self-energy acts as
 a momentum-dependent correction to the inverse propagator.
@@ -292,7 +414,7 @@ as the sum of loop diagrams and counterterm contributions.
 Renormalization conditions determine the counterterms so that
 $G(p)$ has the desired physical properties.
 
-\subsection*{Renormalization schemes: MS, $\overline{\mathrm{MS}}$, and on-shell}
+\subsection*{Renormalization schemes: MS, $\overline{\mathbf{MS}}$, and on-shell}
 
 The introduction of counterterms removes the ultraviolet divergences
 appearing in loop diagrams.
@@ -310,7 +432,7 @@ are independent of the renormalization scheme when computed exactly.
 
 \paragraph{Minimal subtraction (MS).}
 
-In the minimal subtraction (MS) scheme, one removes only the pole terms
+In the minimal subtraction scheme, one removes only the pole terms
 in $\epsilon$ that arise in dimensional regularization.
 If a loop integral produces a divergence of the form
 \begin{equation}
@@ -333,8 +455,8 @@ functions in dimensional regularization,
 \end{equation}
 where $\gamma_E$ is the Euler–Mascheroni constant.
 The $\overline{\mathrm{MS}}$ prescription simplifies many perturbative
-expressions and is widely used in quantum chromodynamics and other
-gauge theories.
+expressions and is therefore widely used in perturbative quantum field
+theory, including quantum chromodynamics.
 
 In minimal subtraction schemes, renormalized parameters depend
 explicitly on the renormalization scale $\mu$ introduced in
