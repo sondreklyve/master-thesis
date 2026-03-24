@@ -16,7 +16,7 @@ emphasis on the $\overline{\mathrm{MS}}$ and on-shell prescriptions.
 The discussion follows standard textbook treatments,
 in particular Refs.~\cite{PeskinSchroeder1995,WeinbergQFT}.
 
-\subsection*{Ultraviolet divergences and dimensional regularization}
+\section*{Ultraviolet divergences and dimensional regularization}
 
 Consider a generic loop integral of the form
 \begin{equation}
@@ -56,12 +56,12 @@ four. One replaces
 \begin{equation}
 \int \frac{d^4 p}{(2\pi)^4}
 \quad \longrightarrow \quad
-\mu^{2\epsilon}
+\Lambda^{2\epsilon}
 \int \frac{d^{d} p}{(2\pi)^{d}},
 \qquad
 d = 4 - 2\epsilon ,
 \end{equation}
-where $\epsilon$ is a small parameter and $\mu$ is an arbitrary mass
+where $\epsilon$ is a small parameter and $\Lambda$ is an arbitrary mass
 scale introduced to keep the integral dimensionally consistent,
 known as the renormalization scale.
 The original theory is recovered in the limit $\epsilon \to 0$.
@@ -75,7 +75,7 @@ We define
 \begin{equation}
 I_\alpha(m^2)
 \equiv
-\mu^{2\epsilon}
+\Lambda^{2\epsilon}
 \int \frac{d^{d}p}{(2\pi)^{d}}\,
 \frac{1}{(p^2+m^2)^\alpha},
 \qquad d=4-2\epsilon ,
@@ -105,7 +105,7 @@ One obtains the general result
 \begin{equation}
 I_\alpha(m^2)
 =
-\frac{\mu^{2\epsilon}}{(4\pi)^{d/2}}
+\frac{\Lambda^{2\epsilon}}{(4\pi)^{d/2}}
 \frac{\Gamma\!\left(\alpha-\frac{d}{2}\right)}{\Gamma(\alpha)}
 \left(m^2\right)^{\frac{d}{2}-\alpha}.
 \label{eq:Ialpha_gamma}
@@ -126,7 +126,7 @@ From the general result \eqref{eq:Ialpha_gamma} we obtain
 \begin{equation}
 I_1(m^2)
 =
-\frac{\mu^{2\epsilon}}{(4\pi)^{d/2}}
+\frac{\Lambda^{2\epsilon}}{(4\pi)^{d/2}}
 \Gamma\!\left(1-\frac{d}{2}\right)
 \left(m^2\right)^{\frac{d}{2}-1}.
 \end{equation}
@@ -147,7 +147,7 @@ expansion around $\epsilon=0$ reads
 \end{equation}
 Expanding the remaining factors,
 \begin{align}
-\mu^{2\epsilon} &= 1 + 2\epsilon\ln\mu + \mathcal{O}(\epsilon^2), \\
+\Lambda^{2\epsilon} &= 1 + 2\epsilon\ln\Lambda + \mathcal{O}(\epsilon^2), \\
 (4\pi)^{-d/2} &= (4\pi)^{-2}\left[1+\epsilon\ln(4\pi)+\mathcal{O}(\epsilon^2)\right], \\
 (m^2)^{\frac{d}{2}-1} &= m^2\left[1-\epsilon\ln m^2+\mathcal{O}(\epsilon^2)\right],
 \end{align}
@@ -159,7 +159,7 @@ I_1(m^2)
 \left[
 \frac{1}{\epsilon}
 +
-\ln\!\left(\frac{\mu^2}{m^2}\right)
+\ln\!\left(\frac{\Lambda^2}{m^2}\right)
 +\text{finite}
 \right].
 \label{eq:I1_pole}
@@ -235,7 +235,82 @@ performed without introducing additional prescriptions. The remaining
 Dirac identities used in the calculation, such as
 $\mathrm{Tr}\,\gamma^\mu = 0$ and
 $\mathrm{Tr}\,(\gamma^\mu\gamma^\nu)=4g^{\mu\nu}$, remain unaffected.
-\subsection*{Renormalization and counterterms}
+
+\subsection*{Useful integrals}
+\label{app:loop_integrals}
+
+In the main text, the renormalization of the Quark--Meson model
+involves a small set of standard one-loop integrals.
+These can be expressed in terms of the general result
+Eq.~\eqref{eq:Ialpha_gamma}.
+
+The tadpole integral is defined as
+\begin{equation}
+A(M_q^2)
+=
+\Lambda^{4-d}
+\int \frac{d^d k}{(2\pi)^d}\,
+\frac{1}{k^2 - M_q^2 + i\epsilon},
+\end{equation}
+where $d=4-2\epsilon$.
+Using Eq.~\eqref{eq:Ialpha_gamma} with $\alpha=1$, one obtains
+\begin{equation}
+A(M_q^2)
+=
+\frac{i M_q^2}{(4\pi)^2}
+\left[
+\frac{1}{\epsilon}
++
+\ln\!\left(\frac{\Lambda^2}{M_q^2}\right)
++ 1
+\right].
+\end{equation}
+
+The two-propagator integral is defined by
+\begin{equation}
+B(p^2)
+=
+\Lambda^{4-d}
+\int \frac{d^d k}{(2\pi)^d}\,
+\frac{1}{\bigl[(k+p)^2 - M_q^2 + i\epsilon\bigr]
+\bigl[k^2 - M_q^2 + i\epsilon\bigr]}.
+\end{equation}
+Using standard Feynman parameterization and dimensional
+regularization, this integral can be written as
+\begin{equation}
+B(p^2)
+=
+\frac{i}{(4\pi)^2}
+\left[
+\frac{1}{\epsilon}
++
+F(p^2)
+\right],
+\end{equation}
+where the finite function $F(p^2)$ is given by
+\begin{equation}
+F(p^2)
+=
+2
+-
+2 \sqrt{\frac{4M_q^2}{p^2} - 1}
+\arctan\!\left(
+\frac{1}{\sqrt{\frac{4M_q^2}{p^2} - 1}}
+\right),
+\end{equation}
+for $p^2 < 4M_q^2$.
+
+We also define
+\begin{equation}
+B'(p^2)
+=
+\frac{dB(p^2)}{dp^2}
+=
+\frac{i}{(4\pi)^2} F'(p^2),
+\end{equation}
+which appears in the wavefunction renormalization.
+
+\section*{Renormalization and counterterms}
 
 Regularization renders loop integrals finite by introducing an auxiliary
 parameter, such as the continuation parameter $\epsilon$ in dimensional
@@ -311,7 +386,7 @@ the short-distance structure of quantum field theory and its behavior
 under changes of scale, as emphasized in the renormalization group
 approach \cite{GellMannLow1954,Wilson1971}.
 
-\subsection*{Perturbation theory, 1PI functions, and Dyson resummation}
+\section*{Perturbation theory, 1PI functions, and Dyson resummation}
 
 In perturbative quantum field theory, Green's functions are expanded
 in powers of the interaction coupling.
@@ -414,7 +489,7 @@ as the sum of loop diagrams and counterterm contributions.
 Renormalization conditions determine the counterterms so that
 $G(p)$ has the desired physical properties.
 
-\subsection*{Renormalization schemes: MS, $\overline{\mathbf{MS}}$, and on-shell}
+\section*{Renormalization schemes: MS, $\overline{\mathbf{MS}}$, and on-shell}
 
 The introduction of counterterms removes the ultraviolet divergences
 appearing in loop diagrams.
@@ -459,7 +534,7 @@ expressions and is therefore widely used in perturbative quantum field
 theory, including quantum chromodynamics.
 
 In minimal subtraction schemes, renormalized parameters depend
-explicitly on the renormalization scale $\mu$ introduced in
+explicitly on the renormalization scale $\Lambda$ introduced in
 dimensional regularization.
 This scale dependence is governed by renormalization group equations,
 first derived in the context of quantum electrodynamics by
