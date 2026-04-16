@@ -1,0 +1,488 @@
+\chapter*{Quark Matter and Compact Stars}
+
+The primary goal of this chapter is to constructtion an equation of state
+for cold and dense quark matter and to investigate its implications
+for compact stars. In contrast to the hadronic models considered in
+the Part~I, the matter described here consists entirely
+of deconfined quarks. The resulting stellar configurations therefore
+represent idealized quark stars. While such objects provide a useful
+theoretical framework for isolating the effects of quark degrees of
+freedom, they are not expected to give a complete description of
+realistic compact stars. A more realistic scenario involves a
+transition between hadronic and quark matter, leading to so-called
+hybrid stars. This possibility will be considered in a later chapter,
+where the present equation of state is combined with a hadronic
+description.
+
+Within the QM model, the thermodynamic properties of the system are
+determined from the grand canonical potential evaluated in the
+mean-field approximation. In this framework, the scalar meson field
+develops a non-vanishing expectation value, which acts as an order
+parameter for chiral symmetry breaking. The constituent quark mass is
+then generated dynamically through the relation
+\begin{equation}
+m_q = g \langle \sigma \rangle ,
+\end{equation}
+and becomes a function of the thermodynamic state of the system. This
+feature distinguishes the model from free fermion descriptions and is
+crucial for obtaining a realistic equation of state.
+
+A first objective of this chapter is to evaluate the grand potential
+numerically and determine the equilibrium value of the scalar
+condensate by minimizing the thermodynamic potential at each value of
+the quark chemical potential. This yields a function
+$\bar{\sigma}(\mu)$, and therefore a density-dependent constituent
+quark mass $m_q = g\bar{\sigma}(\mu)$.
+
+At low chemical potential, the condensate remains close to its vacuum
+value, corresponding to a phase with spontaneously broken chiral
+symmetry and large constituent quark masses. As the chemical
+potential increases, the minimum of the thermodynamic potential shifts
+toward smaller values of the condensate, leading to a reduction of the
+quark mass. This behavior reflects the gradual restoration of chiral
+symmetry and, depending on the model parameters, may occur through a
+chiral phase transition or a smooth crossover
+\cite{Folkestad2018,Buballa2005,Schmitt2010}.
+
+Once the thermodynamic quantities have been determined, we impose the
+physical conditions relevant for compact stars, namely charge
+neutrality and weak equilibrium. These constraints fix the relative
+abundances of the different particle species and ensure that the
+resulting equation of state is suitable for astrophysical
+applications.
+
+In addition to the basic QM model, we also consider extensions that
+include additional interaction channels relevant at high density. In
+particular, we investigate the possibility of diquark condensation,
+which leads to color-superconducting phases of quark matter. These
+phases arise from attractive interactions in the quark--quark channel
+and are expected to play an important role in the phase structure of
+dense QCD \cite{Alford2008,Schmitt2010}. We restrict the analysis to
+the two-flavor superconducting (2SC) phase, which represents the
+simplest realization of color superconductivity. The inclusion of such
+effects modifies the thermodynamic potential and can have a
+significant impact on the resulting equation of state.
+
+Finally, the equation of state obtained from the QM model is used as
+input to the TOV equations, which determine the structure of
+non-rotating compact stars in general relativity. By solving these
+equations, we obtain mass--radius relations for quark stars and
+analyze how the microscopic properties of the model influence
+macroscopic observables.
+
+\section{A Simple Quark--Meson Equation of State}
+
+\subsection*{Thermodynamic framework}
+
+Having established the two-flavor Quark--Meson model in vacuum, the
+next step is to use it as a model for cold and dense matter. The
+central quantity in this construction is the grand potential density
+$\Omega$, since all thermodynamic observables may be obtained from it.
+In the present work we restrict attention to zero temperature,
+\begin{equation}
+T=0,
+\end{equation}
+which is the regime relevant for compact stars to a very good
+approximation.
+
+The thermodynamic treatment is carried out in the mean-field
+approximation. In practice, this means that the mesonic fields are
+replaced by their expectation values, while the quark fields are kept
+as dynamical degrees of freedom and integrated out. This is the same
+large-$N_c$ logic used in the derivation of the effective potential in
+the previous chapter: quark-loop contributions are retained, whereas
+mesonic fluctuations are neglected at this stage. 
+
+With this approximation, the thermodynamics is governed by the grand
+potential
+\begin{equation}
+\Omega = \Omega(\bar{\sigma}; \mu_u,\mu_d,\ldots),
+\end{equation}
+viewed as a function of the mean scalar field and of the relevant
+chemical potentials. In the simplest case considered first below, the
+medium is parameterized by a common quark chemical potential. Later,
+when the model is adapted to quark-star matter, additional chemical
+potentials are introduced in order to impose weak equilibrium and
+charge neutrality. The basic thermodynamic structure is, however, the
+same in both cases: one first constructs $\Omega$ as a function of the
+mean fields and chemical potentials, and then determines the physical
+state by minimizing it.
+
+Since the pion condensate is neglected in the present baseline
+treatment, only the scalar condensate needs to be determined. The
+stationarity condition therefore reduces to
+\begin{equation}
+\frac{\partial \Omega}{\partial \bar{\sigma}} = 0.
+\label{eq:qs_gap_eq}
+\end{equation}
+This equation is often referred to as the \emph{gap equation}. Its
+solution gives the medium-dependent condensate
+$\bar{\sigma}(\mu_u,\mu_d,\ldots)$ and thereby the constituent quark
+mass,
+\begin{equation}
+M_q = g\bar{\sigma}.
+\label{eq:qs_constituent_mass}
+\end{equation}
+The importance of this relation is that the quark mass is not fixed,
+but generated dynamically through the chiral condensate. The equation
+of state is therefore determined self-consistently rather than by
+assuming a prescribed fermion mass. This dynamical mass generation is a
+central feature of the Quark--Meson model and is precisely what makes
+it qualitatively different from models in which quark mass is treated as
+a fixed parameter \cite{Buballa2005,Schmitt2010,sletmoen2022}.
+
+The vacuum expectation value \(\sigma_0=f_\pi\) is fixed by the pion
+decay constant, whereas the sigma mass is less sharply constrained and
+is therefore commonly treated as a model parameter 
+\cite{SchaeferWambach2008,SchaeferPawlowskiWambach2007,Buballa2005}.
+In the simple baseline considered here, the model is therefore
+evaluated for the representative choices
+\(m_\sigma=500,600,\) and \(700\,\mathrm{MeV}\). This
+variation changes the curvature of the effective potential and thereby
+the detailed thermodynamic response, while leaving the underlying
+two-flavor mean-field setup unchanged \cite{Folkestad2018,Andersen2024}.
+
+Once the stationary point of $\Omega$ has been found, the pressure is
+identified as minus the grand potential evaluated at the minimum,
+\begin{equation}
+P = -\Omega_{\min}.
+\label{eq:qs_pressure_def}
+\end{equation}
+The particle number densities follow from derivatives with respect to
+the corresponding chemical potentials,
+\begin{equation}
+n_f = -\frac{\partial \Omega}{\partial \mu_f},
+\label{eq:qs_density_def}
+\end{equation}
+and the energy density is obtained from the thermodynamic relation
+\begin{equation}
+\varepsilon = -P + \sum_f \mu_f n_f.
+\label{eq:qs_energy_def}
+\end{equation}
+In the constrained stellar calculation, the sum is extended to include
+the electron contribution as well.
+
+It is useful to keep in mind that this thermodynamic framework serves
+two distinct purposes in the chapter. First, it allows us to study the
+Quark--Meson model in a simplified setting, where the role of the
+chiral condensate and the onset of dense matter can be seen clearly.
+Second, the same framework can be extended by imposing the additional
+conditions required for stellar matter, namely local charge neutrality
+and $\beta$-equilibrium. The unconstrained and constrained equations of
+state are therefore not based on different formalisms, but on the same
+grand-potential construction with different choices of thermodynamic
+constraints.
+
+\subsection*{Medium contribution at zero temperature}
+
+At zero temperature, the thermodynamic potential separates into a
+vacuum contribution and a medium-dependent part associated with the
+filled Fermi sea. The latter can be expressed in terms of the Fermi
+momentum
+\begin{equation}
+k_{F,f} = \sqrt{\mu_f^2 - M_q^2},
+\end{equation}
+where $M_q = g\bar{\sigma}$ is the constituent quark mass.
+
+The medium contribution is nonvanishing only when the chemical
+potential exceeds the constituent quark mass, $\mu_f > M_q$. In this
+case, a Fermi surface is formed and quark states are occupied up to
+the Fermi momentum. For $\mu_f < M_q$, the Fermi momentum becomes
+imaginary, indicating that no states are occupied and the medium
+contribution vanishes. The system therefore remains in the vacuum
+state, with zero pressure and vanishing number density. This behavior
+is characteristic of zero-temperature fermionic systems and is also
+found in the Quark--Meson model in the mean-field approximation
+\cite{andresen2023,sletmoen2022}.
+
+The resulting expressions for the pressure, number density, and energy
+density are obtained from standard phase-space integrals over the
+occupied states. In particular, the number density is proportional to
+$k_{F,f}^3$, while the pressure and energy density involve integrals
+over the single-particle energy. For each flavor one has
+\begin{equation}
+n_f = \frac{N_c}{3\pi^2} k_{F,f}^3.
+\end{equation}
+These quantities depend explicitly on
+the chemical potentials and on the dynamically generated mass, and
+therefore inherit the medium dependence of the chiral condensate. The
+equation of state is thus determined self-consistently once the
+condensate has been computed from the gap equation. The behavior of
+the condensate together with the onset of finite density is shown in
+Fig.~\ref{fig:qs_sigma_density_mu}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figures/quark_stars/sigma_vs_mu_multi.pdf}
+
+\includegraphics[width=0.88\textwidth]{figures/quark_stars/number_density_vs_mu_multi.pdf}
+\caption{Top: chiral condensate as a function of the quark chemical potential. Bottom: quark number density as a function of the quark chemical potential, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
+\label{fig:qs_sigma_density_mu}
+\end{figure}
+
+As the chemical potential increases, the solution to the gap equation
+changes, leading to a reduction of the condensate and therefore of the
+constituent quark mass. This reflects the gradual restoration of
+chiral symmetry in dense matter. At a critical chemical potential, the
+preferred solution of the gap equation changes abruptly, resulting in
+a discontinuous change in the condensate. Within the present
+mean-field treatment, this corresponds to a first-order phase
+transition between the vacuum and a dense quark-matter phase 
+\cite{andresen2023,sletmoen2022}.
+
+Changing \(m_\sigma\) modifies the stiffness of the effective
+potential and thereby the detailed evolution of the condensate through
+the transition region. This shifts the onset of finite density and
+produces a corresponding spread in the density curves, but the overall
+structure remains the same for the three representative parameter
+choices.
+
+Beyond the transition, the Fermi momentum grows with increasing
+chemical potential, and the pressure and energy density increase
+monotonically. The behavior of these quantities as functions of the
+chemical potential forms the basis for the numerical construction of
+the equation of state presented in the following subsection.
+
+\subsection*{Vacuum normalization}
+
+The thermodynamic potential obtained from the Quark--Meson model
+contains a vacuum contribution which, after renormalization, is
+generally nonzero. As a consequence, the pressure defined by Eq.~(\ref{eq:qs_pressure_def})
+does not vanish in the vacuum state, i.e.\ at vanishing chemical
+potentials. This is in contrast to the physical expectation that the
+vacuum should correspond to zero pressure.
+
+For applications to compact stars, it is therefore necessary to
+normalize the pressure such that
+\begin{equation}
+P(\mu_f = 0) = 0.
+\end{equation}
+This is achieved by introducing a constant shift in the thermodynamic
+potential,
+\begin{equation}
+\Omega \rightarrow \Omega + B,
+\end{equation}
+which corresponds to the transformation
+\begin{equation}
+P \rightarrow P - B, \qquad
+\varepsilon \rightarrow \varepsilon + B.
+\end{equation}
+The constant $B$ is commonly referred to as a \emph{bag constant}, by
+analogy with the MIT bag model \cite{Chodos1974,Chodos1974b}.
+
+In the present framework, this shift has a clear interpretation. The
+renormalized vacuum effective potential determines the absolute value
+of the energy density of the vacuum, but this value is not fixed by
+the theory itself. Only differences in the thermodynamic potential are
+physically meaningful. The constant $B$ therefore fixes the reference
+point of the energy density and ensures that the physical vacuum
+corresponds to zero pressure.
+
+In practice, it is convenient to separate this normalization into two
+steps. First, a vacuum subtraction is performed such that the pressure
+vanishes in the true vacuum configuration,
+\begin{equation}
+B_0 = \Omega_{\mathrm{vac}}(\bar{\sigma}_{\mathrm{vac}}),
+\end{equation}
+where $\bar{\sigma}_{\mathrm{vac}}$ denotes the solution of the gap
+equation at zero chemical potential. This guarantees that the vacuum
+state is correctly normalized.
+
+In addition, one may introduce a further constant shift $B$, which can
+be used to modify the stiffness of the equation of state. While $B_0$
+is fixed by the requirement of vacuum normalization, the additional
+shift $B$ acts as a phenomenological parameter that effectively
+controls the onset of the high-density phase. This is analogous to the
+role of the bag constant in phenomenological quark-matter models
+\cite{sletmoen2022}.
+
+It is important to emphasize that constant shifts of the pressure do
+not affect thermodynamic derivatives such as the number density or the
+speed of sound. However, they do change the relation between pressure
+and energy density,
+\begin{equation}
+P = P(\varepsilon),
+\end{equation}
+which is the quantity entering the Tolman--Oppenheimer--Volkoff
+equations. The choice of $B$ therefore has a direct impact on the
+resulting mass--radius relations of compact stars.
+
+From a numerical perspective, the effect of the vacuum normalization
+can be seen as a vertical shift of the pressure curve. In particular,
+the condition $P=0$ defines the surface of the star, and the
+normalization ensures that this point corresponds to the physical
+vacuum rather than an unphysical offset in the thermodynamic
+potential.
+
+\subsection*{Construction of the equation of state}
+
+The full equation of state is obtained by solving the gap equation for
+$\bar{\sigma}$ at each value of the chemical potential and evaluating
+the thermodynamic quantities at the corresponding minimum of the grand
+potential. In practice, this procedure defines a mapping from the
+chemical potentials to the thermodynamic observables,
+\begin{equation}
+\mu_f \;\longrightarrow\; \{\bar{\sigma},\, M_q,\, n_f,\, P,\, \varepsilon\}.
+\end{equation}
+
+For each value of the chemical potential, the gap equation
+\eqref{eq:qs_gap_eq} is solved to determine the condensate
+$\bar{\sigma}$. This fixes the constituent quark mass through
+$M_q = g\bar{\sigma}$, which in turn determines the Fermi momenta and
+the medium contribution to the thermodynamic potential. The pressure,
+number densities, and energy density are then evaluated using
+Eqs.~\eqref{eq:qs_pressure_def}--\eqref{eq:qs_energy_def}, including
+the vacuum normalization discussed above. Numerically, the global
+minimum of the grand potential is selected at each value of the
+chemical potential, so that the thermodynamically preferred phase is
+obtained.
+
+This relation is obtained numerically by tabulating $P$ and
+$\varepsilon$ as functions of the chemical potential and performing a
+parametric representation of the curve. The resulting function
+$P(\varepsilon)$ serves as input for the Tolman--Oppenheimer--Volkoff
+equations governing the structure of compact stars \cite{sletmoen2022}.
+In the numerical construction, only the branch with non-negative
+pressure is retained in the plotted equation of state.
+The corresponding pressure as a function of chemical potential, together
+with the resulting equation of state, is displayed in
+Fig.~\ref{fig:qs_pressure_panels}.
+
+It is important to note that the structure of the equation of state is
+directly influenced by the behavior of the condensate. In particular,
+a discontinuous change in $\bar{\sigma}$ as a function of the chemical
+potential leads to a corresponding discontinuity in the thermodynamic
+quantities, signaling a first-order phase transition. In the numerical
+equation of state, this manifests itself as a discontinuous change, or
+a very rapid variation, in the thermodynamic quantities.
+
+The multi-curve comparison in Fig.~\ref{fig:qs_pressure_panels} shows
+that the pressure and the resulting equation of state retain the same
+qualitative form across the chosen sigma masses, while exhibiting a
+moderate sensitivity to the value of \(m_\sigma\). In this sense, the
+simple model is best viewed as a controlled baseline that illustrates
+how the parameter choice affects the thermodynamics before the
+additional stellar constraints are imposed.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_mu_multi.pdf}
+
+\includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_energy_density_multi.pdf}
+\caption{Top: pressure as a function of the quark chemical potential. Bottom: equation of state \(P(\varepsilon)\), with only the non-negative-pressure branch shown, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
+\label{fig:qs_pressure_panels}
+\end{figure}
+The equation of state is constructed by eliminating the chemical
+potential and expressing the pressure as a function of the energy
+density,
+\begin{equation}
+P = P(\varepsilon).
+\end{equation}
+
+From a numerical perspective, the construction of the equation of
+state therefore proceeds in three steps:
+\begin{enumerate}
+\item Solve the gap equation for $\bar{\sigma}$ at fixed chemical
+      potential.
+\item Evaluate $P$ and $\varepsilon$ at the corresponding minimum of
+      the grand potential, including vacuum normalization.
+\item Construct the relation $P(\varepsilon)$ from the resulting
+      dataset.
+\end{enumerate}
+
+% \section{Quark Stars}
+
+% \subsection*{Tolman--Oppenheimer--Volkoff equations}
+
+% The structure of a static, spherically symmetric compact star in
+% general relativity is determined by the Tolman--Oppenheimer--Volkoff
+% (TOV) equations,
+% \begin{align}
+% \frac{dP}{dr} &= -\frac{G(\varepsilon + P)(m + 4\pi r^3 P)}{r(r-2Gm)}, \\
+% \frac{dm}{dr} &= 4\pi r^2 \varepsilon,
+% \end{align}
+% where $P(r)$ and $\varepsilon(r)$ are the pressure and energy density
+% profiles, and $m(r)$ is the enclosed mass.
+
+% Given an equation of state $P(\varepsilon)$, these equations can be
+% integrated outward from a central pressure to determine the mass and
+% radius of the star.
+
+% \subsection*{Numerical implementation}
+
+% The TOV equations are solved numerically by specifying a central
+% energy density and integrating outward until the pressure vanishes,
+% which defines the radius of the star. Repeating this procedure for a
+% range of central densities yields a sequence of equilibrium
+% configurations.
+
+% The equation of state obtained from the Quark--Meson model is
+% implemented in tabulated or interpolated form to ensure numerical
+% stability.
+
+% \subsection*{Mass--radius relation}
+
+% The solutions of the TOV equations define a mass--radius relation
+% $M(R)$ for quark stars. This relation encodes the macroscopic
+% properties of the stellar configurations and depends sensitively on
+% the stiffness of the equation of state.
+
+% The maximum mass and corresponding radius provide important
+% observational constraints, which can be compared to measurements of
+% massive pulsars.
+
+
+% \section{Extension to Diquark Pairing}
+
+% \subsection*{Motivation}
+
+% At sufficiently high baryon density, attractive interactions between
+% quarks in certain color channels can lead to the formation of Cooper
+% pairs, resulting in color superconductivity. The simplest such phase
+% in two-flavor quark matter is the two-flavor superconducting (2SC)
+% phase.
+
+% To account for this possibility, the Quark--Meson model can be
+% extended by introducing diquark degrees of freedom, leading to the
+% Quark--Meson--Diquark (QMD) model.
+
+% \subsection*{Extended thermodynamic potential}
+
+% In the presence of diquark pairing, the thermodynamic potential
+% depends on both the chiral condensate and the diquark gap,
+% \begin{equation}
+% \Omega(\bar{\sigma},\Delta;\mu_u,\mu_d).
+% \end{equation}
+% The equilibrium state is determined by solving the coupled gap
+% equations
+% \begin{equation}
+% \frac{\partial \Omega}{\partial \bar{\sigma}} = 0,
+% \qquad
+% \frac{\partial \Omega}{\partial \Delta} = 0.
+% \end{equation}
+
+% \subsection*{Equation of state with pairing}
+
+% The inclusion of the diquark condensate modifies the quasiparticle
+% spectrum and therefore the thermodynamic properties of the system.
+% Following the same procedure as in the unpaired case, the equation of
+% state is obtained by minimizing the thermodynamic potential and
+% evaluating the pressure and energy density at the global minimum.
+
+
+% \section{Quark Stars with Pairing}
+
+% \subsection*{Stellar structure with superconducting matter}
+
+% The equation of state obtained from the extended model can be used as
+% input to the TOV equations in the same way as before. The presence of
+% pairing modifies the pressure and energy density, which in turn
+% affects the mass--radius relation.
+
+% \subsection*{Impact on macroscopic observables}
+
+% By comparing the mass--radius relations obtained with and without
+% pairing, one can assess the impact of color superconductivity on the
+% structure of quark stars. In particular, changes in the maximum mass
+% and the radius of typical configurations provide insight into the
+% astrophysical relevance of the pairing mechanism.

@@ -24,3 +24,8 @@ numerics/data*
 .DS_Store
 .idea/
 .vscode/
+.codex
+
+# Untracked directories
+github-clones/
+numerics/quark_stars/output/*
