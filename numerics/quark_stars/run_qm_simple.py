@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .io import output_directories
+from .io import output_directories, save_table
 from .plotting import apply_plot_style, save_figure
 from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
 from .qm_potential import TwoFlavorQMPotential
@@ -94,7 +94,7 @@ def save_pressure_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
 def save_pressure_energy_density_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
     for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
-        mask = table.pressure_mev4 >= 0.0
+        mask = table.positive_pressure_mask
         ax.plot(
             table.energy_density_gev_fm3[mask],
             table.pressure_gev_fm3[mask],
@@ -106,6 +106,40 @@ def save_pressure_energy_density_plot(tables: list[SimpleEOSTable], plots_dir: P
     ax.set_ylabel(r"Pressure $P\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
     ax.legend()
     save_figure(plots_dir / "pressure_vs_energy_density_multi.pdf")
+
+
+def save_speed_of_sound_outputs(tables: list[SimpleEOSTable], data_dir: Path, plots_dir: Path) -> None:
+    curves: list[tuple[np.ndarray, np.ndarray]] = [table.speed_of_sound_squared_branch() for table in tables]
+    max_points = max((mu_q_mev.size for mu_q_mev, _ in curves), default=0)
+    combined = np.full((max_points, 2 * len(tables)), np.nan)
+    columns: list[str] = []
+    metadata: dict[str, object] = {
+        "pipeline": "simple",
+        "diagnostic": "speed_of_sound_squared",
+        "definition": "c_s^2=(dP/dmu_q)/(depsilon/dmu_q) on the P>=0 branch",
+        "units": "mu_q in MeV; c_s^2 dimensionless",
+    }
+
+    fig, ax = plt.subplots(figsize=(8.8, 3.8))
+    colors = sigma_colors(len(tables))
+    for index, (table, color, (mu_q_mev, cs2)) in enumerate(zip(tables, colors, curves, strict=True)):
+        combined[: mu_q_mev.size, 2 * index] = mu_q_mev
+        combined[: cs2.size, 2 * index + 1] = cs2
+        columns.extend(
+            [
+                f"mu_q_mev_sigma_{int(round(table.m_sigma_mev))}",
+                f"c_s2_sigma_{int(round(table.m_sigma_mev))}",
+            ]
+        )
+        metadata[f"m_sigma_{index + 1}_mev"] = f"{table.m_sigma_mev:.6f}"
+        ax.plot(mu_q_mev, cs2, linewidth=2.2, color=color, label=sigma_label(table.m_sigma_mev))
+
+    ax.axhline(1.0 / 3.0, color="black", linestyle="--", linewidth=1.0, alpha=0.8)
+    ax.set_xlabel(r"Quark chemical potential $\mu_q\;(\mathrm{MeV})$")
+    ax.set_ylabel(r"Speed of sound squared $c_s^2$")
+    ax.legend()
+    save_figure(plots_dir / "speed_of_sound_vs_mu_multi.pdf")
+    save_table(data_dir / "qm_simple_speed_of_sound_multi.txt", columns, combined, metadata)
 
 
 def main() -> None:
@@ -122,6 +156,7 @@ def main() -> None:
     save_number_density_plot(tables, plots_dir)
     save_pressure_plot(tables, plots_dir)
     save_pressure_energy_density_plot(tables, plots_dir)
+    save_speed_of_sound_outputs(tables, data_dir, plots_dir)
 
 
 if __name__ == "__main__":

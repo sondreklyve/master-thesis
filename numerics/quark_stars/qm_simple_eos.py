@@ -54,6 +54,27 @@ class SimpleEOSTable:
     def energy_density_gev_fm3(self) -> np.ndarray:
         return self.energy_density_mev4 * MEV4_TO_GEV_FM3
 
+    @property
+    def positive_pressure_mask(self) -> np.ndarray:
+        return self.pressure_mev4 >= 0.0
+
+    def speed_of_sound_squared_branch(self, derivative_floor_relative: float = 1.0e-10) -> tuple[np.ndarray, np.ndarray]:
+        mask = self.positive_pressure_mask
+        mu_q_mev = self.mu_q_mev[mask]
+        pressure_mev4 = self.pressure_mev4[mask]
+        energy_density_mev4 = self.energy_density_mev4[mask]
+
+        if mu_q_mev.size < 2:
+            return np.array([], dtype=float), np.array([], dtype=float)
+
+        edge_order = 2 if mu_q_mev.size >= 3 else 1
+        dpressure_dmu = np.gradient(pressure_mev4, mu_q_mev, edge_order=edge_order)
+        denergy_dmu = np.gradient(energy_density_mev4, mu_q_mev, edge_order=edge_order)
+
+        derivative_floor = derivative_floor_relative * max(1.0, float(np.max(np.abs(denergy_dmu))))
+        valid = np.isfinite(dpressure_dmu) & np.isfinite(denergy_dmu) & (np.abs(denergy_dmu) > derivative_floor)
+        return mu_q_mev[valid], dpressure_dmu[valid] / denergy_dmu[valid]
+
     def save(self, path: Path) -> None:
         data = np.column_stack(
             [

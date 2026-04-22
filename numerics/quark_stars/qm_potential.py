@@ -33,8 +33,9 @@ def fermion_grand_potential(mu_mev: float, mass_mev: float, degeneracy: float) -
     mu_array = np.asarray(mu_mev)
     mass_array = np.asarray(mass_mev)
     p_f = np.asarray(_fermi_momentum(mu_array, mass_array))
-    log_term = np.where(p_f > 0.0, np.arcsinh(p_f / mass_array), 0.0)
-    omega = -degeneracy / (24.0 * PI**2) * (
+    ratio = np.divide(p_f, mass_array, out=np.zeros_like(p_f, dtype=float), where=mass_array > 0.0)
+    log_term = np.where((p_f > 0.0) & (mass_array > 0.0), np.arcsinh(ratio), 0.0)
+    omega = -degeneracy / (48.0 * PI**2) * (
         (2.0 * mu_array**2 - 5.0 * mass_array**2) * mu_array * p_f + 3.0 * mass_array**4 * log_term
     )
     omega = np.where(p_f > 0.0, omega, 0.0)

@@ -1,9 +1,9 @@
 \chapter*{Quark Matter and Compact Stars}
 
-The primary goal of this chapter is to constructtion an equation of state
+The primary goal of this chapter is to construct an equation of state
 for cold and dense quark matter and to investigate its implications
 for compact stars. In contrast to the hadronic models considered in
-the Part~I, the matter described here consists entirely
+Part~I, the matter described here consists entirely
 of deconfined quarks. The resulting stellar configurations therefore
 represent idealized quark stars. While such objects provide a useful
 theoretical framework for isolating the effects of quark degrees of
@@ -21,7 +21,7 @@ develops a non-vanishing expectation value, which acts as an order
 parameter for chiral symmetry breaking. The constituent quark mass is
 then generated dynamically through the relation
 \begin{equation}
-m_q = g \langle \sigma \rangle ,
+M_q = g \bar{\sigma} ,
 \end{equation}
 and becomes a function of the thermodynamic state of the system. This
 feature distinguishes the model from free fermion descriptions and is
@@ -32,7 +32,7 @@ numerically and determine the equilibrium value of the scalar
 condensate by minimizing the thermodynamic potential at each value of
 the quark chemical potential. This yields a function
 $\bar{\sigma}(\mu)$, and therefore a density-dependent constituent
-quark mass $m_q = g\bar{\sigma}(\mu)$.
+quark mass $M_q = g\bar{\sigma}(\mu)$.
 
 At low chemical potential, the condensate remains close to its vacuum
 value, corresponding to a phase with spontaneously broken chiral
@@ -41,7 +41,7 @@ potential increases, the minimum of the thermodynamic potential shifts
 toward smaller values of the condensate, leading to a reduction of the
 quark mass. This behavior reflects the gradual restoration of chiral
 symmetry and, depending on the model parameters, may occur through a
-chiral phase transition or a smooth crossover
+proper (first-order) phase transition or a smooth crossover
 \cite{Folkestad2018,Buballa2005,Schmitt2010}.
 
 Once the thermodynamic quantities have been determined, we impose the
@@ -78,7 +78,7 @@ Having established the two-flavor Quark--Meson model in vacuum, the
 next step is to use it as a model for cold and dense matter. The
 central quantity in this construction is the grand potential density
 $\Omega$, since all thermodynamic observables may be obtained from it.
-In the present work we restrict attention to zero temperature,
+In the present work we restrict ourselves to zero temperature,
 \begin{equation}
 T=0,
 \end{equation}
@@ -108,9 +108,11 @@ same in both cases: one first constructs $\Omega$ as a function of the
 mean fields and chemical potentials, and then determines the physical
 state by minimizing it.
 
-Since the pion condensate is neglected in the present baseline
-treatment, only the scalar condensate needs to be determined. The
-stationarity condition therefore reduces to
+Since we consider isospin-symmetric matter with
+\(\mu_u = \mu_d\), the isospin chemical potential vanishes and
+pion condensation does not occur. The thermodynamic potential
+therefore depends only on the scalar condensate, and the
+stationarity condition reduces to
 \begin{equation}
 \frac{\partial \Omega}{\partial \bar{\sigma}} = 0.
 \label{eq:qs_gap_eq}
@@ -135,7 +137,7 @@ The vacuum expectation value \(\sigma_0=f_\pi\) is fixed by the pion
 decay constant, whereas the sigma mass is less sharply constrained and
 is therefore commonly treated as a model parameter 
 \cite{SchaeferWambach2008,SchaeferPawlowskiWambach2007,Buballa2005}.
-In the simple baseline considered here, the model is therefore
+In the simple case considered here, the model is therefore
 evaluated for the representative choices
 \(m_\sigma=500,600,\) and \(700\,\mathrm{MeV}\). This
 variation changes the curvature of the effective potential and thereby
@@ -195,6 +197,16 @@ is characteristic of zero-temperature fermionic systems and is also
 found in the Quark--Meson model in the mean-field approximation
 \cite{andresen2023,sletmoen2022}.
 
+In this limit, the Fermi--Dirac distribution reduces to a unit
+step function,
+\begin{equation}
+n_F(E) = \theta(\mu - E),
+\end{equation}
+so that momentum integrals over fermionic states are restricted to
+the region below the Fermi surface. As a result, the medium
+contribution can be evaluated by integrating single-particle
+quantities up to the Fermi momentum.
+
 The resulting expressions for the pressure, number density, and energy
 density are obtained from standard phase-space integrals over the
 occupied states. In particular, the number density is proportional to
@@ -216,7 +228,7 @@ Fig.~\ref{fig:qs_sigma_density_mu}.
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/sigma_vs_mu_multi.pdf}
 
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/number_density_vs_mu_multi.pdf}
-\caption{Top: chiral condensate as a function of the quark chemical potential. Bottom: quark number density as a function of the quark chemical potential, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
+\caption{Upper panel: chiral condensate as a function of the quark chemical potential. Lower panel: quark number density as a function of the quark chemical potential, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
 \label{fig:qs_sigma_density_mu}
 \end{figure}
 
@@ -369,7 +381,7 @@ additional stellar constraints are imposed.
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_mu_multi.pdf}
 
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_energy_density_multi.pdf}
-\caption{Top: pressure as a function of the quark chemical potential. Bottom: equation of state \(P(\varepsilon)\), with only the non-negative-pressure branch shown, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
+\caption{Upper panel: pressure as a function of the quark chemical potential. Lower panel: equation of state \(P(\varepsilon)\), with only the non-negative-pressure branch shown, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
 \label{fig:qs_pressure_panels}
 \end{figure}
 The equation of state is constructed by eliminating the chemical
@@ -389,6 +401,71 @@ state therefore proceeds in three steps:
 \item Construct the relation $P(\varepsilon)$ from the resulting
       dataset.
 \end{enumerate}
+
+\subsection*{Speed of sound}
+
+An additional characterization of the equation of state is provided by
+the speed of sound,
+\begin{equation}
+c_s^2 = \frac{dP}{d\varepsilon},
+\end{equation}
+where \(P\) is the pressure and \(\varepsilon\) is the energy density.
+This quantity measures the response of the pressure to compression and
+therefore reflects the stiffness of the equation of state.
+
+In the present calculation, both \(P\) and \(\varepsilon\) are obtained
+as functions of the quark chemical potential \(\mu_q\). The speed of
+sound can therefore be evaluated parametrically as
+\begin{equation}
+c_s^2
+=
+\frac{dP/d\mu_q}{d\varepsilon/d\mu_q}.
+\end{equation}
+This form is convenient in numerical implementations, since the
+equation of state is constructed as a table in \(\mu_q\), from which
+derivatives can be computed directly.
+
+The behavior of \(c_s^2\) provides information beyond the relation
+\(P(\varepsilon)\). In particular, rapid variations indicate regions
+where the response of the system changes significantly, such as near
+the onset of finite density. In the high-density regime, where the
+constituent quark mass becomes small compared with \(\mu_q\), the
+system approaches an ultrarelativistic limit in which
+\begin{equation}
+c_s^2 \to \frac{1}{3}.
+\end{equation}
+This limit serves as a consistency check on the numerical results.
+
+The numerical results for the two-flavor Quark--Meson model are shown
+in Fig.~\ref{fig:qs_speed_of_sound_mu}. For low values of \(\mu_q\),
+the speed of sound is approximately zero. This reflects that the
+system remains in the vacuum state up to the onset of finite density.
+At the transition to quark matter, \(c_s^2\) increases rapidly,
+indicating a sudden change in the stiffness of the equation of state.
+
+At larger chemical potentials, \(c_s^2\) approaches the
+ultrarelativistic limit \(1/3\) from below. No pronounced overshoot is
+observed within the present mean-field setup. This is consistent with
+the absence of additional interaction channels, such as diquark
+pairing, which in more elaborate models can modify the high-density
+behavior \cite{Andersen2024}.
+
+The dependence on the sigma mass \(m_\sigma\) is moderate. Varying
+\(m_\sigma\) shifts the location of the transition and slightly
+changes the slope of \(c_s^2\), but the qualitative behavior remains
+the same: a vanishing speed of sound in the vacuum phase, a rapid
+increase at onset, and a smooth approach to the ultrarelativistic
+limit at large \(\mu_q\).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{figures/quark_stars/speed_of_sound_vs_mu_multi.pdf}
+\caption{Speed of sound squared as a function of the quark chemical
+potential for the simple two-flavor Quark--Meson model at \(T=0\) for
+\(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\). The horizontal
+dashed line indicates the ultrarelativistic limit \(c_s^2 = 1/3\).}
+\label{fig:qs_speed_of_sound_mu}
+\end{figure}
 
 % \section{Quark Stars}
 

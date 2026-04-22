@@ -21,6 +21,7 @@ It produces:
 - combined `number_density_vs_mu_multi.pdf`
 - combined `pressure_vs_mu_multi.pdf`
 - combined `pressure_vs_energy_density_multi.pdf`
+- combined `speed_of_sound_vs_mu_multi.pdf`
 
 with the thesis baseline choices
 
@@ -30,6 +31,12 @@ Outputs go to:
 
 - `output/simple/data/`
 - `output/simple/plots/`
+
+The simple data products now also include a combined
+`qm_simple_speed_of_sound_multi.txt` table with the positive-pressure
+branch diagnostic
+
+- `c_s^2 = dP / d\varepsilon = (dP/d\mu_q)/(d\varepsilon/d\mu_q)`
 
 ### 2. Stellar quark matter
 
