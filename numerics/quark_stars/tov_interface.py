@@ -9,9 +9,10 @@ from pathlib import Path
 import numpy as np
 from scipy.interpolate import interp1d
 
+from .bag_model import bag_metadata
 from .constants import MEV4_TO_GEV_FM3
 from .io import save_table
-from .qm_stellar_matter import StellarMatterTable
+from .qm_stellar_matter import QuarkMatterEOS
 
 
 def _npemu_directory() -> Path:
@@ -33,8 +34,7 @@ class MassRadiusSequence:
     m_sigma_mev: float
     b0_mev4: float
     b_mev4: float
-    bag_source: str
-    minimum_b_mev4: float | None
+    b_min_mev4: float | None
     central_pressure_dimless: np.ndarray
     central_energy_density_mev4: np.ndarray
     radius_km: np.ndarray
@@ -47,15 +47,12 @@ class MassRadiusSequence:
 
     def save(self, path: Path) -> None:
         metadata = {
-            "pipeline": "stellar",
+            "pipeline": "quark_stars",
             "product": "mass_radius",
             "m_sigma_mev": f"{self.m_sigma_mev:.6f}",
-            "B0_mev4": f"{self.b0_mev4:.12e}",
-            "B_mev4": f"{self.b_mev4:.12e}",
-            "B_source": self.bag_source,
-            "B_min_mev4": "None" if self.minimum_b_mev4 is None else f"{self.minimum_b_mev4:.12e}",
             "units": "central pressure is npemu-dimensionless; central energy density in MeV^4/GeV fm^-3; radius in km; mass in Msun",
         }
+        metadata.update(bag_metadata(b0_mev4=self.b0_mev4, b_mev4=self.b_mev4, b_min_mev4=self.b_min_mev4))
         data = np.column_stack(
             [
                 self.central_pressure_dimless,
@@ -81,7 +78,7 @@ class MassRadiusSequence:
         )
 
 
-def build_npemu_energy_from_pressure(eos: StellarMatterTable) -> tuple[interp1d, np.ndarray, np.ndarray]:
+def build_npemu_energy_from_pressure(eos: QuarkMatterEOS) -> tuple[interp1d, np.ndarray, np.ndarray]:
     npemu_core, _ = _load_npemu_modules()
     pressure_mev4, energy_mev4 = eos.tov_branch()
     pressure_dimless = pressure_mev4 / npemu_core.e0
@@ -97,7 +94,7 @@ def build_npemu_energy_from_pressure(eos: StellarMatterTable) -> tuple[interp1d,
 
 
 def run_tov_sequence(
-    eos: StellarMatterTable,
+    eos: QuarkMatterEOS,
     central_pressure_factor: float = 1.08,
     radial_step_km: float = 0.01,
     max_radius_km: float = 30.0,
@@ -123,8 +120,7 @@ def run_tov_sequence(
         m_sigma_mev=eos.m_sigma_mev,
         b0_mev4=eos.b0_mev4,
         b_mev4=eos.b_mev4,
-        bag_source=eos.bag_source,
-        minimum_b_mev4=eos.minimum_b_mev4,
+        b_min_mev4=eos.b_min_mev4,
         central_pressure_dimless=central_pressure_dimless,
         central_energy_density_mev4=central_energy_density_mev4,
         radius_km=np.asarray(result["Rlist"]),

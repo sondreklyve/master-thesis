@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def apply_plot_style() -> None:
@@ -33,6 +34,18 @@ def save_figure(path: Path) -> None:
     figure.tight_layout()
     figure.savefig(path)
     plt.close(figure)
+
+
+def sigma_label(m_sigma_mev: float) -> str:
+    return rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$"
+
+
+def sigma_colors(num_curves: int) -> np.ndarray:
+    return plt.cm.viridis(np.linspace(0.2, 0.85, num_curves))
+
+
+def bag_curve_label(b_root_mev: float) -> str:
+    return rf"$B^{{1/4}} = {b_root_mev:.1f}\,\mathrm{{MeV}}$"
 
 
 def line_plot(x, y, xlabel: str, ylabel: str, title: str, path: Path, *, color: str = "#1f4e79") -> None:

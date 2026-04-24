@@ -22,3 +22,7 @@ def save_table(path: Path, columns: list[str], data: np.ndarray, metadata: dict[
 def output_directories(root: Path, pipeline: str) -> tuple[Path, Path]:
     base = ensure_directory(root / pipeline)
     return ensure_directory(base / "data"), ensure_directory(base / "plots")
+
+
+def output_directory(root: Path, pipeline: str) -> Path:
+    return ensure_directory(root / pipeline)

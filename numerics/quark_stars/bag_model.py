@@ -1,4 +1,4 @@
-"""Bag-shift handling for the stellar quark-matter pipeline."""
+"""Bag-constant handling for the stellar quark-matter pipeline."""
 
 from __future__ import annotations
 
@@ -59,7 +59,19 @@ def vacuum_subtraction_b0_mev4(vacuum_pressure_mev4: float) -> float:
     return vacuum_pressure_mev4
 
 
-def minimum_additional_bag_constant_mev4(
+def b_root_mev_from_b_mev4(b_mev4: float) -> float:
+    if b_mev4 < 0.0:
+        raise ValueError("The bag constant must be non-negative.")
+    return b_mev4**0.25
+
+
+def b_mev4_from_root_mev(b_root_mev: float) -> float:
+    if b_root_mev < 0.0:
+        raise ValueError("B^(1/4) must be non-negative.")
+    return b_root_mev**4
+
+
+def minimum_bag_constant_mev4(
     pressure_b0_mev4: np.ndarray,
     energy_b0_mev4: np.ndarray,
     baryon_density_mev3: np.ndarray,
@@ -95,18 +107,21 @@ def minimum_additional_bag_constant_mev4(
     return float(solution.root)
 
 
-def bag_summary(
+def bag_metadata(
+    *,
     b0_mev4: float,
     b_mev4: float,
-    minimum_b_mev4: float | None,
-) -> dict[str, object]:
-    metadata: dict[str, object] = {
+    b_min_mev4: float | None,
+) -> dict[str, str]:
+    metadata = {
         "B0_mev4": f"{b0_mev4:.12e}",
         "B0_gev_fm3": f"{b0_mev4 * MEV4_TO_GEV_FM3:.12e}",
         "B_mev4": f"{b_mev4:.12e}",
         "B_gev_fm3": f"{b_mev4 * MEV4_TO_GEV_FM3:.12e}",
+        "B_1_4_mev": f"{b_root_mev_from_b_mev4(b_mev4):.6f}",
     }
-    if minimum_b_mev4 is not None:
-        metadata["B_min_mev4"] = f"{minimum_b_mev4:.12e}"
-        metadata["B_min_gev_fm3"] = f"{minimum_b_mev4 * MEV4_TO_GEV_FM3:.12e}"
+    if b_min_mev4 is not None:
+        metadata["B_min_mev4"] = f"{b_min_mev4:.12e}"
+        metadata["B_min_gev_fm3"] = f"{b_min_mev4 * MEV4_TO_GEV_FM3:.12e}"
+        metadata["B_min_1_4_mev"] = f"{b_root_mev_from_b_mev4(b_min_mev4):.6f}"
     return metadata
