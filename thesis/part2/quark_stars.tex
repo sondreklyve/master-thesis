@@ -483,8 +483,8 @@ equations in order to construct quark-star configurations and study
 their mass--radius relations.
 
 The main objective is to investigate how the stellar properties depend
-on the microscopic parameters of the model. In particular, we analyze
-the sensitivity to the sigma-mass parameter \(m_\sigma\), which
+on the microscopic inputs of the model. In particular, we analyze
+the sensitivity to the sigma mass \(m_\sigma\), which
 controls the shape of the effective potential, and to the bag
 constant \(B\), which fixes the vacuum normalization and shifts the
 equation of state.
@@ -505,31 +505,63 @@ $\beta$-equilibrium. Weak processes of the form
 \[
 d \leftrightarrow u + e^- + \bar{\nu}_e
 \]
-drive the system toward chemical equilibrium, which implies the
-relation
+convert down quarks into up quarks and electrons, and vice versa.
+In chemical equilibrium, the sum of chemical potentials must be
+conserved in such reactions. This leads to the condition
+\begin{equation}
+\mu_d = \mu_u + \mu_e + \mu_{\bar{\nu}_e}.
+\end{equation}
+
+In the present context, neutrinos and antineutrinos are not trapped
+inside the star but escape on timescales much shorter than the
+evolution timescale of the system. As a result, they do not contribute
+to the thermodynamic equilibrium and their chemical potential can be
+set to zero,
+\begin{equation}
+\mu_{\bar{\nu}_e} = 0.
+\end{equation}
+The condition for $\beta$-equilibrium therefore reduces to
 \begin{equation}
 \mu_d = \mu_u + \mu_e.
 \label{eq:qs_beta_eq}
 \end{equation}
-In addition, bulk matter must be electrically neutral. For
-two-flavor quark matter, this condition reads
+
+In addition to weak equilibrium, bulk matter must satisfy local
+electric charge neutrality. For two-flavor quark matter, this condition
+reads
 \begin{equation}
 \frac{2}{3} n_u - \frac{1}{3} n_d - n_e = 0,
 \label{eq:qs_charge_neutrality_sub}
 \end{equation}
 where \(n_u\), \(n_d\), and \(n_e\) denote the number densities of
-up quarks, down quarks, and electrons, respectively. These two
-constraints determine the relative abundances of the particle species
-for a given thermodynamic state \cite{Buballa2005,Schmitt2010}.
+up quarks, down quarks, and electrons, respectively. This ensures that
+the net electric charge of the system vanishes, which is required to
+avoid large Coulomb energies in macroscopic matter.
 
-The thermodynamic potential is therefore generalized to depend on the
-individual chemical potentials,
+A further constraint in quark matter is color neutrality. In general,
+this requires that the densities associated with the color charges
+corresponding to the diagonal generators of SU(3), commonly denoted
+by \(\phi_3\) and \(\phi_8\), vanish. In the present two-flavor
+Quark--Meson model, however, all color degrees of freedom are treated
+symmetrically, and the quark distributions are identical for each
+color. As a consequence, the net color charge vanishes automatically,
+and no additional chemical potentials are required to enforce color
+neutrality.
+This situation changes in more general phases of quark matter, such as
+color-superconducting phases, where pairing patterns can distinguish
+between different colors. In such cases, color neutrality must be
+imposed explicitly through additional constraints.
+
+The thermodynamic potential is therefore generalized to include both
+the quark and electron contributions. Before imposing the constraints,
+it may be written schematically as
 \begin{equation}
-\Omega = \Omega(\bar{\sigma}; \mu_u, \mu_d, \mu_e),
+\Omega = \Omega_q(\bar{\sigma};\mu_u,\mu_d) + \Omega_e(\mu_e),
 \end{equation}
-while the mean-field structure of the model remains unchanged. In
-particular, the equilibrium value of the scalar condensate is still
-obtained from the gap equation
+where \(\Omega_q\) is the Quark--Meson contribution and \(\Omega_e\)
+is the contribution from the electron gas. The mean-field structure of
+the quark sector remains unchanged. In particular, the equilibrium
+value of the scalar condensate is still obtained from the gap equation
 \begin{equation}
 \frac{\partial \Omega}{\partial \bar{\sigma}} = 0,
 \label{eq:qs_gap_eq_stellar}
@@ -537,65 +569,161 @@ obtained from the gap equation
 which determines the medium-dependent condensate \(\bar{\sigma}\) and
 thereby the constituent quark mass,
 \begin{equation}
-M_q = g \bar{\sigma}.
+M_q = g\bar{\sigma}.
 \end{equation}
 
-In contrast to the simplified construction of the previous section,
-the solution must now satisfy Eqs.~(\ref{eq:qs_beta_eq}) and
-(\ref{eq:qs_charge_neutrality_sub}) simultaneously with the gap
-equation. The problem therefore consists of a coupled system of
-equations for the condensate and the chemical potentials. In
-practice, it is convenient to parameterize the system in terms of a
-single independent chemical potential, for instance the average quark
-chemical potential
+It is useful to impose \(\beta\)-equilibrium by changing variables from
+the individual quark chemical potentials to a quark-number chemical
+potential \(\mu\) and the electron chemical potential \(\mu_e\). Since
+\(\mu_e\) couples to negative electric charge, while the electric
+charges of the quarks are \(q_u = 2/3\) and \(q_d = -1/3\), the quark
+chemical potentials are written as
 \begin{equation}
-\mu_q = \frac{\mu_u + \mu_d}{2}.
+\mu_u = \mu - \frac{2}{3}\mu_e,
+\qquad
+\mu_d = \mu + \frac{1}{3}\mu_e.
+\label{eq:qs_mu_u_mu_d}
 \end{equation}
-For each value of \(\mu_q\), the remaining chemical potentials are
-determined self-consistently from the equilibrium and neutrality
-conditions, after which the thermodynamic quantities can be evaluated
-at the minimum of the grand potential.
+This parametrization automatically satisfies the condition for
+\(\beta\)-equilibrium, since
+\begin{equation}
+\mu_d - \mu_u = \mu_e.
+\end{equation}
+The remaining independent composition variable is therefore
+\(\mu_e\), which is fixed by imposing electric charge neutrality.
 
-Once the stationary point has been found, the pressure is given by
+With this parametrization, the thermodynamic potential becomes
+\begin{equation}
+\Omega(\bar{\sigma};\mu,\mu_e)
+=
+\Omega_q\!\left(\bar{\sigma};
+\mu - \frac{2}{3}\mu_e,
+\mu + \frac{1}{3}\mu_e
+\right)
++
+\Omega_e(\mu_e).
+\end{equation}
+The electron term is included because the electrons required by charge
+neutrality are part of the thermodynamic system. In the present model
+they are not coupled to the chiral condensate and are treated as a free
+relativistic Fermi gas. At zero temperature, the grand potential of a
+fermion species is obtained by filling all momentum states up to the
+Fermi momentum. For electrons, the corresponding contribution is
+therefore the standard degenerate Fermi-gas result
+\cite{shapiro_teukolsky,glendenning2000,Schmitt2010}.
+
+The numerical calculation uses the standard massive degenerate
+Fermi-gas expressions with the physical electron mass
+\(m_e = 0.511~\mathrm{MeV}\). For reference, in the ultrarelativistic
+limit \(m_e \ll \mu_e\), these expressions reduce to
+\begin{equation}
+\Omega_e(\mu_e)
+=
+-\frac{\mu_e^4}{12\pi^2}.
+\label{eq:qs_electron_omega}
+\end{equation}
+The corresponding limiting expressions for the pressure and number
+density are
+\begin{equation}
+P_e = -\Omega_e = \frac{\mu_e^4}{12\pi^2},
+\qquad
+n_e = -\frac{\partial \Omega_e}{\partial \mu_e}
+= \frac{\mu_e^3}{3\pi^2}.
+\end{equation}
+The electron energy density is then
+\begin{equation}
+\varepsilon_e
+=
+-P_e + \mu_e n_e
+=
+\frac{\mu_e^4}{4\pi^2}.
+\end{equation}
+Although the electron contribution is usually small compared with the
+quark contribution, it must be included in the total pressure and
+energy density in order to maintain thermodynamic consistency.
+
+For each value of the control chemical potential \(\mu\), the physical
+state is obtained by solving the gap equation together with the
+neutrality condition. The latter can be written as stationarity with
+respect to \(\mu_e\),
+\begin{equation}
+\frac{\partial \Omega}{\partial \mu_e} = 0.
+\end{equation}
+Using Eq.~(\ref{eq:qs_mu_u_mu_d}) together with
+\(n_i = -\partial\Omega/\partial\mu_i\), this gives
+\begin{equation}
+\frac{\partial \Omega}{\partial \mu_e}
+=
+\frac{2}{3}n_u
+-
+\frac{1}{3}n_d
+-
+n_e,
+\end{equation}
+and therefore reproduces the electric charge neutrality condition
+\begin{equation}
+\frac{2}{3}n_u
+-
+\frac{1}{3}n_d
+-
+n_e
+=
+0.
+\end{equation}
+Thus, the coupled problem is reduced to solving for the condensate and
+the chemical potentials subject to the gap equation and electric charge
+neutrality.
+
+Once the stationary point has been found, the total pressure is given
+by
 \begin{equation}
 P = -\Omega_{\min},
 \end{equation}
-while the number densities follow from derivatives with respect to
-the chemical potentials,
+where both the quark and electron contributions are included. The
+particle number densities follow from
 \begin{equation}
 n_f = -\frac{\partial \Omega}{\partial \mu_f},
 \end{equation}
 and the energy density is obtained from
 \begin{equation}
-\varepsilon = -P + \sum_f \mu_f n_f,
+\varepsilon
+=
+-P
++
+\mu_u n_u
++
+\mu_d n_d
++
+\mu_e n_e .
 \end{equation}
-where the sum runs over all particle species, including the electron
-contribution. These relations are identical to those used in the
-previous section, but are now evaluated for the constrained system.
 
 The construction of the equation of state therefore proceeds
-parametrically. For each value of the control chemical potential
-\(\mu_q\), one solves the coupled system consisting of the gap
-equation, the $\beta$-equilibrium condition, and the charge
-neutrality condition. This yields a set of thermodynamic quantities,
+parametrically. For each point in the chemical-potential grid, the gap
+equation and the neutrality condition are solved, with
+\(\beta\)-equilibrium imposed through
+\(\mu_e=\mu_d-\mu_u\). This yields
 \begin{equation}
-\mu_q \;\longrightarrow\;
-\{\bar{\sigma},\, M_q,\, n_u,\, n_d,\, n_e,\, P,\, \varepsilon\}.
+\{\mu_u,\,\mu_d,\,\mu_e\}
+\;\longrightarrow\;
+\{\bar{\sigma},\, M_q,\,
+n_u,\, n_d,\, n_e,\, P,\, \varepsilon\}.
 \end{equation}
-By eliminating the chemical potential, one obtains the relation
+Equivalently, the result may be viewed as a parametrization in terms
+of the quark-number chemical potential \(\mu\). By eliminating the
+chemical potentials, one obtains the relation
 \begin{equation}
 \varepsilon = \varepsilon(P),
 \end{equation}
-which defines the equation of state required for the stellar
-structure calculation.
+which defines the equation of state required for the stellar structure
+calculation.
 
-The resulting composition reflects the requirement of charge
-neutrality. Since electrons carry negative charge, the system
-contains a larger density of down quarks than up quarks,
-\(n_d > n_u\), while the electron density remains much smaller than
-the quark densities. This behavior is characteristic of cold,
-two-flavor quark matter in $\beta$-equilibrium and is consistent with
-previous studies of dense QCD matter in effective models
+The resulting composition reflects the requirement of electric charge
+neutrality. Since electrons carry negative charge, the system contains
+a larger density of down quarks than up quarks, \(n_d > n_u\), while
+the electron density remains much smaller than the quark densities.
+This behavior is characteristic of cold, two-flavor quark matter in
+\(\beta\)-equilibrium and is consistent with previous studies of dense
+QCD matter in effective models
 \cite{Buballa2005,Schmitt2010,Alford2008}.
 
 \subsection*{Vacuum structure, normalization, and phase construction}
@@ -636,11 +764,13 @@ correspond to parameter choices that do not exhibit a stable minimum at
 
 The figure shows that the existence of a physically acceptable vacuum
 depends sensitively on the value of \(m_\sigma\). For sufficiently small
-values, the effective potential does not exhibit a stable minimum at the
-physical value \(\sigma = f_\pi\). Instead, the potential becomes too
-shallow or develops a minimum at a different value of the condensate,
-indicating that the model fails to reproduce the correct vacuum
-structure. In the present setup, this occurs for
+values, the point \(\sigma=f_\pi\) is no longer a stable minimum of the
+effective potential. Although the stationarity condition may still be
+satisfied at this point, the curvature is not positive and the
+potential is not bounded from below in the present truncation. The
+corresponding parameter choices therefore do not define a stable vacuum
+state and are excluded from the stellar calculation. In the present
+setup, this occurs for
 \(m_\sigma \lesssim 395~\mathrm{MeV}\).
 
 Based on this analysis, we restrict the parameter space to values of
@@ -707,24 +837,13 @@ structure calculation \cite{glendenning2000,Schmitt2010}.
 With the constraints of $\beta$-equilibrium and charge neutrality
 imposed, and the vacuum structure fixed as discussed above, the
 equation of state can now be constructed. The procedure follows
-directly from the thermodynamic framework: for each value of the
-control chemical potential \(\mu_q\), the coupled system consisting of
-the gap equation, the equilibrium condition, and the neutrality
-condition is solved, and the pressure and energy density are evaluated
-at the minimum of the grand potential.
-
-In this way, a parametric relation between the thermodynamic
-quantities is obtained,
-\begin{equation}
-\mu_q \;\longrightarrow\; \{P,\, \varepsilon\}.
-\end{equation}
-Eliminating the chemical potential yields the equation of state. In
-the present work, the relation is represented numerically in the form
-\(\varepsilon(P)\), which is convenient for interpolation in the
-subsequent solution of the Tolman--Oppenheimer--Volkoff equations.
+directly from the thermodynamic framework: for each point in the
+chemical-potential grid, the gap equation and the neutrality condition
+are solved, and the pressure and energy density are evaluated at the
+minimum of the grand potential.
 
 The resulting equation of state is shown in
-Fig.~\ref{fig:qs_eos_zoom} for the selected values
+Fig.~\ref{fig:qs_eos_zoom} for 
 \(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\).
 
 \begin{figure}[H]
@@ -764,9 +883,16 @@ chiral condensate with increasing density.
 
 At higher pressures, the curves approach a common behavior, reflecting
 that the system becomes increasingly dominated by relativistic quark
-degrees of freedom. In this regime, the details of the chiral dynamics
-become less important, and the equation of state approaches that of an
-ultrarelativistic Fermi system \cite{Buballa2005,Schmitt2010}.
+degrees of freedom. In this regime, the constituent quark masses become
+small compared with the chemical potentials, and the equation of state
+approaches that of an ultrarelativistic ideal Fermi gas. Correspondingly,
+the different curves tend toward the limiting relation
+\begin{equation}
+\varepsilon = 3P,
+\end{equation}
+or equivalently \(c_s^2=dP/d\varepsilon = 1/3\). This is the standard
+high-density behavior of a gas of weakly interacting relativistic
+fermions \cite{Buballa2005,Schmitt2010}.
 
 \subsection*{Stellar structure and mass--radius relations}
 
@@ -779,15 +905,45 @@ this procedure for a range of central pressures yields a sequence of
 equilibrium configurations characterized by their mass and radius.
 
 In the present calculation, this procedure is applied to the
-equations of state constructed for the parameter sets
+equations of state constructed for the selected sigma masses
 \(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\). For each value of
 \(m_\sigma\), a reference bag constant \(B_{\min}\) is first determined
-from the condition that the equation of state becomes positive at the
-onset of the quark-matter phase. Around this reference value,
-additional equations of state are generated by introducing shifts in
-the bag constant. In practice, three cases are considered for each
-\(m_\sigma\): a reference value and two shifted values corresponding
-to higher and lower bag constants.
+from a stability condition at zero pressure. More precisely, the
+shifted equation of state is written as
+\begin{equation}
+P = P_{B_0} - B,
+\qquad
+\varepsilon = \varepsilon_{B_0} + B,
+\end{equation}
+where \(B_0\) denotes the vacuum subtraction discussed above. The value
+\(B_{\min}\) is chosen such that the energy per baryon at the
+zero-pressure surface satisfies
+\begin{equation}
+\frac{E}{A} = 931~\mathrm{MeV}.
+\end{equation}
+This reference value is used as a conventional
+stability benchmark, obtained by comparing the energy per baryon of
+bulk quark matter at zero pressure with that of ordinary nuclear
+matter, represented by iron. This criterion is commonly used in
+discussions of absolutely stable quark matter and the Bodmer--Witten
+hypothesis \cite{Bodmer1971,Witten1984,FarhiJaffe1984}. In the present
+two-flavor calculation, it should be understood as a reference scale
+for fixing \(B_{\min}\), rather than as a claim that the model realizes
+absolutely stable strange matter.
+
+To test the sensitivity of the stellar solutions to this
+phenomenological shift, two additional equations of state are generated
+around the reference value. The variation is made in fourth-root units,
+\begin{equation}
+B^{1/4} = B_{\min}^{1/4} - 10~\mathrm{MeV},
+\qquad
+B^{1/4} = B_{\min}^{1/4},
+\qquad
+B^{1/4} = B_{\min}^{1/4} + 10~\mathrm{MeV}.
+\end{equation}
+The two shifted values are not independent physical constraints, but
+are included to show how the mass--radius sequence responds to a
+smaller or larger effective bag constant.
 
 For each resulting equation of state, the TOV equations are solved
 numerically using the tabulated relation \(\varepsilon(P)\). The
@@ -805,12 +961,29 @@ Fig.~\ref{fig:qs_mass_radius_clean}.
 
 \caption{Mass--radius relations for quark stars obtained from the
 Quark--Meson model for \(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\)
-(top to bottom). For each value of \(m_\sigma\), three curves are shown
-corresponding to different choices of the bag constant. Solid lines
-indicate stable configurations, while dashed lines denote unstable
-branches beyond the maximum mass.}
+(top to bottom). 
+For each value of \(m_\sigma\), three curves are shown
+corresponding to \(B^{1/4}=B_{\min}^{1/4}-10~\mathrm{MeV}\),
+\(B_{\min}^{1/4}\), and \(B_{\min}^{1/4}+10~\mathrm{MeV}\).
+Solid lines indicate stable configurations, while dashed lines
+denote unstable branches beyond the maximum mass.}
 \label{fig:qs_mass_radius_clean}
 \end{figure}
+
+It is important to note that the low-mass part of these sequences
+should not be interpreted as a realistic description of ordinary
+compact stars. In the present calculation, the quark-matter equation of
+state is used throughout the entire star, down to the surface where
+\(P=0\). This corresponds to an idealized self-bound quark-star
+construction. For configurations with small masses and low central
+pressures, the densities are not necessarily high enough for deconfined
+quark matter to be the appropriate description. In a more realistic
+stellar model, one would expect the low-density region to be described
+by hadronic matter, possibly with a crust or with a transition to quark
+matter only above some critical density. The low-mass, small-radius
+segments of the curves should therefore be regarded mainly as a
+consequence of extending the pure quark-matter equation of state down
+to zero pressure.
 
 The results exhibit a clear dependence on the bag constant. Increasing
 \(B\) shifts the equation of state toward higher energy densities and
