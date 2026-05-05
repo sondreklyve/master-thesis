@@ -1,0 +1,289 @@
+\chapter{Thermodynamic potential of the Quark--Meson--Diquark model}
+\label{app:qmd_potential}
+
+This appendix collects the explicit expressions used for the
+mean-field thermodynamic potential of the two-flavor
+Quark--Meson--Diquark model. The expressions follow
+Ref.~\cite{Andersen2024}. They are included here for reference in order
+to keep the main text focused on the physical structure of the model.
+
+The superconducting mean field is introduced by shifting the sigma field
+and the third component of the diquark field according to
+\begin{align}
+\sigma &\rightarrow \phi_0+\tilde{\sigma}, \\
+\Delta_3 &\rightarrow \Delta_0+\tilde{\Delta}_3 ,
+\end{align}
+where \(\phi_0\) and \(\Delta_0\) are real mean fields and the fluctuating
+fields have vanishing expectation values. With the condensate chosen in
+the third color direction, the tree-level thermodynamic potential is
+\begin{align}
+\Omega_0
+&=
+\frac{1}{2}m^2\phi_0^2
++
+\left(m_\Delta^2-4\mu_3^2\right)\Delta_0^2
++
+\frac{\lambda}{24}\phi_0^4
+-
+h\phi_0
++
+\frac{\lambda_3}{12}\phi_0^2\Delta_0^2
++
+\frac{\lambda_\Delta}{6}\Delta_0^4 ,
+\label{eq:app_qmd_tree_potential}
+\end{align}
+where
+\begin{equation}
+\mu_3=\frac{1}{2}\left(\mu_{ur}+\mu_{dg}\right).
+\end{equation}
+
+For the explicit evaluation of the quark determinant, we use the
+Nambu--Gorkov basis defined in Eq.~\eqref{eq:qmd_nambu_gorkov_spinor}.
+The corresponding inverse propagator is
+\begin{equation}
+D^{-1}(p)
+=
+\begin{pmatrix}
+\slashed{p}-g\phi_0+\gamma^0\hat{\mu}
+&
+i g_\Delta \tau_2 \lambda_2 \gamma^5 \Delta_0
+\\
+i g_\Delta \tau_2 \lambda_2 \gamma^5 \Delta_0
+&
+\slashed{p}-g\phi_0-\gamma^0\hat{\mu}
+\end{pmatrix}.
+\label{eq:app_qmd_inverse_propagator}
+\end{equation}
+Here the tensor \(\epsilon_{3ab}\) has been replaced by the Gell-Mann
+matrix \(i\lambda_2\), corresponding to the chosen color orientation of the
+condensate.
+
+The quasiparticle energies entering the one-loop potential are
+\begin{align}
+E_{ub}^{\pm}(p) &= E(p)\pm\mu_{ub}, \\
+E_{db}^{\pm}(p) &= E(p)\pm\mu_{db}, \\
+E_{\Delta^\pm}^{\pm}(p) &= E_\Delta^\pm(p)\pm\delta\mu,
+\end{align}
+where
+\begin{align}
+E(p) &= \sqrt{p^2+g^2\phi_0^2}, \\
+E_\Delta^\pm(p)
+&=
+\sqrt{\left(E(p)\pm\bar{\mu}\right)^2
++
+g_\Delta^2\Delta_0^2},
+\\
+\bar{\mu}
+&=
+\frac{1}{2}\left(\mu_{ur}+\mu_{dg}\right)
+=
+\frac{1}{2}\left(\mu_{ug}+\mu_{dr}\right),
+\\
+\delta\mu
+&=
+\frac{1}{2}\left(\mu_{dg}-\mu_{ur}\right)
+=
+\frac{1}{2}\left(\mu_{dr}-\mu_{ug}\right).
+\end{align}
+For the common quark chemical potential used in Ref.~\cite{Andersen2024},
+\(\delta\mu=0\), \(\mu_3=\bar{\mu}\), and \(\mu_B=3\bar{\mu}\).
+
+The full renormalized one-loop thermodynamic potential can be written as
+\begin{align}
+\Omega_{0+1}
+&=
+\frac{3}{4}m_\pi^2 f_\pi^2
+\left[
+1-
+\frac{12m_q^2}{(4\pi)^2f_\pi^2}
+m_\pi^2F'(m_\pi^2)
+\right]
+\frac{\phi_0^2}{f_\pi^2}
+\nonumber \\
+&\quad
++
+\frac{2m_q^4}{(4\pi)^2}
+\left[
+\frac{9}{2}
++
+\log\!\left(\frac{m_q^2}{g_0^2\phi_0^2}\right)
++
+2\log\!\left(
+\frac{m_q^2}{g_0^2\phi_0^2+g_{\Delta,0}^2\Delta_0^2}
+\right)
+\right]
+\frac{\phi_0^4}{f_\pi^4}
+\nonumber \\
+&\quad
+-
+\frac{1}{4}m_\sigma^2 f_\pi^2
+\left\{
+1+
+\frac{12m_q^2}{(4\pi)^2f_\pi^2}
+\left[
+\left(1-\frac{4m_q^2}{m_\sigma^2}\right)F(m_\sigma^2)
++
+\frac{4m_q^2}{m_\sigma^2}
+-
+F(m_\pi^2)
+-
+m_\pi^2F'(m_\pi^2)
+\right]
+\right\}
+\frac{\phi_0^2}{f_\pi^2}
+\nonumber \\
+&\quad
++
+\frac{1}{8}m_\sigma^2 f_\pi^2
+\left\{
+1+
+\frac{12m_q^2}{(4\pi)^2f_\pi^2}
+\left[
+\left(1-\frac{4m_q^2}{m_\sigma^2}\right)F(m_\sigma^2)
+-
+F(m_\pi^2)
+-
+m_\pi^2F'(m_\pi^2)
+\right]
+\right\}
+\frac{\phi_0^4}{f_\pi^4}
+\nonumber \\
+&\quad
+-
+\frac{1}{8}m_\pi^2 f_\pi^2
+\left[
+1-
+\frac{12m_q^2}{(4\pi)^2f_\pi^2}
+m_\pi^2F'(m_\pi^2)
+\right]
+\frac{\phi_0^4}{f_\pi^4}
+\nonumber \\
+&\quad
+-
+m_\pi^2 f_\pi^2
+\left[
+1-
+\frac{12m_q^2}{(4\pi)^2f_\pi^2}
+m_\pi^2F'(m_\pi^2)
+\right]
+\frac{\phi_0}{f_\pi}
+\nonumber \\
+&\quad
++
+\left\{
+m_{\Delta,0}^2
+-
+4\bar{\mu}^2
+\left[
+1+
+\frac{4g_{\Delta,0}^2}{(4\pi)^2}
+\left(
+\log\!\left(
+\frac{m_q^2}
+{g_0^2\phi_0^2+g_{\Delta,0}^2\Delta_0^2}
+\right)
+-
+F(m_\pi^2)
+-
+m_\pi^2F'(m_\pi^2)
+\right)
+\right]
+\right\}
+\Delta_0^2
+\nonumber \\
+&\quad
++
+\frac{\lambda_{3,0}}{12}\phi_0^2\Delta_0^2
++
+\frac{\lambda_{\Delta,0}}{6}\Delta_0^4
++
+\frac{12g_0^2g_{\Delta,0}^2}{(4\pi)^2}\phi_0^2\Delta_0^2
++
+\frac{6g_{\Delta,0}^4}{(4\pi)^2}\Delta_0^4
+\nonumber \\
+&\quad
++
+\frac{4g_{\Delta,0}^4}{(4\pi)^2}
+\left[
+\log\!\left(
+\frac{m_q^2}
+{g_0^2\phi_0^2+g_{\Delta,0}^2\Delta_0^2}
+\right)
+-
+F(m_\pi^2)
+-
+m_\pi^2F'(m_\pi^2)
+\right]\Delta_0^4
+\nonumber \\
+&\quad
++
+\frac{4g_0^2g_{\Delta,0}^2}{(4\pi)^2}
+\left[
+\log\!\left(
+\frac{m_q^2}
+{g_0^2\phi_0^2+g_{\Delta,0}^2\Delta_0^2}
+\right)
+-
+F(m_\pi^2)
+-
+m_\pi^2F'(m_\pi^2)
+\right]\phi_0^2\Delta_0^2
+\nonumber \\
+&\quad
++
+\Omega_{1,\mathrm{num}}
++
+\Omega^{\bar{\mu},T}.
+\label{eq:app_qmd_full_potential}
+\end{align}
+
+The function \(F(p^2)\) and its derivative \(F'(p^2)\) are defined in
+Appendix~\ref{app:loop_integrals}. In the present appendix they are
+evaluated with the vacuum constituent quark mass \(m_q=g_0 f_\pi\).
+\begin{equation}
+\Omega^{\bar{\mu},T}
+=
+-4T
+\int_p
+\left\{
+\log\!\left[1+e^{-\beta(E\pm\bar{\mu})}\right]
++
+2\log\!\left[1+e^{-\beta E_\Delta^\pm}\right]
+\right\}.
+\label{eq:app_qmd_temperature_term}
+\end{equation}
+In the zero-temperature calculations considered in the main text this term
+is evaluated in the limit \(T\rightarrow0\).
+
+The finite residual contribution \(\Omega_{1,\mathrm{num}}\) is
+\begin{align}
+\Omega_{1,\mathrm{num}}
+&=
+-4
+\int_p
+\bigg[
+E_\Delta^+(p)
++
+E_\Delta^-(p)
+-
+2\sqrt{
+p^2+g^2\phi_0^2+g_\Delta^2\Delta_0^2
+}
+\nonumber \\
+&\hspace{3.0cm}
+-
+\frac{
+\bar{\mu}^2 g_\Delta^2\Delta_0^2
+}{
+\left(
+p^2+g^2\phi_0^2+g_\Delta^2\Delta_0^2
+\right)^{3/2}
+}
+\bigg].
+\label{eq:app_qmd_omega_num}
+\end{align}
+This integral is finite. It arises after subtracting the ultraviolet
+divergent part of the one-loop quark determinant. Unlike the other terms
+in Eq.~\eqref{eq:app_qmd_full_potential}, it is not available as a simple
+closed analytic expression and must be treated separately in the numerical
+implementation.
