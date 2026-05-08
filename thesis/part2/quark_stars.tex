@@ -1043,14 +1043,44 @@ formed from quarks rather than electrons. Since quarks carry color charge,
 the corresponding phase is called a color-superconducting phase
 \cite{Shovkovy2005}.
 
-The origin of the pairing can be understood from the interaction channel.
-In QCD, one-gluon exchange is attractive for two quarks in the
-antisymmetric color-antitriplet channel. This makes the normal quark Fermi
-surface unstable toward diquark condensation at sufficiently large density
-\cite{Shovkovy2005}. A diquark condensate is an expectation value of a
-quark--quark operator. It plays the role of an order parameter for the
-superconducting phase, in the same way that the chiral condensate is used
-as an order parameter for chiral symmetry breaking.
+The microscopic origin of the pairing can be illustrated by quark--quark
+scattering through one-gluon exchange, shown schematically in
+Fig.~\ref{fig:qq_one_gluon_exchange}. In QCD, this interaction is
+attractive in the antisymmetric color-antitriplet channel. This makes the
+normal quark Fermi surface unstable toward diquark condensation
+\cite{Shovkovy2005}. In this sense, the pairing mechanism is more direct
+than in ordinary electronic superconductivity: for electrons, single-photon
+exchange is repulsive, and the effective attraction responsible for Cooper
+pairing arises from the interaction with the medium, usually through
+phonon exchange.
+
+\begin{figure}[H]
+\centering
+\feynmandiagram [vertical'=b to a] {
+      i1 [particle=\(q_2\)]
+      -- [fermion] a
+      -- [fermion] f1 [particle=\(q_2\)],
+      a -- [gluon, edge label=\(g\)] b,
+      i2 [particle=\(q_1\)]
+      -- [anti fermion] b
+      -- [anti fermion] f2 [particle=\(q_1\)],
+};
+\caption{Schematic tree-level quark--quark scattering through one-gluon
+exchange. In the antisymmetric color-antitriplet channel, the color factor
+makes this interaction attractive, providing the microscopic motivation for
+Cooper pairing in the 2SC phase.}
+\label{fig:qq_one_gluon_exchange}
+\end{figure}
+
+A diquark condensate corresponds to a nonzero expectation value of a
+quark--quark operator. Since such an operator carries color, it is not
+gauge invariant in QCD. By Elitzur's theorem, a local gauge symmetry
+cannot be spontaneously broken in a gauge-invariant formulation
+\cite{Elitzur1975}. The condensate should therefore not be interpreted as
+a gauge-invariant order parameter in the same sense as the chiral
+condensate. In an effective model, or after fixing a color orientation, the
+diquark mean field can instead be used as a convenient representation of
+the pairing pattern and of the resulting quasiparticle spectrum.
 
 In the present work we restrict the discussion to two flavors, \(u\) and
 \(d\). The relevant color-superconducting phase is then the two-flavor
@@ -1058,16 +1088,14 @@ color-superconducting phase, usually denoted by 2SC. In this phase, quarks
 pair in a scalar channel that is antisymmetric in both color and flavor.
 With a conventional choice of color orientation, the condensate pairs red
 and green quarks, while the blue quarks remain unpaired, as shown
-schematically in Fig.~\ref{fig:2sc_pairing_schematic}.
-
-This choice of red--green pairing is conventional. It fixes the orientation
-of the condensate in color space and is made for mathematical convenience.
-An equivalent description could be obtained by a color rotation, so the
-choice of which color remains unpaired should not be interpreted as a
-physical preference for blue quarks. The corresponding pairing pattern
-leaves an \(SU(2)_c\) subgroup of the original color symmetry unchanged.
-This is the standard 2SC structure discussed in effective descriptions of
-dense two-flavor quark matter \cite{Shovkovy2005,Andersen2024}.
+schematically in Fig.~\ref{fig:2sc_pairing_schematic}. This choice fixes
+the orientation of the condensate in color space and is made for
+mathematical convenience. An equivalent description could be obtained by a
+color rotation, so the choice of which color remains unpaired should not
+be interpreted as a physical preference for blue quarks. In the fixed color
+basis used by the effective model, the corresponding pairing pattern
+leaves an \(SU(2)_c\) subgroup of the original color structure unchanged
+\cite{Shovkovy2005,Andersen2024}.
 
 \begin{figure}[H]
 \centering
@@ -1092,9 +1120,6 @@ dense two-flavor quark matter \cite{Shovkovy2005,Andersen2024}.
 \draw[pair] (-1.4,0) ellipse (0.85cm and 1.5cm);
 \draw[pair] ( 1.4,0) ellipse (0.8cm and 1.5cm);
 
-% Surrounding circle
-\draw[thick] (0, 0) circle (2.6);
-
 \end{tikzpicture}
 \caption{Schematic illustration of the conventional 2SC pairing pattern.
 The condensate pairs red and green quarks in an antisymmetric
@@ -1104,17 +1129,14 @@ rotation.}
 \label{fig:2sc_pairing_schematic}
 \end{figure}
 
-It is important to distinguish the role of the model from the underlying
-gauge theory. In QCD, color is a local gauge symmetry, and the diquark
-condensate itself is not a gauge-invariant observable. The physical content
-is instead associated with the pairing pattern and the resulting excitation
-spectrum. In the Quark--Meson--Diquark model, color is treated as a global
-symmetry, so the condensate can be used directly as a mean-field order
-parameter. This should be understood as an effective-model description of
-the 2SC pairing structure, not as a statement that a physical global color
-symmetry is broken in QCD.
-
-With this caveat, the effective model used below follows the formulation of
+This distinction is important when using the Quark--Meson--Diquark model.
+The model contains quarks, mesons, and diquark fields, but no dynamical
+gluons. As a result, the color symmetry appearing in the model is treated
+as a global symmetry. A nonzero value of \(\Delta_0\) therefore signals
+spontaneous breaking of this global symmetry within the effective model.
+This should be understood as a model representation of the 2SC pairing
+structure, not as a gauge-invariant statement about symmetry breaking in
+QCD. With this caveat, the effective model used below follows the formulation of
 Andersen and Nødtvedt~\cite{Andersen2024}. The full renormalized one-loop
 thermodynamic potential is not rederived in the main text.
 
@@ -1122,39 +1144,49 @@ thermodynamic potential is not rederived in the main text.
 
 Following Ref.~\cite{Andersen2024}, the superconducting channel is
 represented by a complex diquark field \(\Delta_a\), with color index
-\(a=1,2,3\). Its schematic quark--quark structure is
+\(a=1,2,3\). Its schematic quark--quark structure may be written as
 \begin{equation}
-\Delta_a \sim \bar{\psi}_b \tau_2 \epsilon_{abc}\gamma_5 \psi_c^C .
+\Delta_a
+\sim
+\epsilon_{abc}\epsilon_{ij}
+\bar{\psi}^{C\,i}_b \gamma_5 \psi^{\,j}_c ,
 \label{eq:2sc_diquark_operator}
 \end{equation}
-Here \(\psi_c\) is the quark field with color \(c\), while
-\(\psi^C=C\bar{\psi}^T\) is the charge-conjugate field. The matrix
-\(\tau_2\) acts in flavor space, and \(\epsilon_{abc}\) is the
-antisymmetric tensor in color space.
+where \(b,c\) are color indices and \(i,j\) are flavor indices. The field
+\(\psi^C=C\bar{\psi}^T\) is the charge-conjugate quark field. The tensor
+\(\epsilon_{abc}\) is antisymmetric in color space, while
+\(\epsilon_{ij}\) is antisymmetric in the two-flavor space. Equivalently,
+the flavor structure may be written using \(\tau_2\), up to a conventional
+factor.
 
 The structure of Eq.~\eqref{eq:2sc_diquark_operator} fixes the quantum
 numbers of the diquark field. The antisymmetric tensor
-\(\epsilon_{abc}\) makes the pair a color antitriplet, \(\tau_2\) gives
-the antisymmetric flavor-singlet combination, and \(\gamma_5\) selects the
-scalar spin-zero channel. This is the standard diquark degree of freedom
-used in the two-flavor Quark--Meson--Diquark model
-\cite{Shovkovy2005,Andersen2024}.
+\(\epsilon_{abc}\) makes the pair a color antitriplet, while
+\(\epsilon_{ij}\) gives the antisymmetric flavor-singlet combination. The
+factor \(\gamma_5\) selects the scalar spin-zero channel. This is the
+standard diquark degree of freedom used in the two-flavor
+Quark--Meson--Diquark model \cite{Shovkovy2005,Andersen2024}.
 
-With the color orientation fixed as in Fig.~\ref{fig:2sc_pairing_schematic},
-the superconducting mean field is written as
+With the color orientation fixed as in
+Fig.~\ref{fig:2sc_pairing_schematic}, we allow the third component of the
+diquark field to develop a nonzero expectation value,
 \begin{equation}
 \Delta_3 \rightarrow \Delta_0 + \tilde{\Delta}_3 ,
-\qquad
-\Delta_1=\Delta_2=0 ,
 \label{eq:2sc_condensate_choice}
 \end{equation}
-where \(\Delta_0\) is taken to be real. The quantity \(\Delta_0\) is the
-mean field that appears in the thermodynamic potential, while the physical
-quasiparticle gap is proportional to
+where \(\Delta_0\) is taken to be real and
+\(\langle \tilde{\Delta}_3\rangle=0\). This choice fixes the orientation
+of the condensate in color space. The other components of \(\Delta_a\) are
+not set to zero as fields; rather, their expectation values vanish in this
+chosen color basis.
+
+The quantity \(\Delta_0\) is the mean field that appears in the
+thermodynamic potential. The quasiparticle gap is proportional to
 \begin{equation}
 g_\Delta \Delta_0 ,
 \end{equation}
-where \(g_\Delta\) is the quark--diquark coupling.
+where \(g_\Delta\) is the quark--diquark coupling introduced explicitly in
+the Lagrangian below.
 
 \subsection*{The Quark--Meson--Diquark Lagrangian}
 
@@ -1168,7 +1200,7 @@ Ref.~\cite{Andersen2024}, we separate the Lagrangian into three parts,
 +
 \mathcal{L}_{\Delta}
 +
-\mathcal{L}_{q\Delta}.
+\mathcal{L}_{q\Delta},
 \label{eq:qmd_lagrangian_split}
 \end{equation}
 where \(\mathcal{L}_{\mathrm{QM}}\) is the previously introduced
@@ -1224,11 +1256,16 @@ m_\Delta^2\Delta_a^\dagger\Delta_a
 (\Delta_a^\dagger\Delta_a)^2 .
 \label{eq:qmd_diquark_part}
 \end{align}
-Here \(m_\Delta\) is the diquark mass parameter, while the chemical
-potential appears with a factor of two because the diquark carries the
-quark number of two quarks. The coupling \(\lambda_3\) links the chiral
-and diquark sectors, and \(\lambda_\Delta\) is the diquark self-coupling
-that stabilizes the potential in the diquark direction.
+Here \(m_\Delta\) is the diquark mass parameter. The quantity \(\mu_a\)
+denotes the chemical potential associated with the diquark field
+\(\Delta_a\). With the convention used in Ref.~\cite{Andersen2024}, it
+enters the covariant derivative as \(2\mu_a\). For the condensate chosen
+in the third color direction, the relevant chemical potential is denoted
+by \(\mu_3\). Its relation to the quark chemical potentials is specified
+below when the thermodynamic potential is constructed. The coupling
+\(\lambda_3\) links the chiral and diquark sectors, and
+\(\lambda_\Delta\) is the diquark self-coupling that stabilizes the
+potential in the diquark direction.
 
 The quark--diquark interaction is
 \begin{align}
@@ -1247,9 +1284,10 @@ The first term couples two quarks to the diquark field, while the second
 term is its Hermitian conjugate. The coupling \(g_\Delta\) controls the
 pairing strength; when \(\Delta_0\neq0\), the product
 \(g_\Delta\Delta_0\) is the gap scale in the paired quasiparticle
-spectrum. The factors in Eq.~\eqref{eq:qmd_quark_diquark_part} are the
-same as in Eq.~\eqref{eq:2sc_diquark_operator}, so the interaction is in
-the color-antitriplet, flavor-singlet scalar channel.
+spectrum. The factors \(\tau_2\) and \(\epsilon_{abc}\) implement the same
+antisymmetric flavor and color structure shown explicitly in
+Eq.~\eqref{eq:2sc_diquark_operator}. The interaction is therefore in the
+color-antitriplet, flavor-singlet scalar channel.
 
 Combining Eqs.~\eqref{eq:qmd_qm_part}--\eqref{eq:qmd_quark_diquark_part},
 the full Lagrangian is
@@ -1323,19 +1361,14 @@ their chosen values.
 
 \subsection*{Mean-field thermodynamic potential}
 
-At mean field, the sigma field and the chosen diquark component are shifted
-according to Ref.~\cite{Andersen2024},
-\begin{align}
-\sigma &\rightarrow \phi_0+\tilde{\sigma}, \\
-\Delta_3 &\rightarrow \Delta_0+\tilde{\Delta}_3 ,
-\end{align}
-where \(\phi_0\) and \(\Delta_0\) are real mean fields, while
-\(\tilde{\sigma}\) and \(\tilde{\Delta}_3\) have vanishing expectation
-values. The field \(\phi_0\) determines the constituent quark mass,
+Using the mean-field shifts introduced above for \(\sigma\) and
+\(\Delta_3\), the fields \(\phi_0\) and \(\Delta_0\) are treated as real
+background fields. The chiral mean field determines the constituent quark
+mass,
 \begin{equation}
-M_q = g\phi_0 .
+M_q = g\phi_0 ,
 \end{equation}
-The field \(\Delta_0\) is the diquark condensate, whose gap scale is
+while the diquark mean field determines the superconducting gap scale
 \(g_\Delta\Delta_0\). The mean-field problem is therefore a coupled
 minimization in \((\phi_0,\Delta_0)\), as in standard treatments of
 color-superconducting quark matter \cite{Shovkovy2005,Andersen2024}.
@@ -1363,9 +1396,17 @@ where
 \begin{equation}
 \mu_3=\frac{1}{2}\left(\mu_{ur}+\mu_{dg}\right).
 \end{equation}
+Here \(\mu_{ur}\) denotes the chemical potential of an up quark with red
+color, while \(\mu_{dg}\) denotes the chemical potential of a down quark
+with green color. These are two of the quarks that participate in the 2SC
+pairing pattern. The diquark field \(\Delta_3\) represents a Cooper pair
+made from two quarks, so the chemical potential associated with the pair is
+\(\mu_{ur}+\mu_{dg}\). With the convention used in the Lagrangian, this
+sum is written as \(2\mu_3\), which gives the term
+\(-4\mu_3^2\Delta_0^2\) in Eq.~\eqref{eq:qmd_tree_potential}.
+
 The term proportional to \(\lambda_3\) couples the chiral and diquark
-sectors. It is therefore responsible for part of the interaction between
-\(\phi_0\) and \(\Delta_0\) already at tree level. The term proportional to
+sectors already at tree level, while the term proportional to
 \(\lambda_\Delta\) is the diquark self-interaction.
 
 The full thermodynamic potential also contains the quark one-loop
@@ -1509,4 +1550,4 @@ theoretical definition of the QMD framework used here. The full
 renormalized potential is collected in Appendix~\ref{app:qmd_potential},
 including the finite residual integral \(\Omega_{1,\mathrm{num}}\), whose
 treatment is part of the numerical implementation. The next section uses
-this framework to construct the superconducting equation of state.
+this framework to construct the equation of state for the 2SC phase.
