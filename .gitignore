@@ -17,6 +17,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv
+numerics/.venv/
+numerics/.sandbox/
+numerics/bin
 numerics/data*
 *.h5
 
@@ -27,5 +30,5 @@ numerics/data*
 .codex
 
 # Untracked directories
-github-clones/
+github-clones/*
 numerics/quark_stars/output/*

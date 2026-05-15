@@ -7,7 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
-from .bag_model import vacuum_subtraction_b0_mev4
+from .thermodynamics.derivatives import speed_of_sound_squared
+from .thermodynamics.vacuum import vacuum_subtraction_b0_mev4
 from .constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
 from .io import save_table
 from .qm_potential import TwoFlavorQMPotential, fermion_number_density
@@ -60,20 +61,12 @@ class SimpleEOSTable:
 
     def speed_of_sound_squared_branch(self, derivative_floor_relative: float = 1.0e-10) -> tuple[np.ndarray, np.ndarray]:
         mask = self.positive_pressure_mask
-        mu_q_mev = self.mu_q_mev[mask]
-        pressure_mev4 = self.pressure_mev4[mask]
-        energy_density_mev4 = self.energy_density_mev4[mask]
-
-        if mu_q_mev.size < 2:
-            return np.array([], dtype=float), np.array([], dtype=float)
-
-        edge_order = 2 if mu_q_mev.size >= 3 else 1
-        dpressure_dmu = np.gradient(pressure_mev4, mu_q_mev, edge_order=edge_order)
-        denergy_dmu = np.gradient(energy_density_mev4, mu_q_mev, edge_order=edge_order)
-
-        derivative_floor = derivative_floor_relative * max(1.0, float(np.max(np.abs(denergy_dmu))))
-        valid = np.isfinite(dpressure_dmu) & np.isfinite(denergy_dmu) & (np.abs(denergy_dmu) > derivative_floor)
-        return mu_q_mev[valid], dpressure_dmu[valid] / denergy_dmu[valid]
+        return speed_of_sound_squared(
+            self.pressure_mev4[mask],
+            self.energy_density_mev4[mask],
+            self.mu_q_mev[mask],
+            derivative_floor_relative=derivative_floor_relative,
+        )
 
     def save(self, path: Path) -> None:
         data = np.column_stack(

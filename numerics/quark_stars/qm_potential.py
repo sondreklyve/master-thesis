@@ -7,62 +7,19 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.optimize import minimize_scalar
 
-from .constants import DEFAULT_NUMERIC_EPS, ELECTRON_MASS_MEV, NC, PI
+from .constants import DEFAULT_NUMERIC_EPS, NC, PI
 from .qm_parameters import QMFittedParameters
-
-
-def _fermi_momentum(mu_mev: float, mass_mev: float) -> float:
-    mu_array = np.asarray(mu_mev)
-    mass_array = np.asarray(mass_mev)
-    squared = np.clip(mu_array**2 - mass_array**2, 0.0, None)
-    momentum = np.where(mu_array > mass_array, np.sqrt(squared), 0.0)
-    if momentum.ndim == 0:
-        return float(momentum)
-    return momentum
-
-
-def fermion_number_density(mu_mev: float, mass_mev: float, degeneracy: float) -> float:
-    p_f = _fermi_momentum(mu_mev, mass_mev)
-    density = degeneracy * np.asarray(p_f) ** 3 / (6.0 * PI**2)
-    if np.ndim(density) == 0:
-        return float(density)
-    return density
-
-
-def fermion_grand_potential(mu_mev: float, mass_mev: float, degeneracy: float) -> float:
-    mu_array = np.asarray(mu_mev)
-    mass_array = np.asarray(mass_mev)
-    p_f = np.asarray(_fermi_momentum(mu_array, mass_array))
-    ratio = np.divide(p_f, mass_array, out=np.zeros_like(p_f, dtype=float), where=mass_array > 0.0)
-    log_term = np.where((p_f > 0.0) & (mass_array > 0.0), np.arcsinh(ratio), 0.0)
-    omega = -degeneracy / (48.0 * PI**2) * (
-        (2.0 * mu_array**2 - 5.0 * mass_array**2) * mu_array * p_f + 3.0 * mass_array**4 * log_term
-    )
-    omega = np.where(p_f > 0.0, omega, 0.0)
-    if omega.ndim == 0:
-        return float(omega)
-    return omega
-
-
-def fermion_energy_density(mu_mev: float, mass_mev: float, degeneracy: float) -> float:
-    omega = fermion_grand_potential(mu_mev, mass_mev, degeneracy)
-    density = fermion_number_density(mu_mev, mass_mev, degeneracy)
-    energy = np.asarray(omega) + np.asarray(mu_mev) * np.asarray(density)
-    if energy.ndim == 0:
-        return float(energy)
-    return energy
-
-
-def electron_number_density(mu_e_mev: float) -> float:
-    return fermion_number_density(mu_e_mev, ELECTRON_MASS_MEV, degeneracy=2.0)
-
-
-def electron_grand_potential(mu_e_mev: float) -> float:
-    return fermion_grand_potential(mu_e_mev, ELECTRON_MASS_MEV, degeneracy=2.0)
-
-
-def electron_energy_density(mu_e_mev: float) -> float:
-    return fermion_energy_density(mu_e_mev, ELECTRON_MASS_MEV, degeneracy=2.0)
+from .thermodynamics.fermi import (
+    _fermi_momentum,
+    chem_potential_energy_term,
+    chem_potential_pressure_term,
+    electron_energy_density,
+    electron_grand_potential,
+    electron_number_density,
+    fermion_energy_density,
+    fermion_grand_potential,
+    fermion_number_density,
+)
 
 
 @dataclass(frozen=True)

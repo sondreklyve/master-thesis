@@ -24,6 +24,27 @@ numerics/
 └── npemu/ # npeμ matter, realistic EoS, and TOV solver
 ```
 
+## Codex Sandbox Runner
+
+Use the repo-local runner when executing numerical Python from Codex:
+
+```bash
+./numerics/bin/python -m numerics.quark_stars.run_qm_vacuum_scan
+```
+
+It uses `numerics/.venv/bin/python` when available, falls back to
+`python3`, sets a non-interactive Matplotlib backend, adds the repository
+root to `PYTHONPATH`, and keeps runtime caches in `numerics/.sandbox/`.
+That lets Codex run checks in workspace sandbox mode without writing
+Python or plotting caches outside this repository.
+
+If the environment has not been created yet:
+
+```bash
+python3 -m venv numerics/.venv
+./numerics/bin/python -m pip install -r numerics/requirements.txt
+```
+
 
 ## Contents
 
