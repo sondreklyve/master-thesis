@@ -30,5 +30,5 @@ numerics/data*
 .codex
 
 # Untracked directories
-github-clones/*
+git-clones/
 numerics/quark_stars/output/*
