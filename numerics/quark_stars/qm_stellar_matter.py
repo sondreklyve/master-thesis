@@ -249,7 +249,7 @@ def build_stellar_eos(
     energy_b0 = _energy_b0(potential, sigma, mu_u, mu_d)
 
     if with_maxwell:
-        pressure_b0, energy_b0, indices = maxwell_construct(pressure_b0, energy_b0)
+        pressure_b0, energy_b0, indices = maxwell_construct(mu_u, pressure_b0, energy_b0)
         sigma = _arr_slice(sigma, indices)
         mu_u = _arr_slice(mu_u, indices)
         mu_d = _arr_slice(mu_d, indices)

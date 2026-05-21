@@ -40,7 +40,7 @@ from .thermodynamics.fermi import fermion_grand_potential
 _LOG_FLOOR = 1.0e-30  # lower bound for log arguments to prevent log(0)
 _FIELD_ZERO_TOL = 1.0e-10  # MeV -- numerical zero for switching exact branches
 _DELTA_PHASE_TOL = 1.0e-2  # MeV — Delta below this threshold is "normal" phase
-_QUAD_EPSABS = 1.0e-3
+_QUAD_EPSABS = 1.0e-6
 _QUAD_EPSREL = 1.0e-7
 _QUAD_LIMIT = 100
 _CACHE_DIGITS = 8

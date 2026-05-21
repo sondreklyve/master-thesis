@@ -86,10 +86,16 @@ def build_npemu_energy_from_pressure(eos: QuarkMatterEOS) -> tuple[interp1d, np.
     interpolator = interp1d(
         pressure_dimless,
         energy_dimless,
-        kind="linear",
+        kind="cubic",
         assume_sorted=True,
         fill_value="extrapolate",
     )
+    # Verify monotonicity of cubic spline on the tabulated grid
+    e_check = interpolator(pressure_dimless)
+    if not np.all(np.diff(e_check) > 0.0):
+        n_nonmono = int(np.sum(np.diff(e_check) <= 0.0))
+        print(f"  WARNING: cubic EoS interpolant has {n_nonmono} non-monotone step(s); "
+              "consider using a finer EoS grid.")
     return interpolator, pressure_dimless, energy_dimless
 
 
