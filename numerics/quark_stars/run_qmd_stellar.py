@@ -1018,7 +1018,7 @@ def main() -> None:
         eos_tov = _QMDEoS(pressure_mev4=p_arr, energy_density_mev4=e_arr)
         sequence = None
         try:
-            sequence = run_tov_sequence(eos_tov)
+            sequence = run_tov_sequence(eos_tov, integrator="rk4")
             stable_tov = sequence.stable_mask.astype(bool)
             print(f"  {sequence.mass_msun.size} TOV configurations, {stable_tov.sum()} stable.")
             if stable_tov.any():

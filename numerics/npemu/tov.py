@@ -18,7 +18,8 @@ from core import (
 )
 
 
-def run_tov(EoS, Pcstart, Pcend, Pcstep, tol, r_max=30.0, rstep=0.01):
+def run_tov(EoS, Pcstart, Pcend, Pcstep, tol, r_max=30.0, rstep=0.01,
+            integrator="euler"):
     """
     Integrate the TOV equations for a sequence of central pressures.
 
@@ -36,6 +37,9 @@ def run_tov(EoS, Pcstart, Pcend, Pcstep, tol, r_max=30.0, rstep=0.01):
         Maximum radius in km.
     rstep : float
         Radial step in km.
+    integrator : str
+        "euler" (default, forward Euler) or "rk4" (classical 4th-order
+        Runge-Kutta with one Euler bootstrap step from the origin).
 
     Returns
     -------
@@ -61,11 +65,46 @@ def run_tov(EoS, Pcstart, Pcend, Pcstep, tol, r_max=30.0, rstep=0.01):
         r = 0.0
         centralpressures.append(Pc)
 
-        while P > tol and r < r_max:
+        if integrator == "rk4":
+            # Bootstrap: one Euler step from r=0 to r=rstep (avoids 1/r² singularity)
             r += rstep
-            eps = float(EoS(P))  # dimensionless epsilon/e0
-            M += rstep * dMdr(r, eps)
-            P += rstep * dPdr(r, M, P, eps)
+            _e = float(EoS(P))
+            M += rstep * dMdr(r, _e)
+            P += rstep * dPdr(r, M, P, _e)
+            # Classical RK4
+            while P > tol and r < r_max:
+                e1 = float(EoS(P))
+                k1M = dMdr(r, e1)
+                k1P = dPdr(r, M, P, e1)
+
+                _P2 = P + 0.5 * rstep * k1P
+                _M2 = M + 0.5 * rstep * k1M
+                e2 = float(EoS(max(_P2, 0.0)))
+                k2M = dMdr(r + 0.5 * rstep, e2)
+                k2P = dPdr(r + 0.5 * rstep, _M2, max(_P2, 0.0), e2)
+
+                _P3 = P + 0.5 * rstep * k2P
+                _M3 = M + 0.5 * rstep * k2M
+                e3 = float(EoS(max(_P3, 0.0)))
+                k3M = dMdr(r + 0.5 * rstep, e3)
+                k3P = dPdr(r + 0.5 * rstep, _M3, max(_P3, 0.0), e3)
+
+                _P4 = P + rstep * k3P
+                _M4 = M + rstep * k3M
+                e4 = float(EoS(max(_P4, 0.0)))
+                k4M = dMdr(r + rstep, e4)
+                k4P = dPdr(r + rstep, _M4, max(_P4, 0.0), e4)
+
+                M += rstep * (k1M + 2.0 * k2M + 2.0 * k3M + k4M) / 6.0
+                P += rstep * (k1P + 2.0 * k2P + 2.0 * k3P + k4P) / 6.0
+                r += rstep
+        else:
+            # Forward Euler (original scheme)
+            while P > tol and r < r_max:
+                r += rstep
+                eps = float(EoS(P))  # dimensionless epsilon/e0
+                M += rstep * dMdr(r, eps)
+                P += rstep * dPdr(r, M, P, eps)
 
         Rlist.append(r)
         Mlist.append(M)

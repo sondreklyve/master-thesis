@@ -541,7 +541,7 @@ def run_stellar_pipeline(cfg: RunConfig) -> tuple[Optional[SimpleNamespace], Opt
         p_arr    = np.array([p.pressure_mev4       for p in stable_points])
         e_arr    = np.array([p.energy_density_mev4 for p in stable_points])
         eos_tov  = _QMDEoS(pressure_mev4=p_arr, energy_density_mev4=e_arr)
-        sequence = run_tov_sequence(eos_tov)
+        sequence = run_tov_sequence(eos_tov, integrator="rk4")
         stable_tov = sequence.stable_mask.astype(bool)
         if stable_tov.any():
             m_st = sequence.mass_msun[stable_tov]

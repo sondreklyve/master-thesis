@@ -104,6 +104,7 @@ def run_tov_sequence(
     central_pressure_factor: float = 1.08,
     radial_step_km: float = 0.01,
     max_radius_km: float = 30.0,
+    integrator: str = "euler",
 ) -> MassRadiusSequence:
     npemu_core, npemu_tov = _load_npemu_modules()
     eos_interp, pressure_dimless, _ = build_npemu_energy_from_pressure(eos)
@@ -119,6 +120,7 @@ def run_tov_sequence(
         tol=0.0,
         r_max=max_radius_km,
         rstep=radial_step_km,
+        integrator=integrator,
     )
     central_pressure_dimless = np.asarray(result["centralpressures"])
     central_energy_density_mev4 = np.array([float(eos_interp(pc)) * npemu_core.e0 for pc in central_pressure_dimless])

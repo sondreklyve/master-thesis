@@ -48,7 +48,7 @@ from .constants import MEV4_TO_GEV_FM3
 from .io import output_directories, save_table
 from .plotting import apply_plot_style, save_figure
 from .qmd_parameters import QMD_SET_A, QMDParameters
-from .qmd_simple import QMDSimpleModel, QMDSimpleState
+from .qmd_simple import QMDSimpleModel, QMDSimpleState, _loop_F, _loop_G_pi
 
 
 # ---------------------------------------------------------------------------
@@ -201,12 +201,15 @@ def _mark_onset(
 
 
 def _asymptotic_gap_mev(params: QMDParameters) -> float:
-    """Analytic BCS asymptotic gap g_Δ Δ̄_0 from Andersen & Nødtvedt 2024 Eq. 39.
+    """Analytic BCS asymptotic gap g_Δ Δ̄_0 (thesis Eq. eq:qmd_asymptotic_gap).
 
-    g_Δ Δ̄_0 = m_q · exp[(4π)² / (8 g_Δ²) − 1/2]
+    Physical-pion-mass version: includes F(m_π²) and m_π²F'(m_π²) corrections.
+    g_Δ Δ̄_0 = m_q · exp[(4π)² / (8 g_Δ²) − 1/2 − (F + G) / 2]
     """
+    F = _loop_F(params.m_pi_mev, params.m_q_mev)
+    G = _loop_G_pi(params.m_pi_mev, params.m_q_mev)
     return params.m_q_mev * np.exp(
-        (4.0 * np.pi) ** 2 / (8.0 * params.g_delta**2) - 0.5
+        (4.0 * np.pi) ** 2 / (8.0 * params.g_delta**2) - 0.5 - (F + G) / 2.0
     )
 
 

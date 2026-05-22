@@ -79,6 +79,7 @@ def main() -> None:
                     central_pressure_factor=args.central_pressure_factor,
                     radial_step_km=args.radial_step_km,
                     max_radius_km=args.max_radius_km,
+                    integrator="rk4",
                 )
             except ValueError as exc:
                 print(

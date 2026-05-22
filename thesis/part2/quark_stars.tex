@@ -1018,11 +1018,11 @@ of state and reduced maximum masses.
 Quantitatively, the maximum masses obtained for the different
 parameter sets are found to lie in the range
 \begin{equation}
-M_{\max} \simeq 1.78\text{--}2.12~M_\odot,
+M_{\max} \simeq 1.79\text{--}2.13~M_\odot,
 \end{equation}
 depending on the choice of \(m_\sigma\) and \(B\). For
 \(m_\sigma = 400~\mathrm{MeV}\), the lowest bag constant considered
-yields a maximum mass of approximately \(2.12~M_\odot\), while
+yields a maximum mass of approximately \(2.13~M_\odot\), while
 increasing \(B\) reduces the maximum mass to below
 \(1.9~M_\odot\). A similar trend is observed for
 \(m_\sigma = 500~\mathrm{MeV}\), where the maximum mass remains close
@@ -2452,7 +2452,10 @@ monotonicity of \(\varepsilon(P)\) is checked on the spline grid
 before TOV integration. The central pressure is scanned
 geometrically, with each step multiplying \(P_c\) by a factor of
 \(1.08\), spanning the range of the stable EoS table. The radial
-integration step is \(0.01~\mathrm{km}\). The resulting sequence
+integration step is \(0.01~\mathrm{km}\), using a fourth-order
+Runge-Kutta (RK4) scheme with a single forward-Euler bootstrap step
+from the origin to avoid the \(1/r^2\) singularity in the TOV
+equations. The resulting sequence
 contains \(285\) configurations.
 
 The stability of each configuration is determined by the sign of the
@@ -2479,29 +2482,29 @@ maximum-mass configuration marked by a filled circle.
 with 2SC pairing (QMD~SET~A, full one-loop potential). The solid curve
 shows the stable branch, the dashed curve the unstable branch beyond
 the maximum mass. The filled circle marks
-\(M_{\max} = 1.964~M_\odot\) at \(R = 12.11~\mathrm{km}\).}
+\(M_{\max} = 1.970~M_\odot\) at \(R = 12.16~\mathrm{km}\).}
 \label{fig:qmd_mass_radius}
 \end{figure}
 
 The principal numerical results are
 \begin{align}
-M_{\max} &= 1.964~M_\odot,
+M_{\max} &= 1.970~M_\odot,
 &
-R(M_{\max}) &= 12.11~\mathrm{km},
+R(M_{\max}) &= 12.16~\mathrm{km},
 \end{align}
 with central energy density \(\varepsilon_c = 1.196~\mathrm{GeV/fm^3}\)
 at the maximum-mass configuration. At lower masses, representative
 stars on the stable branch have
 \begin{align}
-R(1.4\,M_\odot) &= 14.69~\mathrm{km},
+R(1.4\,M_\odot) &= 14.80~\mathrm{km},
 &
-R(1.8\,M_\odot) &= 13.41~\mathrm{km},
+R(1.8\,M_\odot) &= 13.48~\mathrm{km},
 \end{align}
 with central energy densities \(\varepsilon_c(1.4\,M_\odot) =
-0.439~\mathrm{GeV/fm^3}\) and \(\varepsilon_c(1.8\,M_\odot) =
-0.654~\mathrm{GeV/fm^3}\). Across the stable branch, radii lie
+0.433~\mathrm{GeV/fm^3}\) and \(\varepsilon_c(1.8\,M_\odot) =
+0.650~\mathrm{GeV/fm^3}\). Across the stable branch, radii lie
 between approximately \(12\) and \(17~\mathrm{km}\) for masses in the
-range \(0.5\)--\(1.96~M_\odot\).
+range \(0.5\)--\(1.97~M_\odot\).
 
 A notable feature of the QMD mass--radius curve is that the radius
 grows without bound as the mass decreases. Stable configurations
@@ -2550,9 +2553,9 @@ Compared with the unpaired QM model, the QMD sequence has a higher
 maximum mass and larger radii at every fixed mass on the stable
 branch:
 \begin{align}
-\Delta M_{\max} &= +0.177~M_\odot,
+\Delta M_{\max} &= +0.175~M_\odot,
 &
-\Delta R(1.4\,M_\odot) &= +2.22~\mathrm{km}.
+\Delta R(1.4\,M_\odot) &= +2.15~\mathrm{km}.
 \end{align}
 The shift can be attributed to the additional pressure provided by
 the diquark condensate. The condensate \(\Delta_0\) raises the
@@ -2567,15 +2570,15 @@ Within these caveats, the comparison gives a clear quantitative
 estimate of how much 2SC pairing changes stellar observables in this
 class of models.
 
-The maximum mass \(M_{\max} = 1.964~M_\odot\) lies just below the
+The maximum mass \(M_{\max} = 1.970~M_\odot\) lies just below the
 central values inferred from the heaviest observed pulsars. PSR
 J0740+6620 has a measured mass of \(2.08 \pm 0.07~M_\odot\)
 \cite{Fonseca2021}, with a one-sigma lower bound of
 \(2.01~M_\odot\). PSR J0348+0432 has a measured mass of
 \(2.01 \pm 0.04~M_\odot\) \cite{Antoniadis_2013_J0348}. The QMD~SET~A
-prediction is approximately \(0.05~M_\odot\) below both lower bounds,
-which is less than one observational uncertainty for either pulsar
-but does not provide a comfortable margin.
+prediction is approximately \(0.04~M_\odot\) below the J0740+6620
+one-sigma lower bound and essentially at the J0348+0432 one-sigma
+lower bound of \(1.97~M_\odot\), leaving no comfortable margin.
 
 The interpretation is therefore intermediate: the baseline QMD result
 is not in direct conflict with the observational lower limit on the
@@ -2588,7 +2591,7 @@ the observational constraint. Mapping this dependence is the
 appropriate next step before drawing conclusions about whether the
 QMD model with 2SC pairing can support the heaviest observed pulsars.
 
-The baseline QMD~SET~A result, $M_{\max} = 1.964~M_\odot$ at $R = 12.11~\mathrm{km}$,
+The baseline QMD~SET~A result, $M_{\max} = 1.970~M_\odot$ at $R = 12.16~\mathrm{km}$,
 motivates the parameter sensitivity study in Sec.~\ref{sec:qmd_parameter_sensitivity}.
 
 \section{Parameter sensitivity}
@@ -2597,9 +2600,9 @@ motivates the parameter sensitivity study in Sec.~\ref{sec:qmd_parameter_sensiti
 \subsection*{Setup of the study}
 \label{subsec:qmd_param_setup}
 
-QMD~SET~A gives \(M_{\max}=1.964~M_\odot\), approximately
-\(0.05~M_\odot\) below the one-sigma lower bounds of the heaviest
-measured pulsars quoted above. Whether the model can comfortably
+QMD~SET~A gives \(M_{\max}=1.970~M_\odot\), approximately
+\(0.04~M_\odot\) below the J0740+6620 one-sigma lower bound and
+essentially at the J0348+0432 lower bound. Whether the model can comfortably
 support a two-solar-mass star therefore depends on how strongly the
 stellar observables move under modest changes of the diquark sector.
 
@@ -2702,18 +2705,18 @@ The mass--radius curves for the three values of \(g_\Delta\) are
 compared in Fig.~\ref{fig:qmd_MR_gdelta}. The maximum mass and the
 radius at the maximum-mass configuration are
 \begin{align}
-\mathrm{Run~A}\;(1.5g): & \qquad M_{\max} = 1.786~M_\odot,
-\quad R(M_{\max}) = 10.99~\mathrm{km},\\
-\mathrm{Baseline}\;(2g): & \qquad M_{\max} = 1.964~M_\odot,
-\quad R(M_{\max}) = 12.11~\mathrm{km},\\
-\mathrm{Run~B}\;(2.5g): & \qquad M_{\max} = 2.040~M_\odot,
-\quad R(M_{\max}) = 12.67~\mathrm{km}.
+\mathrm{Run~A}\;(1.5g): & \qquad M_{\max} = 1.793~M_\odot,
+\quad R(M_{\max}) = 11.04~\mathrm{km},\\
+\mathrm{Baseline}\;(2g): & \qquad M_{\max} = 1.970~M_\odot,
+\quad R(M_{\max}) = 12.16~\mathrm{km},\\
+\mathrm{Run~B}\;(2.5g): & \qquad M_{\max} = 2.047~M_\odot,
+\quad R(M_{\max}) = 12.72~\mathrm{km}.
 \end{align}
 The range \(\Delta M_{\max} = 0.254~M_\odot\) is the largest produced
 by any of the parameter variations in this section. The radius at
 fixed mass varies by a comparable margin: at \(M = 1.4~M_\odot\) the
-radius spans \(12.89~\mathrm{km}\) (Run~A) to \(16.06~\mathrm{km}\)
-(Run~B), with the baseline at \(14.69~\mathrm{km}\).
+radius spans \(13.00~\mathrm{km}\) (Run~A) to \(16.09~\mathrm{km}\)
+(Run~B), with the baseline at \(14.80~\mathrm{km}\).
 
 \begin{figure}[H]
 \centering
@@ -2870,7 +2873,7 @@ conservation. It indicates that the QMD potential at
 of validity. The stellar calculation is not affected by this
 feature, since the neutrality conditions and the chemical-potential
 range of the stellar scan exclude the spurious region. The
-mass--radius result \(M_{\max} = 2.040~M_\odot\) is therefore
+mass--radius result \(M_{\max} = 2.047~M_\odot\) is therefore
 robust, but it should be quoted with the caveat that the underlying
 potential is near a stability limit.
 
@@ -2901,7 +2904,7 @@ Overall, the Yukawa coupling \(g_\Delta\) is by far the most influential
 parameter in the diquark sector. Across the range explored, the
 maximum mass varies by \(0.254~M_\odot\), the radius at maximum
 mass by \(1.68~\mathrm{km}\), and the radius at fixed
-\(M = 1.4~M_\odot\) by \(3.2~\mathrm{km}\). The shift in
+\(M = 1.4~M_\odot\) by \(3.1~\mathrm{km}\). The shift in
 \(M_{\max}\) is driven not by the asymptotic gap, which decreases
 with \(g_\Delta\), but by the integrated stiffening of the EoS at
 stellar densities, which increases with \(g_\Delta\). Both the
@@ -2937,20 +2940,20 @@ The mass--radius sequences for the three values of \(m_\Delta\) are
 shown in Fig.~\ref{fig:qmd_MR_mdelta} and produce the maximum-mass
 configurations
 \begin{align}
-\mathrm{Run~C}\;(400~\mathrm{MeV}): & \qquad M_{\max} = 2.052~M_\odot,
-\quad R(M_{\max}) = 12.54~\mathrm{km},\\
-\mathrm{Baseline}\;(500~\mathrm{MeV}): & \qquad M_{\max} = 1.964~M_\odot,
-\quad R(M_{\max}) = 12.11~\mathrm{km},\\
-\mathrm{Run~D}\;(700~\mathrm{MeV}): & \qquad M_{\max} = 1.823~M_\odot,
-\quad R(M_{\max}) = 11.22~\mathrm{km}.
+\mathrm{Run~C}\;(400~\mathrm{MeV}): & \qquad M_{\max} = 2.058~M_\odot,
+\quad R(M_{\max}) = 12.59~\mathrm{km},\\
+\mathrm{Baseline}\;(500~\mathrm{MeV}): & \qquad M_{\max} = 1.970~M_\odot,
+\quad R(M_{\max}) = 12.16~\mathrm{km},\\
+\mathrm{Run~D}\;(700~\mathrm{MeV}): & \qquad M_{\max} = 1.829~M_\odot,
+\quad R(M_{\max}) = 11.28~\mathrm{km}.
 \end{align}
 The range \(\Delta M_{\max} = 0.229~M_\odot\) is the second largest
 among the parameter variations, exceeded only by \(g_\Delta\). The
 three curves are systematically ordered: a lighter diquark produces a
 larger maximum mass and a larger radius at every fixed mass on the
 stable branch. At \(M = 1.4~M_\odot\), the radius spans from
-\(13.24~\mathrm{km}\) (Run~D) to \(15.72~\mathrm{km}\) (Run~C), with
-the baseline at \(14.69~\mathrm{km}\); the same ordering holds at
+\(13.32~\mathrm{km}\) (Run~D) to \(15.80~\mathrm{km}\) (Run~C), with
+the baseline at \(14.80~\mathrm{km}\); the same ordering holds at
 \(M = 1.8~M_\odot\) and at the maximum mass itself.
 
 \begin{figure}[H]
@@ -3028,7 +3031,7 @@ minima of the potential. These appear as single-grid-point spikes
 of unphysically large \(c_s^2\) followed by points where the
 derivative is undefined. The stellar calculation is unaffected: the
 Maxwell construction handles the first-order onset cleanly, and the
-mass--radius result \(M_{\max} = 1.823~M_\odot\) is robust. The same
+mass--radius result \(M_{\max} = 1.829~M_\odot\) is robust. The same
 kind of artifact appears, more mildly, in Run~C. For both runs, the
 high-density behavior of \(c_s^2\) is well behaved and qualitatively
 similar to the baseline, with peaks slightly shifted in location.
@@ -3044,7 +3047,7 @@ gapless regime; and the speed of sound retains the characteristic
 peak above the conformal limit followed by a smooth relaxation toward
 \(c_s^2 = 1/3\). Run~D, by contrast, is clean and well-behaved
 numerically but observationally disfavored: at
-\(M_{\max} = 1.823~M_\odot\) it falls roughly \(0.18~M_\odot\) below
+\(M_{\max} = 1.829~M_\odot\) it falls roughly \(0.18~M_\odot\) below
 the central values of the heaviest measured pulsars, and outside the
 observational uncertainty band of either of them.
 
@@ -3087,9 +3090,9 @@ asymptotic gap at \(\mu_q = 900~\mathrm{MeV}\) takes the values
 respectively, a range of less than one MeV against the
 \(135~\mathrm{MeV}\) range produced by the \(g_\Delta\) variation
 in the previous subsections. The maximum mass is similarly
-insensitive: Run~E gives \(M_{\max} = 1.9639~M_\odot\), the baseline
-gives \(1.9640~M_\odot\), and Run~F gives \(1.9633~M_\odot\). The
-total spread is \(0.0007~M_\odot\), smaller than the \(g_\Delta\)
+insensitive: Run~E gives \(M_{\max} = 1.9707~M_\odot\), the baseline
+gives \(1.9703~M_\odot\), and Run~F gives \(1.9701~M_\odot\). The
+total spread is \(0.0006~M_\odot\), smaller than the \(g_\Delta\)
 range by a factor of approximately three hundred and smaller than
 the \(m_\Delta\) range by a similar margin. The corresponding radii
 at the maximum-mass configuration vary by only
@@ -3178,14 +3181,14 @@ The mass--radius sequences for the three values of \(\lambda_3\) are
 shown in Fig.~\ref{fig:qmd_MR_lam3} and produce maximum-mass
 configurations
 \begin{align}
-\mathrm{Run~G}\;(\lambda_3 = 0): & \qquad M_{\max} = 1.998~M_\odot,
-\quad R(M_{\max}) = 12.98~\mathrm{km},\\
-\mathrm{Baseline}\;(\lambda_0): & \qquad M_{\max} = 1.964~M_\odot,
-\quad R(M_{\max}) = 12.11~\mathrm{km},\\
-\mathrm{Run~H}\;(2\lambda_0): & \qquad M_{\max} = 1.943~M_\odot,
-\quad R(M_{\max}) = 11.40~\mathrm{km}.
+\mathrm{Run~G}\;(\lambda_3 = 0): & \qquad M_{\max} = 2.004~M_\odot,
+\quad R(M_{\max}) = 13.03~\mathrm{km},\\
+\mathrm{Baseline}\;(\lambda_0): & \qquad M_{\max} = 1.970~M_\odot,
+\quad R(M_{\max}) = 12.16~\mathrm{km},\\
+\mathrm{Run~H}\;(2\lambda_0): & \qquad M_{\max} = 1.950~M_\odot,
+\quad R(M_{\max}) = 11.46~\mathrm{km}.
 \end{align}
-The range \(\Delta M_{\max} = 0.055~M_\odot\) is intermediate
+The range \(\Delta M_{\max} = 0.054~M_\odot\) is intermediate
 between the negligible effect of \(\lambda_\Delta\) and the
 substantial effects of \(g_\Delta\) and \(m_\Delta\). The ordering
 is monotonic: weaker cross-coupling produces the larger maximum mass
@@ -3206,7 +3209,7 @@ line indicates the observational benchmark \(M = 2\,M_\odot\).}
 
 The spread is more visible at intermediate masses than at the
 maximum. At \(M = 1.4~M_\odot\) the three sequences give radii of
-approximately \(18.1\), \(14.7\), and \(13.0~\mathrm{km}\)
+approximately \(18.2\), \(14.8\), and \(13.1~\mathrm{km}\)
 respectively, a range of more than five kilometers. The three
 curves separate substantially at low masses and converge as they
 approach the maximum-mass configuration. For an observational
@@ -3265,20 +3268,19 @@ of \(\phi_0\), the first-order character of the 2SC onset survives:
 indication that decoupling the sectors converts the transition to
 second order at this level of approximation.
 
-Run~G is also the closest the parameter scan comes to the
-\(2~M_\odot\) benchmark. Its maximum mass of \(1.998~M_\odot\) is
-only \(0.002~M_\odot\) short of the threshold, the smallest deficit
-of any configuration considered. The result indicates that removing
-the cross-coupling moves the model in the favorable direction
-without, however, reaching the constraint by itself; \(\lambda_3\)
-is a second-tier parameter compared with \(g_\Delta\) and
-\(m_\Delta\), and its variation alone is not a route to
-\(2~M_\odot\) compliance. Combined with shifts in the dominant
-parameters, the \(\lambda_3 \to 0\) direction would help
-incrementally, but the conditions under which the QMD model
-comfortably exceeds the observational maximum mass remain those
-identified in the preceding subsections: stronger \(g_\Delta\) or
-lighter \(m_\Delta\).
+Run~G also crosses the \(2~M_\odot\) benchmark, reaching
+\(M_{\max} = 2.004~M_\odot\) and becoming the third configuration
+in the scan to satisfy the observational constraint, after Run~C
+(\(m_\Delta = 400~\mathrm{MeV}\)) and Run~B (\(g_\Delta = 2.5g\)).
+The margin above the threshold is only \(0.004~M_\odot\), the
+narrowest of the three crossing configurations, indicating that
+\(\lambda_3\) is a second-tier parameter: its variation alone moves
+the model into compliance but only marginally. The conditions under
+which the QMD model comfortably exceeds the observational maximum
+mass remain those identified in the preceding subsections: stronger
+\(g_\Delta\) or lighter \(m_\Delta\). The \(\lambda_3 \to 0\)
+direction would reinforce compliance when combined with shifts in
+the dominant parameters, but provides negligible margin by itself.
 
 With this variation the four-parameter scan is complete. The
 relative importance of the four diquark-sector parameters, their
@@ -3304,19 +3306,19 @@ Run & Parameter & Value & \(M_{\max}\) & \(R(M_{\max})\) &
 Onset \(\mu_q\) & \(c_s^2\) peak & \(g_\Delta\Delta_0\) \\
 & & & \((M_\odot)\) & (km) & (MeV) & & (MeV) \\
 \hline
-Baseline & --- & SET~A & 1.964 & 12.11 & 278.8 & 0.45 & 252.4 \\
+Baseline & --- & SET~A & 1.970 & 12.16 & 278.8 & 0.45 & 252.4 \\
 \hline
-A & \(g_\Delta\) & \(1.5g\) & 1.786 & 10.99 & 281.6 & 0.44 & 351.8 \\
-B & \(g_\Delta\) & \(2.5g\) & 2.040 & 12.67 & 277.0 & 0.39 & 216.3 \\
+A & \(g_\Delta\) & \(1.5g\) & 1.793 & 11.04 & 281.6 & 0.44 & 351.8 \\
+B & \(g_\Delta\) & \(2.5g\) & 2.047 & 12.72 & 277.0 & 0.39 & 216.3 \\
 \hline
-C & \(m_\Delta\) & \(400~\mathrm{MeV}\) & 2.052 & 12.54 & 271.4 & 0.46 & 255.7 \\
-D & \(m_\Delta\) & \(700~\mathrm{MeV}\) & 1.823 & 11.22 & 293.7 & ---\(^\dagger\) & 243.8 \\
+C & \(m_\Delta\) & \(400~\mathrm{MeV}\) & 2.058 & 12.59 & 271.4 & 0.46 & 255.7 \\
+D & \(m_\Delta\) & \(700~\mathrm{MeV}\) & 1.829 & 11.28 & 293.7 & ---\(^\dagger\) & 243.8 \\
 \hline
-E & \(\lambda_\Delta\) & \(\lambda_0/8\) & 1.964 & 12.04 & 278.8 & 0.40 & 252.6 \\
-F & \(\lambda_\Delta\) & \(\lambda_0/2\) & 1.963 & 12.12 & 277.9 & 0.40 & 251.8 \\
+E & \(\lambda_\Delta\) & \(\lambda_0/8\) & 1.971 & 12.09 & 278.8 & 0.40 & 252.6 \\
+F & \(\lambda_\Delta\) & \(\lambda_0/2\) & 1.970 & 12.17 & 277.9 & 0.40 & 251.8 \\
 \hline
-G & \(\lambda_3\) & \(0\) & 1.998 & 12.98 & 270.5 & 0.40 & 252.4 \\
-H & \(\lambda_3\) & \(2\lambda_0\) & 1.943 & 11.40 & 285.3 & 0.40 & 252.4 \\
+G & \(\lambda_3\) & \(0\) & 2.004 & 13.03 & 270.5 & 0.40 & 252.4 \\
+H & \(\lambda_3\) & \(2\lambda_0\) & 1.950 & 11.46 & 285.3 & 0.40 & 252.4 \\
 \hline
 \end{tabular}
 \caption{Summary of the parameter sensitivity study. The baseline row
@@ -3351,13 +3353,13 @@ from four to three for compact-star modelling.
 
 The observational benchmark of greatest interest is the maximum
 mass of two solar masses, set by the heaviest measured pulsars. Of
-the eight new configurations, only two cross this threshold. Run~C
-(\(m_\Delta = 400~\mathrm{MeV}\)) gives \(M_{\max} = 2.052~M_\odot\)
+the eight new configurations, three cross this threshold. Run~C
+(\(m_\Delta = 400~\mathrm{MeV}\)) gives \(M_{\max} = 2.058~M_\odot\)
 without any sign of model strain: the vacuum minimum sits at the
 physical chiral-broken state, the 2SC phase is fully gapped over
 essentially the entire stellar density range, and the speed of
 sound retains the qualitative features of the baseline. Run~B
-(\(g_\Delta = 2.5g\)) gives \(M_{\max} = 2.040~M_\odot\) but
+(\(g_\Delta = 2.5g\)) gives \(M_{\max} = 2.047~M_\odot\) but
 carries two caveats. First, the common-\(\mu_q\) benchmark
 exhibits a spurious 2SC condensate near \(\mu_q = 0\), indicating
 that the QMD potential at this coupling is close to the boundary of
@@ -3371,18 +3373,18 @@ they signal that Run~B is operating near the edge of the model's
 quantitative reliability. The lighter-diquark route of Run~C is by
 contrast unambiguously clean.
 
-These two configurations identify two distinct directions in the
+These three configurations identify three distinct directions in the
 diquark parameter space along which the QMD model can satisfy the
-\(2~M_\odot\) constraint: a stronger Yukawa coupling, or a lighter
-diquark mass. Both require parameter changes of roughly twenty to
-twenty-five percent from the baseline, which is a modest variation
-for a phenomenological model with parameters that are not fixed by
-vacuum observables. The cross-coupling \(\lambda_3\) provides a
-secondary lever: Run~G with \(\lambda_3 = 0\) gives the closest
-approach to the threshold of any single-parameter variation,
-falling short by only \(0.002~M_\odot\), and would combine
-constructively with either of the primary directions. A joint scan
-in two or more parameters is not pursued here, but the
+\(2~M_\odot\) constraint: a stronger Yukawa coupling (Run~B), a
+lighter diquark mass (Run~C), or removal of the chiral--diquark
+cross-coupling (Run~G). The first two require parameter changes of
+roughly twenty to twenty-five percent from the baseline, which is a
+modest variation for a phenomenological model with parameters that
+are not fixed by vacuum observables. Run~G achieves compliance with
+\(\lambda_3 \to 0\), but by only \(0.004~M_\odot\)~---~a
+negligible margin compared with the \(0.058~M_\odot\) and
+\(0.047~M_\odot\) provided by Runs~C and~B respectively. A joint
+scan in two or more parameters is not pursued here, but the
 one-dimensional results suggest that an extended region of
 parameter space exists in which the model comfortably reproduces
 the observed maximum mass.
@@ -3410,10 +3412,11 @@ mass, the QMD model is viable: with parameter choices within a
 narrow but plausible window, it produces stellar configurations
 that exceed the heaviest measured pulsar masses. On radius, the
 picture is less favorable. The baseline predicts
-\(R(1.4\,M_\odot) \approx 14.7~\mathrm{km}\), and the
+\(R(1.4\,M_\odot) \approx 14.8~\mathrm{km}\), and the
 configurations that satisfy the mass constraint predict still
-larger radii: \(R(1.4\,M_\odot) \approx 16~\mathrm{km}\) for Run~B
-and \(15.7~\mathrm{km}\) for Run~C. Recent NICER measurements
+larger radii: \(R(1.4\,M_\odot) \approx 16.1~\mathrm{km}\) for
+Run~B, \(15.8~\mathrm{km}\) for Run~C, and \(18.2~\mathrm{km}\)
+for Run~G. Recent NICER measurements
 favor smaller radii in the range \(11\)--\(13~\mathrm{km}\) for a
 \(1.4~M_\odot\) star. This tension is a generic feature of pure
 quark-matter models without a hadronic crust: the QMD equation of
