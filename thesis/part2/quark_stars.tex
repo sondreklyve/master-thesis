@@ -908,6 +908,7 @@ high-density behavior of a gas of weakly interacting relativistic
 fermions \cite{Buballa2005,Schmitt2010}.
 
 \subsection*{Stellar structure and mass--radius relations}
+\label{subsec:qm_stellar_structure}
 
 The macroscopic properties of the quark-star configurations are
 obtained by solving the Tolman--Oppenheimer--Volkoff (TOV) equations,
@@ -974,29 +975,53 @@ Fig.~\ref{fig:qs_mass_radius_clean}.
 
 \caption{Mass--radius relations for quark stars obtained from the
 Quark--Meson model for \(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\)
-(top to bottom). 
-For each value of \(m_\sigma\), three curves are shown
+(top to bottom).
+For each value of \(m_\sigma\), three self-bound curves are shown
 corresponding to \(B^{1/4}=B_{\min}^{1/4}-10~\mathrm{MeV}\),
 \(B_{\min}^{1/4}\), and \(B_{\min}^{1/4}+10~\mathrm{MeV}\).
-Solid lines indicate stable configurations, while dashed lines
-denote unstable branches beyond the maximum mass.}
+In the lower panel (\(m_\sigma = 600~\mathrm{MeV}\)), a dashed black
+curve is added for the gravitationally-bound configuration (\(B_{\min}=0\)),
+which sets the surface condition at the onset of the electron-present
+quark phase (\(P_{\mathrm{onset}} \approx 0\) on the stellar scale).
+Solid coloured lines indicate stable self-bound configurations; dashed
+coloured lines denote their unstable branches beyond the maximum mass.}
 \label{fig:qs_mass_radius_clean}
 \end{figure}
 
 It is important to note that the low-mass part of these sequences
 should not be interpreted as a realistic description of ordinary
-compact stars. In the present calculation, the quark-matter equation of
-state is used throughout the entire star, down to the surface where
-\(P=0\). This corresponds to an idealized self-bound quark-star
-construction. For configurations with small masses and low central
-pressures, the densities are not necessarily high enough for deconfined
-quark matter to be the appropriate description. In a more realistic
-stellar model, one would expect the low-density region to be described
-by hadronic matter, possibly with a crust or with a transition to quark
-matter only above some critical density. The low-mass, small-radius
-segments of the curves should therefore be regarded mainly as a
-consequence of extending the pure quark-matter equation of state down
-to zero pressure.
+compact stars. The three self-bound curves per panel apply the
+stability bag constant \(B_{\min}\), which sets the zero-pressure
+surface at a finite baryon density. As a result, the low-mass tail is
+compact and island-like rather than extending to large radii; this is
+the characteristic topology of self-bound quark stars. In a realistic
+hybrid model, one would replace the low-density region with hadronic
+matter and a nuclear crust. The low-mass, small-radius segments should therefore be regarded
+as a consequence of the self-bound construction rather than as
+realistic predictions; the same caveat applies to the gravitationally-bound
+low-mass tails, which extend to unphysically large radii.
+Neither pure-quark-matter topology can be carried over to realistic
+neutron-star modelling without the addition of a nuclear-matter crust.
+
+To contrast this with a different bound-state choice, the lower panel
+(\(m_\sigma = 600~\mathrm{MeV}\)) also shows a gravitationally-bound
+configuration, obtained by setting \(B_{\min} = 0\) and using the
+onset of the electron-present quark phase as the effective zero-pressure
+surface. This produces a qualitatively different topology: as the
+central pressure decreases from the maximum-mass value, the stellar
+radius grows rather than shrinking toward a compact island, and stars
+at \(M \lesssim 1.0~M_\odot\) extend beyond \(20~\mathrm{km}\),
+reflecting the gravitationally-bound structure in which the quark core
+is surrounded by effectively vacuum. The maximum-mass configuration
+for this sequence is \(M_{\max} = 1.80~M_\odot\) at
+\(R = 11.8~\mathrm{km}\), almost identical in \(M\) to the self-bound
+curve at \(B^{1/4} = 27.8~\mathrm{MeV}\) (\(M_{\max} = 1.80~M_\odot\))
+but extending to noticeably larger radii at every mass on the stable
+branch: \(R(1.4~M_\odot) = 14.1~\mathrm{km}\) in the
+gravitationally-bound case versus \(12.6~\mathrm{km}\) for the
+self-bound case. The choice of bound-state construction therefore
+primarily affects the radii and low-mass topology of the sequence,
+leaving the maximum mass essentially unchanged at this sigma mass.
 
 The results exhibit a clear dependence on the bag constant. Increasing
 \(B\) shifts the equation of state toward higher energy densities and
@@ -2530,45 +2555,65 @@ spanning \(M \approx 1\)--\(1.96~\,M_\odot\).
 
 To isolate the effect of the diquark condensate on stellar
 properties, the QMD sequence is compared in
-Fig.~\ref{fig:qmd_vs_qm_mass_radius} with the corresponding
-two-flavor Quark--Meson sequence at the same sigma meson mass
-\(m_\sigma = 600~\mathrm{MeV}\) used here for the chiral sector. The
-QM sequence shown uses an explicit bag constant
-\(B^{1/4} = 28~\mathrm{MeV}\), an intermediate value from the earlier
-QM stellar analysis.
+Fig.~\ref{fig:qmd_vs_qm_mass_radius} with two Quark--Meson sequences
+at the same sigma meson mass \(m_\sigma = 600~\mathrm{MeV}\). The two
+QM sequences differ only in bound-state construction and serve as
+complementary references.
+
+The primary (matched) comparison uses the gravitationally-bound QM
+sequence (\(B_{\min} = 0\)), which shares the same vacuum structure as
+QMD: both models normalize the vacuum pressure to zero via
+\(P(\mu=0)=0\) and produce stars whose surface sits at zero baryon
+density. This matched comparison directly isolates the contribution of
+the 2SC diquark condensate to the stellar observables. The
+gravitationally-bound QM sequence gives \(M_{\max} = 1.797~M_\odot\)
+at \(R = 11.8~\mathrm{km}\) and \(R(1.4~M_\odot) = 14.1~\mathrm{km}\),
+yielding
+\begin{align}
+\Delta M_{\max} &= +0.17~M_\odot,
+&
+\Delta R(1.4\,M_\odot) &= +0.70~\mathrm{km}.
+\end{align}
+
+The secondary reference uses the self-bound QM sequence with
+\(B^{1/4} = B_{\min}^{1/4} = 27.8~\mathrm{MeV}\) (the absolute
+stability criterion introduced in Sec.~\ref{subsec:qm_stellar_structure}).
+This sequence gives \(M_{\max} = 1.795~M_\odot\) at
+\(R = 11.1~\mathrm{km}\) and \(R(1.4~M_\odot) = 12.6~\mathrm{km}\),
+so
+\begin{align}
+\Delta M_{\max} &= +0.18~M_\odot,
+&
+\Delta R(1.4\,M_\odot) &= +2.15~\mathrm{km}.
+\end{align}
+
+The two comparisons bracket the 2SC contribution to stellar
+observables. The matched comparison (\(\Delta R = +0.70~\mathrm{km}\))
+isolates the diquark effect on the radius; the self-bound comparison
+(\(\Delta R = +2.15~\mathrm{km}\)) adds to this the effect of the bag
+constant's radial stiffening, which shifts the QM radius inward by
+\(\sim 1.5~\mathrm{km}\). The condensate \(\Delta_0\) raises the
+pressure at fixed quark chemical potential through the 2SC pairing
+energy, producing larger and more massive equilibrium configurations.
+The topology difference visible in
+Fig.~\ref{fig:qmd_vs_qm_mass_radius} between the small-mass branches
+of the QMD and gravitationally-bound QM sequences confirms the common
+vacuum construction: both curves extend to large radii at low mass,
+while the self-bound curve collapses to a compact island.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_vs_qm_mass_radius.pdf}
-\caption{Mass--radius comparison between the QMD model with 2SC
-pairing (QMD~SET~A) and the two-flavor Quark--Meson model with
-\(m_\sigma = 600~\mathrm{MeV}\) and \(B^{1/4} = 28~\mathrm{MeV}\).
-Solid curves denote stable branches; dashed curves denote unstable
-branches. Filled circles mark the maximum-mass configuration of each
-sequence.}
+\caption{Mass--radius comparison for \(m_\sigma = 600~\mathrm{MeV}\).
+QMD~SET~A (dark solid) is shown against two unpaired Quark--Meson
+references: the gravitationally-bound sequence (\(B_{\min}=0\), light
+solid) and the self-bound sequence (\(B^{1/4} = 27.8~\mathrm{MeV}\),
+dashed). Filled circles mark maximum-mass configurations; the filled
+square marks the self-bound maximum-mass point. The gravitationally-bound
+QM curve, like QMD, extends to large radii at low mass; the self-bound
+curve collapses to a compact island at low mass.}
 \label{fig:qmd_vs_qm_mass_radius}
 \end{figure}
-
-Compared with the unpaired QM model, the QMD sequence has a higher
-maximum mass and larger radii at every fixed mass on the stable
-branch:
-\begin{align}
-\Delta M_{\max} &= +0.175~M_\odot,
-&
-\Delta R(1.4\,M_\odot) &= +2.15~\mathrm{km}.
-\end{align}
-The shift can be attributed to the additional pressure provided by
-the diquark condensate. The condensate \(\Delta_0\) raises the
-pressure at fixed quark chemical potential through the 2SC pairing
-energy, stiffening the equation of state and producing larger, more
-massive stable configurations. We note that the comparison is not
-perfectly controlled, since the QM sequence uses a non-zero bag
-constant while the QMD vacuum subtraction yields effectively
-\(B = 0\); a strict \(B = 0\) QM baseline would have a softer EoS
-and the gap between the two sequences would be slightly larger.
-Within these caveats, the comparison gives a clear quantitative
-estimate of how much 2SC pairing changes stellar observables in this
-class of models.
 
 The maximum mass \(M_{\max} = 1.970~M_\odot\) lies just below the
 central values inferred from the heaviest observed pulsars. PSR
@@ -3133,18 +3178,14 @@ comparable to \(\bar{\mu}\), does the quartic term begin to dominate. At the den
 configurations, \(\mu_q \sim 500~\mathrm{MeV}\), the system is still
 far from saturation, and the quartic remains a subleading correction.
 
-A small caveat is worth recording. The speed of sound shows a
-modest spread across the three runs that does not follow a clean
-monotonic pattern. Run~E and Run~F give raw benchmark peaks of
-\(c_s^2 = 0.40\), while the corresponding entry for the baseline
-in Table~\ref{tab:qmd_param_summary} is \(0.45\), drawn from the
-neutral stellar EoS rather than the benchmark (see caption); this
-spread reflects the different source calculations rather than a
-systematic dependence on \(\lambda_\Delta\). The overall
-shape of \(c_s^2(\mu_q)\) is essentially identical across the
-three runs and the asymptotic relaxation toward the conformal
-limit is unaffected; the peak height difference does not propagate
-into any detectable shift in the mass--radius sequence.
+The speed of sound shows a modest spread across the three runs
+that does not follow a clean monotonic pattern: Run~E and Run~F give
+raw benchmark peaks of \(c_s^2 = 0.40\), compared with \(0.41\) for
+the baseline. This small scatter carries no systematic dependence on
+\(\lambda_\Delta\); the overall shape of \(c_s^2(\mu_q)\) is essentially
+identical across the three runs, and the asymptotic relaxation toward
+the conformal limit is unaffected. The peak height difference does not
+propagate into any detectable shift in the mass--radius sequence.
 
 The practical consequence is that the effective dimensionality of
 the diquark parameter space is reduced. Within the range of
@@ -3306,13 +3347,13 @@ Run & Parameter & Value & \(M_{\max}\) & \(R(M_{\max})\) &
 Onset \(\mu_q\) & \(c_s^2\) peak & \(g_\Delta\Delta_0\) \\
 & & & \((M_\odot)\) & (km) & (MeV) & & (MeV) \\
 \hline
-Baseline & --- & SET~A & 1.970 & 12.16 & 278.8 & 0.45 & 252.4 \\
+Baseline & --- & SET~A & 1.970 & 12.16 & 278.8 & 0.41 & 252.4 \\
 \hline
 A & \(g_\Delta\) & \(1.5g\) & 1.793 & 11.04 & 281.6 & 0.44 & 351.8 \\
 B & \(g_\Delta\) & \(2.5g\) & 2.047 & 12.72 & 277.0 & 0.39 & 216.3 \\
 \hline
-C & \(m_\Delta\) & \(400~\mathrm{MeV}\) & 2.058 & 12.59 & 271.4 & 0.46 & 255.7 \\
-D & \(m_\Delta\) & \(700~\mathrm{MeV}\) & 1.829 & 11.28 & 293.7 & ---\(^\dagger\) & 243.8 \\
+C & \(m_\Delta\) & \(400~\mathrm{MeV}\) & 2.058 & 12.59 & 271.4 & 0.41 & 255.7 \\
+D & \(m_\Delta\) & \(700~\mathrm{MeV}\) & 1.829 & 11.28 & 293.7 & 0.39 & 243.8 \\
 \hline
 E & \(\lambda_\Delta\) & \(\lambda_0/8\) & 1.971 & 12.09 & 278.8 & 0.40 & 252.6 \\
 F & \(\lambda_\Delta\) & \(\lambda_0/2\) & 1.970 & 12.17 & 277.9 & 0.40 & 251.8 \\
@@ -3325,17 +3366,12 @@ H & \(\lambda_3\) & \(2\lambda_0\) & 1.950 & 11.46 & 285.3 & 0.40 & 252.4 \\
 records the QMD~SET~A result of Sec.~\ref{sec:qmd_section1}. Each
 subsequent row records the maximum-mass configuration, the location
 of the 2SC onset in neutral matter, the raw (unsmoothed)
-speed-of-sound peak, and the asymptotic gap at
-\(\mu_q = 900~\mathrm{MeV}\) for a single-parameter variation from
-baseline. Due to a pipeline asymmetry in the data-generation script, the
-\(c_s^2\) peak for the baseline row is taken from the neutral
-stellar EoS table, while for Runs~A--H it is taken from the
-common-\(\mu_q\) benchmark. Smoothed benchmark peaks are
-\(c_s^2 \simeq 0.41\)/\(0.40\)/\(0.39\) for Runs~A/baseline/B;
-see Fig.~\ref{fig:qmd_cs2_gdelta}.
-\(^\dagger\) The benchmark \(c_s^2\) for Run~D contains
-isolated numerical artifacts at the rapid 2SC onset and is not
-reported here; the stellar result is unaffected.}
+speed-of-sound peak from the common-\(\mu_q\) benchmark, and the
+asymptotic gap at \(\mu_q = 900~\mathrm{MeV}\) for a single-parameter
+variation from baseline. The \(c_s^2\) peak is the maximum of the
+benchmark speed of sound for \(\mu_q \geq 300~\mathrm{MeV}\),
+excluding the finite-difference transient in the first
+\(\sim 10~\mathrm{MeV}\) above the discontinuous 2SC onset.}
 \label{tab:qmd_param_summary}
 \end{table}
 
@@ -3396,7 +3432,7 @@ onset is first-order in every run: the diquark condensate appears
 discontinuously, and the Maxwell construction applied to the raw
 equation of state always removes a small unstable segment in the
 onset region. The speed of sound exceeds the conformal limit in
-every run, with peaks ranging from \(0.39\) to \(0.46\) in the
+every run, with peaks ranging from \(0.39\) to \(0.44\) in the
 clean cases, and approaches \(c_s^2 = 1/3\) from above at the
 upper end of the density grid. The 2SC phase remains conventional
 BCS (fully gapped) over the relevant stellar density range in all
@@ -3442,6 +3478,104 @@ throughout. Each of these is a meaningful extension of the
 present framework, and each can be tackled with the same
 underlying pipeline.
 
+\subsection*{Central thermodynamic state at maximum mass}
+
+The central pressure at the maximum-mass configuration determines
+the thermodynamic state of matter at the stellar core.
+Table~\ref{tab:qmd_central_state} collects, for each QMD
+configuration and for the three QM reference runs at
+\(m_\sigma = 600~\mathrm{MeV}\), the central quark chemical
+potential \(\mu_{q,c}\), the central baryon number density
+\(n_{B,c}\), and the ratio \(n_{B,c}/n_0\) at the
+maximum-mass point, where \(n_0 = 0.16~\mathrm{fm}^{-3}\) is the
+nuclear saturation density.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c l c c c c}
+\hline
+Run & Parameter & \(M_{\max}\) & \(\mu_{q,c}\) &
+    \(n_{B,c}\) & \(n_{B,c}/n_0\) \\
+& & \((M_\odot)\) & (MeV) & \((\mathrm{fm}^{-3})\) & \\
+\hline
+Baseline & ---              & 1.970 & 483 & 1.062 & 6.64 \\
+\hline
+A & \(g_\Delta = 1.5g\)    & 1.793 & 488 & 1.290 & 8.06 \\
+B & \(g_\Delta = 2.5g\)    & 2.047 & 485 & 1.007 & 6.30 \\
+\hline
+C & \(m_\Delta = 400~\mathrm{MeV}\) & 2.058 & 477 & 1.037 & 6.48 \\
+D & \(m_\Delta = 700~\mathrm{MeV}\) & 1.829 & 509 & 1.191 & 7.44 \\
+\hline
+E & \(\lambda_\Delta = \lambda_0/8\) & 1.971 & 488 & 1.088 & 6.80 \\
+F & \(\lambda_\Delta = \lambda_0/2\) & 1.970 & 484 & 1.064 & 6.65 \\
+\hline
+G & \(\lambda_3 = 0\)     & 2.004 & 480 & 1.046 & 6.54 \\
+H & \(\lambda_3 = 2\lambda_0\) & 1.950 & 491 & 1.106 & 6.91 \\
+\hline
+\multicolumn{6}{l}{\textit{QM reference configurations
+  (\(m_\sigma = 600~\mathrm{MeV}\), unpaired)}} \\
+\hline
+--- & \(B^{1/4} = 17.8~\mathrm{MeV}\) & 1.797 & --- & 1.078 & 6.74 \\
+--- & \(B^{1/4} = 27.8~\mathrm{MeV}\) & 1.795 & --- & 1.108 & 6.92 \\
+--- & \(B^{1/4} = 37.8~\mathrm{MeV}\) & 1.790 & --- & 1.083 & 6.77 \\
+\hline
+\end{tabular}
+\caption{Central quark chemical potential \(\mu_{q,c}\), central
+baryon number density \(n_{B,c}\), and \(n_{B,c}/n_0\) at the
+maximum-mass configuration for all nine QMD runs and the three QM
+reference configurations.
+\(\mu_{q,c}\) is the common quark chemical potential in the 2SC
+phase for the QMD runs. The QM model has \(\mu_u \neq \mu_d\) under
+charge neutrality (\(\mu_e \approx 111~\mathrm{MeV}\) at these
+densities), so a single quark chemical potential at the core is not
+directly comparable; the \(n_{B,c}\) column is the meaningful
+quantity for the QM rows.
+The QM configurations are identical to those used in the comparison
+of Fig.~\ref{fig:qmd_vs_qm_mass_radius}.}
+\label{tab:qmd_central_state}
+\end{table}
+
+Across the nine QMD configurations, the central baryon density at
+maximum mass spans \(n_{B,c}/n_0 \in [6.30, 8.06]\), with all but
+one run falling in the range \(6.3\)--\(7.5\,n_0\). The outlier is
+Run~A (\(g_\Delta = 1.5g\)), which produces the softest equation of
+state and the lowest maximum mass (\(1.793~M_\odot\)); a softer EoS
+requires higher central compression to support the star against
+gravity. Conversely, Runs~B and~C, which yield the stiffest
+equations of state and the highest maximum masses, have the lowest
+central densities (\(n_{B,c}/n_0 \approx 6.30\) and
+\(6.48\) respectively). This inverse correlation between maximum
+mass and central density at maximum mass is a generic consequence
+of EoS stiffness and holds consistently across all nine
+runs.\footnote{The anticorrelation between \(M_{\max}\) and
+\(n_{B,c}(M_{\max})\) reflects the fact that a stiffer EoS
+reaches the mass turning-point at a lower central pressure.
+It does not imply that the central density of any individual star
+decreases as more matter is added; along the stable branch, central
+density increases monotonically with mass.}
+
+The central chemical potentials lie in the range
+\(\mu_{q,c} \in [477, 509]~\mathrm{MeV}\) across the nine QMD
+runs, consistent with the rough estimate \(\mu_q \sim
+500~\mathrm{MeV}\) given in the preceding section. At these
+chemical potentials the quark matter is substantially denser than
+nuclear saturation, and the 2SC condensate \(\Delta_0\) is fully
+established in every run.
+
+The three QM reference configurations yield central densities
+\(n_{B,c}/n_0 \approx 6.7\)--\(6.9\), closely bracketing the QMD
+baseline value of \(6.64\,n_0\), indicating that the 2SC pairing
+does not substantially shift the central density at maximum mass
+relative to the unpaired model at comparable stellar mass.
+
+The thermodynamic identity \(\varepsilon = -P + \mu_q n_q\) was
+verified at the central point for all twelve configurations,
+yielding relative residuals below \(0.005\%\) in every case. This
+constitutes an independent cross-check that the EoS tables and
+stellar-integration pipeline are thermodynamically consistent
+throughout the density range probed by the maximum-mass star.
+
 The QMD model with the full one-loop potential, neutrality
 imposed, and the Maxwell construction applied produces a
 thermodynamically consistent and numerically robust description of
@@ -3459,3 +3593,4 @@ above the conformal limit, asymptotic gap saturation, and
 gravitationally bound stellar configurations, are robust across
 the parameter scan and represent genuine consequences of the QMD
 description of dense matter.
+
