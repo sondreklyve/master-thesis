@@ -116,12 +116,21 @@ def run_tov_sequence_grav_bound(
     """
     npemu_core, npemu_tov = _load_npemu_modules()
 
+    # Use the original scan order (density increasing) and keep only entries where P
+    # strictly exceeds the last kept value.  Sorting by P interleaves branches around
+    # first-order phase transitions and produces non-monotone E(P); this forward scan
+    # walks the physical ascending branch and discards all back-tracking loop regions.
     positive_mask = eos.pressure_mev4 > 0.0
-    p_arr = np.sort(eos.pressure_mev4[positive_mask])
-    e_arr = eos.energy_density_mev4[positive_mask][np.argsort(eos.pressure_mev4[positive_mask])]
-    unique = np.concatenate(([True], np.diff(p_arr) > 0.0))
-    p_arr = p_arr[unique]
-    e_arr = e_arr[unique]
+    p_raw = eos.pressure_mev4[positive_mask]
+    e_raw = eos.energy_density_mev4[positive_mask]
+    keep_p: list[float] = [float(p_raw[0])]
+    keep_e: list[float] = [float(e_raw[0])]
+    for p_i, e_i in zip(p_raw[1:], e_raw[1:]):
+        if float(p_i) > keep_p[-1]:
+            keep_p.append(float(p_i))
+            keep_e.append(float(e_i))
+    p_arr = np.array(keep_p)
+    e_arr = np.array(keep_e)
 
     if p_arr.size < 2:
         raise ValueError("The stellar EoS must contain at least two positive-pressure points for TOV.")
