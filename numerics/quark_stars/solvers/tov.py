@@ -99,6 +99,72 @@ def build_npemu_energy_from_pressure(eos: QuarkMatterEOS) -> tuple[interp1d, np.
     return interpolator, pressure_dimless, energy_dimless
 
 
+def run_tov_sequence_grav_bound(
+    eos: QuarkMatterEOS,
+    central_pressure_factor: float = 1.08,
+    radial_step_km: float = 0.01,
+    max_radius_km: float = 100.0,
+    integrator: str = "rk4",
+) -> MassRadiusSequence:
+    """Run a TOV sequence for a gravitationally-bound EoS with no zero-pressure crossing.
+
+    The dense-matter branch does not reach P = 0 (because the EoS only covers the
+    electron-present quark phase, which starts at a small but finite onset pressure
+    P_onset).  Using tol = P_onset as the surface condition is equivalent to treating
+    P_onset as effectively zero on the stellar scale (P_onset / P_max ~ 1e-6) and
+    correctly produces a gravitationally-bound M-R topology for M > ~0.1 Msun.
+    """
+    npemu_core, npemu_tov = _load_npemu_modules()
+
+    positive_mask = eos.pressure_mev4 > 0.0
+    p_arr = np.sort(eos.pressure_mev4[positive_mask])
+    e_arr = eos.energy_density_mev4[positive_mask][np.argsort(eos.pressure_mev4[positive_mask])]
+    unique = np.concatenate(([True], np.diff(p_arr) > 0.0))
+    p_arr = p_arr[unique]
+    e_arr = e_arr[unique]
+
+    if p_arr.size < 2:
+        raise ValueError("The stellar EoS must contain at least two positive-pressure points for TOV.")
+
+    p_d = p_arr / npemu_core.e0
+    e_d = e_arr / npemu_core.e0
+
+    eos_interp = interp1d(p_d, e_d, kind="cubic", assume_sorted=True, fill_value="extrapolate")
+
+    e_check = eos_interp(p_d)
+    if not np.all(np.diff(e_check) > 0.0):
+        n_nonmono = int(np.sum(np.diff(e_check) <= 0.0))
+        print(f"  WARNING: cubic EoS interpolant has {n_nonmono} non-monotone step(s).")
+
+    P_onset = float(p_d[0])
+
+    result = npemu_tov.run_tov(
+        eos_interp,
+        Pcstart=float(p_d[0] * 1.01),
+        Pcend=float(p_d[-1] * 0.999),
+        Pcstep=central_pressure_factor,
+        tol=P_onset,
+        r_max=max_radius_km,
+        rstep=radial_step_km,
+        integrator=integrator,
+    )
+    central_pressure_dimless = np.asarray(result["centralpressures"])
+    central_energy_density_mev4 = np.array(
+        [float(eos_interp(pc)) * npemu_core.e0 for pc in central_pressure_dimless]
+    )
+    return MassRadiusSequence(
+        m_sigma_mev=eos.m_sigma_mev,
+        b0_mev4=eos.b0_mev4,
+        b_mev4=0.0,
+        b_min_mev4=None,
+        central_pressure_dimless=central_pressure_dimless,
+        central_energy_density_mev4=central_energy_density_mev4,
+        radius_km=np.asarray(result["Rlist"]),
+        mass_msun=np.asarray(result["Mlist"]),
+        stable_mask=np.asarray(result["stable_mask"]),
+    )
+
+
 def run_tov_sequence(
     eos: QuarkMatterEOS,
     central_pressure_factor: float = 1.08,

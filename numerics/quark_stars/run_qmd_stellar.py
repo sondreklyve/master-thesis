@@ -793,32 +793,48 @@ def _plot_mass_radius(sequence, plots_dir: Path) -> None:
 
 
 def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
-    """Overlay QMD SET A vs QM m_sigma=600 MeV M-R curves."""
-    qm_files = sorted(QM_STELLAR_DIR.glob(f"qm_stars_sigma_{QM_SIGMA_MEV}_*.txt"))
-    if not qm_files:
-        print(f"  No QM M-R files for m_sigma={QM_SIGMA_MEV} MeV; skipping comparison plot.")
-        return
-    qm_file = next((f for f in qm_files if "Broot_28" in f.name),
-                   qm_files[len(qm_files) // 2])
+    """Overlay QMD SET A vs QM m_sigma=600 MeV M-R curves (three-curve comparison).
 
-    qm_data   = np.loadtxt(qm_file, comments="#")
-    qm_r, qm_m = qm_data[:, 3], qm_data[:, 4]
-    qm_stable   = qm_data[:, 5].astype(bool)
+    Primary comparison: QMD vs gravitationally-bound QM (B_min=0) — matched construction.
+    Secondary reference: self-bound QM (B_min=27.8 MeV) — shown for context.
+    """
+    COLOR_QM_GB  = plt.cm.viridis(0.85)   # gravitationally-bound QM (primary)
+    COLOR_QM_SB  = plt.cm.viridis(0.50)   # self-bound QM (secondary reference)
 
     stable   = sequence.stable_mask.astype(bool)
     unstable = ~stable
 
-    fig, ax = plt.subplots(figsize=(8.0, 5.0))
+    fig, ax = plt.subplots(figsize=(8.0, 5.5))
 
-    ax.plot(qm_r[qm_stable], qm_m[qm_stable], color=COLOR_QM, lw=1.8, ls="-",
-            label=rf"QM $m_\sigma = {QM_SIGMA_MEV}\,\mathrm{{MeV}}$")
-    if (~qm_stable).any():
-        ax.plot(qm_r[~qm_stable], qm_m[~qm_stable], color=COLOR_QM, lw=1.2, ls="--")
-    if qm_stable.any():
-        m_qm = qm_m[qm_stable]
-        r_qm = qm_r[qm_stable]
-        ax.plot(r_qm[int(np.argmax(m_qm))], m_qm.max(), "o", color=COLOR_QM, ms=6)
+    # --- Gravitationally-bound QM (primary comparison) ---
+    gb_file = QM_STELLAR_DIR / "qm_stars_sigma_600_grav_bound.txt"
+    if gb_file.exists():
+        gb_data = np.loadtxt(gb_file, comments="#")
+        gb_r, gb_m, gb_stable = gb_data[:, 3], gb_data[:, 4], gb_data[:, 5].astype(bool)
+        gb_m_s = gb_m[gb_stable]; gb_r_s = gb_r[gb_stable]
+        # Show M > 0.3 Msun and R < 25 km to avoid unphysical low-mass artifacts
+        phys = (gb_m_s > 0.3) & (gb_r_s < 25.0)
+        ax.plot(gb_r_s[phys], gb_m_s[phys], color=COLOR_QM_GB, lw=1.8, ls="-",
+                label=rf"QM grav.\ bound ($B_{{\min}}=0$)")
+        if phys.any():
+            idx_gb = int(np.argmax(gb_m_s[phys]))
+            ax.plot(gb_r_s[phys][idx_gb], gb_m_s[phys][idx_gb], "o", color=COLOR_QM_GB, ms=6)
+    else:
+        print(f"  Gravitationally-bound QM file not found: {gb_file}")
 
+    # --- Self-bound QM (secondary reference) ---
+    qm_files = sorted(QM_STELLAR_DIR.glob(f"qm_stars_sigma_{QM_SIGMA_MEV}_Broot_*.txt"))
+    qm_sb_file = next((f for f in qm_files if "Broot_28" in f.name), None)
+    if qm_sb_file is not None:
+        qm_data = np.loadtxt(qm_sb_file, comments="#")
+        qm_r, qm_m, qm_stable = qm_data[:, 3], qm_data[:, 4], qm_data[:, 5].astype(bool)
+        ax.plot(qm_r[qm_stable], qm_m[qm_stable], color=COLOR_QM_SB, lw=1.4, ls="--",
+                label=rf"QM self-bound ($B^{{1/4}}=27.8\,\mathrm{{MeV}}$)")
+        if qm_stable.any():
+            m_qm = qm_m[qm_stable]; r_qm = qm_r[qm_stable]
+            ax.plot(r_qm[int(np.argmax(m_qm))], m_qm.max(), "s", color=COLOR_QM_SB, ms=5)
+
+    # --- QMD SET A ---
     if stable.any():
         ax.plot(sequence.radius_km[stable], sequence.mass_msun[stable],
                 color=COLOR_QMD, lw=LW, ls="-", label="QMD SET A")
@@ -826,8 +842,7 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
         ax.plot(sequence.radius_km[unstable], sequence.mass_msun[unstable],
                 color=COLOR_QMD, lw=1.4, ls="--")
     if stable.any():
-        m_s = sequence.mass_msun[stable]
-        r_s = sequence.radius_km[stable]
+        m_s = sequence.mass_msun[stable]; r_s = sequence.radius_km[stable]
         idx = int(np.argmax(m_s))
         ax.plot(r_s[idx], m_s[idx], "o", color=COLOR_QMD, ms=6)
 
@@ -836,7 +851,7 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
     ax.set_title(rf"QMD vs QM ($m_\sigma = {QM_SIGMA_MEV}\,\mathrm{{MeV}}$) mass-radius")
     handles, labels = ax.get_legend_handles_labels()
     ax.legend(handles, labels, fontsize=9)
-    ax.set_xlim(8.0, 16.0)
+    ax.set_xlim(8.0, 18.0)
     ax.set_ylim(0.5, 2.1)
     save_figure(plots_dir / "qmd_vs_qm_mass_radius.pdf")
 

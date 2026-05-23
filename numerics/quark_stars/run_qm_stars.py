@@ -21,7 +21,7 @@ from .plotting import apply_plot_style, bag_curve_label, save_figure, sigma_colo
 from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
 from .qm_potential import TwoFlavorQMPotential
 from .qm_stellar_matter import build_sigma_values, build_stellar_eos
-from .solvers.tov import run_tov_sequence
+from .solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
 
 
 OUTPUT_DIR = Path(__file__).resolve().parent / "output"
@@ -136,6 +136,35 @@ def main() -> None:
                         1.6,
                     )
                 )
+
+        # Gravitationally-bound curve for m_sigma = 600 MeV (B_min = 0)
+        if abs(m_sigma_mev - 600.0) < 0.5:
+            try:
+                grav_seq = run_tov_sequence_grav_bound(
+                    eos,
+                    central_pressure_factor=args.central_pressure_factor,
+                    radial_step_km=args.radial_step_km,
+                    max_radius_km=100.0,
+                    integrator="rk4",
+                )
+                grav_seq.save(stellar_dir / "qm_stars_sigma_600_grav_bound.txt")
+                g_stable = grav_seq.stable_mask.astype(bool)
+                g_m = grav_seq.mass_msun[g_stable]
+                g_r = grav_seq.radius_km[g_stable]
+                # Show only the astrophysically relevant range (M > 0.3 Msun, R < 25 km)
+                phys = (g_m > 0.3) & (g_r < 25.0)
+                ax.plot(
+                    g_r[phys], g_m[phys],
+                    color="black", linewidth=1.8, linestyle="--",
+                    label=r"grav.\ bound ($B_{\min}=0$)",
+                )
+                subplot_lines.append((g_r[phys], g_m[phys], "black", "--", 1.8))
+                print(
+                    f"Grav-bound m_sigma=600 MeV: "
+                    f"M_max={g_m[int(np.argmax(g_m))]:.4f} Msun at R={g_r[int(np.argmax(g_m))]:.4f} km"
+                )
+            except Exception as exc:
+                print(f"Grav-bound m_sigma=600 MeV skipped: {exc}")
 
         ax.set_title(rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$")
         ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
