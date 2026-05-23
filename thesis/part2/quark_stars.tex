@@ -2186,12 +2186,42 @@ Ref.~\cite{Andersen2024} and discussed in
 Sec.~\ref{subsec:qmd_benchmark}. Removing
 \(\Omega_{1,\mathrm{num}}\) removes the loop-level binding that
 underlies the 2SC phase at finite density. The narrow window observed
-for QMD~SET~A is itself parameter-sensitive: reducing \(m_\Delta\) by
-\(100~\mathrm{MeV}\) to \(400~\mathrm{MeV}\) widens the truncated
-window from approximately \(4~\mathrm{MeV}\) to
-\(86~\mathrm{MeV}\), confirming that the truncated 2SC phase is not a
-stable feature of the model but a knife-edge configuration whose
-existence and extent depend strongly on the chosen parameters.
+for QMD~SET~A is itself parameter-sensitive across the diquark sector,
+confirming that the truncated 2SC phase is not a stable feature of the
+model but a knife-edge configuration whose existence and extent depend
+strongly on the chosen parameters.
+
+The parameter sensitivity of the truncated calculation is shown
+explicitly in Fig.~\ref{fig:qmd_truncation_parameter_variations},
+which compares the full and truncated diquark gap for three
+representative parameter choices. At \(m_\Delta = 400~\mathrm{MeV}\)
+the truncated window widens to approximately \(86~\mathrm{MeV}\); at
+\(m_\Delta = 700~\mathrm{MeV}\) the truncated 2SC phase disappears
+entirely; at \(\lambda_\Delta = \lambda_0/8\) the window broadens
+compared to QMD~SET~A. In all three cases the full calculation
+produces a stable, sustained 2SC phase. The chaotic dependence of the
+truncated behavior on the diquark parameters confirms that what
+stabilizes the 2SC phase in the full calculation is the residual
+integral \(\Omega_{1,\mathrm{num}}\), and that the surviving
+configurations in the truncated calculation are accidents of how the
+analytic terms balance at particular parameter values.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_truncation_parameter_variations.pdf}
+\caption{Diquark gap \(g_\Delta\Delta_0\) as a function of common
+quark chemical potential for three parameter variations from QMD~SET~A,
+comparing the full one-loop calculation (dark purple) and the truncated
+calculation with \(\Omega_{1,\mathrm{num}}=0\) (amber). Top:
+\(m_\Delta = 400~\mathrm{MeV}\), where the truncated window widens to
+approximately \(86~\mathrm{MeV}\). Middle: \(m_\Delta =
+700~\mathrm{MeV}\), where the truncated 2SC phase does not form.
+Bottom: \(\lambda_\Delta = \lambda_0/8\), where the truncated window
+broadens moderately. In all three cases the full calculation produces
+a stable 2SC phase, demonstrating that the truncated behavior depends
+sensitively on the parameter choice while the full calculation does not.}
+\label{fig:qmd_truncation_parameter_variations}
+\end{figure}
 
 The qualitative failure of the truncated calculation has direct
 quantitative consequences for the equation of state. Near the full
@@ -2213,13 +2243,19 @@ entirely absent.
 
 The conclusion is that \(\Omega_{1,\mathrm{num}}\) is not a numerical
 convenience but a structurally necessary part of the QMD potential at
-stellar densities. The truncated calculation predicts that the 2SC
-phase does not exist in the QMD model in any thermodynamically
-meaningful sense at densities reachable in compact stars. This is the
-opposite of what the full calculation predicts, and is at odds with
-the analytic asymptotic gap formula~\eqref{eq:qmd_asymptotic_gap}
-derived in Ref.~\cite{Andersen2024}, which is itself a consequence of
-including the diquark-loop contribution.
+stellar densities. The truncated calculation does not produce a stable
+prediction for the 2SC phase at all: as
+Fig.~\ref{fig:qmd_truncation_parameter_variations} demonstrates, its
+behavior depends chaotically on the diquark parameters, with some
+choices producing narrow windows of a few MeV, others producing wide
+windows of order \(100~\mathrm{MeV}\), and others producing no 2SC
+phase whatsoever. None of these truncated configurations corresponds
+to a thermodynamically meaningful 2SC phase at densities reachable in
+compact stars. This is the opposite of what the full calculation
+predicts, and is at odds with the analytic asymptotic gap
+formula~\eqref{eq:qmd_asymptotic_gap} derived in
+Ref.~\cite{Andersen2024}, which is itself a consequence of including
+the diquark-loop contribution.
 
 All stellar calculations in the remainder of this chapter therefore
 use the full one-loop potential. The remaining task is to impose
