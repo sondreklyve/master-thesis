@@ -14,6 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from .constants import MEV3_TO_FM_MINUS3, NC, N_FLAVORS
 from .io import output_directories, save_table
 from .plotting import apply_plot_style, save_figure
 from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
@@ -61,6 +62,19 @@ def save_sigma_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
 
 def save_number_density_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
+    # Free massless quark reference: n_q = (N_c N_f / 3π²) μ_q³
+    mu_ref = np.linspace(MU_MIN_MEV, MU_MAX_MEV, NUM_POINTS)
+    n_ref_fm3 = (NC * N_FLAVORS / (3.0 * np.pi**2)) * mu_ref**3 * MEV3_TO_FM_MINUS3
+    ax.plot(
+        mu_ref,
+        n_ref_fm3,
+        color="black",
+        linestyle="--",
+        linewidth=1.5,
+        alpha=0.6,
+        label=r"Free massless quarks",
+        zorder=0,
+    )
     for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
         ax.plot(
             table.mu_q_mev,
@@ -96,14 +110,14 @@ def save_pressure_energy_density_plot(tables: list[SimpleEOSTable], plots_dir: P
     for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
         mask = table.positive_pressure_mask
         ax.plot(
-            table.energy_density_gev_fm3[mask],
             table.pressure_gev_fm3[mask],
+            table.energy_density_gev_fm3[mask],
             linewidth=2.2,
             color=color,
             label=sigma_label(table.m_sigma_mev),
         )
-    ax.set_xlabel(r"Energy density $\varepsilon\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
-    ax.set_ylabel(r"Pressure $P\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
+    ax.set_xlabel(r"Pressure $P\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
+    ax.set_ylabel(r"Energy density $\varepsilon\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
     ax.legend()
     save_figure(plots_dir / "pressure_vs_energy_density_multi.pdf")
 

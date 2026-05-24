@@ -9,12 +9,12 @@ represent idealized quark stars. While such objects provide a useful
 theoretical framework for isolating the effects of quark degrees of
 freedom, they are not expected to give a complete description of
 realistic compact stars. A more realistic scenario involves a
-transition between hadronic and quark matter, leading to so-called
-hybrid stars. This possibility will be considered in a later chapter,
-where the present equation of state is combined with a hadronic
-description.
+transition between hadronic and quark matter, leading to so-called 
+hybrid stars. While such configurations are not considered in this
+thesis, the equations of state constructed here could
+serve as the quark-matter component in such a description.
 
-Within the QM model, the thermodynamic properties of the system are
+Within the models considered in this chapter, the thermodynamic properties of the system are
 determined from the grand canonical potential evaluated in the
 mean-field approximation. In this framework, the scalar meson field
 develops a non-vanishing expectation value, which acts as an order
@@ -58,12 +58,13 @@ which leads to color-superconducting phases of quark matter. These
 phases arise from attractive interactions in the quark--quark channel
 and are expected to play an important role in the phase structure of
 dense QCD \cite{Alford2008,Schmitt2010}. We restrict the analysis to
-the two-flavor superconducting (2SC) phase, which represents the
+the two-flavor superconducting (2SC) phase, described within the
+Quark--Meson--Diquark (QMD) model, which represents the
 simplest realization of color superconductivity. The inclusion of such
 effects modifies the thermodynamic potential and can have a
 significant impact on the resulting equation of state.
 
-Finally, the equation of state obtained from the QM model is used as
+Finally, the equation of state obtained from the models is used as
 input to the TOV equations, which determine the structure of
 non-rotating compact stars in general relativity. By solving these
 equations, we obtain mass--radius relations for quark stars and
@@ -108,9 +109,12 @@ same in both cases: one first constructs $\Omega$ as a function of the
 mean fields and chemical potentials, and then determines the physical
 state by minimizing it.
 
-Since we consider isospin-symmetric matter with
-\(\mu_u = \mu_d\), the isospin chemical potential vanishes and
-pion condensation does not occur. The thermodynamic potential
+In this simplified setting we consider isospin-symmetric matter with
+\(\mu_u = \mu_d\), so the isospin chemical potential vanishes and
+pion condensation does not occur. This assumption does not hold in
+the stellar calculation, where $\beta$-equilibrium requires
+$\mu_u \neq \mu_d$.
+The thermodynamic potential
 therefore depends only on the scalar condensate, and the
 stationarity condition reduces to
 \begin{equation}
@@ -138,11 +142,15 @@ decay constant, whereas the sigma mass is less sharply constrained and
 is therefore commonly treated as a model parameter 
 \cite{SchaeferWambach2008,SchaeferPawlowskiWambach2007,Buballa2005}.
 In the simple case considered here, the model is therefore
-evaluated for the representative choices
+evaluated for
 \(m_\sigma=500,600,\) and \(700\,\mathrm{MeV}\). This
 variation changes the curvature of the effective potential and thereby
 the detailed thermodynamic response, while leaving the underlying
 two-flavor mean-field setup unchanged \cite{Folkestad2018,Andersen2024}.
+These values are chosen as representative illustrations of the parameter
+dependence; the question of which values are physically admissible is
+deferred to the stellar analysis in Sec.~\ref{subsec:vacuum_stability}
+where a vacuum stability condition restricts the allowed range.
 
 Once the stationary point of $\Omega$ has been found, the pressure is
 identified as minus the grand potential evaluated at the minimum,
@@ -211,98 +219,39 @@ Fig.~\ref{fig:qs_sigma_density_mu}.
 \end{figure}
 
 As the chemical potential increases, the solution to the gap equation
-changes, leading to a reduction of the condensate and therefore of the
-constituent quark mass. This reflects the gradual restoration of
-chiral symmetry in dense matter. At a critical chemical potential, the
-preferred solution of the gap equation changes abruptly, resulting in
-a discontinuous change in the condensate. Within the present
-mean-field treatment, this corresponds to a first-order phase
-transition between the vacuum and a dense quark-matter phase 
-\cite{andresen2023,sletmoen2022}.
+changes, leading to a reduction of the condensate and the onset of
+finite quark density. The character of this change depends on
+$m_\sigma$. For $m_\sigma = 500~\mathrm{MeV}$, the transition is
+first-order and discontinuous: at $\mu_q \approx 295~\mathrm{MeV}$
+the condensate drops abruptly from its vacuum value
+$\bar{\sigma} \approx 93~\mathrm{MeV}$ to $\bar{\sigma} \approx
+28~\mathrm{MeV}$ in a single step, and the quark number density jumps
+simultaneously from zero to a finite value. For $m_\sigma = 600$ and
+$700~\mathrm{MeV}$, the onset occurs at $\mu_q \approx 301~\mathrm{MeV}$
+and is continuous: the density turns on smoothly and the condensate
+falls gradually over a range of tens of MeV rather than jumping
+discontinuously. This transition from first-order to crossover
+behavior with increasing $m_\sigma$ reflects the changing curvature
+of the effective potential \cite{andresen2023,sletmoen2022}.
 
-Changing \(m_\sigma\) modifies the stiffness of the effective
-potential and thereby the detailed evolution of the condensate through
-the transition region. This shifts the onset of finite density and
-produces a corresponding spread in the density curves, but the overall
-structure remains the same for the three representative parameter
-choices.
+Changing $m_\sigma$ therefore affects both the location and the
+character of the onset. The three density curves nevertheless converge
+to a common trajectory at high chemical potential, shown as a dashed
+reference line in the lower panel of
+Fig.~\ref{fig:qs_sigma_density_mu}. This line corresponds to the
+analytical result for free massless quarks,
+\begin{equation}
+n_q = \frac{N_c N_f}{3\pi^2}\mu_q^3,
+\end{equation}
+and confirms that all three curves approach the ultrarelativistic
+limit at large $\mu_q$, as expected when the constituent quark mass
+becomes negligible compared with the chemical potential.
 
 Beyond the transition, the Fermi momentum grows with increasing
 chemical potential, and the pressure and energy density increase
 monotonically. The behavior of these quantities as functions of the
 chemical potential forms the basis for the numerical construction of
-the equation of state presented in the following subsection.
-
-\subsection*{Vacuum normalization}
-
-The thermodynamic potential obtained from the Quark--Meson model
-contains a vacuum contribution which, after renormalization, is
-generally nonzero. As a consequence, the pressure defined by Eq.~\eqref{eq:qs_pressure_def}
-does not vanish in the vacuum state, i.e.\ at vanishing chemical
-potentials. This is in contrast to the physical expectation that the
-vacuum should correspond to zero pressure.
-
-For applications to compact stars, it is therefore necessary to
-normalize the pressure such that
-\begin{equation}
-P(\mu_f = 0) = 0.
-\end{equation}
-This is achieved by introducing a constant shift in the thermodynamic
-potential,
-\begin{equation}
-\Omega \rightarrow \Omega + B,
-\end{equation}
-which corresponds to the transformation
-\begin{equation}
-P \rightarrow P - B, \qquad
-\varepsilon \rightarrow \varepsilon + B.
-\end{equation}
-The constant $B$ is commonly referred to as a \emph{bag constant}, by
-analogy with the MIT bag model \cite{Chodos1974,Chodos1974b}.
-
-In the present framework, this shift has a clear interpretation. The
-renormalized vacuum effective potential determines the absolute value
-of the energy density of the vacuum, but this value is not fixed by
-the theory itself. Only differences in the thermodynamic potential are
-physically meaningful. The constant $B$ therefore fixes the reference
-point of the energy density and ensures that the physical vacuum
-corresponds to zero pressure.
-
-In practice, it is convenient to separate this normalization into two
-steps. First, a vacuum subtraction is performed such that the pressure
-vanishes in the true vacuum configuration,
-\begin{equation}
-B_0 = \Omega_{\mathrm{vac}}(\bar{\sigma}_{\mathrm{vac}}),
-\end{equation}
-where $\bar{\sigma}_{\mathrm{vac}}$ denotes the solution of the gap
-equation at zero chemical potential. This guarantees that the vacuum
-state is correctly normalized.
-
-In addition, one may introduce a further constant shift $B$, which can
-be used to modify the stiffness of the equation of state. While $B_0$
-is fixed by the requirement of vacuum normalization, the additional
-shift $B$ acts as a phenomenological parameter that effectively
-controls the onset of the high-density phase. This is analogous to the
-role of the bag constant in phenomenological quark-matter models
-\cite{sletmoen2022}.
-
-It is important to emphasize that constant shifts of the pressure do
-not affect thermodynamic derivatives such as the number density or the
-speed of sound. However, they do change the relation between pressure
-and energy density,
-\begin{equation}
-P = P(\varepsilon),
-\end{equation}
-which is the quantity entering the Tolman--Oppenheimer--Volkoff
-equations. The choice of $B$ therefore has a direct impact on the
-resulting mass--radius relations of compact stars.
-
-From a numerical perspective, the effect of the vacuum normalization
-can be seen as a vertical shift of the pressure curve. In particular,
-the condition $P=0$ defines the surface of the star, and the
-normalization ensures that this point corresponds to the physical
-vacuum rather than an unphysical offset in the thermodynamic
-potential.
+the equation of state.
 
 \subsection*{Construction of the equation of state}
 
@@ -321,13 +270,27 @@ $\bar{\sigma}$. This fixes the constituent quark mass through
 $M_q = g\bar{\sigma}$, which in turn determines the Fermi momenta and
 the medium contribution to the thermodynamic potential. The pressure,
 number densities, and energy density are then evaluated using
-Eqs.~\eqref{eq:qs_pressure_def}--\eqref{eq:qs_energy_def}, including
-the vacuum normalization discussed above. Numerically, the global
+Eqs.~\eqref{eq:qs_pressure_def}--\eqref{eq:qs_energy_def}. Numerically, the global
 minimum of the grand potential is selected at each value of the
 chemical potential, so that the thermodynamically preferred phase is
 obtained.
 
-This relation is obtained numerically by tabulating $P$ and
+The renormalized thermodynamic potential is generally nonzero in the
+vacuum state, which means the pressure as defined by
+Eq.~\eqref{eq:qs_pressure_def} does not vanish at $\mu_q = 0$.
+Since the physical vacuum should correspond to zero pressure, a
+constant shift
+\begin{equation}
+B_0 = \Omega_{\mathrm{vac}}(\bar{\sigma}_{\mathrm{vac}})
+\end{equation}
+is subtracted from $\Omega$, where $\bar{\sigma}_{\mathrm{vac}}$
+is the solution of the gap equation at vanishing chemical potential.
+This ensures $P(\mu_q=0) = 0$ and $\varepsilon(\mu_q=0) = 0$ by
+construction. The subtraction has no effect on thermodynamic
+derivatives such as number densities, and does not alter the physical
+content of the results. 
+
+The equation of state is obtained numerically by tabulating $P$ and
 $\varepsilon$ as functions of the chemical potential and performing a
 parametric representation of the curve. The resulting function
 $\varepsilon(P)$ serves as input for the Tolman--Oppenheimer--Volkoff
@@ -338,47 +301,34 @@ The corresponding pressure as a function of chemical potential, together
 with the resulting equation of state, is displayed in
 Fig.~\ref{fig:qs_pressure_panels}.
 
-It is important to note that the structure of the equation of state is
-directly influenced by the behavior of the condensate. In particular,
-a discontinuous change in $\bar{\sigma}$ as a function of the chemical
-potential leads to a corresponding discontinuity in the thermodynamic
-quantities, signaling a first-order phase transition. In the numerical
-equation of state, this manifests itself as a discontinuous change, or
-a very rapid variation, in the thermodynamic quantities.
+The upper panel of Fig.~\ref{fig:qs_pressure_panels} shows the
+pressure as a function of $\mu_q$. For all three sigma masses the
+pressure is identically zero below the onset, reflecting that no
+quark states are occupied in the chirally broken vacuum. At the onset,
+the pressure rises sharply for $m_\sigma = 500~\mathrm{MeV}$,
+consistent with the first-order transition identified above, while
+for $m_\sigma = 600$ and $700~\mathrm{MeV}$ the rise is slightly more gradual,
+reflecting the smoother crossover. At fixed $\mu_q$ above the onset,
+larger $m_\sigma$ gives lower pressure, because the larger vacuum
+subtraction $B_0$ removes more from the kinetic quark contribution.
 
-The multi-curve comparison in Fig.~\ref{fig:qs_pressure_panels} shows
-that the pressure and the resulting equation of state retain the same
-qualitative form across the chosen sigma masses, while exhibiting a
-moderate sensitivity to the value of \(m_\sigma\). In this sense, the
-simple model is best viewed as a controlled baseline that illustrates
-how the parameter choice affects the thermodynamics before the
-additional stellar constraints are imposed.
+The lower panel shows the equation of state $\varepsilon(P)$. All
+three curves begin at the origin, confirming the vacuum normalization.
+The $m_\sigma = 500~\mathrm{MeV}$ curve is the stiffest: it returns
+the highest energy density at a given pressure. This ordering reflects
+the same $B_0$ dependence seen in the pressure plot. At large density
+the curves approach a common linear behavior, consistent with the
+conformal limit $\varepsilon = 3P$ expected for massless relativistic
+quarks.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_mu_multi.pdf}
 
 \includegraphics[width=0.88\textwidth]{figures/quark_stars/pressure_vs_energy_density_multi.pdf}
-\caption{Upper panel: pressure as a function of the quark chemical potential. Lower panel: equation of state \(P(\varepsilon)\), with only the non-negative-pressure branch shown, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
+\caption{Upper panel: pressure as a function of the quark chemical potential. Lower panel: equation of state \(\varepsilon(P)\), with only the non-negative-pressure branch shown, for the simple two-flavor Quark--Meson model at \(T=0\) for \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\).}
 \label{fig:qs_pressure_panels}
 \end{figure}
-The equation of state is constructed by eliminating the chemical
-potential and expressing the pressure as a function of the energy
-density,
-\begin{equation}
-P = P(\varepsilon).
-\end{equation}
-
-From a numerical perspective, the construction of the equation of
-state therefore proceeds in three steps:
-\begin{enumerate}
-\item Solve the gap equation for $\bar{\sigma}$ at fixed chemical
-      potential.
-\item Evaluate $P$ and $\varepsilon$ at the corresponding minimum of
-      the grand potential, including vacuum normalization.
-\item Construct the relation $P(\varepsilon)$ from the resulting
-      dataset.
-\end{enumerate}
 
 \subsection*{Speed of sound}
 
@@ -403,37 +353,35 @@ This form is convenient in numerical implementations, since the
 equation of state is constructed as a table in \(\mu_q\), from which
 derivatives can be computed directly.
 
-The behavior of \(c_s^2\) provides information beyond the relation
-\(P(\varepsilon)\). In particular, rapid variations indicate regions
-where the response of the system changes significantly, such as near
-the onset of finite density. In the high-density regime, where the
-constituent quark mass becomes small compared with \(\mu_q\), the
-system approaches an ultrarelativistic limit in which
-\begin{equation}
-c_s^2 \to \frac{1}{3}.
-\end{equation}
-This limit serves as a consistency check on the numerical results.
+The numerical results are shown in
+Fig.~\ref{fig:qs_speed_of_sound_mu}. The speed of sound is
+identically zero in the vacuum phase, where the pressure does not
+depend on $\mu_q$. At the onset it rises sharply for
+$m_\sigma = 500~\mathrm{MeV}$, consistent with the abrupt
+first-order jump in the equation of state. 
+For $m_\sigma = 600$ and $700~\mathrm{MeV}$ the
+behavior is qualitatively different: $c_s^2$ rises slowly from
+the onset, then flattens or slightly dips,
+before rising steeply toward the conformal limit. This reflects
+the soft crossover regime in which the condensate is falling
+continuously but the quarks are not yet fully liberated; the
+pressure response is briefly suppressed before the kinetic quark
+contribution takes over. The dip is more pronounced and extends over
+a wider range of $\mu_q$ for $m_\sigma = 700~\mathrm{MeV}$, where
+the chiral restoration is slowest.
 
-The numerical results for the two-flavor Quark--Meson model are shown
-in Fig.~\ref{fig:qs_speed_of_sound_mu}. For low values of \(\mu_q\),
-the speed of sound is approximately zero. This reflects that the
-system remains in the vacuum state up to the onset of finite density.
-At the transition to quark matter, \(c_s^2\) increases rapidly,
-indicating a sudden change in the stiffness of the equation of state.
-
-At larger chemical potentials, \(c_s^2\) approaches the
-ultrarelativistic limit \(1/3\) from below. No pronounced overshoot is
-observed within the present mean-field setup. This is consistent with
-the absence of additional interaction channels, such as diquark
-pairing, which in more elaborate models can modify the high-density
-behavior \cite{Andersen2024}.
-
-The dependence on the sigma mass \(m_\sigma\) is moderate. Varying
-\(m_\sigma\) shifts the location of the transition and slightly
-changes the slope of \(c_s^2\), but the qualitative behavior remains
-the same: a vanishing speed of sound in the vacuum phase, a rapid
-increase at onset, and a smooth approach to the ultrarelativistic
-limit at large \(\mu_q\).
+At larger $\mu_q$, all three curves approach the conformal limit
+$c_s^2 \to \frac{1}{3}$ from below. This limit corresponds to a gas of
+massless relativistic fermions, in which the pressure scales as
+$P \propto \mu_q^4$ and the energy density as $\varepsilon = 3P$.
+It is approached from below in the present model because the
+constituent quark mass remains finite at any fixed $\mu_q$, and the
+approach to the massless limit is only asymptotic. The speed of sound
+never exceeds the conformal limit in the simple QM model; this is an expected
+consequence due to the absence of repulsive vector interactions or
+diquark pairing, both of which can stiffen the equation of state
+beyond the conformal bound at intermediate densities
+\cite{Andersen2024}.
 
 \begin{figure}[H]
 \centering
@@ -441,7 +389,7 @@ limit at large \(\mu_q\).
 \caption{Speed of sound squared as a function of the quark chemical
 potential for the simple two-flavor Quark--Meson model at \(T=0\) for
 \(m_\sigma = 500\), \(600\), and \(700\,\mathrm{MeV}\). The horizontal
-dashed line indicates the ultrarelativistic limit \(c_s^2 = 1/3\).}
+dashed line indicates the ultrarelativistic limit \(c_s^2 = \frac{1}{3}\).}
 \label{fig:qs_speed_of_sound_mu}
 \end{figure}
 
@@ -740,6 +688,7 @@ QCD matter in effective models
 \cite{Buballa2005,Schmitt2010,Alford2008}.
 
 \subsection*{Vacuum structure, normalization, and phase construction}
+\label{subsec:vacuum_stability}
 
 Before constructing the stellar equation of state, it is necessary to
 ensure that the underlying model provides a physically consistent
@@ -903,7 +852,7 @@ the different curves tend toward the limiting relation
 \begin{equation}
 \varepsilon = 3P,
 \end{equation}
-or equivalently \(c_s^2=dP/d\varepsilon = 1/3\). This is the standard
+or equivalently \(c_s^2=dP/d\varepsilon = \frac{1}{3}\). This is the standard
 high-density behavior of a gas of weakly interacting relativistic
 fermions \cite{Buballa2005,Schmitt2010}.
 
@@ -1979,8 +1928,8 @@ Fig.~\ref{fig:qmd_benchmark_cs2}. In the normal phase below the onset
 \(c_s^2 = 0\), since the pressure does not depend on \(\mu_q\) until the
 transition. Immediately after the onset, \(c_s^2\) rises sharply to a
 peak of \(0.41\) near \(\mu_q \approx 400~\mathrm{MeV}\), well above the
-conformal value \(c_s^2 = 1/3\). It then decreases monotonically,
-approaching \(1/3\) from above as \(\mu_q\) increases. On the extended
+conformal value \(c_s^2 = \frac{1}{3}\). It then decreases monotonically,
+approaching \(\frac{1}{3}\) from above as \(\mu_q\) increases. On the extended
 grid, \(c_s^2 = 0.333\) is reached at \(\mu_q \sim 5~\mathrm{GeV}\),
 indistinguishable from the conformal limit at the resolution of the
 scan.
@@ -1990,7 +1939,7 @@ scan.
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_benchmark_cs2.pdf}
 \caption{Speed of sound squared \(c_s^2\) as a function of \(\mu_q\) for
 the common-\(\mu_q\) QMD calculation. The horizontal dashed line marks
-the conformal value \(c_s^2 = 1/3\). The first grid point after the
+the conformal value \(c_s^2 = \frac{1}{3}\). The first grid point after the
 first-order onset is excluded as a finite-difference artifact of the
 discontinuous transition.}
 \label{fig:qmd_benchmark_cs2}
@@ -2236,7 +2185,7 @@ the truncated pressure still \(\sim 14\%\) below the full result at
 
 The speed of sound shows a similar story. In the stable normal phase of
 the truncated model, \(c_s^2\) reaches the conformal value
-\(c_s^2 = 1/3\) by \(\mu_q \approx 500~\mathrm{MeV}\) and remains
+\(c_s^2 = \frac{1}{3}\) by \(\mu_q \approx 500~\mathrm{MeV}\) and remains
 there. It never exceeds the conformal bound. The peak \(c_s^2 \approx
 0.41\) that characterizes the 2SC phase in the full calculation is
 entirely absent.
@@ -2497,11 +2446,11 @@ table consists of \(672\) points satisfying
 The resulting \(P(\varepsilon)\) is shown in
 Fig.~\ref{fig:qmd_stellar_eos}. The speed of sound, shown in
 Fig.~\ref{fig:qmd_stellar_cs2}, rises well above the conformal limit
-\(c_s^2 = 1/3\). The raw finite-difference table contains a narrow
+\(c_s^2 = \frac{1}{3}\). The raw finite-difference table contains a narrow
 maximum \(c_s^2 \approx 0.45\) at \(\mu_q \approx 478~\mathrm{MeV}\);
 the smoothed curve plotted in the figure suppresses this local grid
 spike and peaks at about \(c_s^2 \approx 0.39\). At higher \(\mu_q\)
-it relaxes toward \(1/3\) from above, reaching \(c_s^2 = 0.34\) at
+it relaxes toward \(\frac{1}{3}\) from above, reaching \(c_s^2 = 0.34\) at
 \(\mu_q = 900~\mathrm{MeV}\). The qualitative behavior of \(c_s^2\)
 matches the common-\(\mu_q\) benchmark: the neutral calculation
 retains the same stiffening feature, while the composition degrees of
@@ -2522,7 +2471,7 @@ construction.}
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_stellar_cs2.pdf}
 \caption{Speed of sound squared \(c_s^2\) for the neutral QMD
 equation of state. The horizontal dashed line marks the conformal
-limit \(c_s^2 = 1/3\). The raw finite-difference table has a narrow
+limit \(c_s^2 = \frac{1}{3}\). The raw finite-difference table has a narrow
 peak near \(c_s^2 = 0.45\) at \(\mu_q \approx 478~\mathrm{MeV}\);
 the plotted curve is smoothed to show the robust trend.}
 \label{fig:qmd_stellar_cs2}
@@ -2986,7 +2935,7 @@ Eq.~\eqref{eq:gd_asymptotic_simplified}.}
 
 The effect on the equation of state is reflected most clearly in the
 speed of sound, shown in Fig.~\ref{fig:qmd_cs2_gdelta}. All three
-runs produce a peak above the conformal limit \(c_s^2 = 1/3\), but
+runs produce a peak above the conformal limit \(c_s^2 = \frac{1}{3}\), but
 the peak's location and height shift systematically with
 \(g_\Delta\). In the smoothed curves, Run~A has the highest broad
 peak, \(c_s^2 \approx 0.41\), the baseline reaches
@@ -3007,7 +2956,7 @@ stiffness that drives the larger maximum mass.
 \caption{Speed of sound squared \(c_s^2\) as a function of \(\mu_q\)
 for the three values of \(g_\Delta\), in the common-\(\mu_q\)
 benchmark calculation. The horizontal dashed line marks the
-conformal value \(c_s^2 = 1/3\). Stronger coupling shifts the peak
+conformal value \(c_s^2 = \frac{1}{3}\). Stronger coupling shifts the peak
 to lower \(\mu_q\) and reduces its height, but broadens the region
 of EoS stiffening.}
 \label{fig:qmd_cs2_gdelta}
@@ -3202,7 +3151,7 @@ fully gapped over essentially the entire stellar density range, with
 only the upper few percent of the EoS table marginally entering the
 gapless regime; and the speed of sound retains the characteristic
 peak above the conformal limit followed by a smooth relaxation toward
-\(c_s^2 = 1/3\). Run~D, by contrast, is clean and well-behaved
+\(c_s^2 = \frac{1}{3}\). Run~D, by contrast, is clean and well-behaved
 numerically but observationally disfavored: at
 \(M_{\max} = 1.829~M_\odot\) it falls roughly \(0.18~M_\odot\) below
 the central values of the heaviest measured pulsars, and outside the
@@ -3545,7 +3494,7 @@ discontinuously, and the Maxwell construction applied to the raw
 equation of state always removes a small unstable segment in the
 onset region. The speed of sound exceeds the conformal limit in
 every run, with peaks ranging from \(0.39\) to \(0.44\) in the
-clean cases, and approaches \(c_s^2 = 1/3\) from above at the
+clean cases, and approaches \(c_s^2 = \frac{1}{3}\) from above at the
 upper end of the density grid. The 2SC phase remains conventional
 BCS (fully gapped) over the relevant stellar density range in all
 runs, with only marginal entries into the gapless regime at the
