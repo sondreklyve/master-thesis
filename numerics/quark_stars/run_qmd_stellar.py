@@ -47,7 +47,7 @@ from scipy.signal import savgol_filter
 
 from .constants import MEV4_TO_GEV_FM3
 from .io import ensure_directory, output_directories, save_table
-from .plotting import apply_plot_style, save_figure
+from .plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, apply_plot_style, save_figure
 from .qmd_parameters import QMD_SET_A
 from .qmd_simple import QMDSimpleModel
 from .qmd_stellar import (
@@ -87,7 +87,8 @@ _EOS_ZOOM_EPS_MAX_GEV_FM3 = 0.45
 # because the stellar scan has only 350 points (vs 5000 for the benchmark),
 # so the benchmark window of 81 would span ~150 MeV and over-smooth the onset.
 _EOS_SMOOTH_WINDOW   = 31   # for smoothing P(μ) and ε(μ) before cs² gradient
-_CS2_SMOOTH_WINDOW   = 21   # post-gradient cs² smoothing pass
+_CS2_BENCHMARK_SMOOTH_WINDOW = 51   # matches Section 2 benchmark curves
+_CS2_NEUTRAL_SMOOTH_WINDOW   = 101  # neutral finite-difference curve is noisier
 _RATIO_SMOOTH_WINDOW = 9
 _SMOOTH_POLY = 3
 _CS2_ONSET_THRESH = 295.0   # MeV — apply cs² smoothing only above this
@@ -139,6 +140,34 @@ def _smooth_for_plot(
     if window == 0:
         return arr
     return savgol_filter(arr, window_length=window, polyorder=polyorder)
+
+
+def _prepare_cs2_curve(
+    mu: np.ndarray,
+    cs2: np.ndarray,
+    *,
+    smooth_from_mev: float,
+    min_mu_mev: float | None = None,
+    window: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Filter, trim endpoint artifacts, and smooth cs² like Section 2."""
+    valid = np.isfinite(mu) & np.isfinite(cs2) & (cs2 >= 0.0) & (cs2 <= 1.0)
+    if min_mu_mev is not None:
+        valid &= mu >= min_mu_mev
+    mu_plot = np.asarray(mu, dtype=float)[valid]
+    cs2_plot = np.asarray(cs2, dtype=float)[valid].copy()
+
+    # Match the Section 2 g_delta comparison: drop endpoint-gradient artifacts
+    # before applying the plot-only Savitzky-Golay smoothing pass.
+    if mu_plot.size > 2:
+        mu_plot = mu_plot[:-2]
+        cs2_plot = cs2_plot[:-2]
+
+    post = mu_plot >= smooth_from_mev
+    if post.sum() >= window:
+        cs2_plot[post] = _smooth_for_plot(cs2_plot[post], window)
+
+    return mu_plot, cs2_plot
 
 
 def _set_log_mu_axis(ax, lower: float, upper: float) -> None:
@@ -654,8 +683,8 @@ def _plot_neutrality(
     mu_8 = _smooth_for_plot(mu_8, 21)
 
     fig, ax = plt.subplots()
-    ax.plot(mu, mu_e, lw=LW, color=COLOR_QMD, ls="-",  label=r"$\mu_e$")
-    ax.plot(mu, mu_8, lw=LW, color=COLOR_QMD, ls="--", label=r"$\mu_8$")
+    ax.plot(mu, mu_e, lw=LW, color=COLOR_QMD, label=r"$\mu_e$")
+    ax.plot(mu, mu_8, lw=LW, color=COLOR_BM,  label=r"$\mu_8$")
     ax.axhline(0.0, color="gray", lw=1.0, ls=":")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"chemical potential $(\mathrm{MeV})$")
@@ -700,32 +729,25 @@ def _plot_cs2(
     plots_dir: Path,
     bm_data: dict | None = None,
 ) -> None:
-    """c_s²(μ_q): use pre-computed cs² from stable EoS table, one cosmetic SG pass."""
+    """c_s²(μ_q): use pre-computed cs² from stable EoS table."""
     mu      = np.array([p.mu_q_mev for p in stable_points])
     cs2_raw = np.array([p.cs2      for p in stable_points])
 
-    # Filter to the physical plotted range first; then smooth the post-onset
-    # part only, so isolated finite-difference spikes do not set the visual
-    # scale while the normal branch remains untouched.
-    mask = np.isfinite(cs2_raw) & (cs2_raw >= 0.0) & (cs2_raw <= 1.0)
-    mu_plot  = mu[mask]
-    cs2_plot = cs2_raw[mask].copy()
     smooth_from = max(_CS2_ONSET_THRESH, onset_mev or _CS2_ONSET_THRESH)
-    post = mu_plot >= smooth_from
-    if post.sum() >= _CS2_SMOOTH_WINDOW:
-        cs2_plot[post] = _smooth_for_plot(cs2_plot[post], _CS2_SMOOTH_WINDOW)
-
-    # Drop last 2 points (endpoint gradient artifact).
-    if mu_plot.size > 2:
-        mu_plot  = mu_plot[:-2]
-        cs2_plot = cs2_plot[:-2]
+    mu_plot, cs2_plot = _prepare_cs2_curve(
+        mu,
+        cs2_raw,
+        smooth_from_mev=smooth_from,
+        window=_CS2_NEUTRAL_SMOOTH_WINDOW,
+    )
 
     # Diagnostics
     if cs2_plot.size:
         peak_idx = int(np.nanargmax(cs2_plot))
         peak_val = float(cs2_plot[peak_idx])
         peak_mu  = float(mu_plot[peak_idx])
-        raw_peak = float(np.nanmax(cs2_raw[mask]))
+        raw_mask = np.isfinite(cs2_raw) & (cs2_raw >= 0.0) & (cs2_raw <= 1.0)
+        raw_peak = float(np.nanmax(cs2_raw[raw_mask]))
         print(f"  cs² raw peak: {raw_peak:.4f}  smoothed peak: {peak_val:.4f}  at μ_q={peak_mu:.1f} MeV")
 
     fig, ax = plt.subplots()
@@ -733,33 +755,24 @@ def _plot_cs2(
     if bm_data is not None:
         bm_mu  = bm_data["mu_q_mev"]
         bm_cs2 = bm_data["cs2"]
-        bm_mask = (
-            np.isfinite(bm_cs2) & (bm_cs2 >= 0.0) & (bm_cs2 <= 1.0)
-            & (bm_mu >= _CS2_ONSET_THRESH)
+        bm_mu_p, bm_cs2_p = _prepare_cs2_curve(
+            bm_mu,
+            bm_cs2,
+            smooth_from_mev=CS2_MU_MIN,
+            min_mu_mev=CS2_MU_MIN,
+            window=_CS2_BENCHMARK_SMOOTH_WINDOW,
         )
-        bm_mu_p  = bm_mu[bm_mask]
-        bm_cs2_p = bm_cs2[bm_mask].copy()
-        # SG smoothing post-onset (same as benchmark _plot_cs2)
-        bm_post = bm_mu_p > 290.0
-        if bm_post.sum() >= 51:
-            bm_cs2_p[bm_post] = savgol_filter(
-                bm_cs2_p[bm_post], window_length=51, polyorder=3
-            )
-        # Drop last 2 (endpoint artifact)
-        if bm_mu_p.size > 2:
-            bm_mu_p  = bm_mu_p[:-2]
-            bm_cs2_p = bm_cs2_p[:-2]
         ax.plot(bm_mu_p, bm_cs2_p, lw=LW, color=COLOR_BM,  label="Free QMD")
 
-    ax.plot(mu_plot, cs2_plot, lw=LW, color=COLOR_QMD, label="Neutral QMD")
+    ax.plot(mu_plot, cs2_plot, lw=2.6, color=COLOR_QMD, label="Neutral QMD")
     ax.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5,
-               label=r"Conformal limit $c_s^2 = 1/3$")
+               label=r"Conformal limit $c_s^2 = \frac{1}{3}$")
 
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
     ax.set_title("Speed of sound squared")
-    ax.set_xlim(250.0, 800.0)
-    ax.set_ylim(0.20, 0.45)
+    ax.set_xlim(*CS2_XLIM)
+    ax.set_ylim(*CS2_YLIM)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_cs2.pdf")
 
@@ -798,59 +811,67 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
     Primary comparison: QMD vs gravitationally-bound QM (B_min=0) — matched construction.
     Secondary reference: self-bound QM (B_min=27.8 MeV) — shown for context.
     """
-    COLOR_QM_GB  = plt.cm.viridis(0.85)   # gravitationally-bound QM (primary)
-    COLOR_QM_SB  = plt.cm.viridis(0.50)   # self-bound QM (secondary reference)
+    COLOR_QM_GB  = plt.cm.viridis(0.85)   # gravitationally-bound QM (B=0)
+    COLOR_QM_SB  = plt.cm.viridis(0.50)   # self-bound QM (B^{1/4}=27.8 MeV)
 
     stable   = sequence.stable_mask.astype(bool)
     unstable = ~stable
 
-    fig, ax = plt.subplots(figsize=(8.0, 5.5))
+    fig, ax = plt.subplots(figsize=(7.2, 4.8))
 
-    # --- Gravitationally-bound QM (primary comparison) ---
+    # --- Gravitationally-bound QM (B^{1/4}=0) ---
     gb_file = QM_STELLAR_DIR / "qm_stars_sigma_600_grav_bound.txt"
     if gb_file.exists():
         gb_data = np.loadtxt(gb_file, comments="#")
-        gb_r, gb_m, gb_stable = gb_data[:, 3], gb_data[:, 4], gb_data[:, 5].astype(bool)
-        gb_m_s = gb_m[gb_stable]; gb_r_s = gb_r[gb_stable]
-        # Show M > 0.3 Msun and R < 25 km to avoid unphysical low-mass artifacts
-        phys = (gb_m_s > 0.3) & (gb_r_s < 25.0)
-        ax.plot(gb_r_s[phys], gb_m_s[phys], color=COLOR_QM_GB, lw=1.8, ls="-",
-                label=rf"QM grav.\ bound ($B_{{\min}}=0$)")
-        if phys.any():
-            idx_gb = int(np.argmax(gb_m_s[phys]))
-            ax.plot(gb_r_s[phys][idx_gb], gb_m_s[phys][idx_gb], "o", color=COLOR_QM_GB, ms=6)
+        gb_r, gb_m, gb_stable_mask = gb_data[:, 3], gb_data[:, 4], gb_data[:, 5].astype(bool)
+        gb_unstable_mask = ~gb_stable_mask
+        # Physical filter: avoid unphysical low-mass artifacts (M < 0.3 Msun, R > 25 km)
+        phys = (gb_m > 0.3) & (gb_r < 25.0)
+        phys_s = phys & gb_stable_mask
+        phys_u = phys & gb_unstable_mask
+        if phys_s.any():
+            ax.plot(gb_r[phys_s], gb_m[phys_s], color=COLOR_QM_GB, lw=LW, ls="-",
+                    label=r"QM $B^{1/4}=0$")
+            idx_gb = int(np.argmax(gb_m[phys_s]))
+            ax.plot(gb_r[phys_s][idx_gb], gb_m[phys_s][idx_gb], "o", color=COLOR_QM_GB, ms=6)
+        if phys_u.any():
+            ax.plot(gb_r[phys_u], gb_m[phys_u], color=COLOR_QM_GB, lw=1.4, ls="--")
     else:
         print(f"  Gravitationally-bound QM file not found: {gb_file}")
 
-    # --- Self-bound QM (secondary reference) ---
+    # --- Self-bound QM (B^{1/4}=27.8 MeV) ---
     qm_files = sorted(QM_STELLAR_DIR.glob(f"qm_stars_sigma_{QM_SIGMA_MEV}_Broot_*.txt"))
     qm_sb_file = next((f for f in qm_files if "Broot_28" in f.name), None)
     if qm_sb_file is not None:
         qm_data = np.loadtxt(qm_sb_file, comments="#")
-        qm_r, qm_m, qm_stable = qm_data[:, 3], qm_data[:, 4], qm_data[:, 5].astype(bool)
-        ax.plot(qm_r[qm_stable], qm_m[qm_stable], color=COLOR_QM_SB, lw=1.4, ls="--",
-                label=rf"QM self-bound ($B^{{1/4}}=27.8\,\mathrm{{MeV}}$)")
-        if qm_stable.any():
-            m_qm = qm_m[qm_stable]; r_qm = qm_r[qm_stable]
-            ax.plot(r_qm[int(np.argmax(m_qm))], m_qm.max(), "s", color=COLOR_QM_SB, ms=5)
+        qm_r, qm_m, qm_stable_mask = qm_data[:, 3], qm_data[:, 4], qm_data[:, 5].astype(bool)
+        qm_unstable_mask = ~qm_stable_mask
+        if qm_stable_mask.any():
+            ax.plot(qm_r[qm_stable_mask], qm_m[qm_stable_mask], color=COLOR_QM_SB, lw=LW, ls="-",
+                    label=r"QM $B^{1/4}=27.8\,\mathrm{MeV}$")
+            idx_qm = int(np.argmax(qm_m[qm_stable_mask]))
+            ax.plot(qm_r[qm_stable_mask][idx_qm], qm_m[qm_stable_mask][idx_qm],
+                    "o", color=COLOR_QM_SB, ms=6)
+        if qm_unstable_mask.any():
+            ax.plot(qm_r[qm_unstable_mask], qm_m[qm_unstable_mask],
+                    color=COLOR_QM_SB, lw=1.4, ls="--")
 
     # --- QMD SET A ---
     if stable.any():
         ax.plot(sequence.radius_km[stable], sequence.mass_msun[stable],
                 color=COLOR_QMD, lw=LW, ls="-", label="QMD SET A")
-    if unstable.any():
-        ax.plot(sequence.radius_km[unstable], sequence.mass_msun[unstable],
-                color=COLOR_QMD, lw=1.4, ls="--")
-    if stable.any():
         m_s = sequence.mass_msun[stable]; r_s = sequence.radius_km[stable]
         idx = int(np.argmax(m_s))
         ax.plot(r_s[idx], m_s[idx], "o", color=COLOR_QMD, ms=6)
+    if unstable.any():
+        ax.plot(sequence.radius_km[unstable], sequence.mass_msun[unstable],
+                color=COLOR_QMD, lw=1.4, ls="--")
 
     ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
     ax.set_ylabel(r"Mass $M\;(M_\odot)$")
-    ax.set_title(rf"QMD vs QM ($m_\sigma = {QM_SIGMA_MEV}\,\mathrm{{MeV}}$) mass-radius")
+    ax.set_title(r"Mass--radius comparison at $m_\sigma=600~\mathrm{MeV}$")
     handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles, labels, fontsize=9)
+    ax.legend(handles, labels)
     ax.set_xlim(8.0, 18.0)
     ax.set_ylim(0.5, 2.1)
     save_figure(plots_dir / "qmd_vs_qm_mass_radius.pdf")
@@ -1070,8 +1091,6 @@ def main() -> None:
     _plot_cs2(stable_points, onset_mev, plots_dir, bm_data)
     print("  Saved qmd_stellar_cs2.pdf")
     if sequence is not None:
-        _plot_mass_radius(sequence, plots_dir)
-        print("  Saved qmd_stellar_mass_radius.pdf")
         _plot_qmd_vs_qm(sequence, plots_dir)
         print("  Saved qmd_vs_qm_mass_radius.pdf")
     else:

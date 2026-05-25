@@ -73,13 +73,14 @@ PLOT_MU_MAX = 700.0
 GAP_YMIN = 0.0
 GAP_YMAX = 300.0
 
-# Colors matching qmd_benchmark_condensate_comparison.pdf
+# Colors matching qmd_stellar_condensates.pdf
 _COLOR = plt.cm.viridis(0.15)       # dark purple — full model
-_COLOR_TRUNC = plt.cm.viridis(0.75)  # amber — truncated
-_LABEL_FULL = r"Full ($\Omega_{1,\mathrm{num}}$ included)"
-_LABEL_TRUNC = r"Truncated (no $\Omega_{1,\mathrm{num}}$)"
+_COLOR_TRUNC = plt.cm.viridis(0.6)   # turquoise — truncated
+_LABEL_FULL = "Full"
+_LABEL_TRUNC = "Truncated"
 _LW = 2.2
 _LW_TRUNC = 2.2
+_ONSET_LW = 1.2
 
 # 2SC phase threshold used for onset detection (MeV)
 _GAP_THRESHOLD_MEV = 1.0
@@ -183,18 +184,35 @@ def _save_scan(
     save_table(path, columns, data, metadata)
 
 
-def _load_gap_data(path: Path) -> tuple[np.ndarray, np.ndarray]:
-    """Return (mu_q_mev, gap_mev) arrays from a saved scan file."""
+def _load_condensate_data(path: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return (mu_q_mev, phi_mev, gap_mev) arrays from a saved scan file."""
     data = np.loadtxt(path, comments="#")
-    return data[:, 0], data[:, 3]
+    return data[:, 0], data[:, 1], data[:, 3]
+
+
+def _twosc_window(mu: np.ndarray, gap: np.ndarray) -> tuple[float | None, float | None]:
+    """Return the first and last μ_q values with a non-zero 2SC gap."""
+    idx = np.flatnonzero(gap >= _GAP_THRESHOLD_MEV)
+    if idx.size == 0:
+        return None, None
+    return float(mu[idx[0]]), float(mu[idx[-1]])
+
+
+def _chiral_departure(mu: np.ndarray, phi: np.ndarray) -> float | None:
+    """Return the first μ_q where phi leaves its vacuum value."""
+    phi_vac = float(phi[0])
+    idx = np.flatnonzero(phi < phi_vac - 0.05)
+    if idx.size == 0:
+        return None
+    return float(mu[idx[0]])
 
 
 def _compute_and_save_truncated(
     params_full: QMDParameters,
     trunc_path: Path,
     label: str,
-) -> tuple[np.ndarray, np.ndarray]:
-    """Run truncated scan and save; return (mu_q, gap) arrays."""
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Run truncated scan and save; return (mu_q, phi, gap) arrays."""
     params_trunc = replace(params_full, include_omega_1_num=False)
     mu = np.linspace(MU_MIN_MEV, MU_MAX_MEV, NUM_POINTS)
     print(f"  Running truncated scan for {label} ({NUM_POINTS} pts) ...")
@@ -221,8 +239,9 @@ def _compute_and_save_truncated(
               f"(width {end_mu - onset_mu:.1f} MeV)")
     else:
         print("  No truncated 2SC phase found.")
+    phi = np.array([s.phi_mev for s in states])
     gap = np.array([s.gap_mev for s in states])
-    return mu, gap
+    return mu, phi, gap
 
 
 # ---------------------------------------------------------------------------
@@ -231,7 +250,11 @@ def _compute_and_save_truncated(
 
 
 def _plot_variations(
-    run_data: list[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, str]],
+    run_data: list[tuple[
+        np.ndarray, np.ndarray, float | None, float | None,
+        np.ndarray, np.ndarray, float | None,
+        str,
+    ]],
     plots_dir: Path,
 ) -> None:
     """3x1 panel figure: diquark gap (full vs truncated) for three parameter choices."""
@@ -240,8 +263,18 @@ def _plot_variations(
     if n == 1:
         axes = [axes]
 
-    for i, (mu_f, gap_f, mu_t, gap_t, panel_label) in enumerate(run_data):
+    for i, (
+        mu_f, gap_f, onset_t, end_t,
+        mu_t, gap_t, chiral_t,
+        panel_label,
+    ) in enumerate(run_data):
         ax = axes[i]
+
+        if onset_t is not None and end_t is not None:
+            ax.axvspan(
+                onset_t, end_t,
+                color=_COLOR_TRUNC, alpha=0.16, zorder=0,
+            )
 
         # Plot full model
         mask_f = (mu_f >= PLOT_MU_MIN) & (mu_f <= PLOT_MU_MAX)
@@ -258,6 +291,9 @@ def _plot_variations(
             lw=_LW_TRUNC, color=_COLOR_TRUNC,
             label=_LABEL_TRUNC,
         )
+
+        if chiral_t is not None:
+            ax.axvline(chiral_t, color=_COLOR_TRUNC, ls="--", lw=_ONSET_LW)
 
         ax.set_xlim(PLOT_MU_MIN, PLOT_MU_MAX)
         ax.set_ylim(GAP_YMIN, GAP_YMAX)
@@ -305,7 +341,11 @@ def main() -> None:
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
     TRUNC_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    run_data: list[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, str]] = []
+    run_data: list[tuple[
+        np.ndarray, np.ndarray, float | None, float | None,
+        np.ndarray, np.ndarray, float | None,
+        str,
+    ]] = []
 
     for params_full, full_file, trunc_file, panel_label in RUNS:
         print(f"\n--- {panel_label} ---")
@@ -319,30 +359,36 @@ def main() -> None:
                 f"Full model data not found: {full_path}\n"
                 "Run run_section2_sweep.py first."
             )
-        mu_f, gap_f = _load_gap_data(full_path)
-        onset_full = next(
-            (mu_f[j] for j in range(len(mu_f)) if gap_f[j] >= _GAP_THRESHOLD_MEV),
-            None,
-        )
-        if onset_full is not None:
-            print(f"  Full model 2SC onset: {onset_full:.1f} MeV")
+        mu_f, _, gap_f = _load_condensate_data(full_path)
 
         # Load or compute truncated data
         if trunc_path.exists() and args.plot_only:
-            mu_t, gap_t = _load_gap_data(trunc_path)
+            mu_t, phi_t, gap_t = _load_condensate_data(trunc_path)
             print(f"  Loaded truncated data from {trunc_file}")
         elif trunc_path.exists() and not args.plot_only:
             print(f"  Truncated data already exists ({trunc_file}); loading ...")
-            mu_t, gap_t = _load_gap_data(trunc_path)
+            mu_t, phi_t, gap_t = _load_condensate_data(trunc_path)
         else:
             if args.plot_only:
                 raise FileNotFoundError(
                     f"Truncated data not found: {trunc_path}\n"
                     "Run without --plot-only first."
                 )
-            mu_t, gap_t = _compute_and_save_truncated(params_full, trunc_path, panel_label)
+            mu_t, phi_t, gap_t = _compute_and_save_truncated(params_full, trunc_path, panel_label)
 
-        run_data.append((mu_f, gap_f, mu_t, gap_t, panel_label))
+        onset_trunc, end_trunc = _twosc_window(mu_t, gap_t)
+        chiral_trunc = _chiral_departure(mu_t, phi_t)
+        if onset_trunc is not None and end_trunc is not None:
+            print(f"  Truncated 2SC window: [{onset_trunc:.1f}, {end_trunc:.1f}] MeV "
+                  f"(width {end_trunc - onset_trunc:.1f} MeV)")
+        else:
+            print("  No truncated 2SC phase found.")
+
+        run_data.append((
+            mu_f, gap_f, onset_trunc, end_trunc,
+            mu_t, gap_t, chiral_trunc,
+            panel_label,
+        ))
 
     print("\nGenerating figure ...")
     _plot_variations(run_data, PLOTS_DIR)

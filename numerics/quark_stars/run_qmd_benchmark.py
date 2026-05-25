@@ -65,9 +65,9 @@ PARAMS_TRUNC = replace(QMD_SET_A, include_omega_1_num=False)
 
 # Colours and labels for the two-curve comparison plot
 _COLOR = plt.cm.viridis(0.15)   # full model (dark purple)
-_COLOR_TRUNC = plt.cm.viridis(0.75)  # truncated (amber)
-_LABEL_FULL  = r"Full ($\Omega_{1,\mathrm{num}}$ included)"
-_LABEL_TRUNC = r"Truncated (no $\Omega_{1,\mathrm{num}}$)"
+_COLOR_TRUNC = plt.cm.viridis(0.6)  # truncated, matching qmd_stellar_condensates
+_LABEL_FULL  = "Full"
+_LABEL_TRUNC = "Truncated"
 _LW = 2.2
 _LW_TRUNC = 2.2
 _ONSET_LW = 1.4
@@ -422,14 +422,12 @@ def _plot_condensates(
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.0, 4.8))
 
     ax1.plot(mu, phi_p, lw=_LW, color=_COLOR)
-    _mark_onset(ax1, onset_mev, label=True)
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
     ax1.set_title("Chiral condensate")
     ax1.set_xlim(200.0, 700.0)
 
     ax2.plot(mu, gap_p, lw=_LW, color=_COLOR)
-    _mark_onset(ax2, onset_mev)
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
     ax2.set_title("Diquark gap")
@@ -469,11 +467,7 @@ def _plot_condensate_comparison(
     if trunc_2sc_start is not None and trunc_2sc_end is not None:
         for ax in (ax1, ax2):
             ax.axvspan(trunc_2sc_start, trunc_2sc_end,
-                       color="lightgreen", alpha=0.25, zorder=0, label="2SC window")
-
-    if onset_f is not None:
-        for ax in (ax1, ax2):
-            ax.axvline(onset_f, color=_COLOR, ls="--", lw=1.2)
+                       color=_COLOR_TRUNC, alpha=0.16, zorder=0)
 
     if chiral_onset_t is not None:
         for ax in (ax1, ax2):
@@ -505,7 +499,6 @@ def _plot_pressure(
     pres_g = pressures[mask] * MEV4_TO_GEV_FM3
     fig, ax = plt.subplots()
     ax.plot(mu[mask], pres_g, lw=_LW, color=_COLOR)
-    _mark_onset(ax, onset_mev, label=True, y_axes=0.97)
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
     ax.set_title("Pressure")
@@ -549,34 +542,32 @@ def _plot_eos(
         ratio_mu = mu[mask]
         ratio_p = pressures[mask]
         ratio_eps = eps[mask]
-        ratio_title = "Benchmark-range conformal ratio"
+        ratio_title = "Benchmark-range conformal convergence"
     else:
         ratio_mu, ratio_p, ratio_eps, _ = asymptotic
         ratio_title = "Conformal convergence"
     with np.errstate(divide="ignore", invalid="ignore"):
-        ratio = ratio_eps / ratio_p
+        delta = (ratio_eps - 3.0 * ratio_p) / ratio_p
     ratio_mask = (
-        np.isfinite(ratio)
+        np.isfinite(delta)
         & np.isfinite(ratio_mu)
         & (ratio_p > 0.0)
         & (ratio_mu >= 450.0)
-        & (ratio > 0.0)
-        & (ratio < 6.0)
+        & (delta > -0.35)
+        & (delta < 0.35)
     )
     ratio_x = ratio_mu[ratio_mask]
-    ratio_y_raw = ratio[ratio_mask]
+    ratio_y_raw = delta[ratio_mask]
     ratio_y = _smooth_for_plot(ratio_y_raw, _RATIO_SMOOTH_WINDOW)
     ax_ratio.plot(ratio_x, ratio_y, lw=_LW, color=_COLOR)
-    ax_ratio.axhline(3.0, color="gray", ls="--", lw=1.5,
-                     label=r"$\varepsilon/P=3$")
+    ax_ratio.axhline(0.0, color="gray", ls="--", lw=1.5)
     ax_ratio.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
-    ax_ratio.set_ylabel(r"$\varepsilon/P$")
+    ax_ratio.set_ylabel(r"$\delta$")
     ax_ratio.set_title(ratio_title)
     if ratio_x.size:
         upper = 6000.0 if asymptotic is not None else float(ratio_x[-1])
         _set_log_mu_axis(ax_ratio, float(ratio_x[0]), upper)
-    ax_ratio.set_ylim(2.65, 3.35)
-    ax_ratio.legend(fontsize=8)
+    ax_ratio.set_ylim(-0.35, 0.35)
     save_figure(plots_dir / "qmd_benchmark_eos.pdf")
 
 
@@ -659,9 +650,8 @@ _CS2_SG_POLY   = 3    # polynomial order
 _CS2_ONSET_THRESH = 290.0  # MeV — smoothing is applied only above this
 
 _COND_SMOOTH_THRESH = 280.0  # MeV — smooth condensates above this (preserves onset transition)
-_CS2_PLOT_MU_MIN_MEV = 200.0
-_CS2_PLOT_MU_MAX_MEV = 1500.0
-_CS2_BENCHMARK_HANDOFF_MEV = 800.0
+_CS2_PLOT_MU_MIN_MEV = 250.0
+_CS2_PLOT_MU_MAX_MEV = 800.0
 
 
 def _plot_cs2(
@@ -702,32 +692,12 @@ def _plot_cs2(
         )
 
     fig, ax = plt.subplots()
-    keep_benchmark = mu_plot <= _CS2_BENCHMARK_HANDOFF_MEV
+    keep_benchmark = mu_plot <= _CS2_PLOT_MU_MAX_MEV
     mu_plot = mu_plot[keep_benchmark]
     cs2_smoothed = cs2_smoothed[keep_benchmark]
     ax.plot(mu_plot, cs2_smoothed, lw=_LW, color=_COLOR)
-    if asymptotic is not None and mu_plot.size:
-        asym_mu, _, _, asym_cs2 = asymptotic
-        extend = (
-            np.isfinite(asym_mu)
-            & np.isfinite(asym_cs2)
-            & (asym_mu > mu_plot[-1])
-            & (asym_mu <= _CS2_PLOT_MU_MAX_MEV)
-            & (asym_cs2 >= 0.0)
-            & (asym_cs2 <= 1.0)
-        )
-        if extend.any():
-            ext_mu = np.concatenate(([mu_plot[-1]], asym_mu[extend]))
-            ext_cs2 = np.concatenate(([cs2_smoothed[-1]], asym_cs2[extend]))
-            ax.plot(
-                ext_mu,
-                ext_cs2,
-                lw=_LW,
-                color=_COLOR,
-            )
-    _mark_onset(ax, onset_mev, label=True, y_axes=0.95)
     ax.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5,
-               label=r"Conformal limit $c_s^2 = 1/3$")
+               label=r"Conformal limit $c_s^2 = \frac{1}{3}$")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
     ax.set_title("Speed of sound squared")

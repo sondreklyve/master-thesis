@@ -49,7 +49,7 @@ from scipy.signal import savgol_filter
 
 from .constants import MEV4_TO_GEV_FM3
 from .io import ensure_directory
-from .plotting import apply_plot_style, save_figure
+from .plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, apply_plot_style, save_figure
 from .qmd_parameters import QMD_SET_A, QMDParameters
 from .qmd_simple import QMDSimpleModel
 from .qmd_stellar import (
@@ -967,7 +967,7 @@ def _plot_cs2_gdelta(
     def _draw_cs2(mu, cs2, color, lw, label):
         valid = (
             np.isfinite(mu) & np.isfinite(cs2)
-            & (mu >= 295.0) & (cs2 >= 0.0) & (cs2 <= 1.0)
+            & (mu >= CS2_MU_MIN) & (cs2 >= 0.0) & (cs2 <= 1.0)
         )
         mu_p  = mu[valid][:-2]
         cs2_p = cs2[valid].copy()[:-2]
@@ -985,12 +985,12 @@ def _plot_cs2_gdelta(
             _draw_cs2(res.bm_mu_q, res.bm_cs2, cfg.color, LW_VARIATION, cfg.label)
 
     ax.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5,
-               label=r"Conformal limit $c_s^2=1/3$")
+               label=r"Conformal limit $c_s^2=\frac{1}{3}$")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
     ax.set_title(r"Speed of sound, $g_\Delta$ variation")
-    ax.set_xlim(250.0, _CS2_X_MAX_MEV)
-    ax.set_ylim(0.15, 0.55)
+    ax.set_xlim(*CS2_XLIM)
+    ax.set_ylim(*CS2_YLIM)
     ax.legend(fontsize=9)
     save_figure(PLOTS_DIR / "section2_cs2_gdelta.pdf")
     print("  Saved section2_cs2_gdelta.pdf")

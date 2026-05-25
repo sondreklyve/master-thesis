@@ -868,7 +868,7 @@ to large radii. This distinction follows directly from the surface
 condition produced by each EoS: a first-order transition leaves a
 finite density jump at the stellar surface, which provides the
 self-binding, whereas a continuous crossover gives a smooth approach
-to vanishing density and therefore gravitational binding.
+to vanishing density and therefore gravitational binding \cite{Alcock1986}.
 
 The maximum masses follow the expected ordering with sigma mass:
 \(M_{\max} = 2.45~M_\odot\) at \(R = 13.7~\mathrm{km}\) for
@@ -1541,23 +1541,22 @@ including the finite residual integral \(\Omega_{1,\mathrm{num}}\), whose
 treatment is part of the numerical implementation. The next section uses
 this framework to construct the equation of state for the 2SC phase.
 
-\section{Numerical QMD equation of state with 2SC pairing}
+\section{QMD quark stars with 2SC pairing}
 \label{sec:qmd_section1}
 
-The Quark--Meson--Diquark model defined above is now used as a
-numerical equation of state. The additional mean field
-\(\Delta_0\) makes the calculation more involved than the unpaired
-Quark--Meson case, because the physical state is obtained by
-minimizing the thermodynamic potential in the coupled
-\((\phi_0,\Delta_0)\) plane and, for stellar matter, by imposing
-electric and color neutrality at the same time. This section therefore
-builds the QMD result in stages: first the parameter set and numerical
-conventions are fixed, then a common-chemical-potential calculation is
-used as a controlled benchmark, and finally the neutral stellar
-equation of state is passed to the TOV equations. Unless explicitly
-stated otherwise, all results use the full one-loop potential from
-Appendix~\ref{app:qmd_potential}, including the finite residual
-integral \(\Omega_{1,\mathrm{num}}\).
+The Quark--Meson--Diquark model defined above is now applied to the
+construction of 2SC quark-star configurations. The additional mean field
+\(\Delta_0\) makes the calculation more involved than in the unpaired
+case, because the physical state is obtained by minimizing the
+thermodynamic potential in the coupled \((\phi_0,\Delta_0)\) plane and,
+for stellar matter, by imposing electric and color charge neutrality at the
+same time. This section therefore builds the QMD result in stages: first
+the parameter set and numerical conventions are fixed, then a
+common-chemical-potential calculation is used as a controlled benchmark,
+and finally the neutral stellar equation of state is used as input to
+the TOV equations. Unless explicitly stated otherwise, all results use
+the full one-loop potential from Appendix~\ref{app:qmd_potential},
+including the finite residual integral \(\Omega_{1,\mathrm{num}}\).
 
 \subsection*{Numerical setup and parameter choices}
 \label{subsec:qmd_setup}
@@ -1565,19 +1564,18 @@ integral \(\Omega_{1,\mathrm{num}}\).
 The thermodynamic potential depends on the chiral condensate
 \(\phi_0\), the diquark condensate \(\Delta_0\), and the relevant
 chemical potentials. The model parameters are separated into a vacuum
-sector, which is fixed by on-shell matching, and a diquark sector,
-which is not constrained by vacuum observables and must therefore be
-chosen phenomenologically.
+sector, fixed by matching to vacuum observables, and a diquark sector,
+which is not fixed by these observables and must therefore be specified
+as an additional model input.
 
 The Quark--Meson part of the Lagrangian contains four parameters:
 \(m^2\), \(\lambda\), \(g\), and \(h\). These are fixed by matching to
 the physical pion mass \(m_\pi\), the pion decay constant \(f_\pi\),
 the constituent quark mass \(M_q\), and the sigma meson mass
-\(m_\sigma\). We use the same on-shell scheme adopted in
-Ref.~\cite{Andersen2024}, in which the tree-level mass relations are
-required to hold order by order in the loop expansion. The vacuum
-expectation value of the sigma field is identified with the pion decay
-constant, \(\phi_0 = f_\pi\).
+\(m_\sigma\), as discussed in
+Sec.~\ref{sec:qm_renormalization}. The vacuum expectation value of the
+sigma field is identified with the pion decay constant,
+\(\phi_0 = f_\pi\).
 
 The physical inputs are
 \begin{align}
@@ -1586,110 +1584,105 @@ f_\pi &= 93~\mathrm{MeV}, \\
 M_q &= 300~\mathrm{MeV}, &
 m_\sigma &= 600~\mathrm{MeV}.
 \end{align}
-These values are physical observables; they are identical to those used
-in Ref.~\cite{Andersen2025}. They differ from the chiral-limit choice
-\(m_\pi = 0\), \(m_\sigma = 500~\mathrm{MeV}\) used in the original
-QMD paper~\cite{Andersen2024}, where the chiral limit was taken to
-simplify the renormalization-group analysis. The analytic structure of
-the one-loop potential is unchanged: the loop functions \(F(p^2)\) and
-\(G(p^2)\) defined in Appendix~\ref{app:qmd_potential} simply evaluate
-to their respective limits.
+These values are identical to those used in Ref.~\cite{Andersen2025}.
+They differ from the chiral-limit choice \(m_\pi = 0\),
+\(m_\sigma = 500~\mathrm{MeV}\) used in the original QMD
+paper~\cite{Andersen2024}, where the chiral limit was used to simplify
+the renormalization-group analysis. In the present calculation the same
+renormalized one-loop QMD potential is used, but the loop functions
+\(F(p^2)\) and \(F'(p^2)\), defined in
+Appendix~\ref{app:renormalization}, are evaluated with the physical
+pion mass.
 
-The on-shell matching conditions yield
+The matching conditions yield
 \begin{align}
 g &= \frac{M_q}{f_\pi} \approx 3.23, &
 \lambda_0 &= \frac{3(m_\sigma^2 - m_\pi^2)}{f_\pi^2} \approx 118.1, \\
 h &= f_\pi\, m_\pi^2 \approx 1.82\times 10^6~\mathrm{MeV}^3, &
 m^2 &= \frac{1}{2}(3m_\pi^2 - m_\sigma^2) \approx -(388~\mathrm{MeV})^2.
 \end{align}
-The negative value of \(m^2\) confirms spontaneous chiral symmetry
-breaking in the vacuum. The parameter \(h\) encodes the explicit
-breaking and obeys the partially conserved axial current relation
-\(h = f_\pi m_\pi^2\).
+The negative value of \(m^2\) reflects spontaneous chiral symmetry
+breaking in the vacuum. The parameter \(h\) encodes explicit chiral
+symmetry breaking and obeys the partially conserved axial current
+relation \(h = f_\pi m_\pi^2\).
 
-The renormalization scale is fixed at the vacuum value of the
-constituent quark mass, \(\Lambda_0 = M_q\). At the vacuum field value
-\(\phi_0 = f_\pi\), the arguments of the logarithms in the one-loop
-potential reduce to \(\log(M_q^2/g^2\phi_0^2) = 0\), so that the vacuum
-state is free of logarithmic corrections by construction. This is the
-on-shell condition. With this choice, \(g\) and \(h\) do not run with
-the renormalization scale, and the remaining parameters run according
-to the renormalization group equations derived in
-Ref.~\cite{Andersen2024} and reproduced in
-Appendix~\ref{app:qmd_potential}.
+The renormalization prescription is the same as in the Quark--Meson
+calculation of Sec.~\ref{sec:qm_renormalization}. The reference scale is
+chosen according to Eq.~\eqref{eq:qm_lambda0_condition}, so that the
+running \(\overline{\mathrm{MS}}\) parameters reproduce the vacuum
+observables listed above at the matching scale. The additional
+scale-dependent parameters in the diquark sector are treated following
+Ref.~\cite{Andersen2024}. The resulting renormalized QMD thermodynamic
+potential is collected in Appendix~\ref{app:qmd_potential}.
 
 The diquark sector contains four parameters that cannot be fixed by
 vacuum physics: \(m_\Delta\), \(g_\Delta\), \(\lambda_3\), and
-\(\lambda_\Delta\). For the main results in this section we adopt a
-single parameter set, hereafter referred to as QMD~SET~A:
+\(\lambda_\Delta\). For the main results in this section we adopt the
+baseline parameter set
 \begin{align}
 m_\Delta &= 500~\mathrm{MeV}, &
 g_\Delta &= 2g, \\
 \lambda_3 &= \lambda_0, &
 \lambda_\Delta &= \lambda_0/4 .
 \end{align}
-This is the same diquark sector used in Set~1 of
-Ref.~\cite{Andersen2025}, which makes our results directly comparable
-with their analysis. The sensitivity of the model to these choices is
-studied systematically in Sec.~\ref{sec:qmd_parameter_sensitivity}.
+This parameter choice corresponds to Set~1 of
+Ref.~\cite{Andersen2025}, making the present calculation directly
+comparable with their analysis. In the following we refer to this
+choice as QMD~SET~A.
 
-Each of these parameters has a distinct physical role. The bare diquark
-mass \(m_\Delta\) determines the chemical potential at which the 2SC
-condensate first becomes energetically favorable. At tree level, the
-onset occurs at \(\bar{\mu} = m_\Delta/2\), so smaller \(m_\Delta\)
-leads to earlier onset. The Yukawa coupling \(g_\Delta\) sets the
-magnitude of the superconducting gap \(g_\Delta \Delta_0\) and
-controls how strongly diquark pairing back-reacts on the chiral
-condensate. The cross-coupling \(\lambda_3\) links the chiral and
-diquark sectors at tree level; it shifts the onset and influences how
-the chiral condensate responds to the formation of \(\Delta_0\). The
-diquark self-coupling \(\lambda_\Delta\) stabilizes the potential
-against unbounded growth of \(\Delta_0\) and sets the saturation value
-of the gap in the deep 2SC phase.
+Each of these parameters has a distinct physical role. The diquark mass
+parameter \(m_\Delta\) determines the chemical potential at which the
+2SC condensate first becomes energetically favorable. At tree level,
+the onset occurs at \(\bar{\mu} = m_\Delta/2\), so smaller
+\(m_\Delta\) leads to earlier onset. The Yukawa coupling
+\(g_\Delta\) sets the magnitude of the superconducting gap
+\(g_\Delta \Delta_0\) and controls how strongly diquark pairing
+back-reacts on the chiral condensate. The cross-coupling
+\(\lambda_3\) links the chiral and diquark sectors at tree level; it
+shifts the onset and influences how the chiral condensate responds to
+the formation of \(\Delta_0\). The diquark self-coupling
+\(\lambda_\Delta\) stabilizes the potential against unbounded growth
+of \(\Delta_0\) and sets the saturation value of the gap in the deep
+2SC phase.
 
 One convention issue is worth making explicit. The one-loop potential
-contains a term proportional to
-\(\phi_0^2 \Delta_0^2\) with a logarithmic prefactor, arising from the
-mixing of chiral and diquark fluctuations. In our notation this is
+contains a term proportional to \(\phi_0^2\Delta_0^2\) with a
+logarithmic prefactor, arising from the coupling between the chiral and
+diquark sectors. With the field normalization and coupling conventions
+used here, this contribution is
 \begin{equation}
 \Omega \supset
-\frac{c\, g_0^2 g_{\Delta,0}^2}{(4\pi)^2}
+\frac{4\, g_0^2 g_{\Delta,0}^2}{(4\pi)^2}
 \left[
 \log\!\left(\frac{M_q^2}{g_0^2\phi_0^2 + g_{\Delta,0}^2\Delta_0^2}\right)
 - F(m_\pi^2) - m_\pi^2 F'(m_\pi^2)
 \right]
-\phi_0^2 \Delta_0^2 ,
+\phi_0^2 \Delta_0^2 .
 \label{eq:mixed_log_term}
 \end{equation}
-where the coefficient \(c\) deserves brief comment. Equation~(36) of
-Ref.~\cite{Andersen2024} gives \(c = 4\), while Eq.~(29) of
-Ref.~\cite{Andersen2025} gives \(c = 8\); the discrepancy arises from
-a different convention in the diquark loop counting. We use \(c = 4\),
-consistent with the field normalization of Ref.~\cite{Andersen2024}
-and the explicit derivation in Appendix~\ref{app:qmd_potential}. The
-choice has no practical consequence for any result in this chapter:
-the mixed term is proportional to \(\phi_0^2 \Delta_0^2\) and therefore
-vanishes as chiral symmetry is restored inside the 2SC phase, where
-\(\phi_0 \ll f_\pi\). Numerical comparison confirms that switching
-\(c = 4 \to 8\) with \(g_\Delta\) held fixed shifts the gap by less than
-\(0.05~\mathrm{MeV}\) at all densities relevant to compact stars.
+This follows the convention of Ref.~\cite{Andersen2024}. The related
+expression in Ref.~\cite{Andersen2025} is written with a different
+normalization convention for the same contribution. Throughout this
+chapter, the convention above is used consistently.
 
 At fixed chemical potentials, the equilibrium state is obtained by
 selecting the global minimum of the thermodynamic potential with
-respect to \((\phi_0, \Delta_0)\). The chiral condensate determines the
+respect to \((\phi_0,\Delta_0)\). The chiral condensate determines the
 constituent quark mass \(M_q = g\phi_0\), and the diquark condensate
-determines the superconducting gap scale \(g_\Delta \Delta_0\). The
-residual integral \(\Omega_{1,\mathrm{num}}\) is evaluated numerically
-with adaptive quadrature, using a momentum cutoff
-\(\Lambda_\mathrm{res} = 3000~\mathrm{MeV}\) that lies well above the
-relevant physical scales and is sufficient for convergence of the
-integrand.
+determines the superconducting gap scale \(g_\Delta\Delta_0\). The
+residual integral \(\Omega_{1,\mathrm{num}}\) is formally an integral
+over momenta up to infinity. In the numerical implementation it is
+evaluated with adaptive quadrature up to
+\(\Lambda_\mathrm{res}=3000~\mathrm{MeV}\), which is chosen large
+enough that increasing the upper limit does not change the results at
+the quoted precision. This cutoff is therefore a numerical convergence
+parameter, not a physical cutoff of the model.
 
-The thermodynamic potential is minimized using a bounded
-quasi-Newton method, with multiple starting points chosen to span the
-\((\phi_0, \Delta_0)\) plane in order to avoid local minima. The
-solution at one value of \(\mu_q\) is used as the initial guess for the
-neighboring grid point, providing a continuation procedure that is
+The thermodynamic potential is minimized using a bounded numerical
+minimization routine, with multiple starting points chosen to span the
+\((\phi_0,\Delta_0)\) plane in order to avoid selecting a local minimum.
+The solution at one value of \(\mu_q\) is used as the initial guess for
+the neighboring grid point, providing a continuation procedure that is
 particularly useful near first-order transitions where the global
 minimum can move discontinuously.
 
@@ -1711,87 +1704,47 @@ and the mismatch between the paired Fermi surfaces vanishes,
 \delta\mu=0.
 \end{equation}
 This limit is not the physical compact-star case, since electric and
-color neutrality are not imposed and the paired up and down quarks share
+color charge neutrality are not imposed and the paired up and down quarks share
 identical Fermi momenta. Its purpose is to validate the coupled
-\((\phi_0,\Delta_0)\) minimizer in the simplest possible setting and to
-establish the qualitative features of the 2SC phase in this model before
-neutrality, the Fermi-surface mismatch, and the electron contribution are
-added.
+\((\phi_0,\Delta_0)\) minimization in the simplest possible setting and
+to establish the qualitative features of the 2SC phase before neutrality,
+Fermi-surface mismatch, and electrons are added.
 
-At each value of \(\mu_q\), the thermodynamic potential is first
-evaluated at its global minimum,
-\begin{equation}
-\Omega_{\min}(\mu_q)
-=
-\min_{\phi_0,\Delta_0}
-\Omega_{0+1}(\phi_0,\Delta_0;\mu_q).
-\end{equation}
-After this minimization, \(\Omega_{\min}\) is a function only of the
-external parameter \(\mu_q\). The pressure is obtained by subtracting the
-corresponding vacuum reference,
-\begin{equation}
-P(\mu_q)
-=
--\left[\Omega_{\min}(\mu_q)-\Omega_{\mathrm{vac}}\right],
-\qquad
-\Omega_{\mathrm{vac}}
-=
-\Omega_{\min}(\mu_q=0).
-\end{equation}
-This subtraction fixes \(P(0)=0\) and corresponds to a bag constant
-\(B_0 = -\Omega_{\mathrm{vac}}\) with \(B_0^{1/4}\approx 155.3~\mathrm{MeV}\)
-for QMD~SET~A. This is a property of the model vacuum, not an
-independently tunable phenomenological parameter.
-
-The quark number density follows from
-\begin{equation}
-n_q=\frac{dP}{d\mu_q},
-\end{equation}
-and the energy density from the zero-temperature thermodynamic identity
-\begin{equation}
-\varepsilon = -P + \mu_q\, n_q.
-\end{equation}
-The speed of sound squared is computed parametrically,
-\begin{equation}
-c_s^2 = \frac{dP}{d\varepsilon} = \frac{dP/d\mu_q}{d\varepsilon/d\mu_q}.
-\end{equation}
-In practice the derivatives are evaluated by finite differences on a
-uniform \(\mu_q\) grid of 5000 points covering
-\(\mu_q \in [0,900]~\mathrm{MeV}\), giving a step size of approximately
-\(0.18~\mathrm{MeV}\).
+At each value of \(\mu_q\), the thermodynamic potential is minimized
+with respect to both condensates. The pressure is then obtained from the
+value of the potential at the global minimum, with the vacuum value
+subtracted so that \(P(0)=0\). This subtraction corresponds to a model
+vacuum contribution \(B_0=-\Omega_{\mathrm{vac}}\), with
+\(B_0^{1/4}\approx 155.3~\mathrm{MeV}\) for QMD~SET~A. It is fixed by
+the vacuum normalization and is not an independently tunable bag
+constant. The number density, energy density, and speed of sound are
+then computed from the same zero-temperature thermodynamic relations used
+in the previous quark-matter calculations.
 
 The resulting condensates are shown in
 Fig.~\ref{fig:qmd_benchmark_condensates}. At low chemical potential the
-global minimum has \(\Delta_0=0\) and the chiral condensate sits at its
-vacuum value \(\phi_0=f_\pi\). At \(\mu_q = 266.5~\mathrm{MeV}\) the
-global minimum jumps discontinuously to a solution with nonzero
-\(\Delta_0\), signaling a first-order transition into the 2SC phase.
-
-The character of this transition deserves comment. At the onset itself
-the chiral condensate barely moves: \(\phi_0\) drops only from
-\(93.0~\mathrm{MeV}\) to \(92.7~\mathrm{MeV}\) across the transition,
-while the gap jumps from zero to \(g_\Delta\Delta_0 \approx
-14~\mathrm{MeV}\). The transition is therefore driven by the diquark
-sector. Once inside the 2SC phase, the chiral condensate falls
-continuously and rapidly: \(\phi_0 \to 5.9~\mathrm{MeV}\) at
-\(\mu_q=400~\mathrm{MeV}\) and \(\phi_0 \to 0.7~\mathrm{MeV}\) at
-\(\mu_q=900~\mathrm{MeV}\). Chiral restoration thus happens within the
-2SC phase, not at the boundary.
+global minimum has \(\Delta_0=0\), while the chiral condensate remains at
+its vacuum value \(\phi_0=f_\pi\). At
+\(\mu_q = 266.5~\mathrm{MeV}\), the global minimum changes to a solution
+with nonzero \(\Delta_0\), signaling a first-order transition into the
+2SC phase. The discontinuity is small on the scale of the figure: across
+the transition, \(\phi_0\) changes only slightly, while the gap jumps
+from zero to \(g_\Delta\Delta_0\approx 14~\mathrm{MeV}\). The more
+visible effect occurs after the onset, where the chiral condensate
+decreases rapidly inside the 2SC phase while the superconducting gap
+continues to grow.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/quark_stars/qmd_benchmark_condensates.pdf}
-\caption{Chiral condensate \(\phi_0\) (left) and superconducting gap
-\(g_\Delta\Delta_0\) (right) as functions of the common quark chemical
-potential \(\mu_q\) for QMD~SET~A with the full one-loop potential. The
-vertical dashed line marks the first-order onset at
-\(\mu_q=266.5~\mathrm{MeV}\). The horizontal dashed line on the right
-panel indicates the analytic asymptotic gap from
-Eq.~\eqref{eq:qmd_asymptotic_gap}.}
+\caption{Left panel: chiral condensate \(\phi_0\) as a function of the common
+quark chemical potential \(\mu_q\) for QMD~SET~A. Right panel:
+superconducting gap \(g_\Delta\Delta_0\). The 2SC onset occurs at
+\(\mu_q=266.5~\mathrm{MeV}\).}
 \label{fig:qmd_benchmark_condensates}
 \end{figure}
 
-At large \(\mu_q\) the gap saturates toward a constant value. This
+At large \(\mu_q\), the gap saturates toward a constant value. This
 asymptotic behavior was derived in Ref.~\cite{Andersen2024} from the gap
 equation in the limit \(\bar{\mu} \gg \Delta_0\), with the result
 \begin{equation}
@@ -1802,39 +1755,44 @@ equation in the limit \(\bar{\mu} \gg \Delta_0\), with the result
 \frac{(4\pi)^2}{4 g_\Delta^2}
 - 1
 - F(m_\pi^2) - m_\pi^2 F'(m_\pi^2)
-\right],
+\right].
 \label{eq:qmd_asymptotic_gap}
 \end{equation}
-which for QMD~SET~A gives \(g_\Delta\bar{\Delta}_0 \approx
-281.6~\mathrm{MeV}\) using physical pion masses. The numerical
-calculation gives \(g_\Delta\Delta_0 = 252~\mathrm{MeV}\) at the upper
-end of our grid, \(\mu_q = 900~\mathrm{MeV}\). The gap has not yet
-saturated at this chemical potential; pushing the calculation to
-\(\mu_q = 6~\mathrm{GeV}\) on an extended logarithmic grid yields a gap
-of \(267~\mathrm{MeV}\), within ten percent of the analytic limit. The
-analytic formula thus serves as a useful cross-check on the asymptotic
-behavior of the numerical solution.
-
-It is worth comparing the onset to the tree-level estimate. At tree level
-the 2SC onset occurs at \(\bar{\mu} = m_\Delta/2 = 250~\mathrm{MeV}\) for
-SET~A. The full one-loop result of \(266.5~\mathrm{MeV}\) lies about
-\(7\%\) above this, reflecting the additional one-loop contributions to
-the diquark sector.
+For QMD~SET~A this gives
+\(g_\Delta\bar{\Delta}_0 \approx 281.6~\mathrm{MeV}\) with physical pion
+masses. The numerical calculation gives
+\(g_\Delta\Delta_0 = 252~\mathrm{MeV}\) at
+\(\mu_q = 900~\mathrm{MeV}\), so the gap has not fully saturated on the
+density range relevant for the stellar calculations. Extending the
+calculation to much larger chemical potentials gives a gradual approach
+toward the analytic limit, providing a useful cross-check of the
+numerical minimization.
 
 The pressure as a function of \(\mu_q\) is shown in
-Fig.~\ref{fig:qmd_benchmark_pressure}. The pressure vanishes at the
-onset and rises monotonically into the 2SC phase. The corresponding
-equation of state is shown in Fig.~\ref{fig:qmd_benchmark_eos}: at low
-pressure the relation \(\varepsilon(P)\) is steep, reflecting the
-relatively soft EoS just above the transition, while at large \(\mu_q\)
-the ratio \(\varepsilon/P\) approaches the conformal value \(3\).
+Fig.~\ref{fig:qmd_benchmark_pressure}. Below the transition, the pressure
+is zero after the vacuum subtraction, reflecting the Silver-Blaze
+property of the vacuum. This term refers to the fact that, at
+zero temperature, physical observables remain independent of the chemical
+potential until the onset threshold is reached, even though the chemical
+potential appears explicitly in the microscopic formulation. The name is
+borrowed from Sherlock Holmes' observation in \emph{The Adventure of
+Silver Blaze}: the important clue was that the dog did not bark. Here,
+the analogous point is that nothing happens until the system can lower
+its energy by forming a finite-density state~\cite{Cohen2003SilverBlaze}.
+At the 2SC onset, the pressure begins to increase and then rises
+monotonically with \(\mu_q\). The corresponding equation of state is
+shown in Fig.~\ref{fig:qmd_benchmark_eos}. The left panel shows
+\(\varepsilon(P)\) in the low-pressure region, while the right panel
+shows the dimensionless trace-anomaly measure
+\(\delta=(\varepsilon-3P)/P\), which approaches zero in the conformal
+limit.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_benchmark_pressure.pdf}
 \caption{Pressure \(P\) as a function of the common quark chemical
-potential \(\mu_q\) for QMD~SET~A with the full one-loop potential. The
-vertical dashed line marks the 2SC onset at
+potential \(\mu_q\) for QMD~SET~A. The pressure is zero below the 2SC
+onset and rises monotonically after the transition at
 \(\mu_q=266.5~\mathrm{MeV}\).}
 \label{fig:qmd_benchmark_pressure}
 \end{figure}
@@ -1842,336 +1800,260 @@ vertical dashed line marks the 2SC onset at
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/quark_stars/qmd_benchmark_eos.pdf}
-\caption{Left: equation of state \(P(\varepsilon)\) for the
-common-\(\mu_q\) QMD calculation in the low-pressure region. Right:
-ratio \(\varepsilon/P\) as a function of \(\mu_q\) on a logarithmic
-scale, computed on an extended grid up to \(6~\mathrm{GeV}\). The dashed
-line indicates the conformal value \(\varepsilon/P=3\).}
+\caption{Left panel: equation of state \(\varepsilon(P)\) for the
+common-\(\mu_q\) QMD calculation in the low-pressure region. Right panel:
+trace-anomaly measure \(\delta=\frac{\varepsilon-3P}{P}\) as a function of
+\(\mu_q\) on an extended grid.}
 \label{fig:qmd_benchmark_eos}
 \end{figure}
 
 The speed of sound squared is shown in
-Fig.~\ref{fig:qmd_benchmark_cs2}. In the normal phase below the onset
-\(c_s^2 = 0\), since the pressure does not depend on \(\mu_q\) until the
-transition. Immediately after the onset, \(c_s^2\) rises sharply to a
-peak of \(0.41\) near \(\mu_q \approx 400~\mathrm{MeV}\), well above the
-conformal value \(c_s^2 = \frac{1}{3}\). It then decreases monotonically,
-approaching \(\frac{1}{3}\) from above as \(\mu_q\) increases. On the extended
-grid, \(c_s^2 = 0.333\) is reached at \(\mu_q \sim 5~\mathrm{GeV}\),
-indistinguishable from the conformal limit at the resolution of the
-scan.
+Fig.~\ref{fig:qmd_benchmark_cs2}. In the vacuum region below the onset,
+the pressure is independent of \(\mu_q\), so \(c_s^2=0\). After the
+transition, \(c_s^2\) rises sharply, reaches a peak above the conformal
+limit, and then decreases toward the conformal limit from above at large
+\(\mu_q\).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_benchmark_cs2.pdf}
 \caption{Speed of sound squared \(c_s^2\) as a function of \(\mu_q\) for
 the common-\(\mu_q\) QMD calculation. The horizontal dashed line marks
-the conformal value \(c_s^2 = \frac{1}{3}\). The first grid point after the
-first-order onset is excluded as a finite-difference artifact of the
-discontinuous transition.}
+the conformal value \(c_s^2 = \frac{1}{3}\).}
 \label{fig:qmd_benchmark_cs2}
 \end{figure}
 
-The behavior of \(c_s^2\) is the most informative feature of the
-benchmark. The peak above the conformal limit is a known qualitative
-feature of the QMD model~\cite{Andersen2024,Andersen2025}, where it has
-been argued to reflect the stiffening of the equation of state by the
-diquark condensate: the pairing energy contributes to the pressure but
-not to the leading \(\mu_q^4\) behavior of the energy density. The
-approach to the conformal limit from above is consistent with hard
-dense-loop resummed perturbation theory~\cite{Andersen2024} and contrasts
-with naive perturbative QCD expectations of an approach from below.
+The overshoot above the conformal limit is a characteristic feature of
+the QMD equation of state and was not present in the ordinary unpaired QM
+model. It is associated with the stiffening caused by the diquark
+condensate: pairing contributes to the pressure, but becomes subleading
+compared with the dominant \(\mu_q^4\) behavior at asymptotically large
+chemical potential. This explains why \(c_s^2\) eventually approaches the
+conformal limit from above, in agreement with the behavior found in
+Refs.~\cite{Andersen2024,Andersen2025}.
 
 Together, these benchmark results show that the numerical implementation
-reproduces the qualitative features of the QMD model documented in
-Refs.~\cite{Andersen2024,Andersen2025}: a first-order transition into
-the 2SC phase, asymptotic gap saturation, and a speed of sound that
-peaks above the conformal limit before approaching it from above. The
-direct comparison with Andersen~2024 is partial, since that paper
-worked in the chiral limit (\(m_\pi=0\), \(m_\sigma=500~\mathrm{MeV}\))
-while we use physical meson masses. The qualitative features are
-unaffected, but the onset \(\mu_q\) and asymptotic gap differ at the
-several-percent level.
+reproduces the expected qualitative features of the QMD model: a
+first-order transition into the 2SC phase, saturation of the
+superconducting gap at large chemical potential, and a speed of sound
+that peaks above the conformal limit before approaching it from above.
+The comparison with Ref.~\cite{Andersen2024} is not one-to-one, since
+that work used the chiral-limit parameter choice
+\(m_\pi=0\), \(m_\sigma=500~\mathrm{MeV}\), while the present calculation
+uses physical meson masses. The qualitative behavior is nevertheless the
+same.
 
-The benchmark also makes clear what remains to be done before the
-calculation describes stellar matter. Neutrality is not imposed, so
-\(\mu_e=\mu_8=0\) throughout. The Fermi surfaces of the paired quarks
-are exactly matched, \(\delta\mu=0\), so the model cannot produce a
-gapless 2SC phase. The pressure has no electron contribution. None of
-these features can be carried over to the compact-star calculation. The
-benchmark serves only to validate the QMD machinery; the physically
-relevant equation of state requires the additional ingredients
-introduced below.
+The benchmark also makes clear what remains to be added before the model
+describes stellar matter. Neutrality is not imposed, so
+\(\mu_e=\mu_8=0\) throughout. The Fermi surfaces of the paired quarks are
+exactly matched, \(\delta\mu=0\), so this calculation cannot produce a
+gapless 2SC phase. The pressure also contains no electron contribution.
+The benchmark therefore serves only to validate the QMD machinery; the
+physically relevant compact-star equation of state requires the
+neutrality conditions introduced later.
 
 \subsection*{Truncation comparison: effect of $\Omega_{1,\mathrm{num}}$}
 \label{subsec:truncation_comparison}
 
-The common-\(\mu_q\) benchmark established that the QMD model with the
-full one-loop potential reproduces the expected qualitative features of
-the 2SC phase: a first-order onset, asymptotic gap saturation, and a
-speed of sound that peaks above the conformal limit. Before extending
-the calculation to neutral stellar matter, we examine the role of the
-finite residual integral \(\Omega_{1,\mathrm{num}}\) by comparing
-results obtained with and without this term.
+Before extending the calculation to neutral stellar matter, we examine
+the role of the finite residual integral \(\Omega_{1,\mathrm{num}}\).
+This term is the only part of the renormalized one-loop potential that
+is not available in closed analytic form, and it must therefore be
+evaluated numerically during the minimization in
+\((\phi_0,\Delta_0)\). It is consequently useful to check whether it can
+be neglected, or whether it is structurally important for the QMD phase
+structure.
 
-The motivation for this comparison is practical. The integral
-\(\Omega_{1,\mathrm{num}}\) is evaluated numerically at every step of
-the \((\phi_0,\Delta_0)\) minimization and is the most computationally
-expensive part of the calculation. An earlier version of the present
-work set \(\Omega_{1,\mathrm{num}} = 0\) under the assumption that this
-finite, UV-suppressed contribution would only shift quantitative results
-by a few percent. The comparison below shows that this assumption is
-incorrect: setting \(\Omega_{1,\mathrm{num}} = 0\) qualitatively changes
-the phase structure of the model.
-
-The residual integral arises in the renormalization of the one-loop
-quark contribution to the thermodynamic potential in the presence of a
-diquark condensate. Following the derivation in
-Ref.~\cite{Andersen2024}, the divergent parts of the quark loop are
-absorbed into the running couplings using \(\overline{\mathrm{MS}}\)
-renormalization. After subtraction, a finite, UV-convergent integral
-remains, given in our notation by
+The residual integral arises when the divergent part of the paired-quark
+one-loop contribution is isolated and subtracted. The divergent terms are
+absorbed into the running parameters, while the remaining finite
+contribution is evaluated directly in three spatial dimensions. For the
+common-\(\mu_q\) benchmark, where \(\bar{\mu}=\mu_q\) and
+\(\delta\mu=0\), the residual term can be written as
 \begin{equation}
 \Omega_{1,\mathrm{num}}
 =
--\frac{2}{\pi^2}\int_0^{\Lambda_\mathrm{res}}
+-\frac{2}{\pi^2}\int_0^{\infty}
 dp\,p^2
 \left[
 E^\Delta_+(p)+E^\Delta_-(p)
 - 2 E_\Delta(p)
-- \frac{\bar{\mu}^2\, g_\Delta^2 \Delta_0^2}{E_\Delta(p)^3}
+- \frac{\bar{\mu}^2\, g_\Delta^2 \Delta_0^2}{E_\Delta^3(p)}
 \right],
 \label{eq:omega_1_num}
 \end{equation}
-where \(E(p)=\sqrt{p^2+g^2\phi_0^2}\),
-\(E_\Delta(p)=\sqrt{p^2+g^2\phi_0^2+g_\Delta^2\Delta_0^2}\), and
-\(E^\Delta_\pm(p)=\sqrt{(E(p)\pm\bar{\mu})^2 + g_\Delta^2\Delta_0^2}\).
-The final subtraction term in the integrand is the counterterm that
-removes the ultraviolet divergence; the remainder is finite in three
-dimensions.
+where
+\begin{align}
+E^\Delta_\pm(p)
+&=
+\sqrt{\left(E_q(p)\pm\bar{\mu}\right)^2
++g_\Delta^2\Delta_0^2}, \\
+E_\Delta(p)
+&=
+\sqrt{p^2+g^2\phi_0^2+g_\Delta^2\Delta_0^2}, \\
+E_q(p)
+&=
+\sqrt{p^2+g^2\phi_0^2}.
+\end{align}
+The upper limit in Eq.~\eqref{eq:omega_1_num} is infinite in the
+continuum expression. In the numerical implementation the integral is
+cut off at a large momentum, as described below, only as a convergence
+procedure.
 
-A reader unfamiliar with the structure of the calculation might
-reasonably expect \(\Omega_{1,\mathrm{num}}\) to be a small correction.
-Unlike the medium term in the analytic part of the potential, which
-scales as \(\bar{\mu}^4\) at large density,
-\(\Omega_{1,\mathrm{num}}\) is UV-finite by construction and contains
-no leading \(\bar{\mu}^4\) contribution. Its leading density dependence
-enters through the chemical-potential dependence of the paired
-quasiparticle energies \(E^\Delta_\pm\), and is logarithmically
-suppressed. Truncating \(\Omega_{1,\mathrm{num}}\) is therefore
-superficially defensible on power-counting grounds.
+Although \(\Omega_{1,\mathrm{num}}\) is finite, it is not necessarily
+small. This can already be seen analytically in the deep 2SC limit,
+where \(\phi_0\simeq0\) and \(d=g_\Delta\Delta_0\) is finite. For
+\(\bar{\mu}\gg d\), the leading part of the integrand is obtained by
+setting \(d\to0\) in the quasiparticle energies,
+\begin{equation}
+E^\Delta_+(p)+E^\Delta_-(p)-2E_\Delta(p)
+\longrightarrow
+(p+\bar{\mu})+|p-\bar{\mu}|-2p .
+\end{equation}
+This expression vanishes for \(p>\bar{\mu}\), while for
+\(0<p<\bar{\mu}\) it equals \(2(\bar{\mu}-p)\). Therefore
+\begin{equation}
+\Omega_{1,\mathrm{num}}
+=
+-\frac{2}{\pi^2}
+\int_0^{\bar{\mu}} dp\,p^2\,2(\bar{\mu}-p)
++
+\mathcal{O}\!\left(\bar{\mu}^2 d^2
+\log\frac{\bar{\mu}}{d}\right),
+\end{equation}
+or
+\begin{equation}
+\Omega_{1,\mathrm{num}}
+=
+-\frac{\bar{\mu}^4}{3\pi^2}
++
+\mathcal{O}\!\left(\bar{\mu}^2 d^2
+\log\frac{\bar{\mu}}{d}\right).
+\end{equation}
+Thus the residual integral contributes at order \(\bar{\mu}^4\), the
+same leading order as the dominant quark pressure terms. This suggests
+that \(\Omega_{1,\mathrm{num}}\) can be an important part of the
+one-loop thermodynamic potential, despite being finite after
+renormalization. We therefore examine its impact directly by repeating
+the benchmark calculation with this term removed.
 
-To isolate its effect, we compare two calculations that differ only in whether
-\(\Omega_{1,\mathrm{num}}\) is included. Both use the same parameter
-set (QMD~SET~A) and the same common-\(\mu_q\) calculation as in
-Sec.~\ref{subsec:qmd_benchmark}. The full calculation uses
-\(\Lambda_\mathrm{res} = 3000~\mathrm{MeV}\) as the upper limit of the
-quadrature; the truncated calculation sets the entire integrand to
-zero. All other model parameters, the minimizer settings, and the
-numerical grid are held fixed. The truncated calculation uses 2000
-grid points; the full calculation uses 5000. The truncated window
-width has been verified to converge at higher resolution; the values
-quoted are stable to better than $0.3\%$ at $12\times$ finer grid
-spacing.
+To isolate its effect, we compare two calculations that differ only in
+whether \(\Omega_{1,\mathrm{num}}\) is included. Both use the same
+parameter set, QMD~SET~A, and the same common-\(\mu_q\) setup as in
+Sec.~\ref{subsec:qmd_benchmark}. In the full calculation,
+\(\Omega_{1,\mathrm{num}}\) is evaluated numerically with
+\(\Lambda_\mathrm{res}=3000~\mathrm{MeV}\) as the upper integration
+limit. In the truncated calculation, the residual integral is omitted.
+All other model parameters and minimization settings are kept fixed.
 
 The condensate profiles for the two calculations are compared in
-Fig.~\ref{fig:qmd_truncation_condensates}. The contrast is immediate.
+Fig.~\ref{fig:qmd_truncation_condensates}. The full calculation shows
+the same sustained 2SC phase as in the benchmark above: once the
+diquark condensate appears, the gap remains nonzero throughout the
+density range shown. The truncated calculation behaves very differently.
+It produces only a narrow 2SC window, after which the diquark gap
+collapses back to zero. Thus, setting
+\(\Omega_{1,\mathrm{num}}=0\) does not merely shift the onset or change
+the gap quantitatively; it prevents the model from sustaining the 2SC
+phase over the relevant range of chemical potentials.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/quark_stars/qmd_benchmark_condensate_comparison.pdf}
-\caption{Comparison of the chiral condensate \(\phi_0\) (left) and the
-superconducting gap \(g_\Delta\Delta_0\) (right) for the full QMD
-potential (dark purple) and the truncated potential with
-\(\Omega_{1,\mathrm{num}}=0\) (amber). Both calculations use QMD~SET~A
-at common quark chemical potential. The shaded band marks the brief 2SC
-window \(\mu_q \in [329.7, 334.0]~\mathrm{MeV}\) found in the
-truncated calculation. Vertical dashed lines mark the 2SC onset for the
-full model (\(266.5~\mathrm{MeV}\)) and the chiral crossover for the
-truncated model (\(\sim 302~\mathrm{MeV}\)).}
+\caption{Comparison of the chiral condensate \(\phi_0\) (left panel) and the
+superconducting gap \(g_\Delta\Delta_0\) (right panel) for the full QMD
+potential and the truncated potential with
+\(\Omega_{1,\mathrm{num}}=0\). Both calculations use QMD~SET~A at
+common quark chemical potential. The full calculation is shown by the
+purple curve, while the truncated calculation is shown by the turquoise
+curve. The shaded region marks the finite 2SC window found in the
+truncated calculation. The vertical dashed line indicates where the
+chiral condensate in the truncated calculation first leaves its vacuum
+value.}
 \label{fig:qmd_truncation_condensates}
 \end{figure}
 
-In the full calculation the 2SC condensate appears at
-\(\mu_q = 266.5~\mathrm{MeV}\) and persists across the entire range up
-to \(\mu_q = 900~\mathrm{MeV}\), with the gap growing toward its
-asymptotic value of approximately \(282~\mathrm{MeV}\). The chiral
-condensate is still near its vacuum value \(\phi_0 \approx f_\pi\) at the
-2SC onset, and falls continuously to a few MeV as \(\mu_q\) increases
-within the 2SC phase. In the truncated calculation, the chiral
-condensate begins to fall at \(\mu_q \approx 302~\mathrm{MeV}\) in a
-smooth crossover, reaching \(\phi_0 \approx 15~\mathrm{MeV}\) before any
-diquark condensate appears. The 2SC condensate then appears at
-\(\mu_q = 329.7~\mathrm{MeV}\), reaches a peak gap of approximately
-\(183~\mathrm{MeV}\) almost immediately, and collapses back to zero by
-\(\mu_q = 334.0~\mathrm{MeV}\). The window in which the 2SC phase
-exists is only approximately \(4.4~\mathrm{MeV}\) wide; beyond it, the system reverts
-permanently to normal quark matter.
-
-The dip-and-recovery feature visible in the truncated \(\phi_0\) curve
-across the 2SC window is real. When \(\Delta_0\) briefly turns on, the
-\(\lambda_3 \phi_0^2 \Delta_0^2\) cross-coupling pulls \(\phi_0\) down
-further. When \(\Delta_0\) collapses, \(\phi_0\) rebounds. This is a
-direct visualization of the \(\sigma\)--\(\Delta\) coupling in the
-Lagrangian and is the only signature of diquark physics that survives
-in the truncated calculation.
-
-The qualitative difference between the two calculations can be traced
-to the structure of the diquark sector of the potential. The
-tree-level coefficient of \(\Delta_0^2\) is \((m_\Delta^2 -
-4\bar{\mu}^2)\), which for QMD~SET~A turns negative at
-\(\bar{\mu} = m_\Delta/2 = 250~\mathrm{MeV}\) and drives the
-formation of a non-zero \(\Delta_0\). With
-\(\Omega_{1,\mathrm{num}}\) included, the loop-level binding term
-proportional to \(\bar{\mu}^2 \Delta_0^2\) with a logarithmically
-growing prefactor deepens the 2SC minimum as \(\bar{\mu}\) increases,
-sustaining the phase indefinitely. Without \(\Omega_{1,\mathrm{num}}\),
-only the analytic one-loop logarithmic terms remain to balance the
-tree-level driving. The combination of these terms with the quartic
-self-coupling produces a 2SC minimum that exists only in a narrow
-window of \(\bar{\mu}\): at lower chemical potential the tree-level
-driving is too weak to overcome the cost imposed by the chiral-sector
-log terms proportional to
-\(\log[m_q^2 / (g^2\phi_0^2 + g_\Delta^2 \Delta_0^2)]\), and at
-higher chemical potential the same log terms grow rapidly with
-\(\Delta_0\) and eliminate the 2SC minimum entirely. A reduced
-two-term model retaining only the tree-level mass term and the quartic
-gives a permanent 2SC phase above \(\bar{\mu} = m_\Delta/2\) with no
-upper closure, confirming that the closure observed in the truncated
-calculation is driven by the analytic one-loop log structure rather
-than by the quartic alone.
-
-The role of \(\Omega_{1,\mathrm{num}}\) is to provide an additional
-attractive contribution that scales as \(\bar{\mu}^2 \Delta_0^2\) with
-a logarithmically growing prefactor. Schematically, the deep-2SC
-expansion of \(\Omega_{1,\mathrm{num}}\) yields a contribution to the
-\(\Delta_0^2\) coefficient of order
-\begin{equation}
--\frac{16 g_\Delta^2}{(4\pi)^2}
-\left[
-\log\!\frac{M_q^2}{g_\Delta^2 \Delta_0^2}
-- F(m_\pi^2) - m_\pi^2 F'(m_\pi^2)
-\right]
-\bar{\mu}^2,
-\end{equation}
-which deepens the 2SC minimum as \(\bar{\mu}\) increases and prevents
-the quartic term from closing it. This term has the same parametric
-structure as the diquark-loop binding in the BCS gap equation, and is
-responsible for the asymptotic saturation behavior derived in
-Ref.~\cite{Andersen2024} and discussed in
-Sec.~\ref{subsec:qmd_benchmark}. Removing
-\(\Omega_{1,\mathrm{num}}\) removes the loop-level binding that
-underlies the 2SC phase at finite density. The narrow window observed
-for QMD~SET~A is itself parameter-sensitive across the diquark sector,
-confirming that the truncated 2SC phase is not a stable feature of the
-model but a knife-edge configuration whose existence and extent depend
-strongly on the chosen parameters.
-
-The parameter sensitivity of the truncated calculation is shown
-explicitly in Fig.~\ref{fig:qmd_truncation_parameter_variations},
-which compares the full and truncated diquark gap for three
-representative parameter choices. At \(m_\Delta = 400~\mathrm{MeV}\)
-the truncated window widens to approximately \(86~\mathrm{MeV}\); at
-\(m_\Delta = 700~\mathrm{MeV}\) the truncated 2SC phase disappears
-entirely; at \(\lambda_\Delta = \lambda_0/8\) the window broadens
-compared to QMD~SET~A. In all three cases the full calculation
-produces a stable, sustained 2SC phase. The chaotic dependence of the
-truncated behavior on the diquark parameters confirms that what
-stabilizes the 2SC phase in the full calculation is the residual
-integral \(\Omega_{1,\mathrm{num}}\), and that the surviving
-configurations in the truncated calculation are accidents of how the
-analytic terms balance at particular parameter values.
+To check that this behavior is not a numerical artifact of QMD~SET~A,
+the same comparison was repeated for representative changes in the
+diquark-sector parameters. The result is shown in
+Fig.~\ref{fig:qmd_truncation_parameter_variations}. In all cases, the
+full calculation produces a sustained 2SC phase. The truncated
+calculation, however, is highly sensitive to the parameter choice. For
+a smaller diquark mass, \(m_\Delta=400~\mathrm{MeV}\), the truncated
+2SC window becomes wider. For a larger diquark mass,
+\(m_\Delta=700~\mathrm{MeV}\), no 2SC phase appears in the truncated
+calculation. Reducing the self-coupling to
+\(\lambda_\Delta=\lambda_0/8\) produces only a narrow window. The
+existence and width of the truncated 2SC phase therefore depend
+strongly on details of the parameter choice.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_truncation_parameter_variations.pdf}
 \caption{Diquark gap \(g_\Delta\Delta_0\) as a function of common
-quark chemical potential for three parameter variations from QMD~SET~A,
-comparing the full one-loop calculation (dark purple) and the truncated
-calculation with \(\Omega_{1,\mathrm{num}}=0\) (amber). Top:
-\(m_\Delta = 400~\mathrm{MeV}\), where the truncated window widens to
-approximately \(86~\mathrm{MeV}\). Middle: \(m_\Delta =
-700~\mathrm{MeV}\), where the truncated 2SC phase does not form.
-Bottom: \(\lambda_\Delta = \lambda_0/8\), where the truncated window
-broadens moderately. In all three cases the full calculation produces
-a stable 2SC phase, demonstrating that the truncated behavior depends
-sensitively on the parameter choice while the full calculation does not.}
+quark chemical potential for three parameter variations from QMD~SET~A.
+The purple curves show the full calculation with
+\(\Omega_{1,\mathrm{num}}\) included, while the turquoise curves show
+the truncated calculation with \(\Omega_{1,\mathrm{num}}=0\). Top panel:
+\(m_\Delta=400~\mathrm{MeV}\), where the truncated 2SC window is wider
+than for QMD~SET~A. Middle panel: \(m_\Delta=700~\mathrm{MeV}\), where the
+truncated calculation does not produce a 2SC phase. Bottom panel:
+\(\lambda_\Delta=\lambda_0/8\), where the truncated calculation gives a
+narrow 2SC window. The shaded regions indicate where the truncated
+calculation has a nonzero diquark gap. The vertical dashed lines mark
+where the chiral condensate in the truncated calculation leaves its
+vacuum value.}
 \label{fig:qmd_truncation_parameter_variations}
 \end{figure}
 
-The qualitative failure of the truncated calculation has direct
-quantitative consequences for the equation of state. Near the full
-2SC onset at \(\mu_q = 270~\mathrm{MeV}\), the truncated pressure is
-essentially zero while the full pressure is already \(\sim 10^6~
-\mathrm{MeV}^4\); the relative difference is effectively \(100\%\). At
-\(\mu_q = 350~\mathrm{MeV}\), inside the stable normal-quark-matter
-phase of the truncated model, the truncated pressure is about
-\(28\%\) of the full pressure. The difference closes only slowly, with
-the truncated pressure still \(\sim 14\%\) below the full result at
-\(\mu_q = 900~\mathrm{MeV}\).
-
-The speed of sound shows a similar story. In the stable normal phase of
-the truncated model, \(c_s^2\) reaches the conformal value
-\(c_s^2 = \frac{1}{3}\) by \(\mu_q \approx 500~\mathrm{MeV}\) and remains
-there. It never exceeds the conformal bound. The peak \(c_s^2 \approx
-0.41\) that characterizes the 2SC phase in the full calculation is
-entirely absent.
-
-The conclusion is that \(\Omega_{1,\mathrm{num}}\) is not a numerical
-convenience but a structurally necessary part of the QMD potential at
-stellar densities. The truncated calculation does not produce a stable
-prediction for the 2SC phase at all: as
-Fig.~\ref{fig:qmd_truncation_parameter_variations} demonstrates, its
-behavior depends chaotically on the diquark parameters, with some
-choices producing narrow windows of a few MeV, others producing wide
-windows of order \(100~\mathrm{MeV}\), and others producing no 2SC
-phase whatsoever. None of these truncated configurations corresponds
-to a thermodynamically meaningful 2SC phase at densities reachable in
-compact stars. This is the opposite of what the full calculation
-predicts, and is at odds with the analytic asymptotic gap
-formula~\eqref{eq:qmd_asymptotic_gap} derived in
-Ref.~\cite{Andersen2024}, which is itself a consequence of including
-the diquark-loop contribution.
-
-All stellar calculations in the remainder of this chapter therefore
-use the full one-loop potential. The remaining task is to impose
-electric and color neutrality on the model and to extract the
-equation of state of neutral stellar matter.
+These comparisons show that \(\Omega_{1,\mathrm{num}}\) is a structural
+part of the QMD one-loop potential. When it is removed, the model no
+longer gives a robust 2SC phase: depending on the parameters, the
+truncated calculation may produce a narrow window, a broader window, or
+no 2SC phase at all. Since the purpose of the model is to describe
+stable color-superconducting quark matter, this truncation is not
+acceptable for the stellar calculation. All results in the remainder of
+this chapter therefore use the full one-loop potential, including
+\(\Omega_{1,\mathrm{num}}\).
 
 \subsection*{Neutral stellar equation of state}
 \label{subsec:neutral_stellar_eos}
 
 The common-\(\mu_q\) calculation served to validate the numerical
-implementation of the QMD model. To describe matter in a compact star
-we now impose the additional conditions appropriate to bulk stellar
-matter: electric charge neutrality, color charge neutrality, and weak
-(\(\beta\)) equilibrium. Each of these introduces a new chemical
-potential or constraint, and the result is a single-parameter equation
-of state \(\varepsilon(P)\) suitable for input to the TOV equations.
+implementation of the QMD model. To describe bulk matter in a compact
+star, the equation of state must also satisfy weak equilibrium and
+charge neutrality. As in the two-flavor stellar calculation of
+Sec.~\ref{subsec:stellar_matter_qm}, weak equilibrium is imposed through
+\begin{equation}
+\mu_d = \mu_u + \mu_e,
+\end{equation}
+and the system must be electrically neutral overall,
+\begin{equation}
+\frac{2}{3}n_u-\frac{1}{3}n_d-n_e=0.
+\end{equation}
+Two-flavor quark matter made only of up and down quarks generally carries
+net positive electric charge at equal quark densities, so an electron
+background is required to neutralize the matter.
 
-The physical reasons for imposing the three constraints are well
-documented in the color-superconductivity literature. We summarize them
-briefly here; the conditions themselves and their consequences are
-discussed in detail in Refs.~\cite{Shovkovy2005, Andersen2025}.
-
-As in the two-flavor stellar calculation of Sec.~\ref{subsec:stellar_matter_qm}, we
-impose $\beta$-equilibrium, $\mu_d = \mu_u + \mu_e$, and electric charge neutrality,
-$\tfrac{2}{3}n_u - \tfrac{1}{3}n_d - n_e = 0$. The 2SC condensate introduces an
-additional requirement: it carries a non-zero color charge \(Q_8\), since only the
-red and green quarks participate in pairing while the blue quarks remain unpaired.
-We therefore introduce the color chemical potential \(\mu_8\) and impose
+The 2SC phase introduces an additional constraint. Since red and green
+quarks participate in pairing while blue quarks remain unpaired, the
+paired state can carry nonzero color charge associated with the diagonal
+color generator \(T_8\). We therefore introduce a color chemical
+potential \(\mu_8\) and impose
 \begin{equation}
 n_8
 =
--\frac{\partial \Omega}{\partial \mu_8}
+-\frac{\partial\Omega_\mathrm{tot}}{\partial\mu_8}
 =
 0.
 \end{equation}
-The third color generator \(T_3\) does not require a separate chemical
-potential: the chosen 2SC condensate is symmetric between the red and
-green colors, so \(n_3 = 0\) is satisfied automatically.
+No separate chemical potential for \(T_3\) is needed in the chosen 2SC
+orientation, because the condensate treats red and green symmetrically
+and \(n_3=0\) is then satisfied automatically.
 
-The individual quark chemical potentials are then
+The quark chemical potentials can be written in terms of the common quark
+chemical potential \(\mu_q\), the electron chemical potential \(\mu_e\),
+and the color chemical potential \(\mu_8\) as
 \begin{align}
 \mu_{ur} = \mu_{ug} &= \mu_q - \frac{2}{3}\mu_e + \frac{1}{3}\mu_8,
 \\
@@ -2181,451 +2063,233 @@ The individual quark chemical potentials are then
 \\
 \mu_{db} &= \mu_q + \frac{1}{3}\mu_e - \frac{2}{3}\mu_8.
 \end{align}
-The average chemical potential of the paired (red--green) up and down
-quarks is
-\begin{equation}
+For the paired red--green quasiparticles this gives
+\begin{align}
 \bar{\mu}
+&=
+\frac{1}{2}(\mu_{ur}+\mu_{dg})
 =
-\frac{1}{2}(\mu_{ur} + \mu_{dg})
-=
-\mu_q - \frac{1}{6}\mu_e + \frac{1}{3}\mu_8,
-\end{equation}
-and the mismatch between their Fermi surfaces is
-\begin{equation}
+\mu_q-\frac{1}{6}\mu_e+\frac{1}{3}\mu_8,
+\\
 \delta\mu
+&=
+\frac{1}{2}(\mu_{dg}-\mu_{ur})
 =
-\frac{1}{2}(\mu_{dg} - \mu_{ur})
-=
-\frac{1}{2}\mu_e.
-\end{equation}
-The mismatch \(\delta\mu\) measures the stress on Cooper pairs. When
-\(\delta\mu\) approaches the gap \(g_\Delta \Delta_0\), the paired
-quasiparticle modes become gapless, and the system enters the gapless
-2SC regime~\cite{Shovkovy2005, Alford2008}. We monitor this condition
-explicitly below.
+\frac{1}{2}\mu_e .
+\end{align}
+Here \(\bar{\mu}\) is the average chemical potential of the paired
+quarks, while \(\delta\mu\) measures the Fermi-surface mismatch caused
+by electric neutrality. When this mismatch becomes comparable to the gap
+\(g_\Delta\Delta_0\), paired quasiparticle modes may become gapless.
 
-The total thermodynamic potential for neutral stellar matter is
+The total thermodynamic potential is
 \begin{equation}
-\Omega_\mathrm{tot}(\phi_0, \Delta_0; \mu_q, \mu_e, \mu_8)
+\Omega_\mathrm{tot}(\phi_0,\Delta_0;\mu_q,\mu_e,\mu_8)
 =
-\Omega_{0+1}(\phi_0, \Delta_0; \mu_q, \mu_e, \mu_8)
+\Omega_{0+1}(\phi_0,\Delta_0;\mu_q,\mu_e,\mu_8)
 +
 \Omega_e(\mu_e),
 \end{equation}
-where \(\Omega_{0+1}\) is the full one-loop QMD potential introduced in
-Sec.~\ref{subsec:qmd_benchmark}, and \(\Omega_e(\mu_e)\) is the
-contribution of a free electron Fermi gas at zero temperature. The
-electrons are treated as free since electromagnetic loop corrections
-are negligible at the scales of interest, and the electron mass is
-small relative to \(\mu_e\) in the 2SC phase.
+where \(\Omega_{0+1}\) is the QMD one-loop potential and
+\(\Omega_e\) is the zero-temperature contribution from a free electron
+Fermi gas. We include the physical electron mass,
+\(m_e=0.511~\mathrm{MeV}\), although it is numerically small compared
+with the electron chemical potentials in the 2SC phase.
 
-At each fixed value of the quark chemical potential \(\mu_q\), the
-physical state is determined by the four coupled equations
+At each fixed \(\mu_q\), the physical state is determined by the two gap
+equations and the two neutrality conditions,
 \begin{align}
-\frac{\partial \Omega_\mathrm{tot}}{\partial \phi_0} &= 0,
+\frac{\partial\Omega_\mathrm{tot}}{\partial\phi_0} &= 0,
 &
-\frac{\partial \Omega_\mathrm{tot}}{\partial \Delta_0} &= 0,
+\frac{\partial\Omega_\mathrm{tot}}{\partial\Delta_0} &= 0,
 \label{eq:qmd_gap_equations_neutral}
 \\
-\frac{\partial \Omega_\mathrm{tot}}{\partial \mu_e} &= 0,
+\frac{\partial\Omega_\mathrm{tot}}{\partial\mu_e} &= 0,
 &
-\frac{\partial \Omega_\mathrm{tot}}{\partial \mu_8} &= 0.
+\frac{\partial\Omega_\mathrm{tot}}{\partial\mu_8} &= 0.
 \label{eq:qmd_neutrality_conditions}
 \end{align}
-The first pair are the gap equations for the chiral and diquark
-condensates. The second pair are the neutrality conditions. Together
-they determine \(\{\phi_0, \Delta_0, \mu_e, \mu_8\}\) as functions of
-\(\mu_q\).
-
-Numerically, the system is solved by a nested procedure. For each
-trial pair \((\phi_0, \Delta_0)\), the two neutrality conditions are
-solved as a nonlinear root-finding problem for \((\mu_e, \mu_8)\). The
-resulting neutral thermodynamic potential is then minimized over
-\((\phi_0, \Delta_0)\). The solution at one value of \(\mu_q\) is used
-as the starting point for the next, which is essential for tracking
-the solution across the first-order onset where the global minimum
-moves discontinuously. The calculation uses 700 grid points in
-\(\mu_q \in [250, 900]~\mathrm{MeV}\), giving a spacing of
-approximately \(0.93~\mathrm{MeV}\).
-
-The neutral 2SC phase appears via a first-order transition at
-\begin{equation}
-\mu_q^{\,\mathrm{2SC}} = 278.8~\mathrm{MeV}.
-\end{equation}
-This is shifted upward by \(12.3~\mathrm{MeV}\) relative to the
-common-\(\mu_q\) onset at \(266.5~\mathrm{MeV}\) found in
-Sec.~\ref{subsec:qmd_benchmark}. The shift is a direct consequence of
-the Fermi-surface mismatch \(\delta\mu = \tfrac{1}{2}\mu_e\): at the onset of
-pairing in neutral matter, \(\mu_e\) jumps from a negligibly small
-value to several MeV, and the resulting \(\delta\mu\) raises the
-threshold chemical potential for the 2SC condensate.
+Together these equations determine
+\(\{\phi_0,\Delta_0,\mu_e,\mu_8\}\) as functions of \(\mu_q\). The system
+is solved numerically by finding, at each \(\mu_q\), the neutral global
+minimum of \(\Omega_\mathrm{tot}\) in the \((\phi_0,\Delta_0)\) plane.
+The solution from the previous value of \(\mu_q\) is used as the initial
+guess for the next point, which helps track the physical branch through
+the first-order onset.
 
 The condensate profiles are shown in
-Fig.~\ref{fig:qmd_stellar_condensates}, overlaid with the
-common-\(\mu_q\) results from Sec.~\ref{subsec:qmd_benchmark} for
-comparison. The qualitative behavior is the same in both calculations:
-\(\phi_0\) jumps slightly at the onset and then falls continuously
-through the 2SC phase, while the diquark gap grows from a small value
-at the onset toward an asymptotic plateau. In neutral matter,
-\(\phi_0 = 92.95~\mathrm{MeV}\) immediately after the transition and
-falls to \(\phi_0 \approx 1~\mathrm{MeV}\) by
-\(\mu_q = 900~\mathrm{MeV}\). The gap rises from \(g_\Delta \Delta_0
-= 5.6~\mathrm{MeV}\) at onset to \(225.6~\mathrm{MeV}\) at the upper
-end of the grid. This is slightly below the common-\(\mu_q\) value of
-\(252~\mathrm{MeV}\) at the same \(\mu_q\); the mismatch
-\(\delta\mu\) reduces the available phase space for pairing and
-suppresses the gap.
+Fig.~\ref{fig:qmd_stellar_condensates}, with the common-\(\mu_q\)
+benchmark overlaid for comparison. The qualitative behavior is similar
+in the two calculations. In both cases, the chiral condensate remains
+close to its vacuum value at the onset and then decreases continuously
+through the 2SC phase, while the diquark gap grows toward a high-density
+plateau. Neutrality shifts the onset to
+\(\mu_q=278.8~\mathrm{MeV}\), compared with
+\(\mu_q=266.5~\mathrm{MeV}\) in the common-\(\mu_q\) benchmark. The gap
+is also smaller in neutral matter, because the electron chemical
+potential generates a Fermi-surface mismatch
+\(\delta\mu=\frac{\mu_e}{2}\), which stresses the Cooper pairs and suppresses
+pairing.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/quark_stars/qmd_stellar_condensates.pdf}
-\caption{Chiral condensate \(\phi_0\) (left) and superconducting gap
-\(g_\Delta \Delta_0\) (right) for neutral QMD matter at QMD~SET~A
-parameters. The common-\(\mu_q\) results from
-Sec.~\ref{subsec:qmd_benchmark} are overlaid for comparison. The
-vertical dashed line marks the neutral 2SC onset at
-\(\mu_q = 278.8~\mathrm{MeV}\).}
+\caption{Left panel: chiral condensate \(\phi_0\) for neutral QMD matter at
+QMD~SET~A, with the common-\(\mu_q\) benchmark overlaid for comparison.
+Right panel: corresponding superconducting gap \(g_\Delta\Delta_0\). The
+vertical dashed lines mark the 2SC onset in the neutral and
+common-\(\mu_q\) calculations.}
 \label{fig:qmd_stellar_condensates}
 \end{figure}
 
-The electron and color chemical potentials are shown in
-Fig.~\ref{fig:qmd_stellar_neutrality}. Their behavior is essentially
-that anticipated by the asymptotic analysis of
-Ref.~\cite{Andersen2025}: \(\mu_e\) jumps to a finite value at the
-2SC onset and rises approximately linearly with \(\mu_q\) thereafter,
-while \(\mu_8\) starts at a substantial negative value near the
-onset, crosses zero, and turns positive at high density.
-Quantitatively, the ratio \(\mu_e/\mu_q\) plateaus between
-\(0.60\)--\(0.63\) over \(\mu_q \in [330, 700]~\mathrm{MeV}\) and
-relaxes toward \(0.50\) at the upper end of the grid, consistent with
-the asymptotic prediction \(\mu_e \to 0.57\,\mu_q\) from
-Eq.~(53) of Ref.~\cite{Andersen2025}. The color potential \(\mu_8\)
-crosses zero at \(\mu_q \approx 630~\mathrm{MeV}\) and reaches
-\(+0.024\,\mu_q\) at \(\mu_q = 900~\mathrm{MeV}\), approaching the
-predicted asymptotic value \(\mu_8 \to 0.09\,\mu_q\) from
-Eq.~(54) of Ref.~\cite{Andersen2025} but not yet converged at the
-upper end of our grid.
+The electron and color chemical potentials determined by the neutrality
+conditions are shown in Fig.~\ref{fig:qmd_stellar_neutrality}. At the
+2SC onset, \(\mu_e\) jumps to a finite value, while \(\mu_8\) drops to a
+negative value. The electron chemical potential is required to
+neutralize the positive electric charge of the two-flavor quark matter,
+while \(\mu_8\) compensates the color imbalance between the paired
+red--green sector and the unpaired blue quarks. At higher densities,
+both chemical potentials follow an approximately linear increasing trend.
+The color chemical potential crosses zero and becomes positive at large
+\(\mu_q\), in qualitative agreement with the asymptotic behavior found
+in Ref.~\cite{Andersen2025}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_stellar_neutrality.pdf}
 \caption{Electron chemical potential \(\mu_e\) and color chemical
-potential \(\mu_8\) for neutral QMD matter, determined by the
-neutrality conditions
-Eq.~\eqref{eq:qmd_neutrality_conditions}. The vertical dashed line
-marks the 2SC onset. \(\mu_8\) is strongly negative at the onset,
-crosses zero near \(\mu_q \approx 630~\mathrm{MeV}\), and becomes
-positive at high density.}
+potential \(\mu_8\) for neutral QMD matter, determined by the neutrality
+conditions in Eq.~\eqref{eq:qmd_neutrality_conditions}.} 
 \label{fig:qmd_stellar_neutrality}
 \end{figure}
 
-The large negative value of \(\mu_8\) immediately after the onset
-reflects the strong color imbalance when the diquark condensate is
-small: a substantial compensating color chemical potential is needed
-to enforce neutrality between the paired red--green sector and the
-unpaired blue sector. As the gap grows, the imbalance is reduced and
-the magnitude of \(\mu_8\) decreases.
+As a final check on the neutral solution, we evaluate the mismatch
+condition for gapless 2SC matter. Along the neutral branch,
+\(g_\Delta\Delta_0-\delta\mu\) remains positive over the density range
+relevant for the stellar configurations considered below. The neutral
+QMD equation of state therefore describes conventional, fully gapped
+2SC matter in the region used for the TOV calculation.
 
-We monitor the difference \(g_\Delta \Delta_0 - \delta\mu\)
-throughout the 2SC phase. A positive value indicates conventional BCS
-2SC with fully gapped quasiparticles; a negative value indicates the
-gapless 2SC regime. For QMD~SET~A with neutrality imposed, the gap
-exceeds the mismatch over essentially the entire density range. The
-difference becomes marginally negative only at \(\mu_q
-\approx 858~\mathrm{MeV}\), where \(g_\Delta \Delta_0 - \delta\mu
-\approx -0.004~\mathrm{MeV}\), and reaches \(-1.4~\mathrm{MeV}\) at
-\(\mu_q = 900~\mathrm{MeV}\). The stellar densities reached in the
-mass--radius calculation below all lie well within the
-conventional, fully gapped 2SC phase. We do not pursue the gapless
-regime further here.
+The first-order onset produces a short mechanically unstable segment in
+the raw thermodynamic table. As in the previous quark-matter
+calculations, this segment is removed by a Maxwell construction before
+the equation of state is passed to the TOV solver. Points with
+non-positive pressure or energy density are also discarded, and the
+remaining stable branch is used to construct a monotonic
+\(\varepsilon(P)\) table.
 
-The pressure, energy density, and speed of sound are constructed from
-the solved \(\Omega_\mathrm{tot}(\mu_q)\) using the same expressions
-as in the common-\(\mu_q\) case,
-\begin{equation}
-P(\mu_q)
-=
--[\Omega_\mathrm{tot,min}(\mu_q) - \Omega_\mathrm{vac}],
-\qquad
-n_q = \frac{dP}{d\mu_q},
-\qquad
-\varepsilon = -P + \mu_q n_q,
-\end{equation}
-where \(\Omega_\mathrm{vac}\) is the value of the neutral
-\(\Omega_\mathrm{tot}\) at \(\mu_q = 0\). The speed of sound squared
-is then \(c_s^2 = (dP/d\mu_q)/(d\varepsilon/d\mu_q)\).
-
-The raw \(P(\mu_q)\) is non-monotonic in a narrow window around the
-2SC onset, reflecting the first-order character of the transition.
-This is mechanically unstable and cannot be passed directly to the
-TOV equations. We apply a Maxwell construction to remove the
-unstable segment, replacing it with a constant-pressure tie line
-between the two coexisting branches. For QMD~SET~A, the Maxwell
-construction removes three points in the onset region.
-Points with \(P \leq 0\) or \(\varepsilon \leq 0\) are then
-excluded; twenty-two grid points fall in the low-density vacuum
-region where the bag-subtracted pressure is negative. Three further
-points are removed by a monotonicity filter applied to the stable
-branch. After these steps (\(700 - 3 - 22 - 3 = 672\)), the EoS
-table consists of \(672\) points satisfying
-\(P > 0\), \(\varepsilon > 0\), and monotonic \(\varepsilon(P)\).
-
-The resulting \(P(\varepsilon)\) is shown in
-Fig.~\ref{fig:qmd_stellar_eos}. The speed of sound, shown in
-Fig.~\ref{fig:qmd_stellar_cs2}, rises well above the conformal limit
-\(c_s^2 = \frac{1}{3}\). The raw finite-difference table contains a narrow
-maximum \(c_s^2 \approx 0.45\) at \(\mu_q \approx 478~\mathrm{MeV}\);
-the smoothed curve plotted in the figure suppresses this local grid
-spike and peaks at about \(c_s^2 \approx 0.39\). At higher \(\mu_q\)
-it relaxes toward \(\frac{1}{3}\) from above, reaching \(c_s^2 = 0.34\) at
-\(\mu_q = 900~\mathrm{MeV}\). The qualitative behavior of \(c_s^2\)
-matches the common-\(\mu_q\) benchmark: the neutral calculation
-retains the same stiffening feature, while the composition degrees of
-freedom (\(\mu_e\), \(\mu_8\)) absorb part of the response of the
-system to changes in density and slightly soften the EoS.
+The resulting equation of state is shown in
+Fig.~\ref{fig:qmd_stellar_eos}. The left panel shows
+\(\varepsilon(P)\) for the stable neutral QMD branch. The right panel
+shows the dimensionless trace-anomaly measure
+\[
+\delta=\frac{\varepsilon-3P}{P},
+\]
+which approaches zero in the conformal limit. Thus the neutral QMD
+equation of state becomes approximately conformal at high density,
+although the approach is slow on the chemical-potential range relevant
+for compact stars.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_stellar_eos.pdf}
-\caption{Equation of state \(P(\varepsilon)\) of neutral QMD matter
-with 2SC pairing. The curve shown is the stable branch after Maxwell
-construction.}
+\caption{Left panel: stable equation of state \(\varepsilon(P)\) for neutral
+QMD matter with 2SC pairing. Right panel: trace-anomaly measure
+\(\delta=\frac{\varepsilon-3P}{P}\). The horizontal dashed line marks the
+conformal limit \(\delta=0\).}
 \label{fig:qmd_stellar_eos}
 \end{figure}
+
+The speed of sound squared is shown in
+Fig.~\ref{fig:qmd_stellar_cs2}. As in the common-\(\mu_q\) benchmark,
+\(c_s^2\) rises above the conformal value after the onset of 2SC
+pairing and then relaxes toward it from above at higher density. The
+neutrality constraints soften the response somewhat compared with the
+common-\(\mu_q\) calculation, because the composition variables
+\(\mu_e\) and \(\mu_8\) adjust as the density changes. Nevertheless,
+the characteristic QMD stiffening from diquark pairing remains visible.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/qmd_stellar_cs2.pdf}
-\caption{Speed of sound squared \(c_s^2\) for the neutral QMD
-equation of state. The horizontal dashed line marks the conformal
-limit \(c_s^2 = \frac{1}{3}\). The raw finite-difference table has a narrow
-peak near \(c_s^2 = 0.45\) at \(\mu_q \approx 478~\mathrm{MeV}\);
-the plotted curve is smoothed to show the robust trend.}
+\caption{Speed of sound squared \(c_s^2\) for the neutral QMD equation
+of state. The horizontal dashed line marks the conformal limit
+\(c_s^2 = \frac{1}{3}\).}
 \label{fig:qmd_stellar_cs2}
 \end{figure}
 
-A point that requires explicit comment is the behavior of the EoS at
-zero pressure. In the present QMD calculation,
-\begin{equation}
-\varepsilon(P = 0) \approx 0.
-\end{equation}
-This is in contrast to MIT-bag-type models, in which an explicit bag
-constant \(B\) gives \(\varepsilon(P=0) = 4B\) and the resulting
-quark stars are self-bound, terminating at a finite surface energy
-density. In the QMD model there is no explicit bag constant: the
-renormalized vacuum is identified with the chiral-broken minimum at
-\(\phi_0 = f_\pi\), \(\Delta_0 = 0\), and both \(P\) and
-\(\varepsilon\) vanish there. The TOV integration therefore follows
-the stable branch down to vacuum, and the resulting configurations
-are gravitationally bound rather than self-bound. This distinction is
-important for the interpretation of the mass--radius curves: low-mass
-QMD stars extend to large radii, in
-contrast to the topology of compact self-bound quark stars.
+A useful qualitative feature of the neutral QMD equation of state is its
+surface behavior. With the vacuum normalization used here, both the
+pressure and energy density vanish at the vacuum point. The stable
+branch therefore terminates at \(\varepsilon(P=0)\simeq0\), rather than
+at a finite surface energy density. The resulting stellar sequences are
+therefore gravitationally bound, with the same low-mass topology
+discussed above for the crossover QM sequence.
 
-Overall, the neutral QMD equation of state for QMD~SET~A is a single-parameter
-relation \(P(\varepsilon)\) describing a system that is in the
-chirally-broken vacuum at low chemical potential and in the 2SC phase
-above \(\mu_q = 278.8~\mathrm{MeV}\). The 2SC phase is conventional
-BCS over the full density range relevant to compact stars, with no
-gapless modes. The speed of sound peaks above the conformal limit
-and relaxes toward it at high density. The EoS terminates at zero
-energy density at the surface; the resulting stars are
-gravitationally bound. This stable EoS table is the input for the TOV
-calculation below.
+Overall, the neutral QMD equation of state for QMD~SET~A is a
+single-parameter relation \(\varepsilon(P)\) describing matter that is in
+the chirally broken vacuum at low chemical potential and in the fully
+gapped 2SC phase above the neutral onset. The speed of sound peaks above
+the conformal limit and relaxes toward it at high density, while the
+surface behavior is gravitationally bound rather than self-bound. This
+stable EoS table is used as input for the TOV calculation below.
 
 \subsection*{Mass--radius relations}
 
-The stable neutral equation of state constructed above is now passed to the TOV
-equations to obtain the corresponding sequence of compact-star
-configurations. This produces the principal numerical result of the
-QMD calculation: the maximum mass and radius
-of a 2SC quark star in the QMD model at the QMD~SET~A baseline.
-
-The hydrostatic structure of a static, spherically symmetric,
-non-rotating compact star is governed by the
-Tolman--Oppenheimer--Volkoff equations,
-\begin{align}
-\frac{dm}{dr} &= 4\pi r^2 \varepsilon(r),
-\\
-\frac{dP}{dr} &= -\frac{G\bigl[\varepsilon(r)+P(r)\bigr]
-\bigl[m(r)+4\pi r^3 P(r)\bigr]}
-{r\bigl[r - 2 G m(r)\bigr]},
-\end{align}
-with the boundary conditions \(m(0)=0\) and \(P(0)=P_c\), where \(P_c\)
-is the central pressure. The integration proceeds outward until the
-pressure vanishes, defining the stellar surface at \(r=R\) and the
-gravitational mass \(M=m(R)\).
-
-We use the same solver employed in the earlier two-flavor
-Quark--Meson stellar calculation, with the only change being the
-equation of state. The stable neutral QMD EoS is interpolated as a cubic
-spline \(\varepsilon(P)\) with extrapolation at both ends. The
-monotonicity of \(\varepsilon(P)\) is checked on the spline grid
-before TOV integration. The central pressure is scanned
-geometrically, with each step multiplying \(P_c\) by a factor of
-\(1.08\), spanning the range of the stable EoS table. The radial
-integration step is \(0.01~\mathrm{km}\), using a fourth-order
-Runge-Kutta (RK4) scheme with a single forward-Euler bootstrap step
-from the origin to avoid the \(1/r^2\) singularity in the TOV
-equations. The resulting sequence
-contains \(285\) configurations.
-
-The stability of each configuration is determined by the sign of the
-slope of the mass--central-density relation,
-\begin{equation}
-\frac{dM}{d\varepsilon_c} > 0
-\qquad\text{(stable branch),}
-\end{equation}
-with the maximum mass corresponding to the turning point. Beyond this
-point the sequence is unstable against radial perturbations and the
-configurations would collapse in finite time. Of the \(285\)
-configurations integrated, \(253\) are stable and \(32\) are
-unstable.
-
-The resulting mass--radius relation is shown in
-Fig.~\ref{fig:qmd_mass_radius}. The stable branch is plotted as a
-solid curve and the unstable branch as a dashed curve, with the
-maximum-mass configuration marked by a filled circle.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_stellar_mass_radius.pdf}
-\caption{Mass--radius relation for the neutral QMD equation of state
-with 2SC pairing (QMD~SET~A, full one-loop potential). The solid curve
-shows the stable branch, the dashed curve the unstable branch beyond
-the maximum mass. The filled circle marks
-\(M_{\max} = 1.970~M_\odot\) at \(R = 12.16~\mathrm{km}\).}
-\label{fig:qmd_mass_radius}
-\end{figure}
-
-The principal numerical results are
-\begin{align}
-M_{\max} &= 1.970~M_\odot,
-&
-R(M_{\max}) &= 12.16~\mathrm{km},
-\end{align}
-with central energy density \(\varepsilon_c = 1.196~\mathrm{GeV/fm^3}\)
-at the maximum-mass configuration. At lower masses, representative
-stars on the stable branch have
-\begin{align}
-R(1.4\,M_\odot) &= 14.80~\mathrm{km},
-&
-R(1.8\,M_\odot) &= 13.48~\mathrm{km},
-\end{align}
-with central energy densities \(\varepsilon_c(1.4\,M_\odot) =
-0.433~\mathrm{GeV/fm^3}\) and \(\varepsilon_c(1.8\,M_\odot) =
-0.650~\mathrm{GeV/fm^3}\). Across the stable branch, radii lie
-between approximately \(12\) and \(17~\mathrm{km}\) for masses in the
-range \(0.5\)--\(1.97~M_\odot\).
-
-A notable feature of the QMD mass--radius curve is that the radius
-grows without bound as the mass decreases. Stable configurations
-with \(M \sim 10^{-3}\,M_\odot\) have radii of order
-\(25\)--\(30~\mathrm{km}\), and the limit \(R \to \infty\) is reached
-as \(M \to 0\). This is the topology of gravitationally-bound matter
-and is qualitatively different from the mass--radius curves of
-self-bound (MIT-bag-type) quark stars, where the radius shrinks
-toward zero as the mass decreases. The difference is a direct
-consequence of the surface condition established above: in the QMD model there is no
-explicit bag constant, the renormalized vacuum has
-\(\varepsilon = P = 0\), and the EoS terminates at zero energy
-density rather than at a finite surface value.
-
-The very-low-mass branch is a mathematical solution of the TOV
-equations but not a physically realistic description of compact
-stars. Observed neutron stars have masses in the range
-\(1\)--\(2\,M_\odot\), and the present pure-quark calculation lacks
-the nuclear-matter crust that would bind the outer regions of a real
-star. The portion of the curve relevant for comparison with
-astrophysical data is the band of radii \(R \approx 12\)--\(15~\mathrm{km}\)
-spanning \(M \approx 1\)--\(1.96~\,M_\odot\).
-
-To isolate the effect of the diquark condensate on stellar
-properties, the QMD sequence is compared in
-Fig.~\ref{fig:qmd_vs_qm_mass_radius} with two Quark--Meson sequences
-at the same sigma meson mass \(m_\sigma = 600~\mathrm{MeV}\). The two
-QM sequences differ only in bound-state construction and serve as
-complementary references.
-
-The primary (matched) comparison uses the gravitationally-bound QM
-sequence (\(B_{\min} = 0\)) discussed in Sec.~\ref{sec:qm_grav_bound},
-which shares the same vacuum structure as QMD: both models normalize
-the vacuum pressure to zero via \(P(\mu_q=0)=0\) and produce stars whose
-surface sits at zero baryon density. This matched comparison directly
-isolates the contribution of the 2SC diquark condensate to the stellar
-observables. The gravitationally-bound QM sequence gives
-\(M_{\max} = 1.797~M_\odot\) at \(R = 11.8~\mathrm{km}\) and
-\(R(1.4~M_\odot) = 14.1~\mathrm{km}\),
-yielding
-\begin{align}
-\Delta M_{\max} &= +0.17~M_\odot,
-&
-\Delta R(1.4\,M_\odot) &= +0.70~\mathrm{km}.
-\end{align}
-
-The secondary reference uses the self-bound QM sequence with
-\(B^{1/4} = B_{\min}^{1/4} = 27.8~\mathrm{MeV}\) (the absolute
-stability criterion introduced in Sec.~\ref{subsec:qm_stellar_structure}).
-This sequence gives \(M_{\max} = 1.795~M_\odot\) at
-\(R = 11.1~\mathrm{km}\) and \(R(1.4~M_\odot) = 12.6~\mathrm{km}\),
-so
-\begin{align}
-\Delta M_{\max} &= +0.18~M_\odot,
-&
-\Delta R(1.4\,M_\odot) &= +2.15~\mathrm{km}.
-\end{align}
-
-The two comparisons bracket the 2SC contribution to stellar
-observables. The matched comparison (\(\Delta R = +0.70~\mathrm{km}\))
-isolates the diquark effect on the radius; the self-bound comparison
-(\(\Delta R = +2.15~\mathrm{km}\)) adds to this the effect of the bag
-constant's radial stiffening, which shifts the QM radius inward by
-\(\sim 1.5~\mathrm{km}\). The condensate \(\Delta_0\) raises the
-pressure at fixed quark chemical potential through the 2SC pairing
-energy, producing larger and more massive equilibrium configurations.
-The topology difference visible in
-Fig.~\ref{fig:qmd_vs_qm_mass_radius} between the small-mass branches
-of the QMD and gravitationally-bound QM sequences confirms the common
-vacuum construction: both curves extend to large radii at low mass,
-while the self-bound curve collapses to a compact island.
+The stable neutral QMD equation of state constructed above is now used
+as input to the TOV equations. The same solver as in the earlier
+Quark--Meson stellar calculation is used; the only change is the
+equation of state. The resulting QMD sequence is shown in
+Fig.~\ref{fig:qmd_mass_radius_comparison}, together with the
+corresponding unpaired Quark--Meson reference sequences at
+\(m_\sigma=600~\mathrm{MeV}\).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_vs_qm_mass_radius.pdf}
-\caption{Mass--radius comparison for \(m_\sigma = 600~\mathrm{MeV}\).
-QMD~SET~A (dark solid) is shown against two unpaired Quark--Meson
-references: the gravitationally-bound sequence (\(B_{\min}=0\), light
-solid) and the self-bound sequence (\(B^{1/4} = 27.8~\mathrm{MeV}\),
-dashed). Filled circles mark maximum-mass configurations; the filled
-square marks the self-bound maximum-mass point. The gravitationally-bound
-QM curve, like QMD, extends to large radii at low mass; the self-bound
-curve collapses to a compact island at low mass.}
-\label{fig:qmd_vs_qm_mass_radius}
+\caption{Mass--radius comparison at \(m_\sigma=600~\mathrm{MeV}\).
+The QMD~SET~A sequence is shown together with two unpaired
+Quark--Meson reference sequences: the vacuum-normalized sequence with
+\(B=0\) and the Bodmer--Witten-shifted sequence with
+\(B^{1/4}=27.8~\mathrm{MeV}\). Markers indicate the maximum-mass
+configuration on each sequence.}
+\label{fig:qmd_mass_radius_comparison}
 \end{figure}
 
-The maximum mass \(M_{\max} = 1.970~M_\odot\) lies just below the
-central values inferred from the heaviest observed pulsars. PSR
-J0740+6620 has a measured mass of \(2.08 \pm 0.07~M_\odot\)
-\cite{Fonseca2021}, with a one-sigma lower bound of
-\(2.01~M_\odot\). PSR J0348+0432 has a measured mass of
-\(2.01 \pm 0.04~M_\odot\) \cite{Antoniadis_2013_J0348}. The QMD~SET~A
-prediction is approximately \(0.04~M_\odot\) below the J0740+6620
-one-sigma lower bound and essentially at the J0348+0432 one-sigma
-lower bound of \(1.97~M_\odot\), leaving no comfortable margin.
+The QMD sequence reaches
+\begin{equation}
+M_{\max}=1.970~M_\odot,
+\qquad
+R(M_{\max})=12.16~\mathrm{km},
+\end{equation}
+with central energy density
+\(\varepsilon_c=1.196~\mathrm{GeV/fm^3}\). The sequence has the
+gravitationally-bound topology expected from the surface behavior of the
+neutral QMD equation of state: as the mass decreases, the radius extends
+to large values rather than collapsing into a compact low-mass branch.
+This follows from the fact that the stable EoS terminates at
+\(\varepsilon(P=0)\simeq0\), rather than at a finite surface energy
+density.
 
-The interpretation is therefore intermediate: the baseline QMD result
-is not in direct conflict with the observational lower limit on the
-maximum neutron-star mass, but it does not safely exceed it either.
-This is the central motivation for the parameter sensitivity study in
-Sec.~\ref{sec:qmd_parameter_sensitivity}: the diquark-sector
-parameters are not fixed by vacuum observables, and modest variations
-in them could push the predicted maximum mass either above or below
-the observational constraint. Mapping this dependence is the
-appropriate next step before drawing conclusions about whether the
-QMD model with 2SC pairing can support the heaviest observed pulsars.
+The vacuum-normalized QM sequence provides the cleanest comparison,
+because it shares the same surface topology and vacuum normalization as
+the QMD sequence. For this unpaired reference case,
+\[
+M_{\max}=1.797~M_\odot,
+\qquad
+R(M_{\max})=11.8~\mathrm{km}.
+\]
+Thus, adding the 2SC diquark degree of freedom raises the maximum mass
+by about \(0.17~M_\odot\), with only a modest increase in the radius of
+the maximum-mass configuration. This reflects the additional pressure
+generated by pairing in the QMD equation of state.
 
-The baseline QMD~SET~A result, $M_{\max} = 1.970~M_\odot$ at $R = 12.16~\mathrm{km}$,
-motivates the parameter sensitivity study in Sec.~\ref{sec:qmd_parameter_sensitivity}.
+The Bodmer--Witten-shifted QM sequence gives a second reference with a
+different vacuum shift. It has a similar maximum mass to the
+vacuum-normalized QM sequence but is shifted to somewhat smaller radii.
+The comparison therefore shows that the baseline QMD sequence is
+stiffer and supports a heavier star than the corresponding unpaired
+QM sequences at the same sigma mass.
 
 \section{Parameter sensitivity}
 \label{sec:qmd_parameter_sensitivity}
@@ -3520,7 +3184,7 @@ densities), so a single quark chemical potential at the core is not
 directly comparable; the \(n_{B,c}\) column is the meaningful
 quantity for the QM rows.
 The QM configurations are identical to those used in the comparison
-of Fig.~\ref{fig:qmd_vs_qm_mass_radius}.}
+of Fig.~\ref{fig:qmd_mass_radius_comparison}.}
 \label{tab:qmd_central_state}
 \end{table}
 
