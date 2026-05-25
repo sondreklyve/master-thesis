@@ -71,6 +71,7 @@ def main() -> None:
         b_min_root_mev = b_root_mev_from_b_mev4(b_min_mev4)
         bag_root_values_mev = [b_min_root_mev + offset_mev for offset_mev in args.bag_root_offsets_mev]
         subplot_lines: list[tuple[np.ndarray, np.ndarray, str, str, float]] = []
+        subplot_markers: list[tuple[float, float, str, str, float]] = []
         for bag_root_mev, color in zip(bag_root_values_mev, colors, strict=True):
             bagged_eos = eos.with_bag_constant(b_mev4_from_root_mev(bag_root_mev), b_min_mev4=b_min_mev4)
             try:
@@ -97,12 +98,16 @@ def main() -> None:
             stable_radii = sequence.radius_km[stable]
             if stable_masses.size:
                 max_index = int(np.argmax(stable_masses))
+                max_radius = float(stable_radii[max_index])
+                max_mass = float(stable_masses[max_index])
                 print(
                     f"m_sigma={m_sigma_mev:.0f} MeV, "
                     f"B^(1/4)={bag_root_mev:.2f} MeV: "
-                    f"M_max={stable_masses[max_index]:.6f} Msun at "
-                    f"R={stable_radii[max_index]:.6f} km"
+                    f"M_max={max_mass:.6f} Msun at "
+                    f"R={max_radius:.6f} km"
                 )
+                ax.plot(max_radius, max_mass, "o", color=color, ms=6, zorder=5)
+                subplot_markers.append((max_radius, max_mass, color, "o", 6.0))
             ax.plot(
                 sequence.radius_km[stable],
                 sequence.mass_msun[stable],
@@ -159,6 +164,10 @@ def main() -> None:
                     label=r"grav.\ bound ($B_{\min}=0$)",
                 )
                 subplot_lines.append((g_r[phys], g_m[phys], "black", "--", 1.8))
+                if g_m.size:
+                    max_index = int(np.argmax(g_m))
+                    ax.plot(g_r[max_index], g_m[max_index], "o", color="black", ms=6, zorder=5)
+                    subplot_markers.append((float(g_r[max_index]), float(g_m[max_index]), "black", "o", 6.0))
                 print(
                     f"Grav-bound m_sigma=600 MeV: "
                     f"M_max={g_m[int(np.argmax(g_m))]:.4f} Msun at R={g_r[int(np.argmax(g_m))]:.4f} km"
@@ -174,6 +183,8 @@ def main() -> None:
         fig_single, ax_single = plt.subplots(figsize=(7.2, 4.8))
         for x, y, color, linestyle, linewidth in subplot_lines:
             ax_single.plot(x, y, color=color, linestyle=linestyle, linewidth=linewidth)
+        for x, y, color, marker, markersize in subplot_markers:
+            ax_single.plot(x, y, marker, color=color, ms=markersize, zorder=5)
         ax_single.set_title(rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$")
         ax_single.set_xlabel(r"Radius $R\;(\mathrm{km})$")
         ax_single.set_ylabel(r"Mass $M\;(M_\odot)$")

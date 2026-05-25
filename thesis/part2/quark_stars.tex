@@ -408,24 +408,26 @@ equation of state is then used as input to the Tolman--Oppenheimer--Volkoff
 equations in order to construct quark-star configurations and study
 their mass--radius relations.
 
-The main objective is to investigate how the stellar properties depend
-on the microscopic inputs of the model. In particular, we analyze
-the sensitivity to the sigma mass \(m_\sigma\), which
-controls the shape of the effective potential, and to the bag
-constant \(B\), which fixes the vacuum normalization and shifts the
-equation of state.
+The main objective is first to construct a physically consistent
+equation of state for stellar matter by imposing charge neutrality
+and $\beta$-equilibrium, and then to investigate how the resulting
+stellar configurations depend on the microscopic inputs of the model.
+In particular, we analyze the sensitivity to the sigma mass
+$m_\sigma$, which controls the shape of the effective potential and
+the stiffness of the resulting equation of state.
 
 \subsection*{Stellar matter and construction of the equation of state}
 \label{subsec:stellar_matter_qm}
 
 We now construct the equation of state for quark matter under the
 conditions relevant for compact stars. As discussed in Part~I, the
-matter inside a mature neutron star can be treated to a very good
+matter inside a neutron star can be treated to a very good
 approximation as cold and in weak-interaction equilibrium. In the
 present two-flavor framework, the relevant degrees of freedom are up
-quarks, down quarks, and electrons, while neutrinos are assumed to
-escape from the star and therefore do not contribute to the
-thermodynamics.
+quarks, down quarks, and electrons. Neutrinos and antineutrinos escape
+from the star on timescales much shorter than its evolution timescale,
+so they do not contribute to the thermodynamics and their chemical
+potential is set to zero, $\mu_{\bar{\nu}_e} = 0$.
 
 The composition of the system is determined by the requirement of
 $\beta$-equilibrium. Weak processes of the form
@@ -434,20 +436,8 @@ d \leftrightarrow u + e^- + \bar{\nu}_e
 \]
 convert down quarks into up quarks and electrons, and vice versa.
 In chemical equilibrium, the sum of chemical potentials must be
-conserved in such reactions. This leads to the condition
-\begin{equation}
-\mu_d = \mu_u + \mu_e + \mu_{\bar{\nu}_e}.
-\end{equation}
-
-In the present context, neutrinos and antineutrinos are not trapped
-inside the star but escape on timescales much shorter than the
-evolution timescale of the system. As a result, they do not contribute
-to the thermodynamic equilibrium and their chemical potential can be
-set to zero,
-\begin{equation}
-\mu_{\bar{\nu}_e} = 0.
-\end{equation}
-The condition for $\beta$-equilibrium therefore reduces to
+conserved in such reactions. With $\mu_{\bar{\nu}_e} = 0$ this
+gives
 \begin{equation}
 \mu_d = \mu_u + \mu_e.
 \label{eq:qs_beta_eq}
@@ -474,10 +464,13 @@ symmetrically, and the quark distributions are identical for each
 color. As a consequence, the net color charge vanishes automatically,
 and no additional chemical potentials are required to enforce color
 neutrality.
-This situation changes in more general phases of quark matter, such as
-color-superconducting phases, where pairing patterns can distinguish
-between different colors. In such cases, color neutrality must be
-imposed explicitly through additional constraints.
+This situation changes in the color-superconducting phases considered
+later in this chapter. In the two-flavor superconducting (2SC) phase
+of the Quark--Meson--Diquark model, red and green quarks pair while
+blue quarks remain unpaired, breaking the color symmetry between
+species. Color neutrality must therefore be imposed explicitly through
+an additional color chemical potential $\mu_8$, as discussed in
+Sec.~\ref{subsec:neutral_stellar_eos}.
 
 The thermodynamic potential is therefore generalized to include both
 the quark and electron contributions. Before imposing the constraints,
@@ -486,18 +479,19 @@ it may be written schematically as
 \Omega = \Omega_q(\bar{\sigma};\mu_u,\mu_d) + \Omega_e(\mu_e),
 \end{equation}
 where \(\Omega_q\) is the Quark--Meson contribution and \(\Omega_e\)
-is the contribution from the electron gas. The mean-field structure of
-the quark sector remains unchanged. In particular, the equilibrium
-value of the scalar condensate is still obtained from the gap equation
+is the contribution from the electron gas. The electrons required by
+charge neutrality are part of the thermodynamic system and must
+therefore appear in the potential. In the present model they are not
+coupled to the chiral condensate and are treated as a free relativistic
+Fermi gas. The mean-field structure of the quark sector remains
+unchanged: the equilibrium value of the scalar condensate is still
+obtained from the gap equation
 \begin{equation}
 \frac{\partial \Omega}{\partial \bar{\sigma}} = 0,
 \label{eq:qs_gap_eq_stellar}
 \end{equation}
 which determines the medium-dependent condensate \(\bar{\sigma}\) and
-thereby the constituent quark mass,
-\begin{equation}
-M_q = g\bar{\sigma}.
-\end{equation}
+thereby the constituent quark mass $M_q = g\bar{\sigma}$.
 
 It is useful to impose \(\beta\)-equilibrium by changing variables from
 the individual quark chemical potentials to a quark-number chemical
@@ -512,12 +506,9 @@ chemical potentials are written as
 \label{eq:qs_mu_u_mu_d}
 \end{equation}
 This parametrization automatically satisfies the condition for
-\(\beta\)-equilibrium, since
-\begin{equation}
-\mu_d - \mu_u = \mu_e.
-\end{equation}
-The remaining independent composition variable is therefore
-\(\mu_e\), which is fixed by imposing electric charge neutrality.
+\(\beta\)-equilibrium, since \(\mu_d - \mu_u = \mu_e\). The remaining
+independent composition variable is therefore \(\mu_e\), which is
+fixed by imposing electric charge neutrality.
 
 With this parametrization, the thermodynamic potential becomes
 \begin{equation}
@@ -530,19 +521,13 @@ With this parametrization, the thermodynamic potential becomes
 +
 \Omega_e(\mu_e).
 \end{equation}
-The electron term is included because the electrons required by charge
-neutrality are part of the thermodynamic system. In the present model
-they are not coupled to the chiral condensate and are treated as a free
-relativistic Fermi gas. At zero temperature, the grand potential of a
-fermion species is obtained by filling all momentum states up to the
-Fermi momentum. For electrons, the corresponding contribution is
-therefore the standard degenerate Fermi-gas result
-\cite{shapiro_teukolsky,glendenning2000,Schmitt2010}.
-
-The numerical calculation uses the standard massive degenerate
-Fermi-gas expressions with the physical electron mass
-\(m_e = 0.511~\mathrm{MeV}\). At zero temperature, the electron Fermi
-momentum is
+At zero temperature, the grand potential of a fermion species is
+obtained by filling all momentum states up to the Fermi momentum. For
+electrons, the corresponding contribution is the standard degenerate
+Fermi-gas result \cite{shapiro_teukolsky,glendenning2000,Schmitt2010}.
+The numerical calculation uses the massive form with the physical
+electron mass \(m_e = 0.511~\mathrm{MeV}\). At zero temperature, the
+electron Fermi momentum is
 \begin{equation}
 k_{F,e}
 =
@@ -564,8 +549,7 @@ for \(\mu_e>m_e\), while the electron density vanishes for
 \right],
 \label{eq:qs_electron_omega_massive}
 \end{equation}
-again for \(\mu_e>m_e\). For \(\mu_e\leq m_e\), one has
-\(\Omega_e=0\). The corresponding number density is
+and the corresponding number density is
 \begin{equation}
 n_e
 =
@@ -574,34 +558,12 @@ n_e
 \frac{k_{F,e}^3}{3\pi^2}.
 \label{eq:qs_electron_density_massive}
 \end{equation}
-
-For reference, in the ultrarelativistic limit \(m_e \ll \mu_e\), these
-expressions reduce to
-\begin{equation}
-\Omega_e(\mu_e)
-=
--\frac{\mu_e^4}{12\pi^2}.
-\label{eq:qs_electron_omega_ultrarel}
-\end{equation}
-The corresponding limiting expressions for the pressure and number
-density are
-\begin{equation}
-P_e = -\Omega_e = \frac{\mu_e^4}{12\pi^2},
-\qquad
-n_e = -\frac{\partial \Omega_e}{\partial \mu_e}
-= \frac{\mu_e^3}{3\pi^2}.
-\end{equation}
-The electron energy density is then
-\begin{equation}
-\varepsilon_e
-=
--P_e + \mu_e n_e
-=
-\frac{\mu_e^4}{4\pi^2}.
-\end{equation}
-Although the electron contribution is usually small compared with the
-quark contribution, it must be included in the total pressure and
-energy density in order to maintain thermodynamic consistency.
+In the ultrarelativistic limit $m_e \ll \mu_e$ these expressions
+simplify considerably, but since the full massive forms are
+numerically inexpensive, they are used throughout. Although the
+electron contribution is usually small compared with the quark
+contribution, it must be included in the total pressure and energy
+density in order to maintain thermodynamic consistency.
 
 For each value of the control chemical potential \(\mu_q\), the physical
 state is obtained by solving the gap equation together with the
@@ -659,19 +621,15 @@ and the energy density is obtained from
 \end{equation}
 
 The construction of the equation of state therefore proceeds
-parametrically. For each point in the chemical-potential grid, the gap
-equation and the neutrality condition are solved, with
-\(\beta\)-equilibrium imposed through
-\(\mu_e=\mu_d-\mu_u\). This yields
+parametrically. For each value of $\mu_q$, the gap equation and the
+neutrality condition are solved simultaneously, yielding
 \begin{equation}
-\{\mu_u,\,\mu_d,\,\mu_e\}
+\mu_q
 \;\longrightarrow\;
-\{\bar{\sigma},\, M_q,\,
+\{\mu_u,\,\mu_d,\,\mu_e,\,\bar{\sigma},\, M_q,\,
 n_u,\, n_d,\, n_e,\, P,\, \varepsilon\}.
 \end{equation}
-Equivalently, the result may be viewed as a parametrization in terms
-of the quark-number chemical potential \(\mu_q\). By eliminating the
-chemical potentials, one obtains the relation
+By eliminating the chemical potentials, one obtains the relation
 \begin{equation}
 \varepsilon = \varepsilon(P),
 \end{equation}
@@ -687,24 +645,26 @@ This behavior is characteristic of cold, two-flavor quark matter in
 QCD matter in effective models
 \cite{Buballa2005,Schmitt2010,Alford2008}.
 
-\subsection*{Vacuum structure, normalization, and phase construction}
+\subsection*{Vacuum structure, phase construction, and equation of state}
 \label{subsec:vacuum_stability}
 
 Before constructing the stellar equation of state, it is necessary to
 ensure that the underlying model provides a physically consistent
 description of the vacuum. In the Quark--Meson model, the vacuum is
 determined by the effective potential \(\Omega(\sigma)\) evaluated at
-vanishing temperature and chemical potentials. The physical vacuum
-corresponds to the global minimum of this potential and fixes the
-vacuum value of the chiral condensate.
+vanishing temperature and chemical potentials. In the present
+truncation the renormalized potential is not bounded from below at
+large \(\sigma\), so the relevant condition is the existence of a
+local minimum at \(\sigma \approx f_\pi\) rather than a global one.
+This local minimum fixes the vacuum value of the chiral condensate
+and reproduces the pion decay constant, \(\sigma_0 = f_\pi\).
 
-As discussed previously, the vacuum expectation value is required to
-reproduce the pion decay constant, \(\sigma_0 = f_\pi\). This imposes
-constraints on the model parameters, in particular on the sigma mass
-\(m_\sigma\), which controls the curvature of the effective potential.
-If \(m_\sigma\) is chosen too small, the potential may fail to develop
-a stable minimum at \(\sigma \approx f_\pi\), and the model no longer
-provides a consistent description of the vacuum.
+The existence of such a minimum constrains the model parameters, in
+particular the sigma mass \(m_\sigma\), which controls the curvature
+of the effective potential. If \(m_\sigma\) is chosen too small, the
+potential may fail to develop a stable minimum at
+\(\sigma \approx f_\pi\), and the model no longer provides a
+consistent description of the vacuum.
 
 To determine the range of acceptable parameter values, the vacuum
 effective potential \(\Omega(\sigma)\) is evaluated for different
@@ -718,22 +678,21 @@ Fig.~\ref{fig:qs_vacuum_scan}.
 \(f_\pi^4\), as a function of the chiral condensate for several values of
 the sigma mass \(m_\sigma = 300, 350, 400, 500, 600, 700~\mathrm{MeV}\).
 The vertical dashed line indicates the physical vacuum value
-\(\sigma = f_\pi = 93~\mathrm{MeV}\). Curves shown with dotted lines
+\(\sigma = f_\pi = 93~\mathrm{MeV}\). Curves shown with dashed lines
 correspond to parameter choices that do not exhibit a stable minimum at
 \(\sigma = f_\pi\) and are therefore excluded.}
 \label{fig:qs_vacuum_scan}
 \end{figure}
 
 The figure shows that the existence of a physically acceptable vacuum
-depends sensitively on the value of \(m_\sigma\). For sufficiently small
-values, the point \(\sigma=f_\pi\) is no longer a stable minimum of the
-effective potential. Although the stationarity condition may still be
-satisfied at this point, the curvature is not positive and the
-potential is not bounded from below in the present truncation. The
-corresponding parameter choices therefore do not define a stable vacuum
-state and are excluded from the stellar calculation. In the present
-setup, this occurs for
-\(m_\sigma \lesssim 395~\mathrm{MeV}\).
+depends sensitively on the value of \(m_\sigma\). For sufficiently
+small values, the point \(\sigma=f_\pi\) is no longer a stable minimum
+of the effective potential. The stationarity condition
+\(\partial\Omega/\partial\sigma = 0\) may still be satisfied at this
+point, but the curvature is not positive, so the extremum is not a
+minimum. The corresponding parameter choices therefore do not define a
+stable vacuum state and are excluded from the stellar calculation. In
+the present setup, this occurs for \(m_\sigma \lesssim 395~\mathrm{MeV}\).
 
 Based on this analysis, we restrict the parameter space to values of
 \(m_\sigma\) above this threshold. In the following, we consider the
@@ -741,100 +700,105 @@ representative choices
 \begin{equation}
 m_\sigma = 400,\; 500,\; 600~\mathrm{MeV},
 \end{equation}
-which correspond to the lowest values for which a stable vacuum solution
-is obtained. These values provide a controlled range for studying the
-impact of the effective potential on the thermodynamic and stellar
-properties of the model.
+which correspond to the lowest values for which a stable vacuum
+solution is obtained. These values provide a controlled range for
+studying the impact of the effective potential on the thermodynamic
+and stellar properties of the model.
 
-Having established the parameter range, we turn to the normalization
-of the thermodynamic potential. After renormalization, the vacuum
-contribution to \(\Omega\) is generally nonzero, which implies that the
-pressure does not vanish in the vacuum state. Since the physical
-vacuum should correspond to zero pressure, a constant shift is
-introduced,
+As in the simple equation of state of the previous section, the
+renormalized thermodynamic potential is nonzero in the vacuum, and a
+constant subtraction \(B_0 = \Omega_{\mathrm{vac}}(\sigma_0)\) is
+applied to ensure that \(P = 0\) in the vacuum configuration.
+
+A further aspect of the construction concerns the treatment of the
+phase transition. Within the mean-field approximation, the
+thermodynamic potential develops multiple local minima as a function
+of the chemical potential near the chiral transition. At each
+\(\mu_q\), the physical state is taken to be the deepest available
+local minimum near \(\sigma = f_\pi\); jumps between minima as
+\(\mu_q\) varies signal a first-order transition.
+
+This procedure can produce a non-monotonic pressure curve near the
+transition, with a small interval in which
 \begin{equation}
-\Omega \rightarrow \Omega + B_0,
+\frac{dP}{d\mu_q} < 0.
 \end{equation}
-where
-\begin{equation}
-B_0 = \Omega_{\mathrm{vac}}(\sigma_0).
-\end{equation}
-This ensures that \(P = 0\) in the vacuum configuration.
+Since \(n_q = dP/d\mu_q\), such a region corresponds to a negative
+quark number density and is mechanically unstable: small density
+fluctuations are amplified rather than damped, and the system cannot
+exist as a homogeneous phase in this range. Physically, the system
+phase-separates into coexisting low- and high-density phases at a
+common pressure and chemical potential, with the mixture fraction
+varying smoothly across the transition.
 
-In addition to this vacuum subtraction, one may introduce an
-additional constant shift \(B\), leading to the transformation
-\begin{equation}
-P \rightarrow P - B, \qquad
-\varepsilon \rightarrow \varepsilon + B.
-\end{equation}
-This parameter plays a role analogous to the bag constant in
-phenomenological quark-matter models \cite{Chodos1974,FarhiJaffe1984}.
-While \(B_0\) is fixed by the requirement of vacuum normalization, the
-additional constant \(B\) can be used to control the onset and
-stiffness of the equation of state. In particular, increasing \(B\)
-shifts the equation of state toward higher energy densities and
-delays the point at which the pressure becomes positive.
+This is the situation a Maxwell construction is designed to handle.
+The non-monotonic segment of \(P(\mu_q)\) is replaced by a horizontal
+plateau at the transition pressure \(P_t\), determined by the
+condition that the two coexisting phases share the same pressure and
+chemical potential. The location of \(P_t\) is fixed by the
+equal-area rule: the two regions enclosed between the raw S-curve and
+the horizontal plateau must have equal area, which is equivalent to
+the condition of equal Gibbs free energy for the two coexisting
+phases. In the \(\varepsilon(P)\) representation, the construction
+appears as a vertical jump in energy density at \(P_t\), with the
+intermediate values corresponding to mixed-phase configurations.
+The procedure is illustrated schematically in
+Fig.~\ref{fig:qs_maxwell_schematic}.
 
-A further important aspect is the treatment of the phase transition.
-Within the mean-field approximation, the thermodynamic potential may
-develop multiple local minima as a function of the chemical
-potential. Selecting the global minimum ensures thermodynamic
-consistency, but the resulting equation of state may still contain
-regions where
-\begin{equation}
-\frac{dP}{d\mu_q} < 0,
-\end{equation}
-which corresponds to a mechanically unstable branch.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/quark_stars/maxwell_construction_schematic.pdf}
+\caption{Schematic illustration of the Maxwell construction for a
+first-order phase transition. Left panel: the raw pressure curve
+\(P(\mu_q)\) (dashed) contains a region of negative slope; the
+constructed curve (solid) follows the raw result outside the unstable
+region and connects the two stable branches by a horizontal plateau
+at the transition pressure \(P_t\). Right panel: in the
+\(\varepsilon(P)\) representation, the raw result is multi-valued in
+\(P\) (dashed); the construction replaces this by a vertical jump in
+energy density at \(P_t\) (solid), corresponding to phase coexistence
+between the low- and high-density phases. The curves are schematic
+and not based on the QM model.}
+\label{fig:qs_maxwell_schematic}
+\end{figure}
 
-To construct a physically meaningful equation of state, this unstable
-region is removed by performing a Maxwell construction. This replaces
-the non-monotonic segment by a constant-pressure interval,
-corresponding to a first-order phase transition between two phases at
-equal pressure and chemical potential. The resulting equation of state
-is thermodynamically stable and can be used as input for the stellar
-structure calculation \cite{glendenning2000,Schmitt2010}.
-
-\subsection*{Equation of state and parameter dependence}
+The construction restores monotonicity, removes the unstable region,
+and yields a thermodynamically stable equation of state suitable as
+input for the stellar structure calculation
+\cite{glendenning2000,Schmitt2010}.
 
 With the constraints of $\beta$-equilibrium and charge neutrality
-imposed, and the vacuum structure fixed as discussed above, the
-equation of state can now be constructed. The procedure follows
-directly from the thermodynamic framework: for each point in the
-chemical-potential grid, the gap equation and the neutrality condition
-are solved, and the pressure and energy density are evaluated at the
-minimum of the grand potential.
-
-The resulting equation of state is shown in
-Fig.~\ref{fig:qs_eos_zoom} for 
-\(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\).
+imposed, and the vacuum structure and phase construction fixed as
+described above, the equation of state can now be constructed. The
+procedure follows directly from the thermodynamic framework: for
+each point in the chemical-potential grid, the gap equation and the
+neutrality condition are solved, the pressure and energy density are
+evaluated at the relevant local minimum, and the Maxwell construction
+is applied to the resulting curve. The result is shown in
+Fig.~\ref{fig:qs_eos_zoom}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/quark_stars/pressure_vs_energy_density.pdf}
 \caption{Equation of state for charge-neutral, $\beta$-equilibrated
 two-flavor quark matter. The curves are shown for
-\(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\). The dotted segments
-represent the direct mean-field result, while the solid curves show
-the equation of state after applying the Maxwell construction.}
+\(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\). The solid and dotted
+curves show the raw mean-field result before the Maxwell construction,
+with dotted segments indicating negative pressure. The dashed vertical
+segments show the surface jump introduced by the Maxwell construction
+for the \(400\) and \(500~\mathrm{MeV}\) cases.}
 \label{fig:qs_eos_zoom}
 \end{figure}
 
-The dotted curves correspond to the direct mean-field solution,
-obtained by selecting the global minimum of the thermodynamic
-potential at each value of the chemical potential. As discussed in the
-previous subsection, this construction may contain regions where the
-pressure decreases with increasing chemical potential, indicating a
-mechanically unstable branch. In the \(\varepsilon(P)\) representation,
-this manifests as a non-monotonic behavior that cannot be used in a
-consistent stellar calculation.
-
-The physically relevant equation of state is obtained by performing a
-Maxwell construction, shown by the solid curves in the figure. In this
-procedure, the unstable region is replaced by a constant-pressure
-segment, corresponding to a first-order phase transition between two
-phases at equal pressure and chemical potential. This ensures that the
-resulting equation of state is thermodynamically stable and
-single-valued.
+The raw mean-field curves exhibit the non-monotonic behavior
+anticipated above. For the \(400\) and \(500~\mathrm{MeV}\) cases,
+part of the raw solution lies at negative pressure; these segments are
+shown as dotted lines. After the Maxwell construction, the stellar
+equation of state starts instead with a vertical surface jump from
+\((P,\varepsilon)=(0,0)\) to the finite energy density at \(P=0\),
+shown by the dashed lines. For \(m_\sigma=600~\mathrm{MeV}\), however,
+the pressure remains non-negative everywhere, so the Maxwell construction
+does not modify the equation of state in this case.
 
 The dependence on the sigma mass is clearly visible. Lower values of
 \(m_\sigma\) lead to a stiffer equation of state, with a more rapid
@@ -845,16 +809,13 @@ chiral condensate with increasing density.
 
 At higher pressures, the curves approach a common behavior, reflecting
 that the system becomes increasingly dominated by relativistic quark
-degrees of freedom. In this regime, the constituent quark masses become
-small compared with the chemical potentials, and the equation of state
-approaches that of an ultrarelativistic ideal Fermi gas. Correspondingly,
-the different curves tend toward the limiting relation
-\begin{equation}
-\varepsilon = 3P,
-\end{equation}
-or equivalently \(c_s^2=dP/d\varepsilon = \frac{1}{3}\). This is the standard
-high-density behavior of a gas of weakly interacting relativistic
-fermions \cite{Buballa2005,Schmitt2010}.
+degrees of freedom. In this regime, the constituent quark masses
+become small compared with the chemical potentials, and the equation
+of state approaches that of an ultrarelativistic ideal Fermi gas.
+Correspondingly, the different curves tend toward the limiting
+relation \(\varepsilon = 3P\). This is the standard high-density
+behavior of a gas of weakly interacting relativistic fermions
+\cite{Buballa2005,Schmitt2010}.
 
 \subsection*{Stellar structure and mass--radius relations}
 \label{subsec:qm_stellar_structure}
@@ -867,99 +828,111 @@ pressure vanishes, which defines the radius of the star. Repeating
 this procedure for a range of central pressures yields a sequence of
 equilibrium configurations characterized by their mass and radius.
 
-\subsubsection*{Gravitationally-bound sequences}
+\subsubsection*{Mass--radius sequences from the QM equation of state}
 \label{sec:qm_grav_bound}
 
-Before imposing the absolute-stability constraint, we consider the
-simplest quark-star configuration available in this model: the equation
-of state with vacuum pressure fixed to zero through the \(B_0\)
-subtraction alone, without any additional bag constant. This is the
-analogue of the Quark--Meson--Diquark calculation discussed later in
-this chapter, where the renormalized vacuum serves as the surface
-condition without any externally imposed energy constraint. The
+We first consider the simplest application of the QM equation of state
+to compact stars. The vacuum is normalized by the \(B_0\) subtraction
+introduced above, so that the pressure vanishes at \(\mu_q = 0\), and
+no further modifications are made to the equation of state. The
 resulting mass--radius sequences for \(m_\sigma = 400\), \(500\), and
 \(600~\mathrm{MeV}\) are shown in Fig.~\ref{fig:qm_grav_bound_mr}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/quark_stars/qm_grav_bound_mass_radius.pdf}
-\caption{Mass--radius relations for gravitationally-bound quark stars
-(vacuum subtraction \(B_0\) only, no additional bag constant) for
-\(m_\sigma = 400\), \(500\), and \(600~\mathrm{MeV}\) (viridis color
-scale, dark to light). Filled circles mark the maximum-mass
-configuration on each stable branch. All three sequences use the
-simple \(B_0\) normalization: the stellar surface sits at the onset of
-the electron-present quark phase, where the pressure is effectively
-zero on the stellar scale
-(\(P_{\mathrm{onset}}/P_{\max} \sim 10^{-7}\text{--}10^{-8}\)).}
+\caption{Mass--radius relations for the simple QM equation of state
+for \(m_\sigma = 400\), \(500\), and \(600~\mathrm{MeV}\). Filled
+circles mark the maximum-mass configuration on each stable branch.}
 \label{fig:qm_grav_bound_mr}
 \end{figure}
 
-The \(m_\sigma = 500\) and \(600~\mathrm{MeV}\) sequences exhibit
-the standard gravitationally-bound topology: maximum masses of
-\(M_{\max} = 2.15~M_\odot\) at \(R = 12.3~\mathrm{km}\) and
-\(M_{\max} = 1.80~M_\odot\) at \(R = 11.8~\mathrm{km}\), respectively,
-with radii at canonical mass \(R(1.4\,M_\odot) = 12.9~\mathrm{km}\) and
-\(14.1~\mathrm{km}\). As the central pressure decreases below the
-maximum-mass value, the stellar radius grows rather than shrinking
-toward a compact island, and configurations with
-\(M \lesssim 0.5\,M_\odot\) extend beyond \(20~\mathrm{km}\), reflecting
-the gravitationally-bound structure in which the quark core is
-surrounded by effectively vacuum. The \(m_\sigma = 400~\mathrm{MeV}\)
-sequence is structurally more complex: a residual first-order phase
-transition at low pressure modifies the mass--radius topology at very
-low stellar masses, but at astrophysically relevant masses the sequence
-remains gravitationally-bound, supporting \(M_{\max} = 2.45~M_\odot\)
-at \(R = 13.7~\mathrm{km}\) with \(R(1.4\,M_\odot) = 13.4~\mathrm{km}\).
-Across all three sigma masses, the sequences differ quantitatively
---- higher \(m_\sigma\) gives a softer equation of state and a lower
-maximum mass --- but each has its stellar surface at vanishing baryon
-density rather than at the finite surface density of a self-bound star.
+The three sequences differ markedly in their low-mass topology, and
+this difference can be traced directly to the character of the
+underlying chiral transition. For \(m_\sigma = 400~\mathrm{MeV}\),
+where the EoS exhibits a sharp first-order transition, the sequence
+collapses toward small radii as the central pressure decreases:
+configurations with \(M \lesssim 2~M_\odot\) sit at progressively
+smaller radii rather than extending outward, producing the compact
+island topology characteristic of a self-bound star. The
+\(m_\sigma = 500~\mathrm{MeV}\) sequence shows the same qualitative
+behavior, although the leftward trajectory is somewhat less
+pronounced: the curve slows its inward march near
+\(M \sim 0.5~M_\odot\) but does not extend outward in the way a
+gravitationally-bound sequence would. By contrast, the
+\(m_\sigma = 600~\mathrm{MeV}\) sequence, corresponding to a smooth
+crossover EoS, exhibits the standard gravitationally-bound topology:
+as the central pressure decreases below the maximum-mass value, the
+radius grows monotonically, with low-mass configurations extending
+to large radii. This distinction follows directly from the surface
+condition produced by each EoS: a first-order transition leaves a
+finite density jump at the stellar surface, which provides the
+self-binding, whereas a continuous crossover gives a smooth approach
+to vanishing density and therefore gravitational binding.
 
-These sequences should be understood as a theoretical baseline
---- the pure QM prediction without any absolute-stability tuning ---
-rather than as models of astrophysically realistic compact stars: the
-near-vacuum surface densities and large radii at low mass are not
-compatible with observed neutron-star properties.
+The maximum masses follow the expected ordering with sigma mass:
+\(M_{\max} = 2.45~M_\odot\) at \(R = 13.7~\mathrm{km}\) for
+\(m_\sigma = 400~\mathrm{MeV}\),
+\(M_{\max} = 2.15~M_\odot\) at \(R = 12.3~\mathrm{km}\) for
+\(m_\sigma = 500~\mathrm{MeV}\), and
+\(M_{\max} = 1.80~M_\odot\) at \(R = 11.8~\mathrm{km}\) for
+\(m_\sigma = 600~\mathrm{MeV}\). Larger \(m_\sigma\) gives a softer
+equation of state and therefore a lower maximum mass, with the radius
+at the maximum-mass configuration shrinking correspondingly. The
+maximum masses occur at relatively large radii in all three cases,
+between roughly \(12\) and \(14~\mathrm{km}\), reflecting the
+stiffness of the QM equation of state at the relevant central
+densities.
 
-The remainder of this section examines what happens when an additional
-bag constant is imposed to satisfy the Bodmer--Witten absolute-stability
-criterion. This constraint shifts the surface to a finite baryon density
-and can produce topologically self-bound stellar configurations,
-but the effect depends sensitively on \(m_\sigma\).
+The mass--radius sequences presented here should be regarded as a
+direct readout of the QM equation of state under the TOV equations,
+without any further phenomenological adjustments. The lower two sigma
+masses, and especially \(m_\sigma = 400~\mathrm{MeV}\), produce
+considerably large maximum masses, reflecting the stiffness of the
+corresponding equations of state. However, the surface conditions and
+low-mass topology are not necessarily realistic descriptions of
+physical compact stars.
 
 \subsubsection*{Bodmer--Witten sequences}
 
-In the present calculation, this procedure is applied to the
-equations of state constructed for the selected sigma masses
-\(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\). For each value of
-\(m_\sigma\), a reference bag constant \(B_{\min}\) is first determined
-from a stability condition at zero pressure. More precisely, the
-shifted equation of state is written as
+The preceding sequences were obtained from the vacuum-normalized QM
+equation of state, with no additional phenomenological shift beyond the
+subtraction required to set the vacuum pressure to zero. We now consider
+a second construction inspired by the Bodmer--Witten stability argument.
+In its original form, the Bodmer--Witten hypothesis concerns the
+possibility that bulk strange quark matter could be absolutely stable:
+the energy per baryon at zero pressure would then be lower than that of
+ordinary nuclear matter \cite{Bodmer1971,Witten1984,FarhiJaffe1984}.
+The present model contains only two quark flavors, so this should not be
+interpreted as a calculation of absolutely stable strange matter.
+Instead, we use the same zero-pressure energy-per-baryon condition as a
+phenomenological benchmark for fixing an additional bag-like shift of
+the two-flavor equation of state.
+
+For each value of \(m_\sigma\), we introduce a constant shift \(B\)
+according to
 \begin{equation}
 P = P_{B_0} - B,
 \qquad
 \varepsilon = \varepsilon_{B_0} + B,
 \end{equation}
-where \(B_0\) denotes the vacuum subtraction discussed above. The value
-\(B_{\min}\) is chosen such that the energy per baryon at the
-zero-pressure surface satisfies
+where \(B_0\) denotes the vacuum subtraction discussed above. The
+reference value \(B_{\min}\) is chosen such that the energy per baryon
+at the zero-pressure surface satisfies
 \begin{equation}
 \frac{E}{A} = 931~\mathrm{MeV}.
 \end{equation}
-This reference value is used as a conventional
-stability benchmark, obtained by comparing the energy per baryon of
-bulk quark matter at zero pressure with that of ordinary nuclear
-matter, represented by iron. This criterion is commonly used in
-discussions of absolutely stable quark matter and the Bodmer--Witten
-hypothesis \cite{Bodmer1971,Witten1984,FarhiJaffe1984}. In the present
-two-flavor calculation, it should be understood as a reference scale
-for fixing \(B_{\min}\), rather than as a claim that the model realizes
-absolutely stable strange matter.
+This condition fixes the point at which the shifted equation of state
+terminates at zero pressure. Since the shift lowers the pressure by a
+constant amount, the zero-pressure surface no longer coincides with the
+vacuum-normalized point of the original equation of state. Instead, it
+occurs at a finite density whenever the shifted curve reaches
+\(P=0\). This is the sense in which the Bodmer--Witten construction
+changes the surface condition of the stellar sequence.
 
-To test the sensitivity of the stellar solutions to this
-phenomenological shift, two additional equations of state are generated
-around the reference value. The variation is made in fourth-root units,
+To test the sensitivity of the stellar solutions to this shift, two
+additional equations of state are generated around the reference value.
+The variation is made in fourth-root units,
 \begin{equation}
 B^{1/4} = B_{\min}^{1/4} - 10~\mathrm{MeV},
 \qquad
@@ -967,18 +940,10 @@ B^{1/4} = B_{\min}^{1/4},
 \qquad
 B^{1/4} = B_{\min}^{1/4} + 10~\mathrm{MeV}.
 \end{equation}
-The two shifted values are not independent physical constraints, but
-are included to show how the mass--radius sequence responds to a
-smaller or larger effective bag constant.
-
-For each resulting equation of state, the TOV equations are solved
-numerically using the tabulated relation \(\varepsilon(P)\). The
-integration produces a family of stellar configurations, which are
-represented as mass--radius relations. Along each sequence, the
-maximum mass marks the onset of instability, separating stable and
-unstable configurations.
-The resulting mass--radius relations are shown in
-Fig.~\ref{fig:qs_mass_radius_clean}.
+The shifted values are not independent physical constraints, but are
+included to show how the mass--radius sequence responds to a smaller
+or larger effective bag constant. The resulting mass--radius relations
+are shown in Fig.~\ref{fig:qs_mass_radius_clean}.
 
 \begin{figure}[H]
 \centering
@@ -990,106 +955,57 @@ Quark--Meson model for \(m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}\)
 (top to bottom).
 For each value of \(m_\sigma\), three curves are shown corresponding to
 \(B^{1/4}=B_{\min}^{1/4}-10~\mathrm{MeV}\), \(B_{\min}^{1/4}\), and
-\(B_{\min}^{1/4}+10~\mathrm{MeV}\). Solid colored lines indicate
-stable configurations; dashed colored lines denote the unstable
-branches beyond the maximum mass.}
+\(B_{\min}^{1/4}+10~\mathrm{MeV}\). Solid lines indicate stable
+configurations; dashed lines denote the unstable branches beyond the
+maximum mass.}
 \label{fig:qs_mass_radius_clean}
 \end{figure}
 
-It is important to note that the low-mass part of these sequences
-should not be interpreted as a realistic description of ordinary
-compact stars. These sequences apply the stability bag constant \(B_{\min}\), which sets
-the zero-pressure surface at a finite baryon density. For
-\(m_\sigma = 400\) and \(500~\mathrm{MeV}\), the resulting surface density is high
-enough to produce compact, self-bound topology at low mass. For
-\(m_\sigma = 600~\mathrm{MeV}\), the surface density is lower, and the sequences
-retain a gravitationally-bound character despite satisfying the
-absolute-stability energy criterion.
-In a realistic
-hybrid model, one would replace the low-density region with hadronic
-matter and a nuclear crust. The low-mass, small-radius segments should therefore be regarded
-as a consequence of the self-bound construction rather than as
-realistic predictions; the same caveat applies to the gravitationally-bound
-sequences in Fig.~\ref{fig:qm_grav_bound_mr}, whose low-mass tails
-extend to unphysically large radii.
-Neither pure-quark-matter topology can be carried over to realistic
-neutron-star modeling without the addition of a nuclear-matter crust.
+For \(m_\sigma = 400\) and \(500~\mathrm{MeV}\), the topology is the
+same as in the unshifted QM calculation. Both cases retain compact,
+self-bound-like low-mass branches, reflecting the finite surface
+density associated with the underlying first-order transition. The
+Bodmer--Witten shift mainly changes the mass and radius scale by moving
+the zero-pressure point. As \(B\) increases, the equation of state is
+shifted toward larger energy density at fixed pressure, which softens
+the stellar sequence: the maximum mass decreases and the corresponding
+radius is reduced. Conversely, a smaller bag constant gives a larger
+maximum mass at a larger radius.
 
-Comparing Fig.~\ref{fig:qm_grav_bound_mr} with the lower panel of
-Fig.~\ref{fig:qs_mass_radius_clean} for \(m_\sigma = 600~\mathrm{MeV}\)
-makes the topology contrast directly visible: the self-bound curves
-collapse toward a compact island at low mass, while the
-gravitationally-bound sequence extends to large radii. The maximum mass
-is almost identical in both constructions
-(\(M_{\max} \approx 1.80~M_\odot\)), but the gravitationally-bound
-sequence gives \(R(1.4\,M_\odot) = 14.1~\mathrm{km}\) versus
-\(12.6~\mathrm{km}\) for the self-bound case, so the bound-state
-construction primarily affects radii and low-mass topology rather than
-the maximum mass.
+For \(m_\sigma = 600~\mathrm{MeV}\), the topology is also preserved:
+all three shifted sequences remain gravitationally bound. None of the
+bag constants considered here produces a compact self-bound branch or a
+multivalued mass--radius curve. What changes with increasing \(B\) is
+the shape of the low-mass branch, which falls off more steeply as the
+surface density increases. This indicates that the sequence is being
+pushed toward self-bound behavior, but not enough to change topology
+within the range of bag constants used here. For sufficiently larger
+bag shifts, the same model can produce self-bound quark-star sequences,
+as seen in Ref.~\cite{sletmoen2022}.
 
-This topology comparison identifies a sharper distinction than is sometimes
-drawn in MIT-bag-type discussions: the Bodmer--Witten energy
-criterion (\(E/A = 931~\mathrm{MeV}\) at the zero-pressure surface)
-is necessary but not sufficient for topologically self-bound stellar
-configurations. At \(m_\sigma = 600~\mathrm{MeV}\), satisfying the
-energy criterion at \(B = B_{\min}\) produces matter that is
-absolutely stable against decay into iron nuclei, but with a surface
-density of only about 4 percent of nuclear saturation. Stellar
-configurations at this surface density extend to large radii at low
-mass, in the same gravitationally-bound topology that the
-Quark--Meson--Diquark model produces without any bag constant.
-Genuine self-bound topology, with compact configurations at low
-mass, requires a bag constant several times larger than the
-Bodmer--Witten threshold: \(B^{1/4}\) of order
-\(47\text{--}67~\mathrm{MeV}\) at \(m_\sigma = 600~\mathrm{MeV}\).
-At lower sigma masses (400 and 500~MeV), satisfying the energy
-criterion also produces a surface density sufficient for self-bound
-topology, so the two notions effectively align at these parameter
-choices.
+The low-mass parts of these curves should therefore be interpreted with
+care. They describe pure quark matter all the way to the stellar surface,
+with the surface fixed by the shifted zero-pressure condition. This is a
+useful diagnostic of the equation of state, but it is not a realistic
+description of the outer layers of an ordinary compact star. In a more
+realistic hybrid-star construction, the low-density region would be
+replaced by hadronic matter and eventually by a nuclear crust.
 
-The results exhibit a clear dependence on the bag constant. Increasing
-\(B\) shifts the equation of state toward higher energy densities and
-effectively softens it. As a consequence, the corresponding stellar
-sequences support lower maximum masses and typically smaller radii.
-Conversely, smaller values of \(B\) lead to a stiffer equation of
-state and allow for more massive stars. This behavior is consistent
-with the interpretation of the bag constant as a parameter controlling
-the onset and stiffness of the quark-matter phase
-\cite{FarhiJaffe1984,Buballa2005}.
-
-The dependence on the sigma mass reflects the underlying chiral
-dynamics of the model. Lower values of \(m_\sigma\) correspond to a
-stiffer effective potential and therefore to a stiffer equation of
-state, resulting in more massive and more compact stellar
-configurations. Higher values of \(m_\sigma\) lead to softer equations
-of state and reduced maximum masses.
-
-Quantitatively, for the Bodmer--Witten parameter sequences, the
-maximum masses are found to lie in the range
+Quantitatively, the Bodmer--Witten-shifted sequences give maximum
+masses in the range
 \begin{equation}
 M_{\max} \approx 1.79\text{--}2.13~M_\odot,
 \end{equation}
-depending on the choice of \(m_\sigma\) and \(B\). For
-\(m_\sigma = 400~\mathrm{MeV}\), the lowest bag constant considered
-yields a maximum mass of approximately \(2.13~M_\odot\), while
-increasing \(B\) reduces the maximum mass to below
-\(1.9~M_\odot\). A similar trend is observed for
-\(m_\sigma = 500~\mathrm{MeV}\), where the maximum mass remains close
-to \(2~M_\odot\) for moderate values of the bag constant but decreases
-for larger shifts. For \(m_\sigma = 600~\mathrm{MeV}\), all considered
-configurations yield maximum masses below \(1.8~M_\odot\), indicating
-that the corresponding equations of state are too soft to support the
-most massive observed neutron stars.
-
-Overall, the results demonstrate that both the sigma mass and the bag
-constant play a central role in determining the stellar properties.
-The sigma mass controls the underlying stiffness through the chiral
-dynamics of the model, while the bag constant provides an additional
-phenomenological shift that can significantly modify the mass scale of
-the solutions. Only a subset of the parameter space is capable of
-supporting stars with masses of order \(2~M_\odot\), which provides an
-important constraint when comparing the model to astrophysical
-observations.
+depending on \(m_\sigma\) and \(B\). The largest values occur for
+\(m_\sigma = 400~\mathrm{MeV}\) with the smallest bag shift, while the
+smallest values occur for \(m_\sigma = 600~\mathrm{MeV}\). Compared with
+the unshifted QM sequences, the maximum masses and radii are reduced,
+making the stellar configurations less extreme while preserving the
+basic ordering with sigma mass. Thus the Bodmer--Witten construction
+acts mainly as a phenomenological control on the mass and radius scale:
+smaller \(B\) gives heavier and larger stars, larger \(B\) gives lighter
+and more compact stars, and increasing \(m_\sigma\) softens the equation
+of state throughout.
 
 \section{Color-superconducting quark matter}
 
@@ -1099,11 +1015,13 @@ mean field was the chiral condensate, and the main microscopic effect was
 the density dependence of the constituent quark mass. At sufficiently high
 density, however, another instability may become relevant. Quarks occupy
 states up to a Fermi surface, and an attractive interaction between quarks
-near this surface can lead to the formation of Cooper pairs. This is the
-same basic mechanism as in BCS superconductivity, but the pairs are now
-formed from quarks rather than electrons. Since quarks carry color charge,
-the corresponding phase is called a color-superconducting phase
-\cite{Shovkovy2005}.
+near this surface can lead to the formation of Cooper pairs. A Cooper pair
+is a correlated two-fermion state which behaves as a bosonic degree of
+freedom, allowing many such pairs to occupy the same quantum state and
+form a condensate. This is the same basic mechanism as in BCS
+superconductivity, but the pairs are now formed from quarks rather than
+electrons. Since quarks carry color charge, the corresponding paired phase
+is called a color-superconducting phase \cite{Shovkovy2005}.
 
 The microscopic origin of the pairing can be illustrated by quark--quark
 scattering through one-gluon exchange, shown schematically in
@@ -1144,17 +1062,17 @@ condensate. In an effective model, or after fixing a color orientation, the
 diquark mean field can instead be used as a convenient representation of
 the pairing pattern and of the resulting quasiparticle spectrum.
 
-In the present work we restrict the discussion to two flavors, \(u\) and
-\(d\). The relevant color-superconducting phase is then the two-flavor
-color-superconducting phase, usually denoted by 2SC. In this phase, quarks
-pair in a scalar channel that is antisymmetric in both color and flavor.
-With a conventional choice of color orientation, the condensate pairs red
-and green quarks, while the blue quarks remain unpaired, as shown
-schematically in Fig.~\ref{fig:2sc_pairing_schematic}. This choice fixes
-the orientation of the condensate in color space and is made for
-mathematical convenience. An equivalent description could be obtained by a
-color rotation, so the choice of which color remains unpaired should not
-be interpreted as a physical preference for blue quarks. In the fixed color
+For two flavors, \(u\) and \(d\), the relevant color-superconducting
+phase is the two-flavor color-superconducting phase, usually denoted by
+2SC. In this phase, quarks pair in a scalar channel that is
+antisymmetric in both color and flavor. With a conventional choice of
+color orientation, the condensate pairs red and green quarks, while the
+blue quarks remain unpaired, as shown schematically in
+Fig.~\ref{fig:2sc_pairing_schematic}. This choice fixes the orientation
+of the condensate in color space and is made for mathematical
+convenience. An equivalent description could be obtained by a color
+rotation, so the choice of which color remains unpaired should not be
+interpreted as a physical preference for blue quarks. In the fixed color
 basis used by the effective model, the corresponding pairing pattern
 leaves an \(SU(2)_c\) subgroup of the original color structure unchanged
 \cite{Shovkovy2005,Andersen2024}.
@@ -1194,12 +1112,12 @@ rotation.}
 This distinction is important when using the Quark--Meson--Diquark model.
 The model contains quarks, mesons, and diquark fields, but no dynamical
 gluons. As a result, the color symmetry appearing in the model is treated
-as a global symmetry. A nonzero value of \(\Delta_0\) therefore signals
-spontaneous breaking of this global symmetry within the effective model.
-This should be understood as a model representation of the 2SC pairing
-structure, not as a gauge-invariant statement about symmetry breaking in
-QCD. With this caveat, the effective model used below follows the formulation of
-Andersen and Nødtvedt~\cite{Andersen2024}. The full renormalized one-loop
+as a global symmetry. A nonzero value of \(\Delta_0\) can therefore be
+described as spontaneous breaking of this global symmetry within the
+effective model. This should be understood as a model representation of
+the 2SC pairing structure, not as a gauge-invariant statement about
+symmetry breaking in QCD. With this caveat, the effective model used
+below follows Ref.~\cite{Andersen2024}. The full renormalized one-loop
 thermodynamic potential is not rederived in the main text.
 
 \subsection*{Diquark degrees of freedom}
@@ -1483,8 +1401,14 @@ thermodynamic potential is denoted by
 \begin{equation}
 \Omega_{0+1}
 =
-\Omega_{0+1}(\phi_0,\Delta_0;\bar{\mu},T).
+\Omega_{0+1}(\phi_0,\Delta_0;\{\mu_i\}),
 \end{equation}
+where \(\{\mu_i\}\) denotes the relevant quark chemical potentials. In
+the common-chemical-potential benchmark this dependence reduces to the
+average paired-quark chemical potential \(\bar{\mu}\), while in the
+stellar calculation it is supplemented by the electric and color
+chemical potentials required by neutrality.
+
 The full expression is lengthy and is therefore given in
 Appendix~\ref{app:qmd_potential}. In the main text we only need its
 structure: for each value of the chemical potential, the equilibrium state
@@ -1501,9 +1425,10 @@ normal quark matter, whereas a solution with \(\Delta_0\neq0\)
 corresponds to a color-superconducting state.
 
 The physical pressure is obtained from the value of the thermodynamic
-potential at the global minimum,
+potential at the global minimum, after applying the same vacuum
+normalization as in the ordinary Quark--Meson model,
 \begin{equation}
-P=-\Omega_{0+1,\min}.
+P=-\left(\Omega_{0+1,\min}-\Omega_{\mathrm{vac}}\right).
 \end{equation}
 Thus the superconducting equation of state is determined by the same
 thermodynamic principle as in the ordinary Quark--Meson model, but with an
@@ -1604,7 +1529,9 @@ g_\Delta^2\Delta_0^2
 The quantity \(\bar{\mu}\) is the average chemical potential of the paired
 quarks, while \(\delta\mu\) measures the mismatch between their Fermi
 surfaces. When \(\delta\mu=0\), the paired modes have the standard
-BCS-like form, with gap \(g_\Delta\Delta_0\).
+BCS-like form, with gap \(g_\Delta\Delta_0\). If the mismatch becomes
+comparable to the gap, some paired modes may become gapless; this
+possibility is monitored later in the neutral stellar calculation.
 
 The fermionic one-loop contribution to the thermodynamic potential is
 obtained by summing over these quasiparticle energies. This completes the
@@ -3654,4 +3581,3 @@ above the conformal limit, asymptotic gap saturation, and
 gravitationally-bound stellar configurations, are robust across
 the parameter scan and represent genuine consequences of the QMD
 description of dense matter.
-

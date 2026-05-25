@@ -36,50 +36,95 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _insert_zero_pressure_surface(
+def _plot_raw_eos_by_pressure_sign(
+    ax: plt.Axes,
     pressure_gev_fm3: np.ndarray,
     energy_density_gev_fm3: np.ndarray,
-) -> tuple[np.ndarray, np.ndarray]:
+    *,
+    color: str,
+    label: str,
+) -> None:
     pressure = np.asarray(pressure_gev_fm3, dtype=float)
     energy_density = np.asarray(energy_density_gev_fm3, dtype=float)
     if pressure.size == 0:
-        return pressure, energy_density
+        return
 
-    tolerance = 1.0e-12 * max(1.0, float(np.max(np.abs(pressure))))
-    zero_indices = np.flatnonzero(np.isclose(pressure, 0.0, atol=tolerance))
-    if zero_indices.size:
-        zero_index = int(zero_indices[0])
-        pressure = pressure.copy()
-        energy_density = energy_density.copy()
-        pressure[zero_index] = 0.0
-        return pressure, energy_density
+    split_pressure = [float(pressure[0])]
+    split_energy_density = [float(energy_density[0])]
 
-    crossing_index = None
     for index in range(pressure.size - 1):
         p_left = float(pressure[index])
         p_right = float(pressure[index + 1])
-        if p_left * p_right < 0.0:
-            crossing_index = index
-            break
+        e_left = float(energy_density[index])
+        e_right = float(energy_density[index + 1])
 
-    if crossing_index is None:
-        anchor_index = int(np.argmin(np.abs(pressure)))
-        pressure = pressure.copy()
-        energy_density = energy_density.copy()
-        pressure[anchor_index] = 0.0
-        return pressure, energy_density
-    else:
-        p_left = float(pressure[crossing_index])
-        p_right = float(pressure[crossing_index + 1])
-        weight = -p_left / (p_right - p_left)
-        surface_energy_density = float(
-            energy_density[crossing_index] + weight * (energy_density[crossing_index + 1] - energy_density[crossing_index])
+        if p_left != p_right and (p_left < 0.0) != (p_right < 0.0):
+            weight = -p_left / (p_right - p_left)
+            split_pressure.append(0.0)
+            split_energy_density.append(e_left + weight * (e_right - e_left))
+
+        split_pressure.append(p_right)
+        split_energy_density.append(e_right)
+
+    split_pressure_array = np.asarray(split_pressure)
+    split_energy_array = np.asarray(split_energy_density)
+    segment_start = 0
+    first_solid_label = label
+
+    for index in range(1, split_pressure_array.size):
+        previous_negative = split_pressure_array[index - 1] < 0.0
+        current_negative = split_pressure_array[index] < 0.0
+        if previous_negative == current_negative:
+            continue
+
+        p_segment = split_pressure_array[segment_start : index + 1]
+        e_segment = split_energy_array[segment_start : index + 1]
+        is_negative = np.any(p_segment < 0.0)
+        plot_label = None
+        if not is_negative and first_solid_label is not None:
+            plot_label = first_solid_label
+            first_solid_label = None
+        ax.plot(
+            p_segment,
+            e_segment,
+            color=color,
+            linewidth=2.0,
+            linestyle=":" if is_negative else "-",
+            label=plot_label,
         )
+        segment_start = index
 
-    return (
-        np.concatenate((pressure[: crossing_index + 1], [0.0], pressure[crossing_index + 1 :])),
-        np.concatenate((energy_density[: crossing_index + 1], [surface_energy_density], energy_density[crossing_index + 1 :])),
+    p_segment = split_pressure_array[segment_start:]
+    e_segment = split_energy_array[segment_start:]
+    is_negative = np.any(p_segment < 0.0)
+    plot_label = None
+    if not is_negative and first_solid_label is not None:
+        plot_label = first_solid_label
+    ax.plot(
+        p_segment,
+        e_segment,
+        color=color,
+        linewidth=2.0,
+        linestyle=":" if is_negative else "-",
+        label=plot_label,
     )
+
+
+def _surface_energy_density_after_maxwell(
+    pressure_gev_fm3: np.ndarray,
+    energy_density_gev_fm3: np.ndarray,
+) -> float | None:
+    pressure = np.asarray(pressure_gev_fm3, dtype=float)
+    energy_density = np.asarray(energy_density_gev_fm3, dtype=float)
+
+    for index in range(pressure.size - 1, 0, -1):
+        p_left = float(pressure[index - 1])
+        p_right = float(pressure[index])
+        if p_left < 0.0 and p_right >= 0.0:
+            weight = -p_left / (p_right - p_left)
+            return float(energy_density[index - 1] + weight * (energy_density[index] - energy_density[index - 1]))
+
+    return None
 
 
 def main() -> None:
@@ -108,30 +153,25 @@ def main() -> None:
         eos_with_maxwell.save(eos_dir / f"qm_eos_{tag}_with_maxwell.txt")
 
         label = sigma_label(m_sigma_mev)
-        no_maxwell_pressure, no_maxwell_energy_density = _insert_zero_pressure_surface(
+        _plot_raw_eos_by_pressure_sign(
+            ax,
             eos_without_maxwell.pressure_gev_fm3,
             eos_without_maxwell.energy_density_gev_fm3,
+            color=color,
+            label=label,
         )
-        with_maxwell_pressure, with_maxwell_energy_density = _insert_zero_pressure_surface(
+        surface_energy_density = _surface_energy_density_after_maxwell(
             eos_with_maxwell.pressure_gev_fm3,
             eos_with_maxwell.energy_density_gev_fm3,
         )
-
-        ax.plot(
-            no_maxwell_pressure,
-            no_maxwell_energy_density,
-            color=color,
-            linewidth=2.0,
-            linestyle=":",
-        )
-        ax.plot(
-            with_maxwell_pressure,
-            with_maxwell_energy_density,
-            color=color,
-            linewidth=2.2,
-            linestyle="-",
-            label=f"{label}",
-        )
+        if surface_energy_density is not None:
+            ax.plot(
+                [0.0, 0.0],
+                [0.0, surface_energy_density],
+                color=color,
+                linewidth=2.0,
+                linestyle="--",
+            )
 
     ax.set_xlabel(r"Pressure $P\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")
     ax.set_ylabel(r"Energy density $\varepsilon\;(\mathrm{GeV}\,\mathrm{fm}^{-3})$")

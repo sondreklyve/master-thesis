@@ -176,6 +176,11 @@ def _make_updated_combined_figure(
                 linewidth=2.2,
                 label=bag_curve_label(bag_root_mev),
             )
+            if np.any(stable):
+                m_st = seq.mass_msun[stable]
+                r_st = seq.radius_km[stable]
+                idx = int(np.argmax(m_st))
+                ax.plot(r_st[idx], m_st[idx], "o", color=color, ms=6, zorder=5)
             if np.any(unstable):
                 ax.plot(
                     seq.radius_km[unstable],
