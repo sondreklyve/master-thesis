@@ -23,6 +23,7 @@ Produces
   output/section2/plots/section2_MR_lam3.pdf
   output/section2/plots/section2_cs2_gdelta.pdf
   output/section2/plots/section2_condensates_gdelta.pdf
+  output/section2/plots/section2_condensates_mdelta.pdf
 """
 
 from __future__ import annotations
@@ -906,46 +907,39 @@ def _plot_mr(
     filename: str,
     title: str,
 ) -> None:
-    """M-R comparison plot: baseline (thick) + 2 variation curves."""
+    """M-R comparison plot: 3 curves in increasing parameter order."""
     fig, ax = plt.subplots(figsize=(7.2, 5.0))
 
-    # Baseline (thick black)
+    baseline_label = (
+        r"$g_\Delta=2g$" if "gdelta" in filename
+        else r"$m_\Delta=500\,\mathrm{MeV}$" if "lamdelta" not in filename and "mdelta" in filename
+        else r"$\lambda_\Delta=\lambda_0/4$" if "lamdelta" in filename
+        else r"$\lambda_3=\lambda_0$"
+    )
+
+    def _draw_mr(radius_km, mass_msun, stable_mask, color, label, zorder_base):
+        r_st, m_st, r_un, m_un = _split_stable_branches(radius_km, mass_msun, stable_mask)
+        ax.plot(r_st, m_st, color=color, lw=LW_VARIATION, ls="-",
+                label=label, zorder=zorder_base)
+        if r_un.size:
+            ax.plot(r_un, m_un, color=color, lw=LW_VARIATION, ls="--", zorder=zorder_base - 1)
+        if m_st.size:
+            idx = int(np.argmax(m_st))
+            ax.plot(r_st[idx], m_st[idx], "o", color=color, ms=6, zorder=zorder_base + 1)
+
+    # Plot in increasing parameter order: lower variation, baseline, upper variation
+    if len(runs) >= 1 and runs[0][1].radius_km is not None:
+        cfg0, res0 = runs[0]
+        _draw_mr(res0.radius_km, res0.mass_msun, res0.stable_mask, cfg0.color, cfg0.label, 3)
+
     if baseline.radius_km is not None:
-        r_st, m_st, r_un, m_un = _split_stable_branches(
-            baseline.radius_km, baseline.mass_msun, baseline.stable_mask
-        )
-        ax.plot(
-            r_st, m_st,
-            color="black", lw=LW_BASELINE, ls="-",
-            label=r"$g_\Delta=2g$ (baseline)" if "gdelta" in filename
-                  else r"$m_\Delta=500\,\mathrm{MeV}$" if "mdelta" in filename
-                  else r"$\lambda_\Delta=\lambda_0/4$" if "lamdelta" in filename
-                  else r"$\lambda_3=\lambda_0$ (baseline)",
-            zorder=5,
-        )
-        if r_un.size:
-            ax.plot(r_un, m_un, color="black", lw=1.5, ls="--", zorder=4)
-        if m_st.size:
-            idx  = int(np.argmax(m_st))
-            ax.plot(r_st[idx], m_st[idx], "o", color="black", ms=7, zorder=6)
+        _draw_mr(baseline.radius_km, baseline.mass_msun, baseline.stable_mask,
+                 _COLOR_BASELINE, baseline_label, 4)
 
-    # Variation curves
-    for cfg, res in runs:
-        if res.radius_km is None:
-            continue
-        r_st, m_st, r_un, m_un = _split_stable_branches(
-            res.radius_km, res.mass_msun, res.stable_mask
-        )
-        ax.plot(r_st, m_st,
-                color=cfg.color, lw=LW_VARIATION, ls="-",
-                label=cfg.label, zorder=4)
-        if r_un.size:
-            ax.plot(r_un, m_un, color=cfg.color, lw=1.4, ls="--", zorder=3)
-        if m_st.size:
-            idx  = int(np.argmax(m_st))
-            ax.plot(r_st[idx], m_st[idx], "o", color=cfg.color, ms=6, zorder=4)
+    if len(runs) >= 2 and runs[1][1].radius_km is not None:
+        cfg1, res1 = runs[1]
+        _draw_mr(res1.radius_km, res1.mass_msun, res1.stable_mask, cfg1.color, cfg1.label, 3)
 
-    ax.axhline(_DASHED_MSUN, color="gray", ls="--", lw=1.4, label=r"$2.0\,M_\odot$")
     ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
     ax.set_ylabel(r"Mass $M\;(M_\odot)$")
     ax.set_title(title)
@@ -974,15 +968,18 @@ def _plot_cs2_gdelta(
         cs2_p = _smooth(cs2_p, _CS2_GDELTA_SMOOTH_WINDOW)
         ax.plot(mu_p, cs2_p, color=color, lw=lw, label=label)
 
-    # Baseline
+    # Plot in increasing order: lower variation, baseline, upper variation
+    cfg_a, res_a = run_a
+    if res_a.bm_cs2 is not None:
+        _draw_cs2(res_a.bm_mu_q, res_a.bm_cs2, cfg_a.color, LW_VARIATION, cfg_a.label)
+
     if baseline.bm_mu_q is not None:
         _draw_cs2(baseline.bm_mu_q, baseline.bm_cs2,
-                  "black", LW_BASELINE, r"$g_\Delta=2g$ (baseline)")
+                  _COLOR_BASELINE, LW_VARIATION, r"$g_\Delta=2g$")
 
-    # Variations
-    for cfg, res in [run_a, run_b]:
-        if res.bm_cs2 is not None:
-            _draw_cs2(res.bm_mu_q, res.bm_cs2, cfg.color, LW_VARIATION, cfg.label)
+    cfg_b, res_b = run_b
+    if res_b.bm_cs2 is not None:
+        _draw_cs2(res_b.bm_mu_q, res_b.bm_cs2, cfg_b.color, LW_VARIATION, cfg_b.label)
 
     ax.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5,
                label=r"Conformal limit $c_s^2=\frac{1}{3}$")
@@ -1014,18 +1011,18 @@ def _plot_condensates_gdelta(
         ax1.plot(mu, phi_p, color=color, lw=lw, label=label)
         ax2.plot(mu, gap_p, color=color, lw=lw, label=label)
 
+    # Plot in increasing order: lower variation, baseline, upper variation
+    cfg_a, res_a = run_a
+    if res_a.bm_mu_q is not None:
+        _draw(res_a.bm_mu_q, res_a.bm_phi, res_a.bm_gap, cfg_a.color, LW_VARIATION, cfg_a.label)
+
     if baseline.bm_mu_q is not None:
         _draw(baseline.bm_mu_q, baseline.bm_phi, baseline.bm_gap,
-              "black", LW_BASELINE, r"$g_\Delta=2g$ (baseline)")
+              _COLOR_BASELINE, LW_VARIATION, r"$g_\Delta=2g$")
 
-    for cfg, res in [run_a, run_b]:
-        if res.bm_mu_q is not None:
-            _draw(res.bm_mu_q, res.bm_phi, res.bm_gap, cfg.color, LW_VARIATION, cfg.label)
-
-    # Asymptote reference on gap panel (baseline g_Δ·Δ₀ at 900 MeV)
-    if baseline.asymptotic_gap is not None:
-        ax2.axhline(baseline.asymptotic_gap, color="black", ls=":",
-                    lw=1.2, alpha=0.6, label=rf"Asymptote (baseline) = {baseline.asymptotic_gap:.0f} MeV")
+    cfg_b, res_b = run_b
+    if res_b.bm_mu_q is not None:
+        _draw(res_b.bm_mu_q, res_b.bm_phi, res_b.bm_gap, cfg_b.color, LW_VARIATION, cfg_b.label)
 
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
@@ -1041,6 +1038,53 @@ def _plot_condensates_gdelta(
 
     save_figure(PLOTS_DIR / "section2_condensates_gdelta.pdf")
     print("  Saved section2_condensates_gdelta.pdf")
+
+
+def _plot_condensates_mdelta(
+    baseline: RunResult,
+    run_c: tuple[RunConfig, RunResult],
+    run_d: tuple[RunConfig, RunResult],
+) -> None:
+    """Dual panel: φ₀ (left) and g_Δ·Δ₀ (right), m_Δ variation, benchmark data."""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.0, 4.8))
+
+    def _draw(mu, phi, gap, color, lw, label):
+        thresh = int(np.searchsorted(mu, 295.0))
+        phi_p = phi.copy()
+        gap_p = gap.copy()
+        if thresh < len(mu):
+            phi_p[thresh:] = _smooth(phi[thresh:], 51)
+            gap_p[thresh:] = _smooth(gap[thresh:], 51)
+        ax1.plot(mu, phi_p, color=color, lw=lw, label=label)
+        ax2.plot(mu, gap_p, color=color, lw=lw, label=label)
+
+    # Plot in increasing order: lower variation, baseline, upper variation
+    cfg_c, res_c = run_c
+    if res_c.bm_mu_q is not None:
+        _draw(res_c.bm_mu_q, res_c.bm_phi, res_c.bm_gap, cfg_c.color, LW_VARIATION, cfg_c.label)
+
+    if baseline.bm_mu_q is not None:
+        _draw(baseline.bm_mu_q, baseline.bm_phi, baseline.bm_gap,
+              _COLOR_BASELINE, LW_VARIATION, r"$m_\Delta=500\,\mathrm{MeV}$")
+
+    cfg_d, res_d = run_d
+    if res_d.bm_mu_q is not None:
+        _draw(res_d.bm_mu_q, res_d.bm_phi, res_d.bm_gap, cfg_d.color, LW_VARIATION, cfg_d.label)
+
+    ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
+    ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
+    ax1.set_title("Chiral condensate")
+    ax1.set_xlim(200.0, 900.0)
+    ax1.legend(fontsize=9)
+
+    ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
+    ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
+    ax2.set_title("Diquark gap")
+    ax2.set_xlim(200.0, 900.0)
+    ax2.legend(fontsize=9)
+
+    save_figure(PLOTS_DIR / "section2_condensates_mdelta.pdf")
+    print("  Saved section2_condensates_mdelta.pdf")
 
 
 def _generate_section2_plots(
@@ -1080,6 +1124,20 @@ def _generate_section2_plots(
         _plot_condensates_gdelta(baseline, run_a_pair, run_b_pair)
     else:
         print("  Skipping cs²/condensate plots (g_Δ runs missing).")
+
+    if len(mdelta_runs) >= 2:
+        run_c_pair = mdelta_runs[0]
+        run_d_pair = mdelta_runs[1]
+        for cfg, res in [run_c_pair, run_d_pair]:
+            if cfg.run_id in bm_data and res.bm_mu_q is None:
+                bd = bm_data[cfg.run_id]
+                res.bm_mu_q = bd["mu_q"]
+                res.bm_phi = bd["phi"]
+                res.bm_gap = bd["gap"]
+                res.bm_cs2 = bd["cs2"]
+        _plot_condensates_mdelta(baseline, run_c_pair, run_d_pair)
+    else:
+        print("  Skipping condensate plot (m_Δ runs missing).")
 
 
 # ---------------------------------------------------------------------------

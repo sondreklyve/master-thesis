@@ -84,8 +84,8 @@ _EOS_ZOOM_EPS_MAX_GEV_FM3 = 0.45
 # while this plot uses a larger cutoff and a logarithmic μ grid to show the
 # slow approach to the conformal limit without spending many points at high μ.
 ASYMPTOTIC_MU_MIN_MEV = 300.0
-ASYMPTOTIC_MU_MAX_MEV = 7000.0   # scan to 7 GeV so 6000 MeV is an interior point
-ASYMPTOTIC_NUM_POINTS = 72
+ASYMPTOTIC_MU_MAX_MEV = 9000.0   # scan to 9 GeV so 6000 MeV is well interior to the SG window
+ASYMPTOTIC_NUM_POINTS = 80
 ASYMPTOTIC_RESIDUAL_CUTOFF_MEV = 20000.0
 
 _EOS_SMOOTH_WINDOW = 81

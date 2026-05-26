@@ -10,7 +10,7 @@ import numpy as np
 # Shared axis limits for c_s² plots — used by both run_qmd_stellar and run_section2_sweep
 # so both plots stay in sync.
 CS2_XLIM: tuple[float, float] = (250.0, 800.0)
-CS2_YLIM: tuple[float, float] = (0.15, 0.55)
+CS2_YLIM: tuple[float, float] = (0.20, 0.50)
 CS2_MU_MIN: float = 250.0  # lower μ_q bound for cs² curves (matches xlim left edge)
 
 

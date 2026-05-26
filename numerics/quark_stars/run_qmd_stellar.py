@@ -94,9 +94,9 @@ _SMOOTH_POLY = 3
 _CS2_ONSET_THRESH = 295.0   # MeV — apply cs² smoothing only above this
 
 # Extended free-QMD asymptotic scan (cached; replaces benchmark data for ratio panel)
-_EXTENDED_ASYM_FILE       = "qmd_stellar_extended_asymptotic.txt"
+_EXTENDED_ASYM_FILE       = "qmd_stellar_extended_asymptotic_fine.txt"
 _EXTENDED_ASYM_MU_MAX_MEV = 20000.0
-_EXTENDED_ASYM_NUM_POINTS = 60
+_EXTENDED_ASYM_NUM_POINTS = 200
 _EXTENDED_RESIDUAL_CUTOFF = 20000.0
 _RATIO_TAPER_WIDTH_MEV    = 600.0   # neutral→free shift tapers to zero over this range
 
@@ -196,11 +196,13 @@ def _load_bm_data() -> dict[str, np.ndarray] | None:
     onset_candidates = mu_arr[phase_2sc > 0.5]
     onset = float(onset_candidates[0]) if onset_candidates.size > 0 else None
     return {
-        "mu_q_mev": mu_arr,
-        "phi_mev":  data[:, 1],
-        "gap_mev":  data[:, 3],
-        "cs2":      data[:, 9],
-        "onset_mev": onset,
+        "mu_q_mev":            mu_arr,
+        "phi_mev":             data[:, 1],
+        "gap_mev":             data[:, 3],
+        "cs2":                 data[:, 9],
+        "onset_mev":           onset,
+        "pressure_mev4":       data[:, 6],
+        "energy_density_mev4": data[:, 8],
     }
 
 
@@ -698,13 +700,29 @@ def _plot_eos(
     raw_points: list[QMDStellarEoSPoint],
     stable_points: list[QMDStellarEoSPoint],
     plots_dir: Path,
+    *,
+    ext_asym_data: dict | None = None,
+    bm_data: dict | None = None,
 ) -> None:
-    """Single-panel low-pressure ε(P) zoom of the stable stellar EoS."""
-    p_sta = np.array([p.pressure_mev4       for p in stable_points]) * MEV4_TO_GEV_FM3
-    e_sta = np.array([p.energy_density_mev4 for p in stable_points]) * MEV4_TO_GEV_FM3
+    """Two panels: (left) low-pressure ε(P) zoom; (right) conformal convergence δ=(ε−3P)/P."""
+    p_sta  = np.array([p.pressure_mev4       for p in stable_points]) * MEV4_TO_GEV_FM3
+    e_sta  = np.array([p.energy_density_mev4 for p in stable_points]) * MEV4_TO_GEV_FM3
 
-    fig, ax_eos = plt.subplots(figsize=(6.5, 4.8))
+    fig, (ax_eos, ax_delta) = plt.subplots(1, 2, figsize=(12.5, 4.8))
 
+    # Left: low-pressure ε(P) zoom
+    if bm_data is not None:
+        p_bm = np.asarray(bm_data["pressure_mev4"])       * MEV4_TO_GEV_FM3
+        e_bm = np.asarray(bm_data["energy_density_mev4"]) * MEV4_TO_GEV_FM3
+        bm_zoom = (
+            np.isfinite(p_bm) & np.isfinite(e_bm)
+            & (p_bm >= 0.0) & (p_bm <= _EOS_ZOOM_P_MAX_GEV_FM3)
+        )
+        ax_eos.plot(
+            p_bm[bm_zoom],
+            _smooth_for_plot(e_bm[bm_zoom], _EOS_SMOOTH_WINDOW),
+            lw=LW, color=COLOR_BM, label="Free QMD",
+        )
     sta_zoom = (
         np.isfinite(p_sta) & np.isfinite(e_sta)
         & (p_sta >= 0.0) & (p_sta <= _EOS_ZOOM_P_MAX_GEV_FM3)
@@ -712,13 +730,50 @@ def _plot_eos(
     ax_eos.plot(
         p_sta[sta_zoom],
         _smooth_for_plot(e_sta[sta_zoom], _EOS_SMOOTH_WINDOW),
-        lw=LW, color=COLOR_QMD,
+        lw=LW, color=COLOR_QMD, label="Neutral QMD",
     )
+    if bm_data is not None:
+        ax_eos.legend()
     ax_eos.set_xlabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
     ax_eos.set_ylabel(r"$\varepsilon\;(\mathrm{GeV\,fm}^{-3})$")
     ax_eos.set_title("Low-pressure EoS")
     ax_eos.set_xlim(0.0, _EOS_ZOOM_P_MAX_GEV_FM3)
     ax_eos.set_ylim(0.0, _EOS_ZOOM_EPS_MAX_GEV_FM3)
+
+    # Right: conformal convergence δ = (ε − 3P)/P → 0
+    if ext_asym_data is not None:
+        ratio_mu  = np.asarray(ext_asym_data["mu_q_mev"])
+        ratio_p   = np.asarray(ext_asym_data["pressure_mev4"])
+        ratio_eps = np.asarray(ext_asym_data["energy_density_mev4"])
+        upper_mu  = 6000.0
+    else:
+        ratio_mu  = np.array([p.mu_q_mev            for p in stable_points])
+        ratio_p   = np.array([p.pressure_mev4        for p in stable_points])
+        ratio_eps = np.array([p.energy_density_mev4  for p in stable_points])
+        upper_mu  = float(ratio_mu[-1]) if ratio_mu.size else 900.0
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        delta = (ratio_eps - 3.0 * ratio_p) / ratio_p
+
+    ratio_mask = (
+        np.isfinite(delta)
+        & np.isfinite(ratio_mu)
+        & (ratio_p > 0.0)
+        & (ratio_mu >= 450.0)
+        & (delta > -0.35)
+        & (delta < 0.35)
+    )
+    ratio_x   = ratio_mu[ratio_mask]
+    ratio_y   = _smooth_for_plot(delta[ratio_mask], _RATIO_SMOOTH_WINDOW)
+
+    ax_delta.plot(ratio_x, ratio_y, lw=LW, color=COLOR_QMD)
+    ax_delta.axhline(0.0, color="gray", ls="--", lw=1.5)
+    ax_delta.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
+    ax_delta.set_ylabel(r"$\delta$")
+    ax_delta.set_title("Conformal convergence")
+    if ratio_x.size:
+        _set_log_mu_axis(ax_delta, float(ratio_x[0]), upper_mu)
+    ax_delta.set_ylim(-0.35, 0.35)
 
     save_figure(plots_dir / "qmd_stellar_eos.pdf")
 
@@ -1086,7 +1141,7 @@ def main() -> None:
     print("  Saved qmd_stellar_condensates.pdf")
     _plot_neutrality(raw_all, plots_dir)
     print("  Saved qmd_stellar_neutrality.pdf")
-    _plot_eos(raw_points, stable_points, plots_dir)
+    _plot_eos(raw_points, stable_points, plots_dir, ext_asym_data=ext_asym_data, bm_data=bm_data)
     print("  Saved qmd_stellar_eos.pdf")
     _plot_cs2(stable_points, onset_mev, plots_dir, bm_data)
     print("  Saved qmd_stellar_cs2.pdf")
