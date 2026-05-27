@@ -1,130 +1,138 @@
 \chapter{Introduction}
 \label{chap:introduction2}
 
-Neutron stars are compact stellar remnants formed in core–collapse supernovae,
-with typical masses of order one to two solar masses and radii of roughly ten
-kilometres. Observations accumulated over the past decades—most notably precise
-mass measurements from radio timing of pulsars, X-ray observations of neutron-star
-surfaces, and gravitational-wave signals from neutron-star mergers—have established
-neutron stars as key laboratories for physics at extreme densities. Any theoretical
-description of these objects must therefore be consistent with a growing set of
-astrophysical constraints \cite{LattimerPrakash2004,glendenning2000}.
+Neutron stars are compact stellar remnants formed in core-collapse supernovae.
+They typically contain masses of order one to two solar masses within radii of
+roughly ten kilometres, making them among the densest observable objects in the
+universe. Their interiors reach densities far above those of ordinary nuclei,
+and the microscopic composition of matter under such conditions remains one of
+the central open questions in compact-star physics. Observations from radio
+timing, X-ray pulse-profile modeling, and gravitational-wave detections have
+therefore turned neutron stars into laboratories for strongly interacting matter
+at extreme density \cite{LattimerPrakash2004,glendenning2000,
+Riley_2019_J0030,Miller_2019_J0030,Miller_2021_J0740,Riley2021,LIGO2018}.
 
-The structure of a non-rotating neutron star is described within general relativity
-by the Tolman, Oppenheimer, and Volkoff (TOV) equations \cite{tolman1939,oppenheimer1939}.
-These equations relate the pressure, energy density, and enclosed mass of the star
-under the assumption of hydrostatic equilibrium. In order to solve them, one must
-specify an equation of state (EoS) for dense matter. The EoS encodes assumptions
-about the matter content of the star and their interactions, and it is
-the primary source of theoretical uncertainty in neutron-star modeling.
+The structure of a static, spherically symmetric compact star is determined
+within general relativity by the Tolman--Oppenheimer--Volkoff (TOV) equations
+\cite{tolman1939,oppenheimer1939}. These equations describe hydrostatic
+equilibrium by relating the pressure, energy density, and enclosed mass of the
+star. To solve them, one must provide an equation of state. The equation of
+state encodes the microscopic degrees of freedom and interactions of dense
+matter, and it is the main source of theoretical uncertainty in compact-star
+modeling. Different assumptions about the equation of state can lead to
+substantially different predictions for the maximum mass, radius, central
+density, and stability of compact-star configurations.
 
-Early neutron-star models employed simple equations of state based on ideal,
-degenerate Fermi gases of neutrons. These models provide a useful starting point
-and lead to the classic Oppenheimer–Volkoff limit of approximately
-$0.7\,M_{\odot}$ for the maximum neutron-star mass \cite{oppenheimer1939}. While
-historically important, this result is now known to be far below the masses of
-observed neutron stars, demonstrating that interactions between particles are
-essential for a realistic description of dense matter.
+The importance of the equation of state is already visible in the simplest
+models. The classic Oppenheimer--Volkoff calculation, based on an ideal
+degenerate neutron gas, gives a maximum mass of approximately
+\(0.7\,M_\odot\) \cite{oppenheimer1939}. This is far below the masses of
+observed neutron stars and shows that interactions between particles are
+essential. More realistic hadronic models include interacting neutrons and
+protons, leptons, charge neutrality, and $\beta$-equilibrium. Such models represent
+a major improvement over the ideal Fermi-gas description and can support much
+larger stellar masses. This progression was studied in Part~\ref{part:neutron-stars} of the thesis,
+where compact-star structure was developed from ideal gases to interacting
+relativistic mean-field matter. The main lesson from that analysis was that
+microphysical assumptions are directly reflected in macroscopic mass--radius
+relations.
 
-Including interactions between nucleons leads to significantly stiffer equations
-of state and substantially higher maximum masses. Models that treat neutrons and
-protons as interacting particles, supplemented with leptons to ensure charge
-neutrality and $\beta$-equilibrium, represent a clear improvement over idealized Fermi-gas
-descriptions. Such interacting models are capable of producing neutron stars with
-masses closer to those observed in nature. However, even these more realistic
-descriptions remain uncertain at the highest densities and often struggle to
-reproduce the full range of current observational constraints. This issue was
-demonstrated explicitly in the project thesis (Part~I), where we looked at the
-$npe\mu$ model for matter. It was shown that,
-despite significant improvement over idealized models, the predicted mass-radius
-relations still do not align with well-measured neutron stars.
+Even with interacting hadronic matter, however, the equation of state remains
+uncertain at the highest densities. Models based on nucleonic degrees of
+freedom, such as relativistic mean-field descriptions or microscopic hadronic
+equations of state, can reproduce important aspects of neutron-star
+phenomenology, but their extrapolation to several times nuclear saturation
+density is not unique. A sufficiently stiff equation of state is needed to
+support massive compact stars, while radius measurements and gravitational-wave
+constraints restrict how stiff the matter can be at lower and intermediate
+densities. This tension motivates the study of additional degrees of freedom and
+new phases of strongly interacting matter in the cores of compact stars
+\cite{Baym2018,Annala2020}.
 
-A more detailed description of dense hadronic matter is provided by the
-Akmal, Pandharipande, and Ravenhall (APR) equation of state, which is based on
-realistic two- and three-nucleon interactions constrained by nucleon--nucleon
-scattering data and many-body calculations \cite{Akmal1998}. When three-nucleon
-forces and leading relativistic corrections are included, the APR model can
-support neutron stars with maximum masses above two solar masses, placing it
-among the stiffest purely hadronic equations of state. However, this stiffness
-comes at a cost: at the highest densities, the model approaches or exceeds
-limits set by causality, as the speed of sound can become comparable to or larger
-than the speed of light. This highlights a general issue faced by very stiff
-hadronic equations of state: while they can reproduce large neutron-star
-masses, their behavior at extreme densities becomes increasingly uncertain.
-As a result, even advanced hadronic models such as APR do not fully resolve the
-tension between theoretical consistency and observational constraints, and
-they motivate the exploration of alternative descriptions of dense matter at
-the highest densities.
+At sufficiently high density, the relevant microscopic degrees of freedom may no
+longer be hadrons, but quarks and gluons. Quantum chromodynamics (QCD) is the
+fundamental theory of the strong interaction and describes hadrons in terms of
+colored quarks interacting through gluons \cite{GrossWilczek1973,
+PeskinSchroeder1995}. Due to asymptotic freedom, QCD becomes weakly coupled at
+very large energy or density scales. This suggests that matter at sufficiently
+high baryon density may undergo a transition from confined hadronic matter to
+deconfined quark matter. Compact stars are among the few physical systems in
+which such densities may be realized, making them natural laboratories for
+studying possible quark phases of QCD.
 
-The persistence of these discrepancies suggests that further improvements of the
-equation of state are required. One possible direction is that the relevant
-degrees of freedom at the highest densities differ qualitatively from those of
-ordinary nuclear matter. The development of quantum chromodynamics (QCD) in the
-early 1970s, as the fundamental theory of the strong interaction, provided a
-microscopic description of hadrons in terms of quarks and gluons
-\cite{GrossWilczek1973}. This, in turn, opened the possibility of considering 
-regimes in which quark degrees of freedom are no longer confined in hadronic
-bound states, but instead play a direct role in the description of bulk matter.
+The possibility of quark matter in compact stars has a long history. Early work
+considered stars containing deconfined quark matter, either as hybrid stars with
+quark cores or as stars composed entirely of quark matter
+\cite{Itoh1970,Bodmer1971,Witten1984,glendenning2000}. The strange matter
+hypothesis, proposed by Bodmer and later developed by Witten, suggests that bulk
+three-flavor quark matter could be the true ground state of strongly interacting
+matter \cite{Bodmer1971,Witten1984}. If this hypothesis is realized, compact
+stars could in principle be strange stars rather than ordinary neutron stars.
+In the present thesis, however, the models studied contain only two quark
+flavors. The strange matter hypothesis is therefore relevant as motivation, but
+the calculations performed here should not be interpreted as a direct test of
+absolutely stable strange matter.
 
-Shortly after the formulation of quantum chromodynamics (QCD) in the early
-1970s, the idea emerged that matter at sufficiently high density might undergo a
-transition from a hadronic description to one in terms of deconfined quarks.
-Early studies in the 1970s and 1980s explored the implications of such a
-transition for compact stars, leading to the proposal of new classes of stellar
-objects \cite{Itoh1970,Bodmer1971,Witten1984}. Within this framework, neutron
-stars may contain cores of deconfined quark matter, commonly referred to as
-hybrid stars, or, in more speculative scenarios, be composed entirely of quark
-matter, giving rise to quark or strange stars.
+A direct first-principles treatment of cold dense QCD remains difficult. Lattice
+QCD is highly successful at zero baryon chemical potential, but the sign problem
+prevents straightforward simulations of the cold, dense regime relevant for
+neutron-star interiors. Perturbative QCD is reliable only at densities much
+higher than those expected in the cores of observed compact stars. As a result,
+one must often rely on effective models that retain selected symmetries and
+degrees of freedom of QCD while remaining tractable. Such models cannot replace
+QCD itself, but they provide useful laboratories for studying how chiral symmetry,
+deconfinement-inspired quark degrees of freedom, and pairing mechanisms affect
+the equation of state and compact-star structure
+\cite{Baym2018,Alford2008,Kurkela2010,Komoltsev2022}.
 
-A closely related idea is the strange matter hypothesis, originally proposed by
-Bodmer and later developed by Witten \cite{Bodmer1971,Witten1984}. In this
-scenario, bulk quark matter containing up, down, and strange quarks could have
-a lower energy per baryon than ordinary nuclear matter. If this were the case,
-the hadronic matter observed in nuclei and neutron stars would not represent
-the absolute ground state of the strong interaction, but rather a very
-long-lived, metastable phase. Neutron stars provide one of the few environments
-in the present universe where conditions might allow such a phase to form, due
-to their extremely high central densities. Depending on the details of the
-transition, this could lead either to stars with quark cores or to stars
-composed entirely of strange quark matter, commonly referred to as strange
-stars \cite{glendenning2000}.
+The present thesis studies such effective quark-matter descriptions using the
+two-flavor Quark--Meson model and its extension with diquark degrees of freedom.
+The Quark--Meson model describes quarks coupled to mesonic fields and provides a
+simple framework for studying chiral symmetry breaking and restoration in dense
+matter. By constructing the thermodynamic potential and minimizing it in the
+mean-field approximation, one obtains an equation of state that can be used as
+input to the TOV equations. This makes it possible to study how parameters in
+the chiral sector, such as the sigma mass, affect the stiffness of quark matter
+and the resulting compact-star mass--radius relations.
 
-If strange quark matter were absolutely stable, an important consequence would
-be that the formation of a sufficiently large region of strange matter inside a
-neutron star could trigger the conversion of the surrounding hadronic matter.
-In this case, the star would not remain a hybrid object but could instead
-convert almost entirely into a strange star. Although the dynamics of such a
-conversion process are uncertain and model dependent, this possibility makes
-strange stars qualitatively different from ordinary neutron stars and hybrid
-stars. One proposed observational way to distinguish between these scenarios is
-through rapid rotation. Strange stars are self-bound by the strong interaction,
-rather than being bound by gravity alone, and may therefore be able to rotate
-faster than neutron stars without shedding mass. The discovery of a pulsar with
-a rotation period shorter than what is theoretically possible for a neutron
-star would be difficult to explain within purely hadronic models and would
-provide strong evidence in favor of a strange star interpretation
-\cite{glendenning2000}.
+The thesis also considers a phenomenological Bodmer--Witten-inspired shift of
+the vacuum normalization in the two-flavor Quark--Meson model. This construction
+is useful for studying how changes in the zero-pressure point affect quark-star
+sequences, in a way similar to a bag-like pressure shift. Since the model is
+two-flavor, this should not be understood as a calculation of stable strange
+matter. Rather, it is used as a diagnostic tool for exploring how the mass and
+radius scales of quark-star solutions respond to changes in the vacuum
+normalization.
 
-A theoretical description of these possibilities calls for models that go
-beyond purely hadronic descriptions of dense matter. While hadronic models are
-commonly formulated within quantum field theory, they describe matter in terms
-of composite bound states. A more fundamental description is provided by QCD,
-which is the underlying theory governing the
-interactions between quarks and gluons \cite{PeskinSchroeder1995}. While QCD is
-well established as the correct microscopic theory of the strong interaction,
-its direct application to the high-density, low-temperature regime relevant for
-neutron stars remains notoriously challenging. As a result, first-principles
-calculations in this domain are limited, and one must instead rely on
-approximate approaches. This has motivated the development of effective models
-inspired by QCD, which aim to capture the relevant degrees of freedom and
-symmetry properties of strongly interacting matter while remaining tractable
-\cite{glendenning2000}. Such approaches provide a practical starting point for
-studying deconfined quark matter in compact stars and for exploring how a change
-in the microscopic description of matter can affect macroscopic stellar
-properties.
+The main extension studied in this thesis is the two-flavor
+Quark--Meson--Diquark (QMD) model. This model includes a diquark condensate and allows
+the two-flavor color-superconducting phase to be studied explicitly. Color
+superconductivity is expected to be a generic possibility in dense quark matter,
+where attractive quark--quark channels can lead to Cooper pairing
+\cite{Alford2008}. In the two-flavor case, the relevant paired phase is the 2SC
+phase. The QMD model therefore provides a framework for studying how 2SC pairing
+modifies the equation of state, the speed of sound, and the compact-star
+mass--radius relation.
 
-The present master thesis follows this line of reasoning. Motivated by the
-limitations of hadronic equations of state and supported by the findings of
-Part~I, it explores quantum field–theoretic descriptions of dense matter with
-quark degrees of freedom and investigates their implications for the structure
-and observable properties of compact stars.
+A central question in this thesis is whether such two-flavor quark-matter models
+can produce compact-star sequences compatible with the main qualitative
+astrophysical requirements: sufficiently large maximum masses, radii in the
+range suggested by X-ray observations, and stable stellar branches. The goal is
+not to construct a final realistic neutron-star equation of state. The models
+used here do not include a hadronic crust or envelope, a nuclear-to-quark
+transition, strange quarks, color-flavor-locked (CFL) pairing, or a Bayesian comparison with
+observational data. Instead, the aim is to isolate the physics of the quark
+sector and determine which mechanisms and parameters are most important for
+producing astrophysically relevant compact-star behavior.
+
+The thesis is organized as follows. Chapter~\ref{chap:qft} introduces the
+quantum-field-theoretic tools needed for the effective models used later,
+including scalar field theory, interactions, and renormalization. 
+Chapter~\ref{chap:qm_model} develops the two-flavor Quark--Meson model, its
+mean-field thermodynamics, and the renormalization procedure used to define the
+model consistently. Chapter~\ref{chap:quark_matter_stars} applies these models
+to dense quark matter and compact stars. It first studies simple Quark--Meson
+equations of state and the corresponding quark-star sequences, then introduces
+the Bodmer--Witten-inspired shift, and finally analyzes the QMD model with 2SC pairing. The chapter also examines parameter sensitivity and
+compares the resulting mass--radius curves with selected astrophysical
+constraints.

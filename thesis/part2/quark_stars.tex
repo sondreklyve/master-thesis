@@ -1,9 +1,10 @@
 \chapter{Quark Matter and Compact Stars}
+\label{chap:quark_matter_stars}
 
 The primary goal of this chapter is to construct an equation of state
 for cold and dense quark matter and to investigate its implications
 for compact stars. In contrast to the hadronic models considered in
-Part~I, the matter described here consists entirely
+Part~\ref{part:neutron-stars}, the matter described here consists entirely
 of deconfined quarks. The resulting stellar configurations therefore
 represent idealized quark stars. While such objects provide a useful
 theoretical framework for isolating the effects of quark degrees of
@@ -59,7 +60,7 @@ phases arise from attractive interactions in the quark--quark channel
 and are expected to play an important role in the phase structure of
 dense QCD \cite{Alford2008,Schmitt2010}. We restrict the analysis to
 the two-flavor superconducting (2SC) phase, described within the
-Quark--Meson--Diquark (QMD) model, which represents the
+QMD model, which represents the
 simplest realization of color superconductivity. The inclusion of such
 effects modifies the thermodynamic potential and can have a
 significant impact on the resulting equation of state.
@@ -293,8 +294,8 @@ content of the results.
 The equation of state is obtained numerically by tabulating $P$ and
 $\varepsilon$ as functions of the chemical potential and performing a
 parametric representation of the curve. The resulting function
-$\varepsilon(P)$ serves as input for the Tolman--Oppenheimer--Volkoff
-equations governing the structure of compact stars \cite{sletmoen2022}.
+$\varepsilon(P)$ serves as input for the TOV equations governing the structure
+of compact stars \cite{sletmoen2022}.
 In the numerical construction, only the branch with non-negative
 pressure is retained in the plotted equation of state.
 The corresponding pressure as a function of chemical potential, together
@@ -411,9 +412,8 @@ the conditions realized in compact stars.
 
 In the present section, the same framework is extended to describe
 electrically neutral matter in weak equilibrium. The resulting
-equation of state is then used as input to the Tolman--Oppenheimer--Volkoff
-equations in order to construct quark-star configurations and study
-their mass--radius relations.
+equation of state is then used as input to the TOV equations in order to
+construct quark-star configurations and study their mass--radius relations.
 
 The main objective is first to construct a physically consistent
 equation of state for stellar matter by imposing charge neutrality
@@ -427,7 +427,7 @@ the stiffness of the resulting equation of state.
 \label{subsec:stellar_matter_qm}
 
 We now construct the equation of state for quark matter under the
-conditions relevant for compact stars. As discussed in Part~I, the
+conditions relevant for compact stars. As discussed in Part~\ref{part:neutron-stars}, the
 matter inside a neutron star can be treated to a very good
 approximation as cold and in weak-interaction equilibrium. In the
 present two-flavor framework, the relevant degrees of freedom are up
@@ -472,8 +472,7 @@ color. As a consequence, the net color charge vanishes automatically,
 and no additional chemical potentials are required to enforce color
 neutrality.
 This situation changes in the color-superconducting phases considered
-later in this chapter. In the two-flavor superconducting (2SC) phase
-of the Quark--Meson--Diquark model, red and green quarks pair while
+later in this chapter. In the 2SC phase of the QMD model, red and green quarks pair while
 blue quarks remain unpaired, breaking the color symmetry between
 species. Color neutrality must therefore be imposed explicitly through
 an additional color chemical potential $\mu_8$, as discussed in
@@ -828,8 +827,8 @@ behavior of a gas of weakly interacting relativistic fermions
 \label{subsec:qm_stellar_structure}
 
 The macroscopic properties of the quark-star configurations are
-obtained by solving the Tolman--Oppenheimer--Volkoff (TOV) equations,
-as introduced in Part~I. Given an equation of state, the TOV equations
+obtained by solving the TOV equations, as introduced in
+Part~\ref{part:neutron-stars}. Given an equation of state, the TOV equations
 are integrated outward from a chosen central pressure until the
 pressure vanishes, which defines the radius of the star. Repeating
 this procedure for a range of central pressures yields a sequence of
@@ -1025,9 +1024,9 @@ states up to a Fermi surface, and an attractive interaction between quarks
 near this surface can lead to the formation of Cooper pairs. A Cooper pair
 is a correlated two-fermion state which behaves as a bosonic degree of
 freedom, allowing many such pairs to occupy the same quantum state and
-form a condensate. This is the same basic mechanism as in BCS
-superconductivity, but the pairs are now formed from quarks rather than
-electrons. Since quarks carry color charge, the corresponding paired phase
+form a condensate. This is the same basic mechanism as in
+Bardeen-Cooper-Schrieffer (BCS) superconductivity, but the pairs are now
+formed from quarks rather than electrons. Since quarks carry color charge, the corresponding paired phase
 is called a color-superconducting phase \cite{Shovkovy2005}.
 
 The microscopic origin of the pairing can be illustrated by quark--quark
@@ -1070,8 +1069,7 @@ diquark mean field can instead be used as a convenient representation of
 the pairing pattern and of the resulting quasiparticle spectrum.
 
 For two flavors, \(u\) and \(d\), the relevant color-superconducting
-phase is the two-flavor color-superconducting phase, usually denoted by
-2SC. In this phase, quarks pair in a scalar channel that is
+phase is the 2SC phase. In this phase, quarks pair in a scalar channel that is
 antisymmetric in both color and flavor. With a conventional choice of
 color orientation, the condensate pairs red and green quarks, while the
 blue quarks remain unpaired, as shown schematically in
@@ -1116,7 +1114,7 @@ rotation.}
 \label{fig:2sc_pairing_schematic}
 \end{figure}
 
-This distinction is important when using the Quark--Meson--Diquark model.
+This distinction is important when using the QMD model.
 The model contains quarks, mesons, and diquark fields, but no dynamical
 gluons. As a result, the color symmetry appearing in the model is treated
 as a global symmetry. A nonzero value of \(\Delta_0\) can therefore be
@@ -1151,8 +1149,8 @@ numbers of the diquark field. The antisymmetric tensor
 \(\epsilon_{abc}\) makes the pair a color antitriplet, while
 \(\epsilon_{ij}\) gives the antisymmetric flavor-singlet combination. The
 factor \(\gamma_5\) selects the scalar spin-zero channel. This is the
-standard diquark degree of freedom used in the two-flavor
-Quark--Meson--Diquark model \cite{Shovkovy2005,Andersen2024}.
+standard diquark degree of freedom used in the two-flavor QMD model
+\cite{Shovkovy2005,Andersen2024}.
 
 With the color orientation fixed as in
 Fig.~\ref{fig:2sc_pairing_schematic}, we allow the third component of the
@@ -1175,9 +1173,9 @@ g_\Delta \Delta_0 ,
 where \(g_\Delta\) is the quark--diquark coupling introduced explicitly in
 the Lagrangian below.
 
-\subsection*{The Quark--Meson--Diquark Lagrangian}
+\subsection*{The QMD Lagrangian}
 
-The two-flavor Quark--Meson--Diquark model is obtained by adding the
+The two-flavor QMD model is obtained by adding the
 diquark field to the Quark--Meson degrees of freedom. Following
 Ref.~\cite{Andersen2024}, we separate the Lagrangian into three parts,
 \begin{equation}
@@ -1551,7 +1549,7 @@ this framework to construct the equation of state for the 2SC phase.
 \section{QMD quark stars with 2SC pairing}
 \label{sec:qmd_section1}
 
-The Quark--Meson--Diquark model defined above is now applied to the
+The QMD model defined above is now applied to the
 construction of 2SC quark-star configurations. The additional mean field
 \(\Delta_0\) makes the calculation more involved than in the unpaired
 case, because the physical state is obtained by minimizing the
@@ -2978,8 +2976,9 @@ directions improve the agreement.
 The observational constraints used here are the same type of benchmarks
 used in recent compact-star studies of quark-matter models
 \cite{Annala2023,Andersen2026}. Massive radio pulsars provide lower
-bounds on the maximum mass, while NICER pulse-profile modelling gives
-simultaneous mass--radius estimates for individual sources. We include
+bounds on the maximum mass, while Neutron Star Interior Composition
+Explorer (NICER) pulse-profile modelling gives simultaneous mass--radius
+estimates for individual sources. We include
 four massive-pulsar mass measurements,
 \[
 \text{J0348+0432},\qquad
@@ -2999,7 +2998,7 @@ We also include the NICER mass--radius measurements of
 \]
 using the values from
 Refs.~\cite{Riley_2019_J0030,Salmi_2024_J0740}. These constraints are
-also used as reference points in the recent EQMD hybrid-star analysis of
+also used as reference points in the recent extended QMD hybrid-star analysis of
 Ref.~\cite{Andersen2026}.
 
 We emphasize that the present comparison uses pure two-flavor QMD
