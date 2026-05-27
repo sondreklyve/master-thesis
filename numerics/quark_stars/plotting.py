@@ -13,6 +13,19 @@ CS2_XLIM: tuple[float, float] = (250.0, 800.0)
 CS2_YLIM: tuple[float, float] = (0.20, 0.50)
 CS2_MU_MIN: float = 250.0  # lower μ_q bound for cs² curves (matches xlim left edge)
 
+# Shared section-2 M-R colors.
+SECTION2_MR_PURPLE = plt.cm.viridis(0.10)
+SECTION2_MR_BLUE = plt.cm.viridis(0.45)
+SECTION2_MR_GREEN = plt.cm.viridis(0.75)
+SECTION2_MR_LOW_VARIATION_COLOR = SECTION2_MR_GREEN
+SECTION2_MR_BASELINE_COLOR = SECTION2_MR_PURPLE
+SECTION2_MR_HIGH_VARIATION_COLOR = SECTION2_MR_BLUE
+SECTION2_MR_COMPARISON_COLORS = (
+    SECTION2_MR_BLUE,
+    SECTION2_MR_PURPLE,
+    SECTION2_MR_GREEN,
+)
+
 
 def apply_plot_style() -> None:
     plt.rcParams.update(

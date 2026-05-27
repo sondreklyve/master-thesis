@@ -50,7 +50,16 @@ from scipy.signal import savgol_filter
 
 from .constants import MEV4_TO_GEV_FM3
 from .io import ensure_directory
-from .plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, apply_plot_style, save_figure
+from .plotting import (
+    CS2_MU_MIN,
+    CS2_XLIM,
+    CS2_YLIM,
+    SECTION2_MR_BASELINE_COLOR,
+    SECTION2_MR_HIGH_VARIATION_COLOR,
+    SECTION2_MR_LOW_VARIATION_COLOR,
+    apply_plot_style,
+    save_figure,
+)
 from .qmd_parameters import QMD_SET_A, QMDParameters
 from .qmd_simple import QMDSimpleModel
 from .qmd_stellar import (
@@ -118,33 +127,32 @@ class RunConfig:
 
 def _make_runs() -> list[RunConfig]:
     baseline = QMD_SET_A
-    viridis = plt.cm.viridis
 
     return [
         RunConfig("A", "gdelta", "1.5g", "1p5g",
                   replace(baseline, g_delta_factor=1.5),
-                  r"$g_\Delta = 1.5g$", viridis(0.75)),
+                  r"$g_\Delta = 1.5g$", SECTION2_MR_LOW_VARIATION_COLOR),
         RunConfig("B", "gdelta", "2.5g", "2p5g",
                   replace(baseline, g_delta_factor=2.5),
-                  r"$g_\Delta = 2.5g$", viridis(0.45)),
+                  r"$g_\Delta = 2.5g$", SECTION2_MR_HIGH_VARIATION_COLOR),
         RunConfig("C", "mdelta", "400",  "400",
                   replace(baseline, m_delta_mev=400.0),
-                  r"$m_\Delta = 400\,\mathrm{MeV}$", viridis(0.75)),
+                  r"$m_\Delta = 400\,\mathrm{MeV}$", SECTION2_MR_LOW_VARIATION_COLOR),
         RunConfig("D", "mdelta", "700",  "700",
                   replace(baseline, m_delta_mev=700.0),
-                  r"$m_\Delta = 700\,\mathrm{MeV}$", viridis(0.45)),
+                  r"$m_\Delta = 700\,\mathrm{MeV}$", SECTION2_MR_HIGH_VARIATION_COLOR),
         RunConfig("E", "lamdelta", "lam0div8",  "lam0div8",
                   replace(baseline, lambda_delta_factor=0.125),
-                  r"$\lambda_\Delta = \lambda_0/8$", viridis(0.75)),
+                  r"$\lambda_\Delta = \lambda_0/8$", SECTION2_MR_LOW_VARIATION_COLOR),
         RunConfig("F", "lamdelta", "lam0div2",  "lam0div2",
                   replace(baseline, lambda_delta_factor=0.5),
-                  r"$\lambda_\Delta = \lambda_0/2$", viridis(0.45)),
+                  r"$\lambda_\Delta = \lambda_0/2$", SECTION2_MR_HIGH_VARIATION_COLOR),
         RunConfig("G", "lam3", "0",     "0",
                   replace(baseline, lambda_3_factor=0.0),
-                  r"$\lambda_3 = 0$", viridis(0.75)),
+                  r"$\lambda_3 = 0$", SECTION2_MR_LOW_VARIATION_COLOR),
         RunConfig("H", "lam3", "2lam0", "2lam0",
                   replace(baseline, lambda_3_factor=2.0),
-                  r"$\lambda_3 = 2\lambda_0$", viridis(0.45)),
+                  r"$\lambda_3 = 2\lambda_0$", SECTION2_MR_HIGH_VARIATION_COLOR),
     ]
 
 
@@ -875,7 +883,7 @@ def _smooth(arr: np.ndarray, window: int, poly: int = _SMOOTH_POLY) -> np.ndarra
 # Plots
 # ---------------------------------------------------------------------------
 
-_COLOR_BASELINE = plt.cm.viridis(0.10)   # thick black substitute (dark)
+_COLOR_BASELINE = SECTION2_MR_BASELINE_COLOR
 _DASHED_MSUN = 2.0
 
 
