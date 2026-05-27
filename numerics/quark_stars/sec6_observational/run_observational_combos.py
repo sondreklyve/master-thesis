@@ -33,32 +33,32 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
-from .io import ensure_directory
-from .plotting import SECTION2_MR_COMPARISON_COLORS, apply_plot_style, save_figure
-from .qmd_parameters import QMD_SET_A, QMDParameters
-from .qmd_stellar import (
+from ..constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
+from ..io import ensure_directory
+from ..plotting import SECTION2_MR_COMPARISON_COLORS, apply_plot_style, save_figure
+from ..qmd_parameters import QMD_SET_A, QMDParameters
+from ..qmd_stellar import (
     QMDStellarEoSPoint,
     QMDStellarModel,
     QMDStellarState,
     build_qmd_stellar_eos_from_states,
 )
-from .solvers.tov import run_tov_sequence
-from .thermodynamics.maxwell import maxwell_construct
+from ..solvers.tov import run_tov_sequence
+from ..thermodynamics.maxwell import maxwell_construct
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 
 _HERE = Path(__file__).resolve().parent
-OUTPUT_ROOT = _HERE / "output"
+OUTPUT_ROOT = _HERE.parent / "output"
 COMBO_DIR   = OUTPUT_ROOT / "observational_combos"
 DATA_DIR    = COMBO_DIR / "data"
 LOG_FILE    = COMBO_DIR / "errors.log"
 
 BASELINE_MR_FILE  = OUTPUT_ROOT / "qmd_stellar" / "data" / "qmd_stars_baseline.txt"
 SECT2_DATA        = OUTPUT_ROOT / "section2" / "data"
-FIG_DIR           = _HERE.parents[1] / "thesis" / "figures" / "quark_stars"
+FIG_DIR           = _HERE.parents[2] / "thesis" / "figures" / "quark_stars" / "observational"
 REPORT_SELECTED   = OUTPUT_ROOT / "observational_mr_selected_report.md"
 REPORT_COMBINED   = OUTPUT_ROOT / "combined_parameter_observational_report.md"
 

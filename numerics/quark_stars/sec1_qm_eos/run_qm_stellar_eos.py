@@ -15,14 +15,14 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .io import output_directory
-from .plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
-from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
-from .qm_potential import TwoFlavorQMPotential
-from .qm_stellar_matter import build_sigma_values, build_stellar_eos
+from ..io import output_directory
+from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
+from ..qm_potential import TwoFlavorQMPotential
+from ..qm_stellar_matter import build_sigma_values, build_stellar_eos
 
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 DEFAULT_PLOT_M_SIGMA_VALUES_MEV = (400.0, 500.0, 600.0)
 
 

@@ -174,10 +174,11 @@ ax2.legend(loc="upper left", framealpha=0.85)
 fig.tight_layout()
 
 outpath = (
-    Path(__file__).resolve().parent.parent.parent
+    Path(__file__).resolve().parent.parent.parent.parent
     / "thesis"
     / "figures"
     / "quark_stars"
+    / "qm_stars"
     / "maxwell_construction_schematic.pdf"
 )
 outpath.parent.mkdir(parents=True, exist_ok=True)

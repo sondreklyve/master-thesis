@@ -20,9 +20,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
-from .io import ensure_directory
-from .plotting import apply_plot_style
+from ..constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
+from ..io import ensure_directory
+from ..plotting import apply_plot_style
 from .run_observational_combos import (
     BASELINE_MR_FILE,
     DATA_DIR,

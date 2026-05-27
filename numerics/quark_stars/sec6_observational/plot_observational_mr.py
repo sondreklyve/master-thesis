@@ -35,10 +35,10 @@ OBS_CURVE_COLORS = {
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_SECT2 = REPO_ROOT / "numerics/quark_stars/output/section2/data"
 DATA_BASE = REPO_ROOT / "numerics/quark_stars/output/qmd_stellar/data"
-FIG_DIR = REPO_ROOT / "thesis/figures/quark_stars"
+FIG_DIR = REPO_ROOT / "thesis/figures/quark_stars/observational"
 REPORT_PATH = REPO_ROOT / "numerics/quark_stars/output/observational_mr_diagnostic_report.md"
 
 # ---------------------------------------------------------------------------

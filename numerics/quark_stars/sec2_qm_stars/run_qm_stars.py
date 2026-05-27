@@ -15,16 +15,16 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .thermodynamics.vacuum import b_mev4_from_root_mev, b_root_mev_from_b_mev4, minimum_bag_constant_mev4
-from .io import output_directory
-from .plotting import apply_plot_style, bag_curve_label, save_figure, sigma_colors
-from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
-from .qm_potential import TwoFlavorQMPotential
-from .qm_stellar_matter import build_sigma_values, build_stellar_eos
-from .solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
+from ..thermodynamics.vacuum import b_mev4_from_root_mev, b_root_mev_from_b_mev4, minimum_bag_constant_mev4
+from ..io import output_directory
+from ..plotting import apply_plot_style, bag_curve_label, save_figure, sigma_colors
+from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
+from ..qm_potential import TwoFlavorQMPotential
+from ..qm_stellar_matter import build_sigma_values, build_stellar_eos
+from ..solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
 
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 DEFAULT_M_SIGMA_VALUES_MEV = (400.0, 500.0, 600.0)
 BAG_ROOT_OFFSETS_MEV = (-10.0, 0.0, 10.0)
 

@@ -19,23 +19,23 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .io import output_directory
-from .plotting import apply_plot_style, save_figure, sigma_label
-from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
-from .qm_potential import TwoFlavorQMPotential
-from .qm_stellar_matter import build_sigma_values, build_stellar_eos
-from .solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
-from .thermodynamics.vacuum import (
+from ..io import output_directory
+from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
+from ..qm_potential import TwoFlavorQMPotential
+from ..qm_stellar_matter import build_sigma_values, build_stellar_eos
+from ..solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
+from ..thermodynamics.vacuum import (
     b_mev4_from_root_mev,
     b_root_mev_from_b_mev4,
     minimum_bag_constant_mev4,
 )
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 M_SIGMA_VALUES = (400.0, 500.0, 600.0)
 BAG_ROOT_OFFSETS_MEV = (-10.0, 0.0, 10.0)
 
-GRAV_COLORS = dict(zip(M_SIGMA_VALUES, plt.cm.viridis(np.linspace(0.2, 0.85, 3))))
+GRAV_COLORS = dict(zip(M_SIGMA_VALUES, sigma_colors(len(M_SIGMA_VALUES))))
 GRAV_LABELS = {
     400.0: r"$m_\sigma = 400\,\mathrm{MeV}$",
     500.0: r"$m_\sigma = 500\,\mathrm{MeV}$",
@@ -138,7 +138,7 @@ def _make_updated_combined_figure(
     out_path: Path,
 ) -> None:
     fig, axes = plt.subplots(len(M_SIGMA_VALUES), 1, figsize=(7.4, 12.8), sharex=True)
-    from .plotting import sigma_colors, bag_curve_label
+    from ..plotting import sigma_colors, bag_curve_label
 
     colors = sigma_colors(len(BAG_ROOT_OFFSETS_MEV))
 

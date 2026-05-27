@@ -48,9 +48,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import savgol_filter
 
-from .constants import MEV4_TO_GEV_FM3
-from .io import ensure_directory
-from .plotting import (
+from ..constants import MEV4_TO_GEV_FM3
+from ..io import ensure_directory
+from ..plotting import (
     CS2_MU_MIN,
     CS2_XLIM,
     CS2_YLIM,
@@ -60,23 +60,23 @@ from .plotting import (
     apply_plot_style,
     save_figure,
 )
-from .qmd_parameters import QMD_SET_A, QMDParameters
-from .qmd_simple import QMDSimpleModel
-from .qmd_stellar import (
+from ..qmd_parameters import QMD_SET_A, QMDParameters
+from ..qmd_simple import QMDSimpleModel
+from ..qmd_stellar import (
     QMDStellarEoSPoint,
     QMDStellarModel,
     QMDStellarState,
     build_qmd_stellar_eos_from_states,
 )
-from .solvers.tov import run_tov_sequence
-from .thermodynamics.maxwell import maxwell_construct
+from ..solvers.tov import run_tov_sequence
+from ..thermodynamics.maxwell import maxwell_construct
 
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 
-OUTPUT_DIR   = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR   = Path(__file__).resolve().parent.parent / "output"
 SECTION2_DIR = OUTPUT_DIR / "section2"
 DATA_DIR     = SECTION2_DIR / "data"
 PLOTS_DIR    = SECTION2_DIR / "plots"

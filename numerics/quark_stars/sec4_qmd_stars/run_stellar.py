@@ -45,21 +45,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import savgol_filter
 
-from .constants import MEV4_TO_GEV_FM3
-from .io import ensure_directory, output_directories, save_table
-from .plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, apply_plot_style, save_figure
-from .qmd_parameters import QMD_SET_A
-from .qmd_simple import QMDSimpleModel
-from .qmd_stellar import (
+from ..constants import MEV4_TO_GEV_FM3
+from ..io import ensure_directory, output_directories, save_table
+from ..plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, PURPLE, TURQUOISE, apply_plot_style, save_figure
+from ..qmd_parameters import QMD_SET_A
+from ..qmd_simple import QMDSimpleModel
+from ..qmd_stellar import (
     QMDStellarEoSPoint,
     QMDStellarModel,
     QMDStellarState,
     build_qmd_stellar_eos_from_states,
 )
-from .solvers.tov import run_tov_sequence
-from .thermodynamics.maxwell import maxwell_construct
-
-
+from ..solvers.tov import run_tov_sequence
+from ..thermodynamics.maxwell import maxwell_construct
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
@@ -68,15 +66,13 @@ MU_MIN_MEV = 250.0
 MU_MAX_MEV = 900.0
 NUM_POINTS = 350
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 QM_STELLAR_DIR = OUTPUT_DIR / "stellar"
 BENCHMARK_DATA_DIR = OUTPUT_DIR / "qmd_benchmark" / "data"
 QM_SIGMA_MEV = 600
-
-# House style: viridis matching existing SET A plots
-COLOR_QMD = plt.cm.viridis(0.15)   # neutral QMD (dark purple)
-COLOR_BM  = plt.cm.viridis(0.6)    # free QMD benchmark overlay
-COLOR_QM  = plt.cm.viridis(np.linspace(0.15, 0.6, 3))[2]
+COLOR_QMD = PURPLE
+COLOR_BM  = TURQUOISE
+COLOR_QM  = TURQUOISE
 LW = 2.2
 
 # EoS zoom window (two-panel plot, left panel)
@@ -109,13 +105,9 @@ EOS_COLUMNS = [
 ]
 
 _MINIMIZER_OPTIONS = {"maxiter": 80, "ftol": 1.0e-8, "gtol": 1.0e-6}
-
-
 # ---------------------------------------------------------------------------
 # Smoothing helpers (mirror of run_qmd_benchmark.py)
 # ---------------------------------------------------------------------------
-
-
 def _odd_window(size: int, requested: int, polyorder: int = _SMOOTH_POLY) -> int:
     if size <= polyorder + 2:
         return 0
@@ -125,8 +117,6 @@ def _odd_window(size: int, requested: int, polyorder: int = _SMOOTH_POLY) -> int
     if window <= polyorder:
         return 0
     return window
-
-
 def _smooth_for_plot(
     values: np.ndarray,
     requested_window: int,
@@ -140,8 +130,6 @@ def _smooth_for_plot(
     if window == 0:
         return arr
     return savgol_filter(arr, window_length=window, polyorder=polyorder)
-
-
 def _prepare_cs2_curve(
     mu: np.ndarray,
     cs2: np.ndarray,
@@ -168,8 +156,6 @@ def _prepare_cs2_curve(
         cs2_plot[post] = _smooth_for_plot(cs2_plot[post], window)
 
     return mu_plot, cs2_plot
-
-
 def _set_log_mu_axis(ax, lower: float, upper: float) -> None:
     ax.set_xscale("log")
     ax.set_xlim(lower, upper)
@@ -177,13 +163,9 @@ def _set_log_mu_axis(ax, lower: float, upper: float) -> None:
     ticks = tick_candidates[(tick_candidates >= lower) & (tick_candidates <= upper)]
     ax.set_xticks(ticks)
     ax.set_xticklabels([f"{int(t)}" for t in ticks])
-
-
 # ---------------------------------------------------------------------------
 # Benchmark data loader (for overlay in condensate and cs² plots)
 # ---------------------------------------------------------------------------
-
-
 def _load_bm_data() -> dict[str, np.ndarray] | None:
     """Load the free-QMD benchmark scan for overlay purposes."""
     path = BENCHMARK_DATA_DIR / "qmd_benchmark.txt"
@@ -204,8 +186,6 @@ def _load_bm_data() -> dict[str, np.ndarray] | None:
         "pressure_mev4":       data[:, 6],
         "energy_density_mev4": data[:, 8],
     }
-
-
 def _load_asymptotic_data() -> dict[str, np.ndarray] | None:
     """Load high-μ log-spaced diagnostic for conformal convergence extension."""
     path = BENCHMARK_DATA_DIR / "qmd_benchmark_asymptotic_log.txt"
@@ -218,8 +198,6 @@ def _load_asymptotic_data() -> dict[str, np.ndarray] | None:
         "pressure_mev4":       data[:, 6],
         "energy_density_mev4": data[:, 8],
     }
-
-
 def _compute_or_load_extended_asym(data_dir: Path) -> dict | None:
     """Extended free-QMD scan from vacuum to 20 GeV for conformal convergence.
 
@@ -273,13 +251,9 @@ def _compute_or_load_extended_asym(data_dir: Path) -> dict | None:
     )
     print(f"  Saved {fpath.name} ({len(states)} pts)")
     return {"mu_q_mev": mus, "pressure_mev4": pressures, "energy_density_mev4": eps}
-
-
 # ---------------------------------------------------------------------------
 # Plot-only loaders
 # ---------------------------------------------------------------------------
-
-
 def _load_eos_points(path: Path) -> list:
     """Reconstruct plot-compatible EoS point objects from saved table."""
     points = []
@@ -313,8 +287,6 @@ def _load_eos_points(path: Path) -> list:
                 neutrality_residual_8=0.0,
             ))
     return points
-
-
 def _load_stars_sequence(path: Path):
     """Load saved M-R table into a minimal sequence namespace."""
     if not path.exists():
@@ -327,13 +299,9 @@ def _load_stars_sequence(path: Path):
         mass_msun=data[:, 4],
         stable_mask=data[:, 5].astype(bool),
     )
-
-
 # ---------------------------------------------------------------------------
 # Equilibrium scan
 # ---------------------------------------------------------------------------
-
-
 def _solve_vacuum(model: QMDStellarModel) -> QMDStellarState:
     """Solve or fallback to the canonical vacuum at mu_q = 0."""
     state = model.solve_equilibrium(
@@ -362,8 +330,6 @@ def _solve_vacuum(model: QMDStellarModel) -> QMDStellarState:
         success=False,
         message="Canonical vacuum fallback (solve_equilibrium at mu_q=0 did not converge).",
     )
-
-
 def _scan_equilibrium(
     model: QMDStellarModel,
     mu_values: np.ndarray,
@@ -390,13 +356,9 @@ def _scan_equilibrium(
             flush=True,
         )
     return states
-
-
 # ---------------------------------------------------------------------------
 # Stability construction
 # ---------------------------------------------------------------------------
-
-
 def _filter_points(points: list[QMDStellarEoSPoint]) -> list[QMDStellarEoSPoint]:
     return [
         p for p in points
@@ -406,8 +368,6 @@ def _filter_points(points: list[QMDStellarEoSPoint]) -> list[QMDStellarEoSPoint]
         and p.energy_density_mev4 > 0.0
         and np.isfinite(p.cs2)
     ]
-
-
 def _recompute_cs2(points: list[QMDStellarEoSPoint]) -> list[QMDStellarEoSPoint]:
     if len(points) < 2:
         return [replace(p, cs2=float("nan")) for p in points]
@@ -419,8 +379,6 @@ def _recompute_cs2(points: list[QMDStellarEoSPoint]) -> list[QMDStellarEoSPoint]
         replace(p, cs2=float(dpdeps[i]) if np.isfinite(dpdeps[i]) else float("nan"))
         for i, p in enumerate(points)
     ]
-
-
 def _strictly_increasing(
     points: list[QMDStellarEoSPoint],
 ) -> tuple[list[QMDStellarEoSPoint], int]:
@@ -443,8 +401,6 @@ def _strictly_increasing(
         else:
             removed += 1
     return kept, removed
-
-
 def _nearest_point(
     points: list[QMDStellarEoSPoint],
     p_val: float,
@@ -456,8 +412,6 @@ def _nearest_point(
     e_scale = max(1.0, float(np.nanmax(np.abs(energy))))
     dist = ((pressure - p_val) / p_scale) ** 2 + ((energy - e_val) / e_scale) ** 2
     return points[int(np.nanargmin(dist))]
-
-
 def _build_stable(
     raw_points: list[QMDStellarEoSPoint],
 ) -> tuple[list[QMDStellarEoSPoint], list[int], int, int]:
@@ -490,13 +444,9 @@ def _build_stable(
         stable = _recompute_cs2(stable)
 
     return stable, maxwell_indices, mono_removed, cs2_removed
-
-
 # ---------------------------------------------------------------------------
 # Table writers
 # ---------------------------------------------------------------------------
-
-
 def _write_eos_table(
     path: Path,
     points: list[QMDStellarEoSPoint],
@@ -518,8 +468,6 @@ def _write_eos_table(
                 f"{p.omega_min_mev4:.10e} {p.phase} "
                 f"{int(p.success)} {p.neutrality_residual_norm:.10e}\n"
             )
-
-
 def _write_stars_table(path: Path, sequence) -> None:
     ensure_directory(path.parent)
     metadata = {
@@ -546,13 +494,9 @@ def _write_stars_table(path: Path, sequence) -> None:
         data,
         metadata,
     )
-
-
 # ---------------------------------------------------------------------------
 # TOV EoS wrapper
 # ---------------------------------------------------------------------------
-
-
 @dataclass
 class _QMDEoS:
     """Duck-typed EoS wrapper satisfying the run_tov_sequence interface."""
@@ -597,13 +541,9 @@ class _QMDEoS:
         pressure, energy = pressure[order], energy[order]
         unique = np.concatenate(([True], np.diff(pressure) > 0.0))
         return pressure[unique], energy[unique]
-
-
 # ---------------------------------------------------------------------------
 # Plots
 # ---------------------------------------------------------------------------
-
-
 def _plot_condensates(
     all_points: list[QMDStellarEoSPoint],
     onset_mev: float | None,
@@ -669,8 +609,6 @@ def _plot_condensates(
     ax2.legend()
 
     save_figure(plots_dir / "qmd_stellar_condensates.pdf")
-
-
 def _plot_neutrality(
     all_points: list[QMDStellarEoSPoint],
     plots_dir: Path,
@@ -694,8 +632,6 @@ def _plot_neutrality(
     ax.set_xlim(250.0, 700.0)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_neutrality.pdf")
-
-
 def _plot_eos(
     raw_points: list[QMDStellarEoSPoint],
     stable_points: list[QMDStellarEoSPoint],
@@ -776,8 +712,6 @@ def _plot_eos(
     ax_delta.set_ylim(-0.35, 0.35)
 
     save_figure(plots_dir / "qmd_stellar_eos.pdf")
-
-
 def _plot_cs2(
     stable_points: list[QMDStellarEoSPoint],
     onset_mev: float | None,
@@ -830,8 +764,6 @@ def _plot_cs2(
     ax.set_ylim(*CS2_YLIM)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_cs2.pdf")
-
-
 def _plot_mass_radius(sequence, plots_dir: Path) -> None:
     """M(R): solid stable, dashed unstable, filled circle at M_max."""
     stable   = sequence.stable_mask.astype(bool)
@@ -858,8 +790,6 @@ def _plot_mass_radius(sequence, plots_dir: Path) -> None:
     ax.set_ylim(0.5, 2.1)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_mass_radius.pdf")
-
-
 def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
     """Overlay QMD SET A vs QM m_sigma=600 MeV M-R curves (three-curve comparison).
 
@@ -930,13 +860,9 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
     ax.set_xlim(8.0, 18.0)
     ax.set_ylim(0.5, 2.1)
     save_figure(plots_dir / "qmd_vs_qm_mass_radius.pdf")
-
-
 # ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
-
-
 def _print_summary(
     raw_points: list[QMDStellarEoSPoint],
     stable_points: list[QMDStellarEoSPoint],
@@ -989,13 +915,9 @@ def _print_summary(
 
     print(f"  Stable TOV configurations:    {stable_mask.sum()}")
     print()
-
-
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -1153,7 +1075,5 @@ def main() -> None:
 
     if sequence is not None and not args.plot_only:
         _print_summary(raw_points, stable_points, maxwell_indices, sequence)
-
-
 if __name__ == "__main__":
     main()

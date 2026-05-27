@@ -7,24 +7,39 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Shared axis limits for c_s² plots — used by both run_qmd_stellar and run_section2_sweep
-# so both plots stay in sync.
+# ---------------------------------------------------------------------------
+# Centralized color palette (viridis-based)
+# ---------------------------------------------------------------------------
+# Single-curve plots always use PURPLE.
+# Two-curve plots use (PURPLE, TURQUOISE).
+# Three-curve plots use (PURPLE, GREEN, BLUE).
+
+PURPLE   = plt.cm.viridis(0.10)   # dark purple  — primary / full model
+TURQUOISE = plt.cm.viridis(0.60)  # turquoise    — secondary / truncated / overlay
+GREEN    = plt.cm.viridis(0.75)   # green        — third curve / low variation
+BLUE     = plt.cm.viridis(0.45)   # medium blue  — high variation
+
+PALETTE_1: tuple = (PURPLE,)
+PALETTE_2: tuple = (PURPLE, TURQUOISE)
+PALETTE_3: tuple = (PURPLE, GREEN, BLUE)
+
+# ---------------------------------------------------------------------------
+# Shared axis limits for c_s² plots
+# ---------------------------------------------------------------------------
 CS2_XLIM: tuple[float, float] = (250.0, 800.0)
 CS2_YLIM: tuple[float, float] = (0.20, 0.50)
-CS2_MU_MIN: float = 250.0  # lower μ_q bound for cs² curves (matches xlim left edge)
+CS2_MU_MIN: float = 250.0
 
-# Shared section-2 M-R colors.
-SECTION2_MR_PURPLE = plt.cm.viridis(0.10)
-SECTION2_MR_BLUE = plt.cm.viridis(0.45)
-SECTION2_MR_GREEN = plt.cm.viridis(0.75)
-SECTION2_MR_LOW_VARIATION_COLOR = SECTION2_MR_GREEN
-SECTION2_MR_BASELINE_COLOR = SECTION2_MR_PURPLE
-SECTION2_MR_HIGH_VARIATION_COLOR = SECTION2_MR_BLUE
-SECTION2_MR_COMPARISON_COLORS = (
-    SECTION2_MR_BLUE,
-    SECTION2_MR_PURPLE,
-    SECTION2_MR_GREEN,
-)
+# ---------------------------------------------------------------------------
+# Section-5 parameter-sensitivity M-R colors (kept for back-compat)
+# ---------------------------------------------------------------------------
+SECTION2_MR_PURPLE = PURPLE
+SECTION2_MR_BLUE   = BLUE
+SECTION2_MR_GREEN  = GREEN
+SECTION2_MR_BASELINE_COLOR      = PURPLE
+SECTION2_MR_LOW_VARIATION_COLOR  = GREEN
+SECTION2_MR_HIGH_VARIATION_COLOR = BLUE
+SECTION2_MR_COMPARISON_COLORS = (BLUE, PURPLE, GREEN)
 
 
 def apply_plot_style() -> None:

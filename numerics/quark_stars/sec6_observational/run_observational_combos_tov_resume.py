@@ -20,10 +20,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
-from .io import ensure_directory
-from .plotting import apply_plot_style
-from .qmd_parameters import QMD_SET_A
+from ..constants import MEV3_TO_FM_MINUS3, MEV4_TO_GEV_FM3
+from ..io import ensure_directory
+from ..plotting import apply_plot_style
+from ..qmd_parameters import QMD_SET_A
 from .run_observational_combos import (
     BASELINE_MR_FILE,
     COMBO_DIR,
@@ -53,7 +53,7 @@ from .run_observational_combos import (
     write_combined_report,
     write_selected_report,
 )
-from .solvers.tov import run_tov_sequence
+from ..solvers.tov import run_tov_sequence
 
 # QMDStellarEoSPoint columns (from EoS files written by run_observational_combos.py):
 # mu_q_mev mu_B_mev phi_mev delta_mev gap_mev mu_e_mev mu_8_mev delta_mu_mev

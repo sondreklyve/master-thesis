@@ -15,13 +15,13 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .io import output_directory, save_table
-from .plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
-from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS
-from .vacuum_scan import DEFAULT_M_SIGMA_VALUES_MEV, scan_vacuum_stability
+from ..io import output_directory, save_table
+from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS
+from ..vacuum_scan import DEFAULT_M_SIGMA_VALUES_MEV, scan_vacuum_stability
 
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 
 
 def parse_args() -> argparse.Namespace:

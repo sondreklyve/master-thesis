@@ -14,31 +14,23 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .constants import MEV3_TO_FM_MINUS3, NC, N_FLAVORS
-from .io import output_directories, save_table
-from .plotting import apply_plot_style, save_figure
-from .qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
-from .qm_potential import TwoFlavorQMPotential
-from .qm_simple_eos import SimpleEOSTable, build_simple_eos
+from ..constants import MEV3_TO_FM_MINUS3, NC, N_FLAVORS
+from ..io import output_directories, save_table
+from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
+from ..qm_potential import TwoFlavorQMPotential
+from ..qm_simple_eos import SimpleEOSTable, build_simple_eos
 
 
 MU_MIN_MEV = 0.0
 MU_MAX_MEV = 500.0
 NUM_POINTS = 400
 M_SIGMA_VALUES_MEV = (500.0, 600.0, 700.0)
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 
 
 def sigma_tag(m_sigma_mev: float) -> str:
     return f"sigma_{int(round(m_sigma_mev))}"
-
-
-def sigma_label(m_sigma_mev: float) -> str:
-    return rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$"
-
-
-def sigma_colors(num_curves: int) -> np.ndarray:
-    return plt.cm.viridis(np.linspace(0.2, 0.85, num_curves))
 
 
 def build_tables(mu_values_mev: np.ndarray) -> list[SimpleEOSTable]:

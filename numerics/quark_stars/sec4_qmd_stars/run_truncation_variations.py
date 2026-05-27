@@ -40,25 +40,25 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .io import output_directories, save_table
-from .plotting import apply_plot_style, save_figure
-from .qmd_parameters import QMD_SET_A, QMDParameters
-from .qmd_simple import QMDSimpleModel, QMDSimpleState
+from ..io import output_directories, save_table
+from ..plotting import PURPLE, TURQUOISE, apply_plot_style, save_figure
+from ..qmd_parameters import QMD_SET_A, QMDParameters
+from ..qmd_simple import QMDSimpleModel, QMDSimpleState
 
 
 # ---------------------------------------------------------------------------
 # Paths and scan parameters
 # ---------------------------------------------------------------------------
 
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 SECTION2_DIR = OUTPUT_DIR / "section2"
 FULL_DATA_DIR = SECTION2_DIR / "data"
 TRUNC_DATA_DIR = SECTION2_DIR / "data"
 PLOTS_DIR = SECTION2_DIR / "plots"
 
 THESIS_FIGURES_DIR = (
-    Path(__file__).resolve().parent.parent.parent
-    / "thesis" / "figures" / "quark_stars"
+    Path(__file__).resolve().parent.parent.parent.parent
+    / "thesis" / "figures" / "quark_stars" / "qmd_stars"
 )
 
 MU_MIN_MEV = 0.0
@@ -74,8 +74,8 @@ GAP_YMIN = 0.0
 GAP_YMAX = 300.0
 
 # Colors matching qmd_stellar_condensates.pdf
-_COLOR = plt.cm.viridis(0.15)       # dark purple — full model
-_COLOR_TRUNC = plt.cm.viridis(0.6)   # turquoise — truncated
+_COLOR = PURPLE
+_COLOR_TRUNC = TURQUOISE
 _LABEL_FULL = "Full"
 _LABEL_TRUNC = "Truncated"
 _LW = 2.2
