@@ -8,19 +8,25 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # ---------------------------------------------------------------------------
-# Centralized color palette (viridis-based)
+# Centralized color palette (canonical viridis 6-point)
 # ---------------------------------------------------------------------------
 # Single-curve plots always use PURPLE.
 # Two-curve plots use (PURPLE, TURQUOISE).
 # Three-curve plots use (PURPLE, TURQUOISE, GREEN).
+# Six-curve plots (e.g. vacuum scan) use PALETTE_6.
 
-PURPLE    = plt.cm.viridis(0.10)  # dark purple  — primary / full model
-TURQUOISE = plt.cm.viridis(0.60)  # turquoise    — secondary / truncated / overlay
-GREEN     = plt.cm.viridis(0.82)  # vibrant green — third curve
+PURPLE    = "#440154"  # viridis step 1 — dark purple
+BLUE      = "#414487"  # viridis step 2 — blue-purple
+TEAL      = "#2a788e"  # viridis step 3 — blue-teal
+TURQUOISE = "#21918c"  # viridis step 4 — teal
+LIME      = "#7ad151"  # viridis step 5 — yellow-green
+YELLOW    = "#fde725"  # viridis step 6 — yellow
+GREEN     = "#86d449"  # viridis(0.82)  — lime-green, third curve
 
 PALETTE_1: tuple = (PURPLE,)
 PALETTE_2: tuple = (PURPLE, TURQUOISE)
 PALETTE_3: tuple = (PURPLE, TURQUOISE, GREEN)
+PALETTE_6: tuple = tuple(plt.cm.viridis(np.linspace(0.0, 0.82, 6)))
 
 # ---------------------------------------------------------------------------
 # Shared axis limits for c_s² plots

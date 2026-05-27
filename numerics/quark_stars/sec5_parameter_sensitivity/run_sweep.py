@@ -14,16 +14,15 @@ Baseline loaded from output/qmd_stellar/ (Section 1 results).
 
 Produces
 --------
-  output/section2/data/section2_stellar_{param}_{value_tag}.txt   (×8)
-  output/section2/data/section2_benchmark_{param}_{value_tag}.txt (×8)
-  output/section2/section2_summary.csv
-  output/section2/plots/section2_MR_gdelta.pdf
-  output/section2/plots/section2_MR_mdelta.pdf
-  output/section2/plots/section2_MR_lamdelta.pdf
-  output/section2/plots/section2_MR_lam3.pdf
-  output/section2/plots/section2_cs2_gdelta.pdf
-  output/section2/plots/section2_condensates_gdelta.pdf
-  output/section2/plots/section2_condensates_mdelta.pdf
+  output/sec5_parameter_sensitivity/data/section2_stellar_{param}_{value_tag}.txt   (×8)
+  output/sec5_parameter_sensitivity/data/section2_benchmark_{param}_{value_tag}.txt (×8)
+  thesis/figures/quark_stars/parameter_sensitivity/section2_MR_gdelta.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_MR_mdelta.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_MR_lamdelta.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_MR_lam3.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_cs2_gdelta.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_condensates_gdelta.pdf
+  thesis/figures/quark_stars/parameter_sensitivity/section2_condensates_mdelta.pdf
 """
 
 from __future__ import annotations
@@ -77,9 +76,9 @@ from ..thermodynamics.maxwell import maxwell_construct
 # ---------------------------------------------------------------------------
 
 OUTPUT_DIR   = Path(__file__).resolve().parent.parent / "output"
-SECTION2_DIR = OUTPUT_DIR / "section2"
+SECTION2_DIR = OUTPUT_DIR / "sec5_parameter_sensitivity"
 DATA_DIR     = SECTION2_DIR / "data"
-PLOTS_DIR    = SECTION2_DIR / "plots"
+PLOTS_DIR    = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "parameter_sensitivity"
 ERRORS_LOG   = SECTION2_DIR / "errors.log"
 SUMMARY_CSV  = SECTION2_DIR / "section2_summary.csv"
 

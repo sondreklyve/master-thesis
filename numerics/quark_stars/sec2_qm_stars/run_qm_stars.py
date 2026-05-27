@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from ..thermodynamics.vacuum import b_mev4_from_root_mev, b_root_mev_from_b_mev4, minimum_bag_constant_mev4
-from ..io import output_directory
-from ..plotting import apply_plot_style, bag_curve_label, save_figure, sigma_colors
+from ..io import ensure_directory
+from ..plotting import PALETTE_3, apply_plot_style, bag_curve_label, save_figure
 from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
 from ..qm_potential import TwoFlavorQMPotential
 from ..qm_stellar_matter import build_sigma_values, build_stellar_eos
@@ -25,6 +25,7 @@ from ..solvers.tov import run_tov_sequence, run_tov_sequence_grav_bound
 
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qm_stars"
 DEFAULT_M_SIGMA_VALUES_MEV = (400.0, 500.0, 600.0)
 BAG_ROOT_OFFSETS_MEV = (-10.0, 0.0, 10.0)
 
@@ -46,9 +47,10 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     apply_plot_style()
-    stellar_dir = output_directory(args.output_dir, "stellar")
+    stellar_dir = ensure_directory(args.output_dir / "sec2_qm_stars")
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     selected_m_sigma_values = [float(value) for value in args.m_sigma_values]
-    colors = sigma_colors(len(args.bag_root_offsets_mev))
+    colors = PALETTE_3
     fig_combined, axes = plt.subplots(len(selected_m_sigma_values), 1, figsize=(7.4, 12.8), sharex=True)
     if len(selected_m_sigma_values) == 1:
         axes = [axes]
@@ -196,7 +198,7 @@ def main() -> None:
 
     axes[0].set_ylabel(r"Mass $M\;(M_\odot)$")
     fig_combined.tight_layout()
-    fig_combined.savefig(stellar_dir / "mass_radius_combined.pdf")
+    fig_combined.savefig(FIGURES_DIR / "mass_radius_combined.pdf")
     plt.close(fig_combined)
 
 

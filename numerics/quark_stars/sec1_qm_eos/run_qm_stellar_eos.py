@@ -15,14 +15,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..io import output_directory
-from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..io import ensure_directory
+from ..plotting import PALETTE_3, apply_plot_style, save_figure, sigma_label
 from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
 from ..qm_potential import TwoFlavorQMPotential
 from ..qm_stellar_matter import build_sigma_values, build_stellar_eos
 
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qm_stars"
 DEFAULT_PLOT_M_SIGMA_VALUES_MEV = (400.0, 500.0, 600.0)
 
 
@@ -130,11 +131,11 @@ def _surface_energy_density_after_maxwell(
 def main() -> None:
     args = parse_args()
     apply_plot_style()
-    eos_dir = output_directory(args.output_dir, "eos")
+    eos_dir = ensure_directory(args.output_dir / "sec1_qm_stellar_eos")
     selected_m_sigma_values = [float(value) for value in args.m_sigma_values]
 
     fig, ax = plt.subplots(figsize=(8.0, 4.8))
-    colors = sigma_colors(len(selected_m_sigma_values))
+    colors = PALETTE_3
     for m_sigma_mev, color in zip(selected_m_sigma_values, colors, strict=True):
         fitted = fit_qm_parameters(DEFAULT_QM_VACUUM_INPUTS.with_m_sigma(m_sigma_mev))
         potential = TwoFlavorQMPotential(fitted)
@@ -178,7 +179,8 @@ def main() -> None:
     ax.set_xlim((-0.01, 0.05))
     ax.set_ylim((0.0, 0.45))
     ax.legend(ncol=1)
-    save_figure(eos_dir / "pressure_vs_energy_density.pdf")
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    save_figure(FIGURES_DIR / "pressure_vs_energy_density.pdf")
 
 
 if __name__ == "__main__":

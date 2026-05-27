@@ -8,12 +8,11 @@ Produces
   output/qmd_benchmark/data/qmd_benchmark.txt
   output/qmd_benchmark/data/qmd_benchmark_truncated.txt
   output/qmd_benchmark/data/qmd_benchmark_asymptotic_log.txt
-  output/qmd_benchmark/plots/qmd_benchmark_condensates.pdf
-  output/qmd_benchmark/plots/qmd_benchmark_condensate_comparison.pdf
-  output/qmd_benchmark/plots/qmd_benchmark_pressure.pdf
-  output/qmd_benchmark/plots/qmd_benchmark_eos.pdf
-  output/qmd_benchmark/plots/qmd_benchmark_eos_asymptotic.pdf
-  output/qmd_benchmark/plots/qmd_benchmark_cs2.pdf
+  thesis/figures/quark_stars/qmd_stars/qmd_benchmark_condensates.pdf
+  thesis/figures/quark_stars/qmd_stars/qmd_benchmark_condensate_comparison.pdf
+  thesis/figures/quark_stars/qmd_stars/qmd_benchmark_pressure.pdf
+  thesis/figures/quark_stars/qmd_stars/qmd_benchmark_eos.pdf
+  thesis/figures/quark_stars/qmd_stars/qmd_benchmark_cs2.pdf
 
 Usage
 -----
@@ -60,6 +59,7 @@ MU_MAX_MEV = 900.0
 NUM_POINTS = 5000
 NUM_POINTS_TRUNC = 5000
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qmd_stars"
 
 PARAMS_TRUNC = replace(QMD_SET_A, include_omega_1_num=False)
 
@@ -787,7 +787,9 @@ def main() -> None:
     args = parser.parse_args()
 
     apply_plot_style()
-    data_dir, plots_dir = output_directories(OUTPUT_DIR, "qmd_benchmark")
+    data_dir, _ = output_directories(OUTPUT_DIR, "qmd_benchmark")
+    plots_dir = FIGURES_DIR
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
     asym_gap_analytic = _asymptotic_gap_mev(QMD_SET_A)
 
@@ -868,10 +870,6 @@ def main() -> None:
     print(f"  Saved qmd_benchmark_pressure.pdf")
     _plot_eos(mu, pressures, eps, n_q, plots_dir, asymptotic=asymptotic)
     print(f"  Saved qmd_benchmark_eos.pdf")
-    if asymptotic is not None:
-        asym_mu, asym_pressures, asym_eps, asym_cs2 = asymptotic
-        _plot_asymptotic_eos(asym_mu, asym_pressures, asym_eps, asym_cs2, plots_dir)
-        print(f"  Saved qmd_benchmark_eos_asymptotic.pdf")
     _plot_cs2(mu, pressures, n_q, cs2, onset, plots_dir, asymptotic=asymptotic)
     print(f"  Saved qmd_benchmark_cs2.pdf")
 

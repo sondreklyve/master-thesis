@@ -5,4 +5,4 @@
 
 # Dynamic reports — regenerated each script run
 *.md
-!README.md
+*.csv

@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from ..constants import MEV3_TO_FM_MINUS3, NC, N_FLAVORS
-from ..io import output_directories, save_table
-from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..io import ensure_directory, save_table
+from ..plotting import PALETTE_3, apply_plot_style, save_figure, sigma_label
 from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS, fit_qm_parameters
 from ..qm_potential import TwoFlavorQMPotential
 from ..qm_simple_eos import SimpleEOSTable, build_simple_eos
@@ -27,6 +27,7 @@ MU_MAX_MEV = 500.0
 NUM_POINTS = 400
 M_SIGMA_VALUES_MEV = (500.0, 600.0, 700.0)
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qm_eos"
 
 
 def sigma_tag(m_sigma_mev: float) -> str:
@@ -44,7 +45,7 @@ def build_tables(mu_values_mev: np.ndarray) -> list[SimpleEOSTable]:
 
 def save_sigma_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
-    for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
+    for table, color in zip(tables, PALETTE_3, strict=True):
         ax.plot(table.mu_q_mev, table.sigma_mev, linewidth=2.2, color=color, label=sigma_label(table.m_sigma_mev))
     ax.set_xlabel(r"Quark chemical potential $\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"Condensate $\sigma\;(\mathrm{MeV})$")
@@ -67,7 +68,7 @@ def save_number_density_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> N
         label=r"Free massless quarks",
         zorder=0,
     )
-    for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
+    for table, color in zip(tables, PALETTE_3, strict=True):
         ax.plot(
             table.mu_q_mev,
             table.quark_number_density_fm3,
@@ -83,7 +84,7 @@ def save_number_density_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> N
 
 def save_pressure_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
-    for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
+    for table, color in zip(tables, PALETTE_3, strict=True):
         ax.plot(
             table.mu_q_mev,
             table.pressure_gev_fm3,
@@ -99,7 +100,7 @@ def save_pressure_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
 
 def save_pressure_energy_density_plot(tables: list[SimpleEOSTable], plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
-    for table, color in zip(tables, sigma_colors(len(tables)), strict=True):
+    for table, color in zip(tables, PALETTE_3, strict=True):
         mask = table.positive_pressure_mask
         ax.plot(
             table.pressure_gev_fm3[mask],
@@ -127,7 +128,7 @@ def save_speed_of_sound_outputs(tables: list[SimpleEOSTable], data_dir: Path, pl
     }
 
     fig, ax = plt.subplots(figsize=(8.8, 3.8))
-    colors = sigma_colors(len(tables))
+    colors = PALETTE_3
     for index, (table, color, (mu_q_mev, cs2)) in enumerate(zip(tables, colors, curves, strict=True)):
         combined[: mu_q_mev.size, 2 * index] = mu_q_mev
         combined[: cs2.size, 2 * index + 1] = cs2
@@ -150,7 +151,8 @@ def save_speed_of_sound_outputs(tables: list[SimpleEOSTable], data_dir: Path, pl
 
 def main() -> None:
     apply_plot_style()
-    data_dir, plots_dir = output_directories(OUTPUT_DIR, "simple")
+    data_dir = ensure_directory(OUTPUT_DIR / "sec1_qm_eos" / "data")
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     mu_values_mev = np.linspace(MU_MIN_MEV, MU_MAX_MEV, NUM_POINTS)
     tables = build_tables(mu_values_mev)
 
@@ -158,11 +160,11 @@ def main() -> None:
         tag = sigma_tag(table.m_sigma_mev)
         table.save(data_dir / f"qm_simple_{tag}.txt")
 
-    save_sigma_plot(tables, plots_dir)
-    save_number_density_plot(tables, plots_dir)
-    save_pressure_plot(tables, plots_dir)
-    save_pressure_energy_density_plot(tables, plots_dir)
-    save_speed_of_sound_outputs(tables, data_dir, plots_dir)
+    save_sigma_plot(tables, FIGURES_DIR)
+    save_number_density_plot(tables, FIGURES_DIR)
+    save_pressure_plot(tables, FIGURES_DIR)
+    save_pressure_energy_density_plot(tables, FIGURES_DIR)
+    save_speed_of_sound_outputs(tables, data_dir, FIGURES_DIR)
 
 
 if __name__ == "__main__":

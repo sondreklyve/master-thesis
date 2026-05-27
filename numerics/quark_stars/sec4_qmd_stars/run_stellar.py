@@ -47,7 +47,7 @@ from scipy.signal import savgol_filter
 
 from ..constants import MEV4_TO_GEV_FM3
 from ..io import ensure_directory, output_directories, save_table
-from ..plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, PURPLE, TURQUOISE, apply_plot_style, save_figure
+from ..plotting import CS2_MU_MIN, CS2_XLIM, CS2_YLIM, GREEN, PURPLE, TURQUOISE, apply_plot_style, save_figure
 from ..qmd_parameters import QMD_SET_A
 from ..qmd_simple import QMDSimpleModel
 from ..qmd_stellar import (
@@ -67,8 +67,9 @@ MU_MAX_MEV = 900.0
 NUM_POINTS = 350
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
-QM_STELLAR_DIR = OUTPUT_DIR / "stellar"
+QM_STELLAR_DIR = OUTPUT_DIR / "sec2_qm_stars"
 BENCHMARK_DATA_DIR = OUTPUT_DIR / "qmd_benchmark" / "data"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qmd_stars"
 QM_SIGMA_MEV = 600
 COLOR_QMD = PURPLE
 COLOR_BM  = TURQUOISE
@@ -796,8 +797,8 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
     Primary comparison: QMD vs gravitationally-bound QM (B_min=0) — matched construction.
     Secondary reference: self-bound QM (B_min=27.8 MeV) — shown for context.
     """
-    COLOR_QM_GB  = plt.cm.viridis(0.85)   # gravitationally-bound QM (B=0)
-    COLOR_QM_SB  = plt.cm.viridis(0.50)   # self-bound QM (B^{1/4}=27.8 MeV)
+    COLOR_QM_GB  = TURQUOISE   # gravitationally-bound QM (B=0)
+    COLOR_QM_SB  = GREEN       # self-bound QM (B^{1/4}=27.8 MeV)
 
     stable   = sequence.stable_mask.astype(bool)
     unstable = ~stable
@@ -927,7 +928,9 @@ def main() -> None:
     args = parser.parse_args()
 
     apply_plot_style()
-    data_dir, plots_dir = output_directories(OUTPUT_DIR, "qmd_stellar")
+    data_dir, _ = output_directories(OUTPUT_DIR, "qmd_stellar")
+    plots_dir = FIGURES_DIR
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
     if args.plot_only:
         print("Plot-only mode: loading saved data ...")

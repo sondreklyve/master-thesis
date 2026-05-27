@@ -15,13 +15,14 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..io import output_directory, save_table
-from ..plotting import apply_plot_style, save_figure, sigma_colors, sigma_label
+from ..io import ensure_directory, save_table
+from ..plotting import PALETTE_6, apply_plot_style, save_figure, sigma_label
 from ..qm_parameters import DEFAULT_QM_VACUUM_INPUTS
 from ..vacuum_scan import DEFAULT_M_SIGMA_VALUES_MEV, scan_vacuum_stability
 
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
+FIGURES_DIR = Path(__file__).resolve().parents[3] / "thesis" / "figures" / "quark_stars" / "qm_stars"
 
 
 def parse_args() -> argparse.Namespace:
@@ -39,7 +40,7 @@ def parse_args() -> argparse.Namespace:
 def save_vacuum_plot(results, output_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8.2, 4.8))
     ax.axvline(DEFAULT_QM_VACUUM_INPUTS.f_pi_mev, color="black", linestyle="--", linewidth=1.0)
-    for result, color in zip(results, sigma_colors(len(results)), strict=True):
+    for result, color in zip(results, PALETTE_6, strict=True):
         f_pi_mev = DEFAULT_QM_VACUUM_INPUTS.f_pi_mev
         omega_scaled = (result.omega_mev4) / f_pi_mev**4
         style = "-" if result.valid else "--"
@@ -69,7 +70,7 @@ def save_vacuum_plot(results, output_dir: Path) -> None:
 def main() -> None:
     args = parse_args()
     apply_plot_style()
-    vacuum_dir = output_directory(args.output_dir, "vacuum")
+    vacuum_dir = ensure_directory(args.output_dir / "sec2_vacuum_scan")
 
     results = scan_vacuum_stability(
         args.m_sigma_values,
@@ -130,7 +131,8 @@ def main() -> None:
         {"pipeline": "vacuum_scan", "selection": f"lowest_{args.selection_count}_valid"},
     )
 
-    save_vacuum_plot(results, vacuum_dir)
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    save_vacuum_plot(results, FIGURES_DIR)
 
 
 if __name__ == "__main__":

@@ -12,11 +12,10 @@ Parameter choices
 
 Produces
 --------
-  output/section2/data/section2_trunc_mdelta_400.txt
-  output/section2/data/section2_trunc_mdelta_700.txt
-  output/section2/data/section2_trunc_lamdelta_lam0div8.txt
-  output/section2/plots/qmd_truncation_parameter_variations.pdf
-  thesis/figures/quark_stars/qmd_truncation_parameter_variations.pdf
+  output/sec5_parameter_sensitivity/data/section2_trunc_mdelta_400.txt
+  output/sec5_parameter_sensitivity/data/section2_trunc_mdelta_700.txt
+  output/sec5_parameter_sensitivity/data/section2_trunc_lamdelta_lam0div8.txt
+  thesis/figures/quark_stars/qmd_stars/qmd_truncation_parameter_variations.pdf
 
 Usage
 -----
@@ -40,7 +39,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..io import output_directories, save_table
+from ..io import save_table
 from ..plotting import PURPLE, TURQUOISE, apply_plot_style, save_figure
 from ..qmd_parameters import QMD_SET_A, QMDParameters
 from ..qmd_simple import QMDSimpleModel, QMDSimpleState
@@ -51,13 +50,12 @@ from ..qmd_simple import QMDSimpleModel, QMDSimpleState
 # ---------------------------------------------------------------------------
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
-SECTION2_DIR = OUTPUT_DIR / "section2"
+SECTION2_DIR = OUTPUT_DIR / "sec5_parameter_sensitivity"
 FULL_DATA_DIR = SECTION2_DIR / "data"
 TRUNC_DATA_DIR = SECTION2_DIR / "data"
-PLOTS_DIR = SECTION2_DIR / "plots"
 
 THESIS_FIGURES_DIR = (
-    Path(__file__).resolve().parent.parent.parent.parent
+    Path(__file__).resolve().parents[3]
     / "thesis" / "figures" / "quark_stars" / "qmd_stars"
 )
 
@@ -312,16 +310,10 @@ def _plot_variations(
 
         ax.legend(loc="upper right", fontsize=11)
 
-    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = plots_dir / "qmd_truncation_parameter_variations.pdf"
+    THESIS_FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = THESIS_FIGURES_DIR / "qmd_truncation_parameter_variations.pdf"
     save_figure(out_path)
     print(f"  Saved {out_path}")
-
-    thesis_path = THESIS_FIGURES_DIR / "qmd_truncation_parameter_variations.pdf"
-    THESIS_FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    import shutil
-    shutil.copy2(out_path, thesis_path)
-    print(f"  Copied to {thesis_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -338,7 +330,6 @@ def main() -> None:
     args = parser.parse_args()
 
     apply_plot_style()
-    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
     TRUNC_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     run_data: list[tuple[
@@ -391,7 +382,7 @@ def main() -> None:
         ))
 
     print("\nGenerating figure ...")
-    _plot_variations(run_data, PLOTS_DIR)
+    _plot_variations(run_data, THESIS_FIGURES_DIR)
 
 
 if __name__ == "__main__":

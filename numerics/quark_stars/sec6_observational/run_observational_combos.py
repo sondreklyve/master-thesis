@@ -57,7 +57,7 @@ DATA_DIR    = COMBO_DIR / "data"
 LOG_FILE    = COMBO_DIR / "errors.log"
 
 BASELINE_MR_FILE  = OUTPUT_ROOT / "qmd_stellar" / "data" / "qmd_stars_baseline.txt"
-SECT2_DATA        = OUTPUT_ROOT / "section2" / "data"
+SECT2_DATA        = OUTPUT_ROOT / "sec5_parameter_sensitivity" / "data"
 FIG_DIR           = _HERE.parents[2] / "thesis" / "figures" / "quark_stars" / "observational"
 REPORT_SELECTED   = OUTPUT_ROOT / "observational_mr_selected_report.md"
 REPORT_COMBINED   = OUTPUT_ROOT / "combined_parameter_observational_report.md"
