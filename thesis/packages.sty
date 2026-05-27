@@ -2,6 +2,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{packages}[2021/04/20 Packages]
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
     \usepackage[utf8]{inputenc} % Character encoding (pdfTeX only)
@@ -20,14 +21,9 @@
 % -----------------------
 
 % --- Appendices ---
-\usepackage{appendix}
-\newcommand{\addappendix}{   % Self-created command to insert appendix with predefined settings
-    \newpage
-    \appendix
-    \section*{Appendix}   % Name of appendix
-    \addcontentsline{toc}{section}{Appendix}  % Add appendix name to table of contents
-    \renewcommand{\thesubsection}{\Alph{subsection}}    % Change numbering of section to upper-case letters.
-}
+% \usepackage{appendix}  % Not needed: no \begin{appendices} or \appendixpage used; \appendix is standard LaTeX
+% \addappendix is the original template command (section-level appendix). Unused: the thesis uses
+% \appendix + \part{Appendices} + \chapter{} at the document level instead.
 
 % --- Bibliography & References---  
 \usepackage[backend = biber,    % Recommended backend for sorting bibliography
@@ -39,14 +35,18 @@
 
 \usepackage{caption}        % Enables controlling the look and feel of captions, see package documentation
 \usepackage{subcaption}     % Recommended when making sub-figures
-\usepackage[nottoc]{tocbibind}  % Includes Bibliography, Index, list of Listing etc. to table of contents
+% tocbibind[nottoc,notbib]: suppresses TOC and bibliography self-entries; effectively a no-op here because
+% there is no \listoffigures/\listoftables in the document and biblatex handles the bibliography TOC entry.
+% Left in to avoid any unexpected side-effects from removal.
+\usepackage[nottoc,notbib]{tocbibind}
 \newcommand{\source}[1]{\vspace{-4pt} \caption*{\hfill \footnotesize{Source: {#1}} } }   % Easily insert sources in images
 
 % --- Front matter ---
-% Front matter is located before the table of contents, e.g. preface (Norsk: forord) and often has separate settings
-\newcommand{\frontmatter}{
-    \pagenumbering{roman}   % Setting page numbering to lower-case roman
-}
+% abstract environment: defined here because book class omits it; \chapter adds it to TOC in frontmatter.
+% Currently unused: front/abstract.tex calls \chapter{Abstract} directly. Kept for compatibility.
+\newenvironment{abstract}{%
+    \chapter{\abstractname}%
+}{}
 
 % --- General ---
 \usepackage{import}     % Enable importing of sections
@@ -85,12 +85,6 @@
     \def\subsubsectionautorefname{\sectionautorefname} % Autoref-name for subsubsections
 }
 
-% --- Main matter ---
-% This is the main part of the paper.
-\newcommand{\mainmatter}{
-    \newpage
-    \pagenumbering{arabic}  % Setting page numbering to normal integers
-}
 
 % --- Mathematics ---
 \usepackage{bm}         % Bold text in math mode
@@ -106,14 +100,43 @@
 
 
 % --- Page setup ---
-\usepackage[a4paper, total={160mm, 245mm,footskip = 14mm}]{geometry}
+\usepackage[
+    a4paper,
+    margin=2.5cm,
+    headheight=15pt
+]{geometry}
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.8em}
+\usepackage{microtype}
+\usepackage{emptypage}
+\usepackage{calc}
 
-% Customized header and footer
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0.1ex}
-\renewcommand{\footrulewidth}{0.1ex}
-\fancyfoot[C]{\thepage}
+% Chapter and part title styles
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\Large\chaptertitlename\ \thechapter}
+  {0.5em}
+  {\Huge}
+  [\vspace{0.5em}\titlerule]
+
+\titlespacing*{\chapter}
+  {0pt}
+  {0pt}
+  {2.5em}
+
+\titleformat{\part}[display]
+  {\normalfont\centering\bfseries}
+  {\Large\partname\ \thepart}
+  {1em}
+  {\Huge}
+  [\vspace{1em}\titlerule]
+
+\titlespacing*{\part}
+  {0pt}
+  {5em}
+  {5em}
+
+% Simple page style
+\pagestyle{plain}
