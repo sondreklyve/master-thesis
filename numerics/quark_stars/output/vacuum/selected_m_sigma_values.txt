@@ -1,0 +1,6 @@
+# pipeline=vacuum_scan
+# selection=lowest_3_valid
+# columns=m_sigma_mev
+4.000e+02
+5.000e+02
+6.000e+02

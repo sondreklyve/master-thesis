@@ -31,4 +31,3 @@ numerics/data*
 
 # Untracked directories
 git-clones/
-numerics/quark_stars/output/*

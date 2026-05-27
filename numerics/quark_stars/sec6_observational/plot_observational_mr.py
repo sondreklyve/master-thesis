@@ -2,9 +2,8 @@
 Generate mass-radius plots comparing QMD quark-star sequences with observational constraints.
 
 Outputs:
-  thesis/figures/quark_stars/qmd_baseline_observational_mr.pdf
-  thesis/figures/quark_stars/qmd_selected_observational_mr.pdf
-  thesis/figures/quark_stars/qmd_all_runs_observational_mr.pdf
+  thesis/figures/quark_stars/observational/qmd_baseline_observational_mr.pdf
+  thesis/figures/quark_stars/observational/qmd_selected_observational_mr.pdf
   numerics/quark_stars/output/observational_mr_diagnostic_report.md
 """
 
@@ -419,8 +418,6 @@ def main():
     print("Plot B: Selected runs + observational constraints")
     plot_selected(RUNS)
 
-    print("Plot C: All runs + observational constraints")
-    plot_all_runs(RUNS)
 
     print("\nWriting diagnostic report...")
     write_report(all_results)

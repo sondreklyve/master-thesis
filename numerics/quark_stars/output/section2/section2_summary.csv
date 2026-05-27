@@ -1,0 +1,10 @@
+run_id,param_name,param_value,M_max,R_at_Mmax,onset_muq,cs2_peak,cs2_peak_muq,asymptotic_gap,n_nonconverged_pct,notes
+baseline,baseline,baseline,1.9640,12.1100,278.8,0.4527,477.8,252.40,24.6,Section 1 SET A baseline
+A,gdelta,1.5g,1.7863,10.9900,281.6,0.4374,597.4,351.75,0.0,
+B,gdelta,2.5g,2.0398,12.6700,277.0,0.3885,390.5,216.31,0.0,Run B: g_Δ·Δ₀(900 MeV) = 216.31 MeV below Kurkela bound 268.0 MeV
+C,mdelta,400,2.0515,12.5400,271.4,0.4618,884.3,255.67,0.0,
+D,mdelta,700,1.8227,11.2200,293.7,0.7098,295.4,243.76,0.0,
+E,lamdelta,lam0div8,1.9639,12.0400,278.8,0.4031,432.3,252.63,0.0,
+F,lamdelta,lam0div2,1.9633,12.1200,277.9,0.4021,425.6,251.81,0.0,
+G,lam3,0,1.9975,12.9800,270.5,0.4023,399.3,252.36,0.0,
+H,lam3,2lam0,1.9431,11.4000,285.3,0.4037,435.1,252.35,0.0,

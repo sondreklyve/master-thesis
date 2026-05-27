@@ -1,0 +1,12 @@
+# pipeline=vacuum_scan
+# criterion=interior minimum with positive curvature and finite rise on both sides in the local vacuum window
+# sigma_max_ratio=1.600000
+# rise_fraction_threshold=0.010000
+# local_window_ratio=0.250000
+# columns=m_sigma_mev sigma_min_mev curvature_mev2 left_rise_mev4 right_rise_mev4 valid_flag
+3.000e+02 2.000e+02 nan 2.223e+09 2.223e+09 0.000e+00
+3.500e+02 2.000e+02 nan 1.985e+09 1.985e+09 0.000e+00
+4.000e+02 9.300e+01 9.288e+04 2.992e+07 1.403e+07 1.000e+00
+5.000e+02 9.300e+01 1.754e+05 4.697e+07 4.170e+07 1.000e+00
+6.000e+02 9.300e+01 3.389e+05 8.076e+07 9.650e+07 1.000e+00
+7.000e+02 9.300e+01 6.058e+05 1.360e+08 1.860e+08 1.000e+00

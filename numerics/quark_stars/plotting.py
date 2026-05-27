@@ -12,16 +12,15 @@ import numpy as np
 # ---------------------------------------------------------------------------
 # Single-curve plots always use PURPLE.
 # Two-curve plots use (PURPLE, TURQUOISE).
-# Three-curve plots use (PURPLE, GREEN, BLUE).
+# Three-curve plots use (PURPLE, TURQUOISE, GREEN).
 
-PURPLE   = plt.cm.viridis(0.10)   # dark purple  — primary / full model
+PURPLE    = plt.cm.viridis(0.10)  # dark purple  — primary / full model
 TURQUOISE = plt.cm.viridis(0.60)  # turquoise    — secondary / truncated / overlay
-GREEN    = plt.cm.viridis(0.75)   # green        — third curve / low variation
-BLUE     = plt.cm.viridis(0.45)   # medium blue  — high variation
+GREEN     = plt.cm.viridis(0.82)  # vibrant green — third curve
 
 PALETTE_1: tuple = (PURPLE,)
 PALETTE_2: tuple = (PURPLE, TURQUOISE)
-PALETTE_3: tuple = (PURPLE, GREEN, BLUE)
+PALETTE_3: tuple = (PURPLE, TURQUOISE, GREEN)
 
 # ---------------------------------------------------------------------------
 # Shared axis limits for c_s² plots
@@ -34,12 +33,11 @@ CS2_MU_MIN: float = 250.0
 # Section-5 parameter-sensitivity M-R colors (kept for back-compat)
 # ---------------------------------------------------------------------------
 SECTION2_MR_PURPLE = PURPLE
-SECTION2_MR_BLUE   = BLUE
 SECTION2_MR_GREEN  = GREEN
 SECTION2_MR_BASELINE_COLOR      = PURPLE
-SECTION2_MR_LOW_VARIATION_COLOR  = GREEN
-SECTION2_MR_HIGH_VARIATION_COLOR = BLUE
-SECTION2_MR_COMPARISON_COLORS = (BLUE, PURPLE, GREEN)
+SECTION2_MR_LOW_VARIATION_COLOR  = TURQUOISE
+SECTION2_MR_HIGH_VARIATION_COLOR = GREEN
+SECTION2_MR_COMPARISON_COLORS = (TURQUOISE, PURPLE, GREEN)
 
 
 def apply_plot_style() -> None:
