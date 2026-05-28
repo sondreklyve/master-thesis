@@ -25,15 +25,12 @@ gravitational mass as functions of the radial coordinate. To close the system, o
 an equation of state, thereby providing the crucial connection between microphysics and 
 astrophysical observables.
 
-Historically, these equations were first formulated independently by Tolman \cite{tolman1939} 
-and by Oppenheimer and Volkoff. Their pioneering work laid the foundation 
-for modern neutron star astrophysics, showing that general relativity predicts a maximum mass for 
-compact stars beyond which no stable configuration exists. This insight still guides research into 
-the ultimate fate of dense matter and the physics of gravitational collapse.
+Historically, these equations were first formulated independently by Tolman \cite{tolman1939}
+and by Oppenheimer and Volkoff. Their pioneering work laid the foundation
+for modern neutron star astrophysics, showing that general relativity predicts a maximum mass for
+compact stars beyond which no stable configuration exists.
 
-The derivation presented here follows the standard approach used in the literature,
-and closely follows the steps from Carroll’s \emph{Spacetime and Geometry}.
-\cite{oppenheimer1939, tolman1939, carroll}. 
+The derivation follows Carroll’s \emph{Spacetime and Geometry} \cite{oppenheimer1939, tolman1939, carroll}.
 
 \section{Metric ansatz and coordinates}
 We now restrict outselves to static, spherically symmetric stellar configurations. 
@@ -119,15 +116,12 @@ G^{\theta}{}_{\theta} &= G^{\phi}{}_{\phi}
 
 \section{Einstein equations with a perfect fluid source}
 
-In relativistic astrophysics, stellar matter is commonly modeled as a 
-perfect fluid. A perfect fluid is an idealized medium that has 
-no viscosity, no heat conduction, and is completely characterized by 
-its local rest--frame energy density $\epsilon$ and isotropic pressure $P$. 
-This means that, in the rest frame of the fluid, the stress is the same 
-in all spatial directions and there are no dissipative processes such 
-as friction or heat flow. While real nuclear matter may exhibit more 
-complicated transport properties, the perfect fluid approximation 
-captures the essential macroscopic features of dense stellar matter 
+In relativistic astrophysics, stellar matter is commonly modeled as a
+perfect fluid --- an idealized medium with no viscosity or heat conduction,
+characterized entirely by its local rest--frame energy density $\epsilon$
+and isotropic pressure $P$. While real nuclear matter may exhibit more
+complicated transport properties, the perfect fluid approximation
+captures the essential macroscopic features of dense stellar matter
 and provides a tractable starting point for deriving equilibrium equations.
 
 Accordingly, we assume the perfect-fluid form \eqref{eq:perfect_fluid_Tmn}
@@ -168,8 +162,6 @@ Finally, Eq.~\eqref{eq:Ein_thth} comes from the angular components of the Einste
 It requires that the pressure entering the field equations is the same in the radial 
 and tangential directions, reflecting the assumption of an isotropic perfect fluid.  
 
-Taken together, these equations encode the interplay between energy density, pressure, 
-and spacetime curvature that governs the internal structure of relativistic stars.
 
 \section{Mass function}
 
@@ -418,7 +410,7 @@ as the radius gets close to $\tfrac{9}{4}M$ from above, the central pressure
 grows without bound ($P_{c} \to \infty$), as illustrated in 
 Fig.~\ref{fig:buchdahl_limit}.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/incompressible_star/pressure_analytical_buchdahl.pdf}
 \caption[Central pressure and Buchdahl limit for incompressible star]{
@@ -503,7 +495,7 @@ P_{c}=\frac{3G}{8\pi}\frac{M^{2}}{R^{4}}
 illustrating how general relativity strengthens the required pressure
 support as gravity becomes stronger.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/incompressible_star/pressure_analytical_incompressible.pdf}
 \caption[Pressure profiles for incompressible star]{

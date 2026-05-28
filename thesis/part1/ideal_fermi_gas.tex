@@ -63,7 +63,7 @@ E_F = \mu(T=0),
 which is called the \emph{Fermi energy}. It is the energy of the highest occupied 
 single--particle state in the system.  
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/ideal_fermi_gas/fermi_dirac_distribution.pdf}
 \caption[Fermi--Dirac distribution at different temperatures]{
@@ -86,8 +86,8 @@ p_F = \sqrt{\mu^2 - m^2},
 \end{equation}
 since $\mu = E_F$ in this limit.  
 
-Thus a degenerate Fermi gas is fully specified once the particle mass $m$ and the chemical potential $\mu$ are given. 
-Equivalently, one can use the pair $(m, p_F)$, since $p_F$ and $\mu$ are related by the dispersion relation above. 
+Thus a degenerate Fermi gas is fully specified once the particle mass $m$ and the chemical potential $\mu$ are given.
+Equivalently, one can use the pair $(m, p_F)$, since $p_F$ and $\mu$ are related by the dispersion relation above.
 These quantities set the natural scales of the system and will serve as the basis for the thermodynamic description in the following sections.
 
 \subsection*{Physical meaning of $E_F$ and $p_F$}
@@ -162,8 +162,8 @@ This expression makes explicit the crossover between the non--relativistic regim
 and the ultra--relativistic regime ($x_F\gg 1$, where $\epsilon \propto p_F^4$).
 
 \subsection*{Chemical potential}
-The chemical potential measures the change in energy when adding one particle to the system, 
-and at zero temperature it coincides with the Fermi energy. 
+The chemical potential measures the change in energy when adding one particle to the system,
+and at zero temperature it coincides with the Fermi energy.
 Intuitively, this is because the highest occupied single--particle state at $T=0$ 
 sits exactly at the Fermi surface, so adding one more fermion forces it into that state. 
 Formally, one finds
@@ -324,9 +324,9 @@ densities grow. In all cases, the degeneracy pressure encapsulated by the Fermi 
 equation of state provides the fundamental microscopic mechanism preventing 
 gravitational collapse.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/ideal_fermi_gas/fermi_eos.pdf}
+\includegraphics[width=0.7\textwidth]{figures/ideal_fermi_gas/fermi_eos.pdf}
 \caption[Stiffness of the Fermi gas equation of state]{
 Ratio of pressure to energy density $P/\epsilon$ as a function of the
 dimensionless Fermi momentum $x_F = p_F/m$. 
@@ -342,55 +342,42 @@ $P = \epsilon/3$, indicated by the dashed line.
 
 The ideal Fermi gas model, while highly simplified, captures the essential
 microscopic mechanism that allows compact stars to resist gravitational
-collapse: degeneracy pressure. Its relevance can be illustrated in two
-canonical astrophysical contexts.
+collapse: degeneracy pressure. Its relevance is illustrated most clearly by
+white dwarfs and neutron stars.
 
-\paragraph{White dwarfs.}
-In white dwarfs, the pressure support is provided almost entirely by
-degenerate electrons. As the central density increases, the electron
-Fermi momentum can approach or exceed the rest mass, $p_F \gtrsim m_e$,
-driving the system toward the relativistic regime. In this limit the
-equation of state approaches $P = \epsilon/3$, and the stellar mass
-becomes essentially independent of radius. Balancing this relativistic
-degeneracy pressure against gravity yields the Chandrasekhar mass limit,
-$M_{\rm Ch} \simeq 1.4\,M_\odot$. This result follows under the
-idealized assumptions of a cold, non--interacting electron gas providing
-all of the pressure support, with ions contributing only to the rest--mass
-density, and with the electrons treated in the ultra--relativistic
-limit. Despite these simplifications, the Chandrasekhar limit gives a
-value close to the maximum masses of observed white dwarfs, making the
-ideal Fermi gas a useful model for this calculation.
+In white dwarfs, the pressure support is provided almost entirely by degenerate
+electrons. As the central density increases, the electron Fermi momentum can
+approach or exceed the rest mass, \(p_F \gtrsim m_e\), driving the gas into the
+relativistic regime. The equation of state then approaches \(P=\epsilon/3\),
+and the stellar mass becomes nearly independent of radius. Balancing this
+pressure against gravity gives the Chandrasekhar mass limit,
+\(M_{\rm Ch} \simeq 1.4\,M_\odot\). Although derived under the idealized
+assumptions of a cold, non--interacting electron gas, with ions contributing
+only to the rest--mass density, this estimate is close to the observed upper
+masses of white dwarfs.
 
-\paragraph{Neutron stars.}
-In their pioneering work, Oppenheimer and Volkoff modeled neutron stars
-as a cold, ideal Fermi gas of neutrons with no nuclear interactions,
-described by the full relativistic dispersion relation
-$E(p)=\sqrt{p^2+m_n^2}$. Solving the TOV equations with this equation of
-state, they found a maximum stable mass of order $0.7\,M_\odot$. Although
-this value is far below the $\sim 2\,M_\odot$ neutron stars observed
-today~\cite{haensel2007}, the calculation was historically crucial: it
-demonstrated that combining general relativity with a microscopic
-equation of state leads to an upper mass limit for neutron stars,
-analogous to Chandrasekhar’s result for white dwarfs.
+For neutron stars, the same physical idea applies, but with important
+differences. Oppenheimer and Volkoff modeled neutron stars as a cold, ideal
+Fermi gas of neutrons with relativistic dispersion relation
+\(E(p)=\sqrt{p^2+m_n^2}\). Solving the TOV equations with this equation of
+state, they found a maximum stable mass of order \(0.7\,M_\odot\). Although
+this is far below the \(\sim 2\,M_\odot\) neutron stars observed
+today~\cite{haensel2007}, the calculation was historically crucial: it showed
+that general relativity combined with a microscopic equation of state naturally
+produces an upper mass limit, analogous to the Chandrasekhar limit for white
+dwarfs.
 
-\paragraph{Limitations.}
-The ideal Fermi gas neglects several important physical ingredients. Real
-neutron star matter is strongly interacting, with short--range nuclear
-forces significantly modifying the pressure at supranuclear densities.
-Charge neutrality and beta equilibrium imply a mixture of neutrons,
-protons, electrons, and muons, rather than a pure single--species Fermi
-gas. At sufficiently high densities, more exotic components may appear.
-Moreover, finite temperature effects can be relevant in newly born
-protoneutron stars. All of these factors alter the equation of state,
-and hence the predicted stellar structure.
+The ideal Fermi gas nevertheless neglects several important physical
+ingredients. Real neutron-star matter is strongly interacting, charge neutrality
+and beta equilibrium require a mixture of neutrons, protons, electrons, and
+muons, and exotic components may appear at sufficiently high densities. Finite
+temperature effects can also matter in newly born protoneutron stars. These
+effects modify the equation of state and hence the predicted stellar structure.
 
-\paragraph{Summary.}
-Despite its limitations, the ideal Fermi gas remains a valuable baseline
+Despite these limitations, the ideal Fermi gas remains a valuable baseline
 model. It provides analytic control in limiting regimes, a clear physical
-picture of degeneracy pressure, and a simple parametric equation of state
-that can be directly coupled to the Tolman--Oppenheimer--Volkoff equations.
-As such, it serves as a pedagogical introduction to compact star physics,
-and its predictions---such as the Chandrasekhar mass for white dwarfs and
-the Oppenheimer--Volkoff mass limit for neutron stars---show that even this
-simplified treatment can reproduce the correct order of magnitude for the
-maximum masses of compact stars.
+picture of degeneracy pressure, and a simple equation of state that can be
+coupled directly to the TOV equations. Its predictions, such as the
+Chandrasekhar and Oppenheimer--Volkoff mass limits, show that even this
+simplified treatment captures the correct order of magnitude for compact-star
+maximum masses.

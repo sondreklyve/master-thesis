@@ -64,7 +64,6 @@
 
 % --- Image ---
 \usepackage{graphicx}   % Handle images
-\usepackage{wrapfig}    % Wrap text around images
 \usepackage{float}      % Force image location using "H"
 \usepackage{url}        % Insert urls
 \urlstyle{sf}           % Set url-style as "sans-serif". Other options are e.g. "same" or "rm"
@@ -74,7 +73,7 @@
 \usepackage{siunitx}    % Enable SI units
 \usepackage[british]{babel}     % Defining UK English as language. This will among other things ensure that dates are displayed as 24/03/1997 rather than 03/24/1997 in the bibliography.
 \addto\extrasbritish{   % Change naming of different functions, e.g. figure references.
-    \renewcommand*\contentsname{Table of Contents}  % Rename table of contents
+    \renewcommand*\contentsname{Contents}  % Rename table of contents
     \renewcommand{\listfigurename}{List of Figures} % Rename list of figures
     \renewcommand{\listtablename}{List of Tables}   % Rename list of tables
     \def\equationautorefname{Equation}              % Autoref-name for equations
@@ -115,10 +114,10 @@
 \usepackage{titlesec}
 
 \titleformat{\chapter}[display]
-  {\normalfont\bfseries}
+  {\normalfont\bfseries\raggedright}
   {\Large\chaptertitlename\ \thechapter}
   {0.5em}
-  {\Huge}
+  {\huge}
   [\vspace{0.5em}\titlerule]
 
 \titlespacing*{\chapter}
@@ -138,5 +137,19 @@
   {5em}
   {5em}
 
+% Float placement settings — avoids float-only pages and large blank gaps
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.70}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+
 % Simple page style
 \pagestyle{plain}
+
+% TOC entry spacing — tighter than the book-class default (1em before each chapter)
+\usepackage[titles]{tocloft}
+\setlength{\cftbeforepartskip}{0.6em}
+\setlength{\cftbeforechapskip}{0.3em}

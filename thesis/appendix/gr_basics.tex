@@ -1,160 +1,125 @@
-\chapter{General Relativity: Setup and Conventions}
+\chapter{General Relativity Conventions}
 \label{app:GR_basics}
 
-This appendix collects the geometric conventions used in the project.
-The purpose is not to derive the Einstein equations, but to fix notation
-and sign conventions so that the definitions used in the main text are
-unambiguous.
-
-We use natural units with
-\[
-c=G=1,
-\]
-and the metric signature is chosen to be
-\[
-(+,-,-,-).
-\]
-With this convention, timelike four-velocities satisfy
-\[
-u^\mu u_\mu = 1 .
-\]
-Greek indices \(\mu,\nu,\ldots\) run over spacetime coordinates
-\(0,1,2,3\), while Latin indices \(i,j,\ldots\) denote spatial
-components \(1,2,3\). Symmetrization and antisymmetrization are defined
-with unit weight,
-\[
-A_{(\mu\nu)}
-=
-\frac{1}{2}
-\left(A_{\mu\nu}+A_{\nu\mu}\right),
-\qquad
-A_{[\mu\nu]}
-=
-\frac{1}{2}
-\left(A_{\mu\nu}-A_{\nu\mu}\right).
-\]
+This appendix collects the general-relativistic definitions used in
+Part~\ref{part:neutron-stars}. The global notation and metric signature are
+given in the front-matter section on notation and conventions. Here we only fix
+the curvature convention and the form of the Einstein equations used in the
+main text.
 
 The metric tensor \(g_{\mu\nu}\) defines the line element
 \begin{equation}
-ds^2 = g_{\mu\nu}\,dx^\mu dx^\nu .
+    ds^2 = g_{\mu\nu}\,dx^\mu dx^\nu .
 \end{equation}
-Indices are raised and lowered with \(g^{\mu\nu}\) and \(g_{\mu\nu}\),
-where
+Indices are raised and lowered with \(g^{\mu\nu}\) and \(g_{\mu\nu}\), where
 \[
-g^{\mu\alpha}g_{\alpha\nu}
-=
-\delta^\mu{}_\nu .
+    g^{\mu\alpha}g_{\alpha\nu}
+    =
+    \delta^\mu{}_\nu .
 \]
 The determinant of the metric is denoted
 \[
-g \equiv \det(g_{\mu\nu}) .
+    g \equiv \det(g_{\mu\nu}),
 \]
-For the mostly-minus signature used here, \(g<0\) for ordinary
-Lorentzian coordinate systems, and the invariant spacetime volume
-element is
+and the invariant spacetime volume element is
 \[
-\sqrt{-g}\,d^4x .
+    \sqrt{-g}\,d^4x .
 \]
 
-All covariant derivatives are defined using the Levi--Civita connection,
-which is torsion free and metric compatible. Acting on contravariant and
-covariant vectors, the covariant derivative is
+All covariant derivatives are defined using the Levi--Civita connection, which
+is torsion free and metric compatible. Acting on contravariant and covariant
+vectors,
 \begin{equation}
-\nabla_\mu V^\nu
-=
-\partial_\mu V^\nu
-+
-\Gamma^\nu{}_{\mu\lambda}V^\lambda,
-\qquad
-\nabla_\mu V_\nu
-=
-\partial_\mu V_\nu
--
-\Gamma^\lambda{}_{\mu\nu}V_\lambda .
+    \nabla_\mu V^\nu
+    =
+    \partial_\mu V^\nu
+    +
+    \Gamma^\nu{}_{\mu\lambda}V^\lambda,
+    \qquad
+    \nabla_\mu V_\nu
+    =
+    \partial_\mu V_\nu
+    -
+    \Gamma^\lambda{}_{\mu\nu}V_\lambda .
 \end{equation}
 The Christoffel symbols are
 \begin{equation}
-\Gamma^\rho{}_{\mu\nu}
-=
-\frac{1}{2}g^{\rho\sigma}
-\left(
-\partial_\mu g_{\nu\sigma}
-+
-\partial_\nu g_{\mu\sigma}
--
-\partial_\sigma g_{\mu\nu}
-\right).
-\label{eq:christoffel_def}
+    \Gamma^\rho{}_{\mu\nu}
+    =
+    \frac{1}{2}g^{\rho\sigma}
+    \left(
+        \partial_\mu g_{\nu\sigma}
+        +
+        \partial_\nu g_{\mu\sigma}
+        -
+        \partial_\sigma g_{\mu\nu}
+    \right).
+    \label{eq:christoffel_def}
 \end{equation}
 
 The curvature convention is fixed by defining the Riemann tensor as
 \begin{equation}
-R^\rho{}_{\sigma\mu\nu}
-=
-\partial_\mu \Gamma^\rho{}_{\nu\sigma}
--
-\partial_\nu \Gamma^\rho{}_{\mu\sigma}
-+
-\Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma}
--
-\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}.
-\label{eq:riemann_def}
+    R^\rho{}_{\sigma\mu\nu}
+    =
+    \partial_\mu \Gamma^\rho{}_{\nu\sigma}
+    -
+    \partial_\nu \Gamma^\rho{}_{\mu\sigma}
+    +
+    \Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma}
+    -
+    \Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}.
+    \label{eq:riemann_def}
 \end{equation}
 The Ricci tensor and Ricci scalar are obtained by contraction,
 \begin{equation}
-R_{\mu\nu}
-=
-R^\rho{}_{\mu\rho\nu},
-\qquad
-R
-=
-g^{\mu\nu}R_{\mu\nu}.
-\label{eq:ricci_def}
+    R_{\mu\nu}
+    =
+    R^\rho{}_{\mu\rho\nu},
+    \qquad
+    R
+    =
+    g^{\mu\nu}R_{\mu\nu}.
+    \label{eq:ricci_def}
 \end{equation}
 With these definitions, the Einstein tensor is
 \begin{equation}
-G_{\mu\nu}
-=
-R_{\mu\nu}
--
-\frac{1}{2}R\,g_{\mu\nu}.
-\label{eq:einstein_tensor_def}
+    G_{\mu\nu}
+    =
+    R_{\mu\nu}
+    -
+    \frac{1}{2}R\,g_{\mu\nu}.
+    \label{eq:einstein_tensor_def}
 \end{equation}
-For the Levi--Civita connection it satisfies the twice-contracted
-Bianchi identity,
+For the Levi--Civita connection it satisfies the twice-contracted Bianchi
+identity,
 \begin{equation}
-\nabla^\mu G_{\mu\nu}=0 .
+    \nabla^\mu G_{\mu\nu}=0 .
 \end{equation}
 
-Matter enters through the energy--momentum tensor \(T_{\mu\nu}\), which
-encodes energy density, momentum density, and stresses. Local
+Matter enters through the energy--momentum tensor \(T_{\mu\nu}\). Local
 energy--momentum conservation is written as
 \begin{equation}
-\nabla^\mu T_{\mu\nu}=0 .
+    \nabla^\mu T_{\mu\nu}=0 .
 \end{equation}
-For a perfect fluid in the signature convention used here,
+For a perfect fluid, using the metric signature stated in the notation section,
 \begin{equation}
-T_{\mu\nu}
-=
-(\epsilon+p)u_\mu u_\nu
--
-p\,g_{\mu\nu},
-\label{eq:perfect_fluid_Tmn}
+    T_{\mu\nu}
+    =
+    (\epsilon+p)u_\mu u_\nu
+    -
+    p\,g_{\mu\nu},
+    \label{eq:perfect_fluid_Tmn}
 \end{equation}
-where \(\epsilon\) is the energy density, \(p\) is the pressure, and
-\(u^\mu\) is the fluid four-velocity.
+where \(\epsilon\) is the energy density, \(p\) is the pressure, and \(u^\mu\)
+is the fluid four-velocity.
 
 The Einstein field equations are written as
 \begin{equation}
-R_{\mu\nu}
--
-\frac{1}{2}R\,g_{\mu\nu}
-=
-8\pi T_{\mu\nu}.
-\label{eq:einstein_equation}
+    R_{\mu\nu}
+    -
+    \frac{1}{2}R\,g_{\mu\nu}
+    =
+    8\pi G\,T_{\mu\nu}.
+    \label{eq:einstein_equation}
 \end{equation}
-Since \(c=G=1\), the gravitational coupling is \(8\pi\). The sign
-conventions in this appendix are consistent with the mostly-minus metric
-signature. When comparing with sources that use the mostly-plus
-signature \((- ,+,+,+)\), several intermediate signs may differ, although
-coordinate-invariant physical statements are unchanged.
+In units where \(G=1\), this reduces to the form used in the TOV derivation.
