@@ -149,7 +149,8 @@
 % Simple page style
 \pagestyle{plain}
 
-% TOC entry spacing — tighter than the book-class default (1em before each chapter)
+% TOC entry spacing — neutralises \parskip leaking into TOC entries and tightens sections
 \usepackage[titles]{tocloft}
-\setlength{\cftbeforepartskip}{0.6em}
-\setlength{\cftbeforechapskip}{0.3em}
+\setlength{\cftbeforepartskip}{1.5em}
+\setlength{\cftbeforechapskip}{1.2em}
+\setlength{\cftbeforesecskip}{0.5em}
