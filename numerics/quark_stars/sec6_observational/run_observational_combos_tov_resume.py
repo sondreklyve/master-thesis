@@ -38,7 +38,7 @@ from .run_observational_combos import (
     REPORT_COMBINED,
     REPORT_SELECTED,
     SECT2_DATA,
-    ComboConfig,
+    CombinedSetConfig,
     RunResult,
     _QMDEoS,
     _curve_intersects_j0030,
@@ -102,7 +102,7 @@ def load_eos_file(path: Path) -> dict:
     }
 
 
-def run_tov_from_eos_file(cfg: ComboConfig) -> RunResult:
+def run_tov_from_eos_file(cfg: CombinedSetConfig) -> RunResult:
     eos_path = DATA_DIR / f"combo_{cfg.tag}_eos.txt"
     result = RunResult(tag=cfg.tag, label=cfg.label)
 
@@ -234,7 +234,7 @@ def plot_combined(combo_results: dict[str, RunResult]) -> None:
     _draw_obs(ax)
 
     R, M, st = _load_tov(BASELINE_MR_FILE)
-    _draw_tov(ax, R, M, st, "#0072B2", r"Baseline (QMD SET A)", zorder=4, lw=2.2)
+    _draw_tov(ax, R, M, st, "#0072B2", "Set A", zorder=4, lw=2.2)
 
     combo_keys = ["combo1", "combo2", "combo3", "combo4", "combo5"]
     for key in combo_keys:

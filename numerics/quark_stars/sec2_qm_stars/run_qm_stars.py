@@ -176,8 +176,6 @@ def main() -> None:
                 )
             except Exception as exc:
                 print(f"Grav-bound m_sigma=600 MeV skipped: {exc}")
-
-        ax.set_title(rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$")
         ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
         ax.set_xlim(7, 15)
         ax.set_ylim(0.4, 2.2)
@@ -187,7 +185,6 @@ def main() -> None:
             ax_single.plot(x, y, color=color, linestyle=linestyle, linewidth=linewidth)
         for x, y, color, marker, markersize in subplot_markers:
             ax_single.plot(x, y, marker, color=color, ms=markersize, zorder=5)
-        ax_single.set_title(rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$")
         ax_single.set_xlabel(r"Radius $R\;(\mathrm{km})$")
         ax_single.set_ylabel(r"Mass $M\;(M_\odot)$")
         ax_single.set_xlim(7, 15)

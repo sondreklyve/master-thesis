@@ -1,4 +1,4 @@
-"""QMD SET A benchmark scan and truncation comparison.
+"""Set A benchmark scan and truncation comparison.
 
 Runs QMD_SET_A (full one-loop potential) and the truncated variant
 (include_omega_1_num=False) for the condensate comparison plot.
@@ -305,7 +305,7 @@ def _save_data(
     cs2: np.ndarray,
     *,
     params: QMDParameters = QMD_SET_A,
-    description: str = "QMD SET A common-mu benchmark (Section 1)",
+    description: str = "Set A common-mu benchmark (Section 1)",
     mu_min_mev: float = MU_MIN_MEV,
     mu_max_mev: float = MU_MAX_MEV,
     num_points: int = NUM_POINTS,
@@ -391,7 +391,7 @@ def _compute_asymptotic_diagnostic(
         eps,
         cs2,
         params=params,
-        description="QMD SET A common-mu asymptotic diagnostic (log-spaced, larger residual cutoff)",
+        description="Set A common-mu asymptotic diagnostic (log-spaced, larger residual cutoff)",
         mu_min_mev=MU_MIN_MEV,
         mu_max_mev=ASYMPTOTIC_MU_MAX_MEV,
         num_points=len(mu),
@@ -424,13 +424,11 @@ def _plot_condensates(
     ax1.plot(mu, phi_p, lw=_LW, color=_COLOR)
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
-    ax1.set_title("Chiral condensate")
     ax1.set_xlim(200.0, 700.0)
 
     ax2.plot(mu, gap_p, lw=_LW, color=_COLOR)
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
-    ax2.set_title("Diquark gap")
     ax2.set_xlim(200.0, 700.0)
 
     save_figure(plots_dir / "qmd_benchmark_condensates.pdf")
@@ -475,13 +473,11 @@ def _plot_condensate_comparison(
 
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
-    ax1.set_title("Chiral condensate")
     ax1.set_xlim(250.0, 420.0)
     ax1.legend()
 
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
-    ax2.set_title("Diquark gap")
     ax2.set_xlim(250.0, 420.0)
     ax2.legend()
 
@@ -501,7 +497,6 @@ def _plot_pressure(
     ax.plot(mu[mask], pres_g, lw=_LW, color=_COLOR)
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
-    ax.set_title("Pressure")
     save_figure(plots_dir / "qmd_benchmark_pressure.pdf")
 
 
@@ -534,7 +529,6 @@ def _plot_eos(
 
     ax_eos.set_xlabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
     ax_eos.set_ylabel(r"$\varepsilon\;(\mathrm{GeV\,fm}^{-3})$")
-    ax_eos.set_title("Low-pressure EoS")
     ax_eos.set_xlim(0.0, _EOS_ZOOM_P_MAX_GEV_FM3)
     ax_eos.set_ylim(0.0, _EOS_ZOOM_EPS_MAX_GEV_FM3)
 
@@ -563,7 +557,6 @@ def _plot_eos(
     ax_ratio.axhline(0.0, color="gray", ls="--", lw=1.5)
     ax_ratio.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax_ratio.set_ylabel(r"$\delta$")
-    ax_ratio.set_title(ratio_title)
     if ratio_x.size:
         upper = 6000.0 if asymptotic is not None else float(ratio_x[-1])
         _set_log_mu_axis(ax_ratio, float(ratio_x[0]), upper)
@@ -598,7 +591,6 @@ def _plot_asymptotic_eos(
                 label=r"$\varepsilon=3P$")
     ax_eos.set_xlabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
     ax_eos.set_ylabel(r"$\varepsilon\;(\mathrm{GeV\,fm}^{-3})$")
-    ax_eos.set_title("High-pressure EoS")
     ax_eos.set_xlim(0.0, float(np.nanmax(p_g)) * 1.02)
     ax_eos.set_ylim(0.0, float(np.nanmax(eps_g)) * 1.02)
     ax_eos.legend(fontsize=8)
@@ -615,7 +607,6 @@ def _plot_asymptotic_eos(
     ax_ratio.axhline(3.0, color="gray", ls="--", lw=1.5)
     ax_ratio.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax_ratio.set_ylabel(r"$\varepsilon/P$")
-    ax_ratio.set_title("Energy-pressure ratio")
     _set_log_mu_axis(ax_ratio, 500.0, ASYMPTOTIC_MU_MAX_MEV)
     ax_ratio.set_ylim(2.7, 3.35)
 
@@ -632,16 +623,9 @@ def _plot_asymptotic_eos(
     ax_cs2.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5)
     ax_cs2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax_cs2.set_ylabel(r"$c_s^2/c^2$")
-    ax_cs2.set_title("Sound speed")
     _set_log_mu_axis(ax_cs2, 500.0, ASYMPTOTIC_MU_MAX_MEV)
     ax_cs2.set_ylim(0.30, 0.39)
 
-    fig.suptitle(
-        rf"Conformal diagnostic ($\Lambda_{{\rm res}}="
-        rf"{ASYMPTOTIC_RESIDUAL_CUTOFF_MEV / 1000.0:.1f}\,\mathrm{{GeV}}$)",
-        y=1.02,
-        fontsize=12,
-    )
     save_figure(plots_dir / "qmd_benchmark_eos_asymptotic.pdf")
 
 
@@ -700,7 +684,6 @@ def _plot_cs2(
                label=r"Conformal limit $c_s^2 = \frac{1}{3}$")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
-    ax.set_title("Speed of sound squared")
     ax.set_xlim(_CS2_PLOT_MU_MIN_MEV, _CS2_PLOT_MU_MAX_MEV)
     ax.set_ylim(0.20, 0.45)
     ax.legend()
@@ -738,7 +721,7 @@ def _print_summary(
     n_bulk = int((fail_mu > tr_hi).sum())
 
     print("\n" + "=" * 60)
-    print("QMD SET A benchmark — summary")
+    print("Set A benchmark — summary")
     print("=" * 60)
     if onset is not None:
         print(f"  2SC onset:                    μ_q = {onset:.1f} MeV")
@@ -809,7 +792,7 @@ def main() -> None:
     else:
         mu = np.linspace(MU_MIN_MEV, MU_MAX_MEV, NUM_POINTS)
 
-        print("QMD SET A benchmark scan")
+        print("Set A benchmark scan")
         print(f"  include_omega_1_num = {QMD_SET_A.include_omega_1_num}")
         print(f"  μ_q range: {MU_MIN_MEV:.0f}–{MU_MAX_MEV:.0f} MeV, {NUM_POINTS} points")
         print(f"  Analytic asymptotic g_Δ Δ̄_0 (Eq. 39, A&N 2024): {asym_gap_analytic:.2f} MeV")
@@ -849,7 +832,7 @@ def main() -> None:
                 data_dir / "qmd_benchmark_truncated.txt",
                 states_t, pressures_t, n_q_t, eps_t, cs2_t,
                 params=PARAMS_TRUNC,
-                description="QMD SET A truncated (no Omega_1_num)",
+                description="Set A truncated (no Omega_1_num)",
                 num_points=NUM_POINTS_TRUNC,
             )
             print(f"  Saved {data_dir / 'qmd_benchmark_truncated.txt'}")

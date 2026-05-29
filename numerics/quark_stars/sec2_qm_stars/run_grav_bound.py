@@ -190,8 +190,6 @@ def _make_updated_combined_figure(
                     linewidth=1.6,
                     linestyle="--",
                 )
-
-        ax.set_title(rf"$m_\sigma = {m_sigma_mev:.0f}\,\mathrm{{MeV}}$")
         ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
         ax.set_xlim(7, 15)
         ax.set_ylim(0.4, 2.2)

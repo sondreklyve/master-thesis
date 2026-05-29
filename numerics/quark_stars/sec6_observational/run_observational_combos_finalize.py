@@ -36,7 +36,7 @@ from .run_observational_combos import (
     REPORT_COMBINED,
     REPORT_SELECTED,
     SECT2_DATA,
-    ComboConfig,
+    CombinedSetConfig,
     _curve_intersects_j0030,
     _curve_intersects_j0740,
     _draw_obs,
@@ -135,7 +135,7 @@ def load_eos_metrics(path: Path, ec_mmax_mev4: float) -> dict:
     }
 
 
-def build_results(combos: list[ComboConfig]) -> dict[str, FinalResult]:
+def build_results(combos: list[CombinedSetConfig]) -> dict[str, FinalResult]:
     results = {}
     for cfg in combos:
         mr_path  = DATA_DIR / f"combo_{cfg.tag}.txt"
@@ -198,12 +198,12 @@ def build_results(combos: list[ComboConfig]) -> dict[str, FinalResult]:
 
 def plot_selected(results: dict[str, FinalResult]) -> None:
     sect2_curves = {
-        "Run B": (SECT2_DATA / "section2_stellar_gdelta_2p5g.txt",
-                  "Run B", OBS_CURVE_COLORS["Run B"]),
-        "Run C": (SECT2_DATA / "section2_stellar_mdelta_400.txt",
-                  "Run C", OBS_CURVE_COLORS["Run C"]),
-        "Run H": (SECT2_DATA / "section2_stellar_lam3_2lam0.txt",
-                  "Run H", OBS_CURVE_COLORS["Run H"]),
+        "Set C": (SECT2_DATA / "section2_stellar_gdelta_2p5g.txt",
+                  "Set C", OBS_CURVE_COLORS["Set C"]),
+        "Set D": (SECT2_DATA / "section2_stellar_mdelta_400.txt",
+                  "Set D", OBS_CURVE_COLORS["Set D"]),
+        "Set I": (SECT2_DATA / "section2_stellar_lam3_2lam0.txt",
+                  "Set I", OBS_CURVE_COLORS["Set I"]),
     }
     fig, ax = plt.subplots()
     _draw_obs(ax)
@@ -219,10 +219,10 @@ def plot_selected(results: dict[str, FinalResult]) -> None:
     print(f"  saved: {out}")
 
 
-def plot_combined(results: dict[str, FinalResult], combos: list[ComboConfig]) -> None:
+def plot_combined(results: dict[str, FinalResult], combos: list[CombinedSetConfig]) -> None:
     fig, ax = plt.subplots(figsize=(8.5, 6.0))
     _draw_obs(ax)
-    combo_labels = {"combo2": "Combo 1", "combo3": "Combo 2", "combo4": "Combo 3"}
+    combo_labels = {"combo2": "Set J", "combo3": "Set K", "combo4": "Set L"}
     for cfg in combos:
         if cfg.tag not in combo_labels:
             continue
@@ -261,22 +261,22 @@ def write_selected_report(results: dict[str, FinalResult]) -> None:
         "",
         "## Curves included",
         "",
-        "- **Baseline** (QMD SET A): Mmax=1.970 M☉, R=12.16 km",
-        "- **Run B** (g_Δ=2.5g): Mmax=2.047 M☉, R=12.72 km  — raises Mmax above 2 M☉",
-        "- **Run C** (m_Δ=400 MeV): Mmax=2.058 M☉, R=12.59 km  — raises Mmax above 2 M☉",
-        "- **Run H** (λ₃=2λ₀): Mmax=1.950 M☉, R=11.46 km  — reduces radii, slightly lowers Mmax",
+        "- **Set A**: Mmax=1.970 M☉, R=12.16 km",
+        "- **Set C** (g_Δ=2.5g): Mmax=2.047 M☉, R=12.72 km  — raises Mmax above 2 M☉",
+        "- **Set D** (m_Δ=400 MeV): Mmax=2.058 M☉, R=12.59 km  — raises Mmax above 2 M☉",
+        "- **Set I** (λ₃=2λ₀): Mmax=1.950 M☉, R=11.46 km  — reduces radii, slightly lowers Mmax",
         lam3_line,
         "",
         "## Rationale for selection",
         "",
-        "- Run G (λ₃=0) removed: increases radii but not Mmax; trajectory goes wrong direction.",
-        "- Run H and λ₃=3λ₀ kept to show the λ₃ trend: increasing λ₃ compresses radii but reduces Mmax.",
-        "- Runs B and C remain to show two approaches to exceeding 2 M☉.",
+        "- Set H (λ₃=0) removed: increases radii but not Mmax; trajectory goes wrong direction.",
+        "- Set I and λ₃=3λ₀ kept to show the λ₃ trend: increasing λ₃ compresses radii but reduces Mmax.",
+        "- Sets C and D remain to show two approaches to exceeding 2 M☉.",
         "- λ_Δ has negligible effect and is not shown.",
         "",
         "## Observational comparison (visual, not Bayesian)",
         "",
-        "- **J0740+6620 (NICER)**: Runs B and C push Mmax toward the J0740 mass range.",
+        "- **J0740+6620 (NICER)**: Sets C and D push Mmax toward the J0740 mass range.",
         "  None of the single-parameter runs has Mmax ≥ 2.08 M☉.",
         "- **J0030+0451 (NICER)**: All curves with R ~ 10–13 km pass through or near the",
         "  J0030 mass-radius box around M≈1.34 M☉.",
@@ -296,8 +296,8 @@ def write_selected_report(results: dict[str, FinalResult]) -> None:
     print(f"  saved: {REPORT_SELECTED}")
 
 
-def write_combined_report(results: dict[str, FinalResult], combos: list[ComboConfig]) -> None:
-    # Baseline checks
+def write_combined_report(results: dict[str, FinalResult], combos: list[CombinedSetConfig]) -> None:
+    # Set A checks
     R_bl, M_bl, st_bl = _load_tov(BASELINE_MR_FILE)
     bl_j0030 = "✓" if _curve_intersects_j0030(R_bl, M_bl, st_bl) else "✗"
     bl_j0740 = "✓" if _curve_intersects_j0740(R_bl, M_bl, st_bl) else "✗"
@@ -307,10 +307,10 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "",
         "## Source files",
         "",
-        "### Baseline",
+        "### Set A",
         f"- `{BASELINE_MR_FILE.relative_to(DATA_DIR.parents[3])}`",
         "",
-        "### Combined runs (generated by run_observational_combos.py)",
+        "### Combined sets (generated by run_observational_combos.py)",
     ]
     for cfg in combos:
         lines.append(f"- `output/observational_combos/data/combo_{cfg.tag}.txt`  (TOV M-R)")
@@ -377,7 +377,7 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "",
         "\\* cs²_phys > 0.95: approaches causal limit; check if physical or EoS artifact.",
         "",
-        f"**Baseline reference**: Mmax=1.970 M☉, R=12.16 km, J0030={bl_j0030}, "
+        f"**Set A reference**: Mmax=1.970 M☉, R=12.16 km, J0030={bl_j0030}, "
         f"J0740={bl_j0740}, ≥2M☉=✗",
         "",
         "---",
@@ -394,7 +394,7 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
             and results[cfg.tag].M_max >= 2.0]
     if both:
         lines += [
-            f"Yes. Runs {', '.join(both)} intersect both the J0030 and J0740 1σ error boxes "
+            f"Yes. Sets {', '.join(both)} intersect both the J0030 and J0740 1σ error boxes "
             "and exceed 2 M☉.",
             "This confirms that combining a Mmax-raising parameter (g_Δ or m_Δ) with a "
             "radius-adjusting parameter (λ₃) can simultaneously improve both NICER comparisons.",
@@ -411,17 +411,17 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "",
         "Increasing λ₃ reduces radii at all densities and also lowers Mmax modestly. "
         "The λ₃=3λ₀ single-parameter run (lam3_3lam0) gives Mmax=1.937 M☉ vs. "
-        "the baseline 1.970 M☉ — a reduction of ~0.03 M☉. In the combined runs, "
+        "Set A at 1.970 M☉ — a reduction of ~0.03 M☉. In the combined sets, "
         "this penalty is partially offset by increasing g_Δ or lowering m_Δ. "
-        "Combo2 (g_Δ=2.5g, λ₃=3λ₀) achieves Mmax=2.015 M☉ despite λ₃=3λ₀, "
-        "and combo4 (m_Δ=400, λ₃=3λ₀) reaches 2.012 M☉. "
+        "Set J (g_Δ=2.5g, λ₃=3λ₀) achieves Mmax=2.015 M☉ despite λ₃=3λ₀, "
+        "and Set L (m_Δ=400, λ₃=3λ₀) reaches 2.012 M☉. "
         "So the λ₃ radius compression does not destroy Mmax if g_Δ or m_Δ is tuned upward.",
         "",
         "### Does the model appear capable of fitting the plotted constraints?",
         "",
         "The QMD model with 2SC pairing shows meaningful parameter flexibility: "
         "g_Δ and m_Δ tune Mmax upward, while λ₃ compresses radii to bring the "
-        "low-mass branch closer to J0030. Combined runs achieve Mmax > 2 M☉ with "
+        "low-mass branch closer to J0030. Combined sets achieve Mmax > 2 M☉ with "
         "radii broadly consistent with both NICER boxes. However, none of the tested "
         "combinations reach the J0740 central mass of 2.08 M☉ while simultaneously "
         "being within the error box at that mass. The model may require further "
@@ -431,7 +431,7 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "### Or does the result suggest a hadronic crust or hybrid construction is needed?",
         "",
         "The pure QMD quark-star scenario is not definitively ruled out by these "
-        "constraints. The mass-radius curves from the combined runs overlap with "
+        "constraints. The mass-radius curves from the combined sets overlap with "
         "the plotted observational boxes. A hadronic crust would modify the low-mass "
         "tail of the M-R sequence but is not expected to significantly change Mmax "
         "or the high-mass branch. A full Bayesian analysis with a quark-hadron hybrid "
@@ -441,14 +441,14 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "",
         "## Notes on cs² spikes",
         "",
-        "Runs combo1 and combo3 show 2 isolated points where the stored cs² exceeds 1 "
+        "The diagnostic set with g_Δ=2.5g and λ₃=2λ₀ and Set K show 2 isolated points where the stored cs² exceeds 1 "
         "(artifacts of the np.gradient finite-difference estimator at kinks in the Maxwell-"
         "constructed EoS). These occur at 2 grid points each and are surrounded by "
         "physical cs² values. They are not actual causality violations. The TOV "
         "integration uses the smooth interpolated P(ε) curve and is not affected. "
         "The reported cs²_phys column excludes these spike points.",
         "",
-        "Combo1 has cs²_phys_max = 0.960, close to but below the causal limit. "
+        "The diagnostic set with g_Δ=2.5g and λ₃=2λ₀ has cs²_phys_max = 0.960, close to but below the causal limit. "
         "This is a physical feature of the stiff g_Δ=2.5g EoS at the onset of 2SC "
         "pairing and is consistent with expectations for a strongly-coupled diquark sector.",
         "",
@@ -460,7 +460,7 @@ def write_combined_report(results: dict[str, FinalResult], combos: list[ComboCon
         "2. **No tidal deformability**: GW170817 not used.",
         "3. **Visual diagnostic only**: J0030/J0740 checks are geometric, not Bayesian.",
         "4. **J0030/J0740 boxes**: 1σ error boxes (central ± 1σ in both M and R).",
-        "5. **λ₃=3λ₀ is outside the baseline model set**: the physical motivation for",
+        "5. **λ₃=3λ₀ is outside Set A**: the physical motivation for",
         "   values this large should be examined before using it in a final thesis argument.",
     ]
 

@@ -1,4 +1,4 @@
-"""Section 1 neutral stellar pipeline — QMD SET A baseline (full one-loop potential).
+"""Section 1 neutral stellar pipeline — Set A baseline (full one-loop potential).
 
 Computes the neutral stellar EoS and TOV mass-radius sequence for QMD_SET_A
 with include_omega_1_num=True.  The existing cached equilibrium states in
@@ -599,13 +599,11 @@ def _plot_condensates(
 
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
-    ax1.set_title("Chiral condensate")
     ax1.set_xlim(200.0, 700.0)
     ax1.legend()
 
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
-    ax2.set_title("Diquark gap")
     ax2.set_xlim(200.0, 700.0)
     ax2.legend()
 
@@ -629,7 +627,6 @@ def _plot_neutrality(
     ax.axhline(0.0, color="gray", lw=1.0, ls=":")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"chemical potential $(\mathrm{MeV})$")
-    ax.set_title("Neutrality chemical potentials")
     ax.set_xlim(250.0, 700.0)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_neutrality.pdf")
@@ -673,7 +670,6 @@ def _plot_eos(
         ax_eos.legend()
     ax_eos.set_xlabel(r"$P\;(\mathrm{GeV\,fm}^{-3})$")
     ax_eos.set_ylabel(r"$\varepsilon\;(\mathrm{GeV\,fm}^{-3})$")
-    ax_eos.set_title("Low-pressure EoS")
     ax_eos.set_xlim(0.0, _EOS_ZOOM_P_MAX_GEV_FM3)
     ax_eos.set_ylim(0.0, _EOS_ZOOM_EPS_MAX_GEV_FM3)
 
@@ -707,7 +703,6 @@ def _plot_eos(
     ax_delta.axhline(0.0, color="gray", ls="--", lw=1.5)
     ax_delta.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax_delta.set_ylabel(r"$\delta$")
-    ax_delta.set_title("Conformal convergence")
     if ratio_x.size:
         _set_log_mu_axis(ax_delta, float(ratio_x[0]), upper_mu)
     ax_delta.set_ylim(-0.35, 0.35)
@@ -760,7 +755,6 @@ def _plot_cs2(
 
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
-    ax.set_title("Speed of sound squared")
     ax.set_xlim(*CS2_XLIM)
     ax.set_ylim(*CS2_YLIM)
     ax.legend()
@@ -773,7 +767,7 @@ def _plot_mass_radius(sequence, plots_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(7.2, 4.8))
     if stable.any():
         ax.plot(sequence.radius_km[stable], sequence.mass_msun[stable],
-                color=COLOR_QMD, lw=LW, ls="-", label="QMD SET A")
+                color=COLOR_QMD, lw=LW, ls="-", label="Set A")
     if unstable.any():
         ax.plot(sequence.radius_km[unstable], sequence.mass_msun[unstable],
                 color=COLOR_QMD, lw=1.4, ls="--")
@@ -786,13 +780,12 @@ def _plot_mass_radius(sequence, plots_dir: Path) -> None:
 
     ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
     ax.set_ylabel(r"Mass $M\;(M_\odot)$")
-    ax.set_title("QMD stellar mass-radius (SET A baseline)")
     ax.set_xlim(8.0, 16.0)
     ax.set_ylim(0.5, 2.1)
     ax.legend()
     save_figure(plots_dir / "qmd_stellar_mass_radius.pdf")
 def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
-    """Overlay QMD SET A vs QM m_sigma=600 MeV M-R curves (three-curve comparison).
+    """Overlay Set A vs QM m_sigma=600 MeV M-R curves (three-curve comparison).
 
     Primary comparison: QMD vs gravitationally-bound QM (B_min=0) — matched construction.
     Secondary reference: self-bound QM (B_min=27.8 MeV) — shown for context.
@@ -842,10 +835,10 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
             ax.plot(qm_r[qm_unstable_mask], qm_m[qm_unstable_mask],
                     color=COLOR_QM_SB, lw=1.4, ls="--")
 
-    # --- QMD SET A ---
+    # --- Set A ---
     if stable.any():
         ax.plot(sequence.radius_km[stable], sequence.mass_msun[stable],
-                color=COLOR_QMD, lw=LW, ls="-", label="QMD SET A")
+                color=COLOR_QMD, lw=LW, ls="-", label="Set A")
         m_s = sequence.mass_msun[stable]; r_s = sequence.radius_km[stable]
         idx = int(np.argmax(m_s))
         ax.plot(r_s[idx], m_s[idx], "o", color=COLOR_QMD, ms=6)
@@ -855,7 +848,6 @@ def _plot_qmd_vs_qm(sequence, plots_dir: Path) -> None:
 
     ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
     ax.set_ylabel(r"Mass $M\;(M_\odot)$")
-    ax.set_title(r"Mass--radius comparison at $m_\sigma=600~\mathrm{MeV}$")
     handles, labels = ax.get_legend_handles_labels()
     ax.legend(handles, labels)
     ax.set_xlim(8.0, 18.0)
@@ -871,7 +863,7 @@ def _print_summary(
     sequence,
 ) -> None:
     print("\n" + "=" * 62)
-    print("Section 1 stellar baseline — summary")
+    print("Section 1 stellar Set A — summary")
     print("=" * 62)
 
     onset = next((p.mu_q_mev for p in stable_points if p.phase == "2SC"), None)
@@ -959,7 +951,7 @@ def main() -> None:
         params = QMD_SET_A
 
         print("=" * 70)
-        print("Section 1: neutral QMD stellar EoS — SET A baseline (full one-loop)")
+        print("Section 1: neutral QMD stellar EoS — Set A (full one-loop)")
         print(f"  include_omega_1_num = {params.include_omega_1_num}")
         print(f"  t_loop4_factor      = {params.t_loop4_factor}")
         print(f"  μ_q grid: {MU_MIN_MEV:.0f}–{MU_MAX_MEV:.0f} MeV, {NUM_POINTS} points")

@@ -1,13 +1,11 @@
 """
-Combined-parameter observational comparison runs.
+Combined-parameter observational comparison sets.
 
-Runs:
-  lam3_3lam0  — single-parameter λ₃=3λ₀ (for updated selected plot)
-  Combo1      — g_Δ=2.5g, λ₃=2λ₀, m_Δ=500 MeV, λ_Δ=λ₀/4
-  Combo2      — g_Δ=2.5g, λ₃=3λ₀, m_Δ=500 MeV, λ_Δ=λ₀/4
-  Combo3      — m_Δ=400, λ₃=2λ₀, g_Δ=2g,   λ_Δ=λ₀/4
-  Combo4      — m_Δ=400, λ₃=3λ₀, g_Δ=2g,   λ_Δ=λ₀/4
-  Combo5      — g_Δ=2.25g, λ₃=2λ₀, m_Δ=500 MeV, λ_Δ=λ₀/4
+Sets:
+  lam3_3lam0  — single-parameter λ₃=3λ₀ (diagnostic)
+  Set J       — g_Δ=2.5g, λ₃=3λ₀, m_Δ=500 MeV, λ_Δ=λ₀/4
+  Set K       — m_Δ=400, λ₃=2λ₀, g_Δ=2g,   λ_Δ=λ₀/4
+  Set L       — m_Δ=400, λ₃=3λ₀, g_Δ=2g,   λ_Δ=λ₀/4
 
 Outputs
 -------
@@ -77,49 +75,49 @@ N_SAT_FM3          = 0.160   # nuclear saturation density [fm^-3]
 # ---------------------------------------------------------------------------
 
 @dataclass
-class ComboConfig:
+class CombinedSetConfig:
     tag:    str
     label:  str
     color:  str
     params: QMDParameters
 
 
-def _make_combos() -> list[ComboConfig]:
+def _make_combos() -> list[CombinedSetConfig]:
     bl = QMD_SET_A
     return [
-        ComboConfig(
+        CombinedSetConfig(
             "lam3_3lam0",
-            r"$\lambda_3 = 3\lambda_0$ (single-param)",
+            r"$\lambda_3 = 3\lambda_0$ (diagnostic)",
             "#888888",
             replace(bl, lambda_3_factor=3.0),
         ),
-        ComboConfig(
+        CombinedSetConfig(
             "combo1",
-            r"Combo 1: $g_\Delta{=}2.5g,\;\lambda_3{=}2\lambda_0$",
+            "candidate: g_delta=2.5g, lambda_3=2lambda_0",
             "#E69F00",
             replace(bl, g_delta_factor=2.5, lambda_3_factor=2.0),
         ),
-        ComboConfig(
+        CombinedSetConfig(
             "combo2",
-            r"Combo 2: $g_\Delta{=}2.5g,\;\lambda_3{=}3\lambda_0$",
+            "Set J",
             "#D55E00",
             replace(bl, g_delta_factor=2.5, lambda_3_factor=3.0),
         ),
-        ComboConfig(
+        CombinedSetConfig(
             "combo3",
-            r"Combo 3: $m_\Delta{=}400\,\mathrm{MeV},\;\lambda_3{=}2\lambda_0$",
+            "Set K",
             "#009E73",
             replace(bl, m_delta_mev=400.0, lambda_3_factor=2.0),
         ),
-        ComboConfig(
+        CombinedSetConfig(
             "combo4",
-            r"Combo 4: $m_\Delta{=}400\,\mathrm{MeV},\;\lambda_3{=}3\lambda_0$",
+            "Set L",
             "#0072B2",
             replace(bl, m_delta_mev=400.0, lambda_3_factor=3.0),
         ),
-        ComboConfig(
+        CombinedSetConfig(
             "combo5",
-            r"Combo 5: $g_\Delta{=}2.25g,\;\lambda_3{=}2\lambda_0$",
+            "candidate: g_delta=2.25g, lambda_3=2lambda_0",
             "#CC79A7",
             replace(bl, g_delta_factor=2.25, lambda_3_factor=2.0),
         ),
@@ -364,7 +362,7 @@ def _write_eos(path: Path, points, meta: dict) -> None:
 # Main run pipeline
 # ---------------------------------------------------------------------------
 
-def run_combo(cfg: ComboConfig) -> RunResult:
+def run_combo(cfg: CombinedSetConfig) -> RunResult:
     params = cfg.params
     print(f"\n{'='*60}")
     print(f"  Running: {cfg.tag}")
@@ -521,13 +519,13 @@ def _log(tag: str, ctx: str, exc: Exception) -> None:
 # ---------------------------------------------------------------------------
 
 OBS_J0030 = {"M": 1.34, "dM_lo": 0.16, "dM_hi": 0.15, "R": 12.71, "dR_lo": 1.19, "dR_hi": 1.14}
-OBS_J0740 = {"M": 2.08, "dM_lo": 0.07, "dM_hi": 0.07, "R": 12.49, "dR_lo": 0.88, "dR_hi": 1.28}
+OBS_J0740 = {"M": 2.073, "dM_lo": 0.069, "dM_hi": 0.069, "R": 12.49, "dR_lo": 0.88, "dR_hi": 1.28}
 
 PULSARS = [
-    {"name": "PSR J0348+0432", "M": 2.01, "dM": 0.04},
-    {"name": "PSR J1614$-$2230", "M": 1.97, "dM": 0.04},
-    {"name": "PSR J2215+5135",   "M": 2.27, "dM": 0.16},
-    {"name": "PSR J0952$-$0607", "M": 2.35, "dM": 0.17},
+    {"name": "PSR J0348+0432", "M": 2.01, "dM_lo": 0.04, "dM_hi": 0.04},
+    {"name": "PSR J1614$-$2230", "M": 1.97, "dM_lo": 0.04, "dM_hi": 0.04},
+    {"name": "PSR J2215+5135",   "M": 2.27, "dM_lo": 0.15, "dM_hi": 0.17},
+    {"name": "PSR J0952$-$0607", "M": 2.35, "dM_lo": 0.17, "dM_hi": 0.17},
 ]
 
 OBS_NICER_COLORS = {
@@ -536,12 +534,12 @@ OBS_NICER_COLORS = {
 }
 
 OBS_CURVE_COLORS = {
-    "Run B": SECTION2_MR_COMPARISON_COLORS[0],
-    "Run C": SECTION2_MR_COMPARISON_COLORS[1],
-    "Run H": SECTION2_MR_COMPARISON_COLORS[2],
-    "Combo 1": SECTION2_MR_COMPARISON_COLORS[0],
-    "Combo 2": SECTION2_MR_COMPARISON_COLORS[1],
-    "Combo 3": SECTION2_MR_COMPARISON_COLORS[2],
+    "Set C": SECTION2_MR_COMPARISON_COLORS[0],
+    "Set D": SECTION2_MR_COMPARISON_COLORS[1],
+    "Set I": SECTION2_MR_COMPARISON_COLORS[2],
+    "Set J": SECTION2_MR_COMPARISON_COLORS[0],
+    "Set K": SECTION2_MR_COMPARISON_COLORS[1],
+    "Set L": SECTION2_MR_COMPARISON_COLORS[2],
 }
 
 R_MIN, R_MAX = 8.0, 20.0
@@ -551,7 +549,7 @@ M_MIN, M_MAX = 0.5, 2.6
 def _draw_obs(ax):
     for p in PULSARS:
         ax.fill_betweenx(
-            [p["M"] - p["dM"], p["M"] + p["dM"]],
+            [p["M"] - p["dM_lo"], p["M"] + p["dM_hi"]],
             R_MIN, R_MAX,
             alpha=0.30, label=p["name"], zorder=1,
         )
@@ -598,7 +596,6 @@ def _finalize(ax, title):
     ax.set_ylim(M_MIN, M_MAX)
     ax.set_xlabel(r"$R\;[\mathrm{km}]$")
     ax.set_ylabel(r"$M/M_\odot$")
-    ax.set_title(title)
     ax.legend(loc="lower left", ncol=1, fontsize=8, framealpha=0.88)
 
 
@@ -613,17 +610,17 @@ def _load_tov(path: Path):
 
 def plot_selected_updated(combo_results: dict[str, RunResult]) -> None:
     """
-    Run B + Run C + Run H + observational constraints.
+    Set C + Set D + Set I + observational constraints.
     Overwrites thesis/figures/quark_stars/qmd_selected_observational_mr.pdf.
     """
     # Load single-parameter runs from section2 data
     sect2_files = {
-        "Run B": (SECT2_DATA / "section2_stellar_gdelta_2p5g.txt",
-                  "Run B", OBS_CURVE_COLORS["Run B"]),
-        "Run C": (SECT2_DATA / "section2_stellar_mdelta_400.txt",
-                  "Run C", OBS_CURVE_COLORS["Run C"]),
-        "Run H": (SECT2_DATA / "section2_stellar_lam3_2lam0.txt",
-                  "Run H", OBS_CURVE_COLORS["Run H"]),
+        "Set C": (SECT2_DATA / "section2_stellar_gdelta_2p5g.txt",
+                  "Set C", OBS_CURVE_COLORS["Set C"]),
+        "Set D": (SECT2_DATA / "section2_stellar_mdelta_400.txt",
+                  "Set D", OBS_CURVE_COLORS["Set D"]),
+        "Set I": (SECT2_DATA / "section2_stellar_lam3_2lam0.txt",
+                  "Set I", OBS_CURVE_COLORS["Set I"]),
     }
 
     fig, ax = plt.subplots()
@@ -652,9 +649,9 @@ def plot_combined(combo_results: dict[str, RunResult]) -> None:
     _draw_obs(ax)
 
     combo_keys = [
-        ("combo2", "Combo 1"),
-        ("combo3", "Combo 2"),
-        ("combo4", "Combo 3"),
+        ("combo2", "Set J"),
+        ("combo3", "Set K"),
+        ("combo4", "Set L"),
     ]
     for key, label in combo_keys:
         res = combo_results.get(key)
@@ -724,23 +721,23 @@ def write_selected_report(combo_results: dict[str, RunResult]) -> None:
         "",
         "## Curves included",
         "",
-        "- **Baseline** (QMD SET A): Mmax=1.970 M☉, R=12.16 km",
-        "- **Run B** (g_Δ=2.5g): Mmax=2.047 M☉, R=12.72 km  — raises Mmax above 2 M☉",
-        "- **Run C** (m_Δ=400 MeV): Mmax=2.058 M☉, R=12.59 km  — raises Mmax above 2 M☉",
-        "- **Run H** (λ₃=2λ₀): Mmax=1.950 M☉, R=11.46 km  — reduces radii, slightly lowers Mmax",
+        "- **Set A**: Mmax=1.970 M☉, R=12.16 km",
+        "- **Set C** (g_Δ=2.5g): Mmax=2.047 M☉, R=12.72 km  — raises Mmax above 2 M☉",
+        "- **Set D** (m_Δ=400 MeV): Mmax=2.058 M☉, R=12.59 km  — raises Mmax above 2 M☉",
+        "- **Set I** (λ₃=2λ₀): Mmax=1.950 M☉, R=11.46 km  — reduces radii, slightly lowers Mmax",
         lam3_line,
         "",
         "## Rationale for selection",
         "",
-        "- Run G (λ₃=0) is removed: it increases radii but does not help Mmax coverage.",
-        "- Run H and λ₃=3λ₀ are kept to show the λ₃ trend on radii vs. Mmax trade-off.",
-        "- Runs B and C remain to show the two approaches to exceeding 2 M☉.",
+        "- Set H (λ₃=0) is removed: it increases radii but does not help Mmax coverage.",
+        "- Set I and λ₃=3λ₀ are kept to show the λ₃ trend on radii vs. Mmax trade-off.",
+        "- Sets C and D remain to show the two approaches to exceeding 2 M☉.",
         "- λ_Δ has negligible effect and is not shown.",
         "",
         "## Observational compatibility (visual, not Bayesian)",
         "",
-        "- **J0740+6620 (NICER)**: Runs B and C push Mmax toward the J0740 mass range,",
-        "  but none of the curves have Mmax above 2.08 M☉ except when combined.",
+        "- **J0740+6620 (NICER)**: Sets C and D push Mmax toward the J0740 mass range,",
+        "  but none of the curves have Mmax above 2.073 M☉ except when combined.",
         "- **J0030+0451 (NICER)**: All curves with R(Mmax)≈11–13 km span the J0030 radius",
         "  band. The lower-mass part of each curve passes through or near the J0030 box.",
         "- **J2215+5135, J0952−0607**: None of the single-parameter runs reach these masses.",
@@ -803,10 +800,10 @@ def write_combined_report(combo_results: dict[str, RunResult]) -> None:
         "",
         "## Source files",
         "",
-        "### Baseline",
+        "### Set A",
         f"- `{BASELINE_MR_FILE.relative_to(_HERE.parents[1])}`",
         "",
-        "### Combined runs (generated by run_observational_combos.py)",
+        "### Combined sets (generated by run_observational_combos.py)",
     ]
     for cfg in combos:
         lines.append(f"- `output/observational_combos/data/combo_{cfg.tag}.txt`  (TOV)")
@@ -852,10 +849,10 @@ def write_combined_report(combo_results: dict[str, RunResult]) -> None:
             f"{r['j0030']} | {r['j0740']} | {r['2msun']} | {r['notes']} |"
         )
 
-    # Baseline row for reference
+    # Set A row for reference
     lines += [
         "",
-        f"**Baseline reference**: Mmax=1.970 M☉, R=12.16 km, "
+        f"**Set A reference**: Mmax=1.970 M☉, R=12.16 km, "
         f"J0030={bl_j0030}, J0740={bl_j0740}, ≥2M☉=✗",
         "",
         "---",
@@ -884,7 +881,7 @@ def write_combined_report(combo_results: dict[str, RunResult]) -> None:
         "",
         "### Did improving the low-mass radius destroy the maximum mass?",
     ]
-    # Check if runs with λ₃ ≥ 2 have lower Mmax than baseline
+    # Check if sets with λ₃ ≥ 2 have lower Mmax than Set A
     high_lam3 = [r for r in rows if "3lam0" in r["tag"] or "lam3" in r["tag"]]
     if high_lam3:
         lines.append(
@@ -898,7 +895,7 @@ def write_combined_report(combo_results: dict[str, RunResult]) -> None:
         "### Does the model appear capable of fitting the plotted constraints?",
         "",
         "The QMD model with 2SC pairing can produce Mmax ≥ 2 M☉ with suitable g_Δ or m_Δ, "
-        "and can adjust radii via λ₃. However, reaching the J0740 mass (2.08 M☉) with "
+        "and can adjust radii via λ₃. However, reaching the J0740 mass (2.073 M☉) with "
         "simultaneously compact radii consistent with J0030 requires a combination that "
         "is non-trivial. Whether such a combination exists within physically motivated "
         "parameter ranges remains an open question.",

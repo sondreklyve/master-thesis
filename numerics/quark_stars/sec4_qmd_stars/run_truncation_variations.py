@@ -1,6 +1,6 @@
 """Truncation parameter variation figure — 3x1 panel.
 
-For three parameter choices around QMD SET A, compares the full one-loop
+For three parameter choices around Set A, compares the full one-loop
 calculation (Omega_{1,num} included) with the truncated calculation
 (Omega_{1,num} = 0).  Shows diquark gap g_Delta*Delta_0 vs mu_q.
 

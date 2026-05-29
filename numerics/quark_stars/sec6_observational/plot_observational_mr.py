@@ -25,10 +25,10 @@ OBS_NICER_COLORS = {
     "J0740": "tab:blue",
 }
 OBS_CURVE_COLORS = {
-    "Baseline": SECTION2_MR_BASELINE_COLOR,
-    "Run B": SECTION2_MR_COMPARISON_COLORS[0],
-    "Run C": SECTION2_MR_COMPARISON_COLORS[1],
-    "Run H": SECTION2_MR_COMPARISON_COLORS[2],
+    "Set A": SECTION2_MR_BASELINE_COLOR,
+    "Set C": SECTION2_MR_COMPARISON_COLORS[0],
+    "Set D": SECTION2_MR_COMPARISON_COLORS[1],
+    "Set I": SECTION2_MR_COMPARISON_COLORS[2],
 }
 
 # ---------------------------------------------------------------------------
@@ -44,57 +44,57 @@ REPORT_PATH = REPO_ROOT / "numerics/quark_stars/output/observational_mr_diagnost
 # Run registry
 # ---------------------------------------------------------------------------
 RUNS = {
-    "Baseline": {
+    "Set A": {
         "file": DATA_BASE / "qmd_stars_baseline.txt",
-        "label": r"Baseline (QMD SET A)",
+        "label": "Set A",
         "color": "#0072B2",
         "zorder": 4,
     },
     "A": {
         "file": DATA_SECT2 / "section2_stellar_gdelta_1p5g.txt",
-        "label": r"Run A: $g_\Delta = 1.5\,g$",
+        "label": "Set B",
         "color": "#56B4E9",
         "zorder": 3,
     },
     "B": {
         "file": DATA_SECT2 / "section2_stellar_gdelta_2p5g.txt",
-        "label": r"Run B: $g_\Delta = 2.5\,g$",
+        "label": "Set C",
         "color": "#E69F00",
         "zorder": 3,
     },
     "C": {
         "file": DATA_SECT2 / "section2_stellar_mdelta_400.txt",
-        "label": r"Run C: $m_\Delta = 400\,\mathrm{MeV}$",
+        "label": "Set D",
         "color": "#009E73",
         "zorder": 3,
     },
     "D": {
         "file": DATA_SECT2 / "section2_stellar_mdelta_700.txt",
-        "label": r"Run D: $m_\Delta = 700\,\mathrm{MeV}$",
+        "label": "Set E",
         "color": "#F0E442",
         "zorder": 3,
     },
     "E": {
         "file": DATA_SECT2 / "section2_stellar_lamdelta_lam0div8.txt",
-        "label": r"Run E: $\lambda_\Delta = \lambda_0/8$",
+        "label": "Set F",
         "color": "#CC79A7",
         "zorder": 3,
     },
     "F": {
         "file": DATA_SECT2 / "section2_stellar_lamdelta_lam0div2.txt",
-        "label": r"Run F: $\lambda_\Delta = \lambda_0/2$",
+        "label": "Set G",
         "color": "#999999",
         "zorder": 3,
     },
     "G": {
         "file": DATA_SECT2 / "section2_stellar_lam3_0.txt",
-        "label": r"Run G: $\lambda_3 = 0$",
+        "label": "Set H",
         "color": "#D55E00",
         "zorder": 3,
     },
     "H": {
         "file": DATA_SECT2 / "section2_stellar_lam3_2lam0.txt",
-        "label": r"Run H: $\lambda_3 = 2\lambda_0$",
+        "label": "Set I",
         "color": "#8B4513",
         "zorder": 3,
     },
@@ -105,21 +105,21 @@ RUNS = {
 # ---------------------------------------------------------------------------
 OBS = {
     "J0030": {"M": 1.34, "dM_lo": 0.16, "dM_hi": 0.15, "R": 12.71, "dR_lo": 1.19, "dR_hi": 1.14},
-    "J0740": {"M": 2.08, "dM_lo": 0.07, "dM_hi": 0.07, "R": 12.49, "dR_lo": 0.88, "dR_hi": 1.28},
+    "J0740": {"M": 2.073, "dM_lo": 0.069, "dM_hi": 0.069, "R": 12.49, "dR_lo": 0.88, "dR_hi": 1.28},
 }
 PULSARS = [
-    {"name": "PSR J0348+0432", "M": 2.01, "dM": 0.04},
-    {"name": "PSR J1614$-$2230", "M": 1.97, "dM": 0.04},
-    {"name": "PSR J2215+5135",  "M": 2.27, "dM": 0.16},
-    {"name": "PSR J0952$-$0607", "M": 2.35, "dM": 0.17},
+    {"name": "PSR J0348+0432", "M": 2.01, "dM_lo": 0.04, "dM_hi": 0.04},
+    {"name": "PSR J1614$-$2230", "M": 1.97, "dM_lo": 0.04, "dM_hi": 0.04},
+    {"name": "PSR J2215+5135",  "M": 2.27, "dM_lo": 0.15, "dM_hi": 0.17},
+    {"name": "PSR J0952$-$0607", "M": 2.35, "dM_lo": 0.17, "dM_hi": 0.17},
 ]
 
 for key, color in zip(RUNS, plt.cm.viridis(np.linspace(0.10, 0.85, len(RUNS))), strict=True):
     RUNS[key]["color"] = color
-RUNS["Baseline"]["color"] = OBS_CURVE_COLORS["Baseline"]
-RUNS["B"]["color"] = OBS_CURVE_COLORS["Run B"]
-RUNS["C"]["color"] = OBS_CURVE_COLORS["Run C"]
-RUNS["H"]["color"] = OBS_CURVE_COLORS["Run H"]
+RUNS["Set A"]["color"] = OBS_CURVE_COLORS["Set A"]
+RUNS["B"]["color"] = OBS_CURVE_COLORS["Set C"]
+RUNS["C"]["color"] = OBS_CURVE_COLORS["Set D"]
+RUNS["H"]["color"] = OBS_CURVE_COLORS["Set I"]
 
 # ---------------------------------------------------------------------------
 # Axis limits
@@ -183,7 +183,7 @@ def draw_observational(ax, R_min=R_MIN, R_max=R_MAX):
     # Horizontal mass bands
     for p in PULSARS:
         ax.fill_betweenx(
-            [p["M"] - p["dM"], p["M"] + p["dM"]],
+            [p["M"] - p["dM_lo"], p["M"] + p["dM_hi"]],
             R_min, R_max,
             alpha=0.30,
             label=p["name"],
@@ -222,7 +222,6 @@ def finalize_ax(ax, title: str) -> None:
     ax.set_ylim(M_MIN, M_MAX)
     ax.set_xlabel(r"$R\;[\mathrm{km}]$")
     ax.set_ylabel(r"$M/M_\odot$")
-    ax.set_title(title)
     ax.legend(loc="lower left", ncol=1, framealpha=0.85)
 
 
@@ -235,17 +234,17 @@ def save_fig(path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Figure A: Baseline + observational
+# Figure A: Set A + observational
 # ---------------------------------------------------------------------------
 
 def plot_baseline(runs: dict) -> tuple[float, float]:
     fig, ax = plt.subplots()
     draw_observational(ax)
-    cfg = runs["Baseline"]
+    cfg = runs["Set A"]
     R, M, stable = load_tov(cfg["file"])
     draw_tov_curve(ax, R, M, stable, cfg["color"], cfg["label"], cfg["zorder"], lw=2.2)
     Mmax, Rmax = find_mmax(R, M, stable)
-    finalize_ax(ax, "Baseline QMD sequence and observational constraints")
+    finalize_ax(ax, "Set A and observational constraints")
     save_fig(FIG_DIR / "qmd_baseline_observational_mr.pdf")
     return Mmax, Rmax
 
@@ -262,7 +261,7 @@ def plot_selected(runs: dict) -> dict:
     for key in selected_keys:
         cfg = runs[key]
         R, M, stable = load_tov(cfg["file"])
-        draw_tov_curve(ax, R, M, stable, cfg["color"], f"Run {key}", cfg["zorder"])
+        draw_tov_curve(ax, R, M, stable, cfg["color"], cfg["label"], cfg["zorder"])
         results[key] = find_mmax(R, M, stable)
     finalize_ax(ax, "Selected QMD parameter variations and observational constraints")
     save_fig(FIG_DIR / "qmd_selected_observational_mr.pdf")
@@ -285,7 +284,6 @@ def plot_all_runs(runs: dict) -> dict:
     ax.set_ylim(M_MIN, M_MAX)
     ax.set_xlabel(r"$R\;[\mathrm{km}]$")
     ax.set_ylabel(r"$M/M_\odot$")
-    ax.set_title("All QMD parameter runs and observational constraints")
     ax.legend(loc="lower left", ncol=2, fontsize=9, framealpha=0.85)
     save_fig(FIG_DIR / "qmd_all_runs_observational_mr.pdf")
     return results
@@ -296,7 +294,7 @@ def plot_all_runs(runs: dict) -> dict:
 # ---------------------------------------------------------------------------
 
 EXPECTED = {
-    "Baseline": (1.970, 12.16),
+    "Set A": (1.970, 12.16),
     "A": (1.793, 11.04),
     "B": (2.047, 12.72),
     "C": (2.058, 12.59),
@@ -329,7 +327,7 @@ def write_report(all_results: dict) -> None:
         "",
         "## Maximum-mass confirmation table",
         "",
-        "| Run | Label | M_max (M☉) computed | R(M_max) (km) computed | M_max expected | R expected | Match |",
+        "| Set | Label | M_max (M☉) computed | R(M_max) (km) computed | M_max expected | R expected | Match |",
         "|-----|-------|---------------------|------------------------|----------------|------------|-------|",
     ]
     for key, (M_exp, R_exp) in EXPECTED.items():
@@ -342,41 +340,41 @@ def write_report(all_results: dict) -> None:
             )
 
     # Visual interpretation
-    base_M, base_R = all_results["Baseline"]
+    base_M, base_R = all_results["Set A"]
     lines += [
         "",
         "---",
         "",
         "## Visual interpretation",
         "",
-        f"**Baseline maximum mass**: {base_M:.3f} M☉, at R = {base_R:.2f} km.",
+        f"**Set A maximum mass**: {base_M:.3f} M☉, at R = {base_R:.2f} km.",
         "",
-        "### Does the baseline QMD reach the robust 2 M☉ region?",
-        f"The baseline Mmax = {base_M:.3f} M☉ is **just below** 2 M☉.",
+        "### Does Set A reach the robust 2 M☉ region?",
+        f"Set A has Mmax = {base_M:.3f} M☉, just below 2 M☉.",
         "It falls within the PSR J1614−2230 band (1.97 ± 0.04 M☉) but does not",
         "reach the PSR J0348+0432 central value (2.01 M☉).",
         "It is below the heavier pulsars J2215+5135 (2.27 M☉) and J0952−0607 (2.35 M☉).",
         "",
-        "### Are baseline radii consistent with NICER constraints?",
-        f"The baseline branch spans roughly R ~ 10–13 km.",
-        f"R(Mmax) = {base_R:.2f} km. NICER J0740+6620 gives R = 12.49 +0.88/−1.28 km",
-        "at M = 2.08 M☉, and NICER J0030+0451 gives R = 12.71 ± ~1.2 km at M = 1.34 M☉.",
-        "The baseline curve passes through both NICER error boxes, suggesting",
-        "rough radius consistency, though the baseline Mmax falls below J0740's central mass.",
+        "### Are Set A radii consistent with NICER constraints?",
+        f"The Set A branch spans roughly R ~ 10–13 km.",
+        f"R(Mmax) = {base_R:.2f} km. NICER J0740+6620 gives R = 12.49 +1.28/−0.88 km",
+        "at M = 2.073 M☉, and NICER J0030+0451 gives R = 12.71 +1.14/−1.19 km at M = 1.34 M☉.",
+        "The Set A curve passes through both NICER error boxes, suggesting",
+        "rough radius consistency, though its Mmax falls below J0740's central mass.",
         "",
-        "### Which selected runs improve maximum mass?",
-        f"- **Run B** (g_Δ = 2.5g): Mmax = {all_results['B'][0]:.3f} M☉ — exceeds 2 M☉.",
-        f"- **Run C** (m_Δ = 400 MeV): Mmax = {all_results['C'][0]:.3f} M☉ — exceeds 2 M☉.",
+        "### Which selected sets improve maximum mass?",
+        f"- **Set C** (g_Δ = 2.5g): Mmax = {all_results['B'][0]:.3f} M☉ — exceeds 2 M☉.",
+        f"- **Set D** (m_Δ = 400 MeV): Mmax = {all_results['C'][0]:.3f} M☉ — exceeds 2 M☉.",
         "",
-        "### Radius changes relative to baseline:",
-        f"- **Run G** (λ₃ = 0): Mmax = {all_results['G'][0]:.3f} M☉, R(Mmax) = {all_results['G'][1]:.2f} km — larger radii, higher Mmax.",
-        f"- **Run H** (λ₃ = 2λ₀): Mmax = {all_results['H'][0]:.3f} M☉, R(Mmax) = {all_results['H'][1]:.2f} km — smaller radii, slightly lower Mmax.",
+        "### Radius changes relative to Set A:",
+        f"- **Set H** (λ₃ = 0): Mmax = {all_results['G'][0]:.3f} M☉, R(Mmax) = {all_results['G'][1]:.2f} km — larger radii, higher Mmax.",
+        f"- **Set I** (λ₃ = 2λ₀): Mmax = {all_results['H'][0]:.3f} M☉, R(Mmax) = {all_results['H'][1]:.2f} km — smaller radii, slightly lower Mmax.",
         "",
         "### Does any selected run appear compatible with all plotted constraints?",
-        "Run B and Run C both exceed 2 M☉ and have radii consistent with NICER constraints.",
-        "Run G has the largest radii; whether it remains inside the NICER boxes depends on the",
-        "full curve shape. None of the runs reach the J0952−0607 central value (2.35 M☉).",
-        "No run is definitively ruled out by the plotted constraints at this level of analysis.",
+        "Set C and Set D both exceed 2 M☉ and have radii consistent with NICER constraints.",
+        "Set H has the largest radii; whether it remains inside the NICER boxes depends on the",
+        "full curve shape. None of the sets reach the J0952−0607 central value (2.35 M☉).",
+        "No set is definitively ruled out by the plotted constraints at this level of analysis.",
         "",
         "---",
         "",
@@ -412,10 +410,10 @@ def main():
         Mmax, Rmax = all_results[key]
         print(f"  {key:10s}  Mmax={Mmax:.3f} M_sun  R(Mmax)={Rmax:.2f} km")
 
-    print("\nPlot A: Baseline + observational constraints")
+    print("\nPlot A: Set A + observational constraints")
     plot_baseline(RUNS)
 
-    print("Plot B: Selected runs + observational constraints")
+    print("Plot B: Selected sets + observational constraints")
     plot_selected(RUNS)
 
 

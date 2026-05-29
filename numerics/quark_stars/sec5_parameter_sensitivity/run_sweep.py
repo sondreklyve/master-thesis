@@ -1,16 +1,16 @@
-"""Section 2 parameter sensitivity sweep — QMD SET A.
+"""Section 2 parameter sensitivity sweep around Set A.
 
-Runs 8 single-parameter variations around the SET A baseline:
-  Runs A,B: g_Δ = 1.5g, 2.5g
-  Runs C,D: m_Δ = 400, 700 MeV
-  Runs E,F: λ_Δ = λ₀/8, λ₀/2
-  Runs G,H: λ₃ = 0, 2λ₀
+Runs 8 single-parameter variations around the default parameter set:
+  Sets B,C: g_Δ = 1.5g, 2.5g
+  Sets D,E: m_Δ = 400, 700 MeV
+  Sets F,G: λ_Δ = λ₀/8, λ₀/2
+  Sets H,I: λ₃ = 0, 2λ₀
 
-For each run:
+For each set:
   - 700-point neutral stellar pipeline (same solver settings as Section 1)
   - 5000-point common-μ_q benchmark (no neutrality)
 
-Baseline loaded from output/qmd_stellar/ (Section 1 results).
+Set A loaded from output/qmd_stellar/ (Section 1 results).
 
 Produces
 --------
@@ -115,7 +115,7 @@ _CS2_X_MAX_MEV = 800.0
 
 @dataclass
 class RunConfig:
-    run_id: str          # e.g. "A"
+    run_id: str          # e.g. "B"
     param_name: str      # e.g. "gdelta"
     param_value: str     # e.g. "1.5g"
     value_tag: str       # e.g. "1p5g"  (used in filename)
@@ -128,30 +128,30 @@ def _make_runs() -> list[RunConfig]:
     baseline = QMD_SET_A
 
     return [
-        RunConfig("A", "gdelta", "1.5g", "1p5g",
+        RunConfig("B", "gdelta", "1.5g", "1p5g",
                   replace(baseline, g_delta_factor=1.5),
-                  r"$g_\Delta = 1.5g$", SECTION2_MR_LOW_VARIATION_COLOR),
-        RunConfig("B", "gdelta", "2.5g", "2p5g",
+                  "Set B", SECTION2_MR_LOW_VARIATION_COLOR),
+        RunConfig("C", "gdelta", "2.5g", "2p5g",
                   replace(baseline, g_delta_factor=2.5),
-                  r"$g_\Delta = 2.5g$", SECTION2_MR_HIGH_VARIATION_COLOR),
-        RunConfig("C", "mdelta", "400",  "400",
+                  "Set C", SECTION2_MR_HIGH_VARIATION_COLOR),
+        RunConfig("D", "mdelta", "400",  "400",
                   replace(baseline, m_delta_mev=400.0),
-                  r"$m_\Delta = 400\,\mathrm{MeV}$", SECTION2_MR_LOW_VARIATION_COLOR),
-        RunConfig("D", "mdelta", "700",  "700",
+                  "Set D", SECTION2_MR_LOW_VARIATION_COLOR),
+        RunConfig("E", "mdelta", "700",  "700",
                   replace(baseline, m_delta_mev=700.0),
-                  r"$m_\Delta = 700\,\mathrm{MeV}$", SECTION2_MR_HIGH_VARIATION_COLOR),
-        RunConfig("E", "lamdelta", "lam0div8",  "lam0div8",
+                  "Set E", SECTION2_MR_HIGH_VARIATION_COLOR),
+        RunConfig("F", "lamdelta", "lam0div8",  "lam0div8",
                   replace(baseline, lambda_delta_factor=0.125),
-                  r"$\lambda_\Delta = \lambda_0/8$", SECTION2_MR_LOW_VARIATION_COLOR),
-        RunConfig("F", "lamdelta", "lam0div2",  "lam0div2",
+                  "Set F", SECTION2_MR_LOW_VARIATION_COLOR),
+        RunConfig("G", "lamdelta", "lam0div2",  "lam0div2",
                   replace(baseline, lambda_delta_factor=0.5),
-                  r"$\lambda_\Delta = \lambda_0/2$", SECTION2_MR_HIGH_VARIATION_COLOR),
-        RunConfig("G", "lam3", "0",     "0",
+                  "Set G", SECTION2_MR_HIGH_VARIATION_COLOR),
+        RunConfig("H", "lam3", "0",     "0",
                   replace(baseline, lambda_3_factor=0.0),
-                  r"$\lambda_3 = 0$", SECTION2_MR_LOW_VARIATION_COLOR),
-        RunConfig("H", "lam3", "2lam0", "2lam0",
+                  "Set H", SECTION2_MR_LOW_VARIATION_COLOR),
+        RunConfig("I", "lam3", "2lam0", "2lam0",
                   replace(baseline, lambda_3_factor=2.0),
-                  r"$\lambda_3 = 2\lambda_0$", SECTION2_MR_HIGH_VARIATION_COLOR),
+                  "Set I", SECTION2_MR_HIGH_VARIATION_COLOR),
     ]
 
 
@@ -680,16 +680,16 @@ def run_benchmark_pipeline(cfg: RunConfig) -> Optional[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Baseline loader
+# Set A loader
 # ---------------------------------------------------------------------------
 
 def load_baseline() -> RunResult:
-    """Load Section 1 baseline from output/qmd_stellar/ and qmd_benchmark/."""
+    """Load Set A from output/qmd_stellar/ and qmd_benchmark/."""
     baseline = RunResult(
         run_id="baseline",
         param_name="baseline",
         param_value="baseline",
-        notes="Section 1 SET A baseline",
+        notes="Section 1 Set A",
     )
 
     # Stellar M-R
@@ -706,9 +706,9 @@ def load_baseline() -> RunResult:
         baseline.radius_km   = data[:, 3]
         baseline.mass_msun   = data[:, 4]
         baseline.stable_mask = data[:, 5].astype(bool)
-        print(f"  Baseline M-R loaded: M_max={baseline.M_max:.4f} M☉")
+        print(f"  Set A M-R loaded: M_max={baseline.M_max:.4f} M☉")
     else:
-        print(f"  WARNING: baseline M-R not found at {mr_path}")
+        print(f"  WARNING: Set A M-R not found at {mr_path}")
 
     # Onset from stable EoS
     eos_path = BASELINE_STELLAR_DIR / "qmd_stellar_eos_baseline_stable.txt"
@@ -762,7 +762,7 @@ def load_baseline() -> RunResult:
         n_fail = int(np.sum(bm[:, 10] < 0.5))
         baseline.n_nonconverged_pct = 100.0 * n_fail / max(1, bm.shape[0])
 
-    print(f"  Baseline: onset={baseline.onset_muq}  cs2_peak={baseline.cs2_peak}  "
+    print(f"  Set A: onset={baseline.onset_muq}  cs2_peak={baseline.cs2_peak}  "
           f"asym_gap={baseline.asymptotic_gap}")
     return baseline
 
@@ -917,12 +917,7 @@ def _plot_mr(
     """M-R comparison plot: 3 curves in increasing parameter order."""
     fig, ax = plt.subplots(figsize=(7.2, 5.0))
 
-    baseline_label = (
-        r"$g_\Delta=2g$" if "gdelta" in filename
-        else r"$m_\Delta=500\,\mathrm{MeV}$" if "lamdelta" not in filename and "mdelta" in filename
-        else r"$\lambda_\Delta=\lambda_0/4$" if "lamdelta" in filename
-        else r"$\lambda_3=\lambda_0$"
-    )
+    baseline_label = "Set A"
 
     def _draw_mr(radius_km, mass_msun, stable_mask, color, label, zorder_base):
         r_st, m_st, r_un, m_un = _split_stable_branches(radius_km, mass_msun, stable_mask)
@@ -949,7 +944,6 @@ def _plot_mr(
 
     ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
     ax.set_ylabel(r"Mass $M\;(M_\odot)$")
-    ax.set_title(title)
     ax.set_xlim(8.0, 16.0)
     ax.set_ylim(0.5, 2.4)
     ax.legend(fontsize=9)
@@ -982,7 +976,7 @@ def _plot_cs2_gdelta(
 
     if baseline.bm_mu_q is not None:
         _draw_cs2(baseline.bm_mu_q, baseline.bm_cs2,
-                  _COLOR_BASELINE, LW_VARIATION, r"$g_\Delta=2g$")
+                  _COLOR_BASELINE, LW_VARIATION, "Set A")
 
     cfg_b, res_b = run_b
     if res_b.bm_cs2 is not None:
@@ -992,7 +986,6 @@ def _plot_cs2_gdelta(
                label=r"Conformal limit $c_s^2=\frac{1}{3}$")
     ax.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax.set_ylabel(r"$c_s^2/c^2$")
-    ax.set_title(r"Speed of sound, $g_\Delta$ variation")
     ax.set_xlim(*CS2_XLIM)
     ax.set_ylim(*CS2_YLIM)
     ax.legend(fontsize=9)
@@ -1025,7 +1018,7 @@ def _plot_condensates_gdelta(
 
     if baseline.bm_mu_q is not None:
         _draw(baseline.bm_mu_q, baseline.bm_phi, baseline.bm_gap,
-              _COLOR_BASELINE, LW_VARIATION, r"$g_\Delta=2g$")
+              _COLOR_BASELINE, LW_VARIATION, "Set A")
 
     cfg_b, res_b = run_b
     if res_b.bm_mu_q is not None:
@@ -1033,13 +1026,11 @@ def _plot_condensates_gdelta(
 
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
-    ax1.set_title("Chiral condensate")
     ax1.set_xlim(200.0, 900.0)
     ax1.legend(fontsize=9)
 
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
-    ax2.set_title("Diquark gap")
     ax2.set_xlim(200.0, 900.0)
     ax2.legend(fontsize=9)
 
@@ -1072,7 +1063,7 @@ def _plot_condensates_mdelta(
 
     if baseline.bm_mu_q is not None:
         _draw(baseline.bm_mu_q, baseline.bm_phi, baseline.bm_gap,
-              _COLOR_BASELINE, LW_VARIATION, r"$m_\Delta=500\,\mathrm{MeV}$")
+              _COLOR_BASELINE, LW_VARIATION, "Set A")
 
     cfg_d, res_d = run_d
     if res_d.bm_mu_q is not None:
@@ -1080,13 +1071,11 @@ def _plot_condensates_mdelta(
 
     ax1.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax1.set_ylabel(r"$\phi_0\;(\mathrm{MeV})$")
-    ax1.set_title("Chiral condensate")
     ax1.set_xlim(200.0, 900.0)
     ax1.legend(fontsize=9)
 
     ax2.set_xlabel(r"$\mu_q\;(\mathrm{MeV})$")
     ax2.set_ylabel(r"$g_\Delta\Delta_0\;(\mathrm{MeV})$")
-    ax2.set_title("Diquark gap")
     ax2.set_xlim(200.0, 900.0)
     ax2.legend(fontsize=9)
 
@@ -1201,11 +1190,11 @@ def main() -> None:
     t_start = time.time()
 
     print("=" * 70)
-    print("Section 2: Parameter Sensitivity Sweep — QMD SET A")
+    print("Section 2: Parameter Sensitivity Sweep — Set A")
     print("=" * 70)
 
-    # Load baseline
-    print("\n--- Loading Section 1 baseline ---")
+    # Load Set A
+    print("\n--- Loading Section 1 Set A ---")
     baseline = load_baseline()
 
     runs = _make_runs()
@@ -1227,7 +1216,7 @@ def main() -> None:
                 if result.stable_mask is not None else 0
             )
             print(
-                f"  Run {cfg.run_id}: loaded {stable} stable + "
+                f"  Set {cfg.run_id}: loaded {stable} stable + "
                 f"{unstable} unstable TOV points"
             )
 
@@ -1238,7 +1227,7 @@ def main() -> None:
     # --- Execute 8 runs ---
     for cfg in runs:
         print(f"\n{'='*60}")
-        print(f"Run {cfg.run_id}: {cfg.param_name} = {cfg.param_value}")
+        print(f"Set {cfg.run_id}: {cfg.param_name} = {cfg.param_value}")
         print(f"{'='*60}")
 
         # ---- Stellar pipeline ----
@@ -1277,12 +1266,12 @@ def main() -> None:
             bm_data[cfg.run_id] = bm_result
 
         # ---- Special checks ----
-        if cfg.run_id == "B":
+        if cfg.run_id == "C":
             gap_b = stellar_result.asymptotic_gap
             if gap_b is not None:
                 exceeds = gap_b > KURKELA_BOUND_MEV
                 note = (
-                    f"Run B: g_Δ·Δ₀(900 MeV) = {gap_b:.2f} MeV "
+                    f"Set C: g_Δ·Δ₀(900 MeV) = {gap_b:.2f} MeV "
                     f"{'EXCEEDS' if exceeds else 'below'} Kurkela bound {KURKELA_BOUND_MEV} MeV"
                 )
                 print(f"\n  *** {note} ***")
@@ -1291,10 +1280,10 @@ def main() -> None:
                 else:
                     stellar_result.notes = note
 
-        if cfg.run_id == "D":
+        if cfg.run_id == "E":
             if stellar_result.onset_muq is None:
                 note = "No 2SC phase within μ_q ≤ 900 MeV; M_max approaches unpaired QM value"
-                print(f"\n  *** Run D: {note} ***")
+                print(f"\n  *** Set E: {note} ***")
                 if stellar_result.notes:
                     stellar_result.notes += "; " + note
                 else:
@@ -1354,18 +1343,18 @@ def main() -> None:
         else:
             print("2.0 M☉ constraint: some runs have no M_max computed")
 
-    # Run B gap check
-    run_b_res = next((r for r in all_results if r.run_id == "B"), None)
+    # Set C gap check
+    run_b_res = next((r for r in all_results if r.run_id == "C"), None)
     if run_b_res and run_b_res.asymptotic_gap is not None:
         gap_b = run_b_res.asymptotic_gap
-        print(f"Run B (g_Δ=2.5g): g_Δ·Δ₀(900 MeV) = {gap_b:.2f} MeV  "
+        print(f"Set C (g_Δ=2.5g): g_Δ·Δ₀(900 MeV) = {gap_b:.2f} MeV  "
               f"({'EXCEEDS' if gap_b > KURKELA_BOUND_MEV else 'below'} "
               f"Kurkela bound {KURKELA_BOUND_MEV} MeV)")
 
     print(f"Total wall-clock time: {elapsed/60:.1f} min ({elapsed:.0f} s)")
 
     # Print table
-    print("\n--- Run Summary ---")
+    print("\n--- Set Summary ---")
     print(f"{'ID':>4}  {'param':>10}  {'value':>12}  {'M_max':>7}  {'R':>6}  "
           f"{'onset':>6}  {'cs2pk':>6}  {'gap':>6}  {'fail%':>5}  notes")
     print("-" * 110)

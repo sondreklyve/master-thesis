@@ -91,5 +91,4 @@ def line_plot(x, y, xlabel: str, ylabel: str, title: str, path: Path, *, color: 
     ax.plot(x, y, color=color, linewidth=2.2)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    ax.set_title(title)
     save_figure(path)
