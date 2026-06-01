@@ -853,21 +853,19 @@ circles mark the maximum-mass configuration on each stable branch.}
 \label{fig:qm_grav_bound_mr}
 \end{figure}
 
-The three sequences differ markedly in their low-mass topology, and
-this difference can be traced directly to the character of the
-underlying chiral transition. For \(m_\sigma = 400~\mathrm{MeV}\),
-where the EoS exhibits a sharp first-order transition, the sequence
-collapses toward small radii as the central pressure decreases:
-configurations with \(M \lesssim 2~M_\odot\) sit at progressively
-smaller radii rather than extending outward, producing the compact
-island topology characteristic of a self-bound star. The
-\(m_\sigma = 500~\mathrm{MeV}\) sequence shows the same qualitative
-behavior, although the leftward trajectory is somewhat less
-pronounced: the curve slows its inward march near
-\(M \sim 0.5~M_\odot\) but does not extend outward in the way a
-gravitationally-bound sequence would. By contrast, the
+The three sequences differ markedly in their low-mass branch structure, and
+this difference can be traced directly to the character of the underlying
+chiral transition. For \(m_\sigma = 400~\mathrm{MeV}\), where the EoS exhibits
+a sharp first-order transition, the sequence collapses toward small radii as
+the central pressure decreases: configurations with \(M \lesssim 2~M_\odot\)
+sit at progressively smaller radii rather than extending outward. This produces
+a compact low-mass branch characteristic of a self-bound star. The
+\(m_\sigma = 500~\mathrm{MeV}\) sequence shows the same qualitative behavior,
+although the leftward trajectory is somewhat less pronounced: the curve slows
+its inward march near \(M \sim 0.5~M_\odot\) but does not extend outward in the
+way a gravitationally-bound sequence would. By contrast, the
 \(m_\sigma = 600~\mathrm{MeV}\) sequence, corresponding to a smooth
-crossover EoS, exhibits the standard gravitationally-bound topology:
+crossover EoS, exhibits the standard gravitationally bound behavior:
 as the central pressure decreases below the maximum-mass value, the
 radius grows monotonically, with low-mass configurations extending
 to large radii. This distinction follows directly from the surface
@@ -896,7 +894,7 @@ without any further phenomenological adjustments. The lower two sigma
 masses, and especially \(m_\sigma = 400~\mathrm{MeV}\), produce
 considerably large maximum masses, reflecting the stiffness of the
 corresponding equations of state. However, the surface conditions and
-low-mass topology are not necessarily realistic descriptions of
+low-mass branch structures are not necessarily realistic descriptions of
 physical compact stars.
 
 \subsubsection*{Bodmer--Witten sequences}
@@ -967,7 +965,7 @@ maximum mass.}
 \label{fig:qs_mass_radius_clean}
 \end{figure}
 
-For \(m_\sigma = 400\) and \(500~\mathrm{MeV}\), the topology is the
+For \(m_\sigma = 400\) and \(500~\mathrm{MeV}\), the branch structure is the
 same as in the unshifted QM calculation. Both cases retain compact,
 self-bound-like low-mass branches, reflecting the finite surface
 density associated with the underlying first-order transition. The
@@ -978,14 +976,14 @@ the stellar sequence: the maximum mass decreases and the corresponding
 radius is reduced. Conversely, a smaller bag constant gives a larger
 maximum mass at a larger radius.
 
-For \(m_\sigma = 600~\mathrm{MeV}\), the topology is also preserved:
+For \(m_\sigma = 600~\mathrm{MeV}\), the branch structure is also preserved:
 all three shifted sequences remain gravitationally bound. None of the
 bag constants considered here produces a compact self-bound branch or a
 multivalued mass--radius curve. What changes with increasing \(B\) is
 the shape of the low-mass branch, which falls off more steeply as the
 surface density increases. This indicates that the sequence is being
-pushed toward self-bound behavior, but not enough to change topology
-within the range of bag constants used here. For sufficiently larger
+pushed toward self-bound behavior, but not enough to change the branch
+structure within the range of bag constants used here. For sufficiently larger
 bag shifts, the same model can produce self-bound quark-star sequences,
 as seen in Ref.~\cite{sletmoen2022}.
 
@@ -1408,8 +1406,8 @@ thermodynamic potential is denoted by
 =
 \Omega_{0+1}(\phi_0,\Delta_0;\{\mu_i\}),
 \end{equation}
-where \(\{\mu_i\}\) denotes the relevant quark chemical potentials. In
-the common-chemical-potential benchmark this dependence reduces to the
+where \(\{\mu_i\}\) denotes the relevant quark chemical potentials. With
+equal chemical potentials this dependence reduces to the
 average paired-quark chemical potential \(\bar{\mu}\), while in the
 stellar calculation it is supplemented by the electric and color
 chemical potentials required by neutrality.
@@ -1557,9 +1555,9 @@ thermodynamic potential in the coupled \((\phi_0,\Delta_0)\) plane and,
 for stellar matter, by imposing electric and color charge neutrality at the
 same time. This section therefore builds the QMD result in stages: first
 the parameter set and numerical conventions are fixed, then a
-common-chemical-potential calculation is used as a controlled benchmark,
-and finally the neutral stellar equation of state is used as input to
-the TOV equations. Unless explicitly stated otherwise, all results use
+simplified calculation with all quark chemical potentials set equal is
+performed, and finally the neutral stellar equation of state is used as input
+to the TOV equations. Unless explicitly stated otherwise, all results use
 the full one-loop potential from Appendix~\ref{app:qmd_potential},
 including the finite residual integral \(\Omega_{1,\mathrm{num}}\).
 
@@ -1691,12 +1689,12 @@ the neighboring grid point, providing a continuation procedure that is
 particularly useful near first-order transitions where the global
 minimum can move discontinuously.
 
-\subsection*{Common-chemical-potential benchmark}
+\subsection*{Equal chemical potentials}
 \label{subsec:qmd_benchmark}
 
 Before imposing the stellar neutrality constraints, we first consider a
-simpler benchmark calculation. In this case all quark flavors and colors
-are assigned the same quark chemical potential,
+simpler case where all quark flavors and colors are assigned the same quark
+chemical potential,
 \begin{equation}
 \mu_{ur}=\mu_{ug}=\mu_{ub}=\mu_{dr}=\mu_{dg}=\mu_{db}=\mu_q.
 \end{equation}
@@ -1742,8 +1740,8 @@ continues to grow.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/quark_stars/qmd_stars/qmd_benchmark_condensates.pdf}
-\caption{Left panel: chiral condensate \(\phi_0\) as a function of the common
-quark chemical potential \(\mu_q\) for Set~A. Right panel:
+\caption{Left panel: chiral condensate \(\phi_0\) as a function of \(\mu_q\)
+for Set~A with equal chemical potentials. Right panel:
 superconducting gap \(g_\Delta\Delta_0\). The 2SC onset occurs at
 \(\mu_q=266.5~\mathrm{MeV}\).}
 \label{fig:qmd_benchmark_condensates}
@@ -1789,16 +1787,15 @@ monotonically with \(\mu_q\). The corresponding equation of state is
 shown in Fig.~\ref{fig:qmd_benchmark_eos}. The left panel shows
 \(\varepsilon(P)\) in the low-pressure region, while the right panel
 shows the dimensionless trace-anomaly measure
-\(\delta=(\varepsilon-3P)/P\), which approaches zero in the conformal
+\(\delta=\frac{\varepsilon-3P}{P}\), which approaches zero in the conformal
 limit.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/quark_stars/qmd_stars/qmd_benchmark_pressure.pdf}
-\caption{Pressure \(P\) as a function of the common quark chemical
-potential \(\mu_q\) for Set~A. The pressure is zero below the 2SC
-onset and rises monotonically after the transition at
-\(\mu_q=266.5~\mathrm{MeV}\).}
+\caption{Pressure \(P\) as a function of \(\mu_q\) for Set~A with equal
+chemical potentials. The pressure is zero below the 2SC onset and rises
+monotonically after the transition at \(\mu_q=266.5~\mathrm{MeV}\).}
 \label{fig:qmd_benchmark_pressure}
 \end{figure}
 
@@ -1806,7 +1803,7 @@ onset and rises monotonically after the transition at
 \centering
 \includegraphics[width=\textwidth]{figures/quark_stars/qmd_stars/qmd_benchmark_eos.pdf}
 \caption{Left panel: equation of state \(\varepsilon(P)\) for the
-common-\(\mu_q\) QMD calculation in the low-pressure region. Right panel:
+QMD calculation with equal chemical potentials in the low-pressure region. Right panel:
 trace-anomaly measure \(\delta=\frac{\varepsilon-3P}{P}\) as a function of
 \(\mu_q\) on an extended grid.}
 \label{fig:qmd_benchmark_eos}
@@ -1823,7 +1820,7 @@ limit, and then decreases toward the conformal limit from above at large
 \centering
 \includegraphics[width=0.8\textwidth]{figures/quark_stars/qmd_stars/qmd_benchmark_cs2.pdf}
 \caption{Speed of sound squared \(c_s^2\) as a function of \(\mu_q\) for
-the common-\(\mu_q\) QMD calculation. The horizontal dashed line marks
+the QMD calculation with equal chemical potentials. The horizontal dashed line marks
 the conformal value \(c_s^2 = \frac{1}{3}\).}
 \label{fig:qmd_benchmark_cs2}
 \end{figure}
@@ -1837,7 +1834,7 @@ chemical potential. This explains why \(c_s^2\) eventually approaches the
 conformal limit from above, in agreement with the behavior found in
 Refs.~\cite{Andersen2024,Andersen2025}.
 
-Together, these benchmark results show that the numerical implementation
+Together, these results show that the numerical implementation
 reproduces the expected qualitative features of the QMD model: a
 first-order transition into the 2SC phase, saturation of the
 superconducting gap at large chemical potential, and a speed of sound
@@ -1848,12 +1845,12 @@ that work used the chiral-limit parameter choice
 uses physical meson masses. The qualitative behavior is nevertheless the
 same.
 
-The benchmark also makes clear what remains to be added before the model
+This simplified setup also makes clear what remains to be added before the model
 describes stellar matter. Neutrality is not imposed, so
 \(\mu_e=\mu_8=0\) throughout. The Fermi surfaces of the paired quarks are
 exactly matched, \(\delta\mu=0\), so this calculation cannot produce a
 gapless 2SC phase. The pressure also contains no electron contribution.
-The benchmark therefore serves only to validate the QMD machinery; the
+This simplified setup therefore serves only to validate the QMD machinery; the
 physically relevant compact-star equation of state requires the
 neutrality conditions introduced later.
 
@@ -1872,8 +1869,8 @@ structure.
 The residual integral arises when the divergent part of the paired-quark
 one-loop contribution is isolated and subtracted. The divergent terms are
 absorbed into the running parameters, while the remaining finite
-contribution is evaluated directly in three spatial dimensions. For the
-common-\(\mu_q\) benchmark, where \(\bar{\mu}=\mu_q\) and
+contribution is evaluated directly in three spatial dimensions. With
+equal chemical potentials, where \(\bar{\mu}=\mu_q\) and
 \(\delta\mu=0\), the residual term can be written as
 \begin{equation}
 \Omega_{1,\mathrm{num}}
@@ -1940,12 +1937,12 @@ same leading order as the dominant quark pressure terms. This suggests
 that \(\Omega_{1,\mathrm{num}}\) can be an important part of the
 one-loop thermodynamic potential, despite being finite after
 renormalization. We therefore examine its impact directly by repeating
-the benchmark calculation with this term removed.
+the equal-chemical-potential calculation with this term removed.
 
 To isolate its effect, we compare two calculations that differ only in
 whether \(\Omega_{1,\mathrm{num}}\) is included. Both use the same
-parameter set, Set~A, and the same common-\(\mu_q\) setup as in
-Sec.~\ref{subsec:qmd_benchmark}. In the full calculation,
+parameter set, Set~A, with equal chemical potentials.
+In the full calculation,
 \(\Omega_{1,\mathrm{num}}\) is evaluated numerically with
 \(\Lambda_\mathrm{res}=3000~\mathrm{MeV}\) as the upper integration
 limit. In the truncated calculation, the residual integral is omitted.
@@ -1953,7 +1950,7 @@ All other model parameters and minimization settings are kept fixed.
 
 The condensate profiles for the two calculations are compared in
 Fig.~\ref{fig:qmd_truncation_condensates}. The full calculation shows
-the same sustained 2SC phase as in the benchmark above: once the
+the same sustained 2SC phase as above: once the
 diquark condensate appears, the gap remains nonzero throughout the
 density range shown. The truncated calculation behaves very differently.
 It produces only a narrow 2SC window, after which the diquark gap
@@ -1968,8 +1965,8 @@ phase over the relevant range of chemical potentials.
 \caption{Comparison of the chiral condensate \(\phi_0\) (left panel) and the
 superconducting gap \(g_\Delta\Delta_0\) (right panel) for the full QMD
 potential and the truncated potential with
-\(\Omega_{1,\mathrm{num}}=0\). Both calculations use Set~A at
-common quark chemical potential. The full calculation is shown by the
+\(\Omega_{1,\mathrm{num}}=0\). Both calculations use Set~A with
+equal chemical potentials. The full calculation is shown by the
 purple curve, while the truncated calculation is shown by the turquoise
 curve. The shaded region marks the finite 2SC window found in the
 truncated calculation. The vertical dashed line indicates where the
@@ -1995,8 +1992,8 @@ strongly on details of the parameter choice.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/quark_stars/qmd_stars/qmd_truncation_parameter_variations.pdf}
-\caption{Diquark gap \(g_\Delta\Delta_0\) as a function of common
-quark chemical potential for three parameter variations from Set~A.
+\caption{Diquark gap \(g_\Delta\Delta_0\) as a function of \(\mu_q\)
+for three parameter variations from Set~A, with equal chemical potentials.
 The purple curves show the full calculation with
 \(\Omega_{1,\mathrm{num}}\) included, while the turquoise curves show
 the truncated calculation with \(\Omega_{1,\mathrm{num}}=0\). Top panel:
@@ -2024,7 +2021,7 @@ this chapter therefore use the full one-loop potential, including
 \subsection*{Neutral stellar equation of state}
 \label{subsec:neutral_stellar_eos}
 
-The common-\(\mu_q\) calculation served to validate the numerical
+The calculation with equal chemical potentials served to validate the numerical
 implementation of the QMD model. To describe bulk matter in a compact
 star, the equation of state must also satisfy weak equilibrium and
 charge neutrality. As in the two-flavor stellar calculation of
@@ -2123,14 +2120,14 @@ guess for the next point, which helps track the physical branch through
 the first-order onset.
 
 The condensate profiles are shown in
-Fig.~\ref{fig:qmd_stellar_condensates}, with the common-\(\mu_q\)
-benchmark overlaid for comparison. The qualitative behavior is similar
+Fig.~\ref{fig:qmd_stellar_condensates}, with the results for equal chemical
+potential overlaid for comparison. The qualitative behavior is similar
 in the two calculations. In both cases, the chiral condensate remains
 close to its vacuum value at the onset and then decreases continuously
 through the 2SC phase, while the diquark gap grows toward a high-density
 plateau. Neutrality shifts the onset to
 \(\mu_q=278.8~\mathrm{MeV}\), compared with
-\(\mu_q=266.5~\mathrm{MeV}\) in the common-\(\mu_q\) benchmark. The gap
+\(\mu_q=266.5~\mathrm{MeV}\) with equal chemical potentials. The gap
 is also smaller in neutral matter, because the electron chemical
 potential generates a Fermi-surface mismatch
 \(\delta\mu=\frac{\mu_e}{2}\), which stresses the Cooper pairs and suppresses
@@ -2139,11 +2136,11 @@ pairing.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/quark_stars/qmd_stars/qmd_stellar_condensates.pdf}
-\caption{Left panel: chiral condensate \(\phi_0\) for neutral QMD matter at
-Set~A, with the common-\(\mu_q\) benchmark overlaid for comparison.
+\caption{Left panel: chiral condensate \(\phi_0\) for neutral stellar matter at
+Set~A, with the results for equal chemical potential overlaid for comparison.
 Right panel: corresponding superconducting gap \(g_\Delta\Delta_0\). The
 vertical dashed lines mark the 2SC onset in the neutral and
-common-\(\mu_q\) calculations.}
+equal-chemical-potential calculations.}
 \label{fig:qmd_stellar_condensates}
 \end{figure}
 
@@ -2163,8 +2160,8 @@ in Ref.~\cite{Andersen2025}.
 \centering
 \includegraphics[width=0.8\textwidth]{figures/quark_stars/qmd_stars/qmd_stellar_neutrality.pdf}
 \caption{Electron chemical potential \(\mu_e\) and color chemical
-potential \(\mu_8\) for neutral QMD matter, determined by the neutrality
-conditions in Eq.~\eqref{eq:qmd_neutrality_conditions}.} 
+potential \(\mu_8\) for neutral stellar matter, determined by the neutrality
+conditions in Eq.~\eqref{eq:qmd_neutrality_conditions}.}
 \label{fig:qmd_stellar_neutrality}
 \end{figure}
 
@@ -2172,7 +2169,7 @@ As a final check on the neutral solution, we evaluate the mismatch
 condition for gapless 2SC matter. Along the neutral branch,
 \(g_\Delta\Delta_0-\delta\mu\) remains positive over the density range
 relevant for the stellar configurations considered below. The neutral
-QMD equation of state therefore describes conventional, fully gapped
+stellar-matter equation of state therefore describes conventional, fully gapped
 2SC matter in the region used for the TOV calculation.
 
 The first-order onset produces a short mechanically unstable segment in
@@ -2185,12 +2182,12 @@ remaining stable branch is used to construct a monotonic
 
 The resulting equation of state is shown in
 Fig.~\ref{fig:qmd_stellar_eos}. The left panel shows
-\(\varepsilon(P)\) for the stable neutral QMD branch. The right panel
+\(\varepsilon(P)\) for the stable neutral stellar branch. The right panel
 shows the dimensionless trace-anomaly measure
 \[
 \delta=\frac{\varepsilon-3P}{P},
 \]
-which approaches zero in the conformal limit. Thus the neutral QMD
+which approaches zero in the conformal limit. Thus the neutral stellar-matter
 equation of state becomes approximately conformal at high density,
 although the approach is slow on the chemical-potential range relevant
 for compact stars.
@@ -2199,39 +2196,39 @@ for compact stars.
 \centering
 \includegraphics[width=\textwidth]{figures/quark_stars/qmd_stars/qmd_stellar_eos.pdf}
 \caption{Left panel: stable equation of state \(\varepsilon(P)\) for neutral
-QMD matter with 2SC pairing. Right panel: trace-anomaly measure
+stellar matter with 2SC pairing. Right panel: trace-anomaly measure
 \(\delta=\frac{\varepsilon-3P}{P}\). The horizontal dashed line marks the
 conformal limit \(\delta=0\).}
 \label{fig:qmd_stellar_eos}
 \end{figure}
 
 The speed of sound squared is shown in
-Fig.~\ref{fig:qmd_stellar_cs2}. As in the common-\(\mu_q\) benchmark,
+Fig.~\ref{fig:qmd_stellar_cs2}. As in the case with equal chemical potential,
 \(c_s^2\) rises above the conformal value after the onset of 2SC
 pairing and then relaxes toward it from above at higher density. The
 neutrality constraints soften the response somewhat compared with the
-common-\(\mu_q\) calculation, because the composition variables
+calculation with equal chemical potentials, because the composition variables
 \(\mu_e\) and \(\mu_8\) adjust as the density changes. Nevertheless,
 the characteristic QMD stiffening from diquark pairing remains visible.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/quark_stars/qmd_stars/qmd_stellar_cs2.pdf}
-\caption{Speed of sound squared \(c_s^2\) for the neutral QMD equation
+\caption{Speed of sound squared \(c_s^2\) for the neutral stellar-matter equation
 of state. The horizontal dashed line marks the conformal limit
 \(c_s^2 = \frac{1}{3}\).}
 \label{fig:qmd_stellar_cs2}
 \end{figure}
 
-A useful qualitative feature of the neutral QMD equation of state is its
+A useful qualitative feature of the neutral stellar-matter equation of state is its
 surface behavior. With the vacuum normalization used here, both the
 pressure and energy density vanish at the vacuum point. The stable
 branch therefore terminates at \(\varepsilon(P=0)\simeq0\), rather than
 at a finite surface energy density. The resulting stellar sequences are
-therefore gravitationally bound, with the same low-mass topology
+therefore gravitationally bound, with the same low-mass branch structure
 discussed above for the crossover QM sequence.
 
-Overall, the neutral QMD equation of state for Set~A is a
+Overall, the neutral stellar-matter equation of state for Set~A is a
 single-parameter relation \(\varepsilon(P)\) describing matter that is in
 the chirally broken vacuum at low chemical potential and in the fully
 gapped 2SC phase above the neutral onset. The speed of sound peaks above
@@ -2241,7 +2238,7 @@ stable EoS table is used as input for the TOV calculation below.
 
 \subsection*{Mass--radius relations}
 
-The stable neutral QMD equation of state constructed above is now used
+The stable neutral stellar-matter equation of state constructed above is now used
 as input to the TOV equations. The same solver as in the earlier
 Quark--Meson stellar calculation is used; the only change is the
 equation of state. The resulting QMD sequence is shown in
@@ -2269,15 +2266,15 @@ R(M_{\max})=12.16~\mathrm{km},
 \end{equation}
 with central energy density
 \(\varepsilon_c=1.196~\mathrm{GeV/fm^3}\). The sequence has the
-gravitationally-bound topology expected from the surface behavior of the
-neutral QMD equation of state: as the mass decreases, the radius extends
+gravitationally bound behavior expected from the surface behavior of the
+neutral stellar-matter equation of state: as the mass decreases, the radius extends
 to large values rather than collapsing into a compact low-mass branch.
 This follows from the fact that the stable EoS terminates at
 \(\varepsilon(P=0)\simeq0\), rather than at a finite surface energy
 density.
 
 The vacuum-normalized QM sequence provides the cleanest comparison,
-because it shares the same surface topology and vacuum normalization as
+because it shares the same surface behavior and vacuum normalization as
 the QMD sequence. For this unpaired reference case,
 \[
 M_{\max}=1.797~M_\odot,
@@ -2464,7 +2461,7 @@ predicted by Eq.~\eqref{eq:gdelta_asymptotic_gap_full}.
 \includegraphics[width=\textwidth]{figures/quark_stars/parameter_sensitivity/section2_condensates_gdelta.pdf}
 \caption{Chiral condensate \(\phi_0\) and physical gap
 \(g_\Delta\Delta_0\) as functions of \(\mu_q\) for the three values of
-\(g_\Delta\), shown in the common-\(\mu_q\) benchmark calculation. The
+\(g_\Delta\), shown in the calculation with equal chemical potential. The
 chiral condensate is only weakly affected by changing \(g_\Delta\), while
 the gap curves cross as the solutions approach their high-density
 behavior.}
@@ -2483,15 +2480,15 @@ of the three.
 
 The speed of sound provides a useful diagnostic of how the coupling
 affects the stiffness of the QMD equation of state. For this comparison
-we use the common-\(\mu_q\) setup, so the curves should be read as a
-controlled benchmark rather than as the neutral stellar equation of state
-itself. The result is shown in Fig.~\ref{fig:qmd_cs2_gdelta}. All three
+we use the setup with equal chemical potential, so the curves show the model
+response without neutrality constraints rather than the neutral stellar
+equation of state itself. The result is shown in Fig.~\ref{fig:qmd_cs2_gdelta}. All three
 sets retain the characteristic QMD overshoot above the conformal value.
 The weakest coupling, Set~B, differs most clearly: its peak is broader
 and shifted to larger \(\mu_q\). Set~A and Set~C have very similar
 shapes, with Set~C lying slightly lower over the whole range.
 Thus the larger maximum mass of Set~C is not explained by a larger peak
-in \(c_s^2\) in the common-\(\mu_q\) benchmark. It reflects the full
+in \(c_s^2\) with equal chemical potentials. It reflects the full
 neutral equation of state used in the TOV calculation, including how the
 pressure accumulates over the density range sampled by the star.
 
@@ -2499,8 +2496,8 @@ pressure accumulates over the density range sampled by the star.
 \centering
 \includegraphics[width=0.8\textwidth]{figures/quark_stars/parameter_sensitivity/section2_cs2_gdelta.pdf}
 \caption{Speed of sound squared \(c_s^2\) as a function of \(\mu_q\)
-for the three values of \(g_\Delta\), shown in the common-\(\mu_q\)
-benchmark calculation. The horizontal dashed line marks the conformal
+for the three values of \(g_\Delta\), shown in the calculation with
+equal chemical potential. The horizontal dashed line marks the conformal
 value \(c_s^2 = \frac{1}{3}\). The weakest coupling gives a broader peak shifted
 to higher chemical potential, while Set~A and the stronger-coupling
 curves have very similar shapes.}
@@ -2520,7 +2517,7 @@ several hundred MeV should be treated cautiously, since such large gaps
 need not be negligible for the high-density pressure.
 
 Set~C also reveals the upper edge of the useful range of
-\(g_\Delta\). In the common-\(\mu_q\) benchmark, the minimizer finds a
+\(g_\Delta\). In the setup with equal chemical potential, the minimizer finds a
 spurious 2SC-like vacuum solution at very small \(\mu_q\). Such a state
 would correspond to color superconductivity in the vacuum and is not a
 physical feature expected of QCD. It indicates that
@@ -2563,7 +2560,7 @@ kept at their Set~A values.
 
 The mass--radius sequences are shown in
 Fig.~\ref{fig:qmd_MR_mdelta}. The three curves have almost identical
-topology and very similar shapes. The main effect of changing
+branch structure and very similar shapes. The main effect of changing
 \(m_\Delta\) is to shift the sequence as a whole: lowering
 \(m_\Delta\) moves the maximum-mass point upward and outward, while
 raising \(m_\Delta\) moves it downward and inward. The maximum-mass
@@ -2981,46 +2978,45 @@ radio pulsars provide lower bounds on the maximum mass, while NICER
 pulse-profile modelling gives simultaneous mass--radius estimates for
 individual sources. We use the following measurements:
 \begin{enumerate}
-    \item Radio-timing and spectroscopy observations of PSR J0348+0432:
+    \item Radio-timing and spectroscopy observations of
+    PSR J0348+0432~\cite{Antoniadis_2013_J0348}:
     \[
-        M = 2.01^{+0.04}_{-0.04}\,M_\odot
+        M = 2.01^{+0.04}_{-0.04}\,M_\odot .
     \]
-    \cite{Antoniadis_2013_J0348}.
 
-    \item Shapiro-delay measurement of PSR J1614--2230:
+    \item Shapiro-delay measurement of
+    PSR J1614--2230~\cite{Demorest_2010_J1614}:
     \[
-        M = 1.97^{+0.04}_{-0.04}\,M_\odot
+        M = 1.97^{+0.04}_{-0.04}\,M_\odot .
     \]
-    \cite{Demorest_2010_J1614}.
 
     \item Spectrophotometry, photometry, and radio-timing observations of
-    PSR J2215+5135:
+    PSR J2215+5135~\cite{linares2018}:
     \[
-        M = 2.27^{+0.17}_{-0.15}\,M_\odot
+        M = 2.27^{+0.17}_{-0.15}\,M_\odot .
     \]
-    \cite{linares2018}.
 
-    \item Spectrophotometry and radio-timing observations of PSR J0952--0607:
+    \item Spectrophotometry and radio-timing observations of
+    PSR J0952--0607~\cite{romani2022}:
     \[
-        M = 2.35^{+0.17}_{-0.17}\,M_\odot
+        M = 2.35^{+0.17}_{-0.17}\,M_\odot .
     \]
-    \cite{romani2022}.
 
-    \item NICER X-ray pulse-profile modelling of PSR J0030+0451:
+    \item NICER X-ray pulse-profile modelling of
+    PSR J0030+0451~\cite{Riley_2019_J0030}:
     \[
         M = 1.34^{+0.15}_{-0.16}\,M_\odot,
         \qquad
-        R = 12.71^{+1.14}_{-1.19}\,\mathrm{km}
+        R = 12.71^{+1.14}_{-1.19}\,\mathrm{km}.
     \]
-    \cite{Riley_2019_J0030}.
 
-    \item NICER X-ray pulse-profile modelling of PSR J0740+6620:
+    \item NICER X-ray pulse-profile modelling of
+    PSR J0740+6620~\cite{Salmi_2024_J0740}:
     \[
         M = 2.073^{+0.069}_{-0.069}\,M_\odot,
         \qquad
-        R = 12.49^{+1.28}_{-0.88}\,\mathrm{km}
+        R = 12.49^{+1.28}_{-0.88}\,\mathrm{km}.
     \]
-    \cite{Salmi_2024_J0740}.
 \end{enumerate}
 
 These measurements are used only as visual reference regions in the
@@ -3226,17 +3222,17 @@ also bringing the lower-mass radius scale closer to the observed region.
 
 Set~L illustrates the remaining trade-off. Increasing \(\lambda_3\) further
 compresses the radius scale and keeps the maximum mass above \(2M_\odot\), but
-the maximum-mass configuration occurs at too small a radius to pass through the
+the maximum-mass configuration occurs at too small a radius to overlap with the
 high-mass NICER region. More importantly, the stable branch departs from the
-simple gravitationally-bound topology seen in the other QMD sequences. After
+simple gravitationally bound behavior seen in the other QMD sequences. After
 the branch drops away from the maximum, it bends slightly back toward smaller
 radii before recovering and continuing almost vertically downward at lower
 masses. The result is a multivalued \(M(R)\) relation over part of the stable
 branch, rather than a single smooth radius for each mass. This is not the
-compact self-bound topology seen in the first-order QM cases, but it is also
-not the simple gravitationally-bound behavior of Set~A. It
-suggests that pushing the radius compression too far can lead to a more
-complicated stability structure in the pure QMD star.
+compact self-bound branch structure seen in the first-order QM cases, but it is
+also not the simple gravitationally bound behavior of Set~A. It suggests that
+pushing the radius compression too far can lead to a more complicated stable
+branch in the pure QMD sequences.
 
 The comparison also shows the limitations of the present model. None of
 the combined QMD sequences reaches the central values of the highest-mass
