@@ -584,11 +584,11 @@ def _plot_condensates(
         if bm_thresh < len(bm_mu):
             bm_phi_p[bm_thresh:] = _smooth_for_plot(bm_phi[bm_thresh:], 51)
             bm_gap_p[bm_thresh:] = _smooth_for_plot(bm_gap[bm_thresh:], 51)
-        ax1.plot(bm_mu, bm_phi_p, lw=LW, color=COLOR_BM,  label="Free QMD",    zorder=2)
-        ax2.plot(bm_mu, bm_gap_p, lw=LW, color=COLOR_BM,  label="Free QMD",    zorder=2)
+        ax1.plot(bm_mu, bm_phi_p, lw=LW, color=COLOR_BM,  label="Equal chemical potentials",    zorder=2)
+        ax2.plot(bm_mu, bm_gap_p, lw=LW, color=COLOR_BM,  label="Equal chemical potentials",    zorder=2)
 
-    ax1.plot(mu, phi_p, lw=LW, color=COLOR_QMD, label="Neutral QMD", zorder=3)
-    ax2.plot(mu, gap_p, lw=LW, color=COLOR_QMD, label="Neutral QMD", zorder=3)
+    ax1.plot(mu, phi_p, lw=LW, color=COLOR_QMD, label="Neutral matter", zorder=3)
+    ax2.plot(mu, gap_p, lw=LW, color=COLOR_QMD, label="Neutral matter", zorder=3)
 
     if onset_mev is not None:
         ax1.axvline(onset_mev, color=COLOR_QMD, ls="--", lw=1.4)
@@ -655,7 +655,7 @@ def _plot_eos(
         ax_eos.plot(
             p_bm[bm_zoom],
             _smooth_for_plot(e_bm[bm_zoom], _EOS_SMOOTH_WINDOW),
-            lw=LW, color=COLOR_BM, label="Free QMD",
+            lw=LW, color=COLOR_BM, label="Equal chemical potentials",
         )
     sta_zoom = (
         np.isfinite(p_sta) & np.isfinite(e_sta)
@@ -664,7 +664,7 @@ def _plot_eos(
     ax_eos.plot(
         p_sta[sta_zoom],
         _smooth_for_plot(e_sta[sta_zoom], _EOS_SMOOTH_WINDOW),
-        lw=LW, color=COLOR_QMD, label="Neutral QMD",
+        lw=LW, color=COLOR_QMD, label="Neutral matter",
     )
     if bm_data is not None:
         ax_eos.legend()
@@ -747,9 +747,9 @@ def _plot_cs2(
             min_mu_mev=CS2_MU_MIN,
             window=_CS2_BENCHMARK_SMOOTH_WINDOW,
         )
-        ax.plot(bm_mu_p, bm_cs2_p, lw=LW, color=COLOR_BM,  label="Free QMD")
+        ax.plot(bm_mu_p, bm_cs2_p, lw=LW, color=COLOR_BM,  label="Equal chemical potentials")
 
-    ax.plot(mu_plot, cs2_plot, lw=2.6, color=COLOR_QMD, label="Neutral QMD")
+    ax.plot(mu_plot, cs2_plot, lw=2.6, color=COLOR_QMD, label="Neutral matter")
     ax.axhline(1.0 / 3.0, color="gray", ls="--", lw=1.5,
                label=r"Conformal limit $c_s^2 = \frac{1}{3}$")
 
@@ -951,7 +951,7 @@ def main() -> None:
         params = QMD_SET_A
 
         print("=" * 70)
-        print("Section 1: neutral QMD stellar EoS — Set A (full one-loop)")
+        print("Section 1: neutral stellar EoS (QMD Set A, full one-loop)")
         print(f"  include_omega_1_num = {params.include_omega_1_num}")
         print(f"  t_loop4_factor      = {params.t_loop4_factor}")
         print(f"  μ_q grid: {MU_MIN_MEV:.0f}–{MU_MAX_MEV:.0f} MeV, {NUM_POINTS} points")
@@ -1042,12 +1042,12 @@ def main() -> None:
     # Onset for onset markers in plots
     onset_mev = next((p.mu_q_mev for p in stable_points if p.phase == "2SC"), None)
 
-    # Benchmark overlay data (free QMD, no neutrality)
+    # Equal-mu_q overlay data (no neutrality constraints)
     bm_data   = _load_bm_data()
     if bm_data is not None:
         print(f"\nLoaded benchmark data for overlay ({len(bm_data['mu_q_mev'])} pts).")
     else:
-        print("\nNo qmd_benchmark data found; condensate/cs² plots will show neutral QMD only.")
+        print("\nNo qmd_benchmark data found; condensate/cs² plots will show neutral matter only.")
 
     # Extended free-QMD scan for conformal convergence (vacuum → 20 GeV)
     print("Loading/computing extended asymptotic data ...")
