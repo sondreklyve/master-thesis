@@ -1,35 +1,41 @@
 # Quark Stars
 
-This module now follows one physics-driven pipeline:
+This module implements the Quark-Meson-Diquark (QMD) model and produces all
+numerical results for Part 2 of the thesis.
 
-1. Vacuum consistency scan
-2. Selection of the lowest valid `m_sigma` values
-3. EoS construction with and without Maxwell construction
-4. Bag scan in `B^(1/4)` around `B_min`
-5. TOV mass-radius sequences
+## Pipeline
 
-## Workflows
+The calculation follows six steps, each with a corresponding subdirectory:
 
-Run:
+| Directory | Contents |
+|-----------|----------|
+| `sec1_qm_eos/` | QM model equation of state |
+| `sec2_qm_stars/` | QM model mass-radius sequences |
+| `sec4_qmd_stars/` | QMD baseline stellar sequence |
+| `sec5_parameter_sensitivity/` | Parameter sweeps (m_Δ, g_Δ, λ_Δ, λ₃) |
+| `sec6_observational/` | Comparison with observational constraints |
+
+Core physics modules:
+
+| File | Contents |
+|------|----------|
+| `qmd_parameters.py` | Model parameter sets |
+| `qmd_stellar.py` | QMD EoS builder and stellar matter |
+| `qmd_simple.py` | Simplified QMD utilities |
+| `qm_potential.py` | QM vacuum and medium thermodynamics |
+| `qm_stellar_matter.py` | Beta-equilibrated, charge-neutral EoS |
+| `solvers/` | TOV integrator |
+| `thermodynamics/` | Maxwell construction and related tools |
+
+## Running
+
+From the repository root:
 
 ```bash
-./numerics/.venv/bin/python -m numerics.quark_stars.run_qm_vacuum_scan
-./numerics/.venv/bin/python -m numerics.quark_stars.run_qm_eos_simple
-./numerics/.venv/bin/python -m numerics.quark_stars.run_qm_stars
+./numerics/bin/python -m numerics.quark_stars.sec4_qmd_stars.<script>
+./numerics/bin/python -m numerics.quark_stars.sec5_parameter_sensitivity.<script>
+./numerics/bin/python -m numerics.quark_stars.sec6_observational.plot_observational_mr
 ```
 
-Outputs go to:
-
-- `output/vacuum/`
-- `output/eos/`
-- `output/stellar/`
-
-## File Roles
-
-- `qm_potential.py`: core vacuum and medium thermodynamics
-- `vacuum_scan.py`: vacuum-consistency scan and `m_sigma` selection
-- `qm_stellar_matter.py`: clean beta-equilibrated, charge-neutral EoS builder
-- `bag_model.py`: vacuum subtraction, `B_min`, and `B^(1/4)` conversion helpers
-- `tov_interface.py`: bridge from the QM EoS to the existing TOV solver
-
-The old pedagogical/simple pipeline, bag-scale multipliers, and mixed-summary plotting code were removed.
+Pre-computed output data are stored in `output/` and tracked in the repository
+so that figures can be regenerated without re-running the full pipeline.

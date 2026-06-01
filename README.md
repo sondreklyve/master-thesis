@@ -1,22 +1,41 @@
-# Neutron Stars — Specialization Project (TFY4510)
+# Color-Superconducting Quark Matter in Compact Stars
 
-This repository contains the LaTeX source and numerical material for my 
-project in the course **TFY4510 – Physics Specialization Project**
-at NTNU. The project focuses on the theoretical modelling of neutron
-stars, with emphasis on the equation of state of dense matter, the
-Tolman–Oppenheimer–Volkoff equations, and the resulting mass–radius
-relations.
+**Mass-Radius Sequences and Parameter Sensitivity in the Quark-Meson-Diquark Model**
 
-The project combines analytical results, numerical solutions of the TOV
-equations, and comparisons with current observational constraints from
-radio pulsar timing, NICER X-ray observations, and gravitational-wave
-measurements.
+Master's thesis by Sondre Klyve, NTNU (2026).
 
-## Contents
+This repository contains the full LaTeX source and all numerical code used to
+produce the results and figures in the thesis.
 
-- Full LaTeX source for the written project.
-- Automated PDF build via GitHub Actions.
-- Python code used to generate figures and numerical results included in
-  the main text.
+## Structure
 
-For details about the numerical implementaion, please see `numerics/`.
+```
+thesis/      LaTeX source, figures, and bibliography
+numerics/    Python code for all numerical calculations
+Makefile     Builds the thesis PDF via latexmk
+```
+
+## Thesis overview
+
+**Part 1 – Neutron Stars** (background): TOV equations, ideal Fermi gas, and
+a relativistic mean-field model for $npe\mu$ matter.
+
+**Part 2 – Quark Stars** (main contribution): Quark-meson (QM) model, extension
+to the quark-meson-diquark (QMD) model with 2SC color-superconducting pairing,
+mass-radius sequences, parameter sensitivity analysis, and comparison with
+observational constraints (NICER, radio timing).
+
+## Building the thesis
+
+```bash
+make pdf
+```
+
+Requires a TeX Live installation with `latexmk`. A compiled PDF is also
+produced automatically on each push via GitHub Actions.
+
+## Numerical code
+
+See [`numerics/`](numerics/) for setup instructions and a description of each
+module. All figures in the thesis are generated from the Python code in that
+directory.
