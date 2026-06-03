@@ -42,7 +42,7 @@ potential increases, the minimum of the thermodynamic potential shifts
 toward smaller values of the condensate, leading to a reduction of the
 quark mass. This behavior reflects the gradual restoration of chiral
 symmetry and, depending on the model parameters, may occur through a
-proper, first-order, phase transition or a smooth crossover
+proper phase transition or a smooth crossover
 \cite{Folkestad2018,Buballa2005,Schmitt2010}.
 
 Once the thermodynamic quantities have been determined, we impose the
@@ -69,7 +69,7 @@ Finally, the equation of state obtained from the models is used as
 input to the TOV equations, which determine the structure of
 non-rotating compact stars in general relativity. By solving these
 equations, we obtain mass--radius relations for quark stars and
-analyse how the microscopic properties of the model influence
+analyze how the microscopic properties of the model influence
 macroscopic observables.
 
 \section{A Simple Quark--Meson Equation of State}
@@ -386,7 +386,7 @@ It is approached from below in the present model because the
 constituent quark mass remains finite at any fixed $\mu_q$, and the
 approach to the massless limit is only asymptotic. The speed of sound
 never exceeds the conformal limit in the simple QM model; this is an expected
-consequence due to the absence of repulsive vector interactions or
+consequence of the absence of repulsive vector interactions or
 diquark pairing, both of which can stiffen the equation of state
 beyond the conformal bound at intermediate densities
 \cite{Andersen2024}.
@@ -419,7 +419,7 @@ The main objective is first to construct a physically consistent
 equation of state for stellar matter by imposing charge neutrality
 and $\beta$-equilibrium, and then to investigate how the resulting
 stellar configurations depend on the microscopic inputs of the model.
-In particular, we analyse the sensitivity to the sigma mass
+In particular, we analyze the sensitivity to the sigma mass
 $m_\sigma$, which controls the shape of the effective potential and
 the stiffness of the resulting equation of state.
 
@@ -659,18 +659,21 @@ ensure that the underlying model provides a physically consistent
 description of the vacuum. In the Quark--Meson model, the vacuum is
 determined by the effective potential \(\Omega(\sigma)\) evaluated at
 vanishing temperature and chemical potentials. In the present
-truncation the renormalized potential is not bounded from below at
-large \(\sigma\), so the relevant condition is the existence of a
-local minimum at \(\sigma \approx f_\pi\) rather than a global one.
-This local minimum fixes the vacuum value of the chiral condensate
-and reproduces the pion decay constant, \(\sigma_0 = f_\pi\).
+truncation, this potential is not bounded from below at large
+\(\sigma\). The logarithmic one-loop contribution in
+Eq.~\eqref{eq:qm_Omega_vac_final} eventually dominates the ordinary
+quartic terms and drives the potential toward \(-\infty\). The physical
+vacuum used here is therefore not the global minimum, but a metastable
+local minimum at \(\sigma \approx f_\pi\). This local minimum fixes the
+vacuum value of the chiral condensate and reproduces the pion decay
+constant, \(\sigma_0=f_\pi\).
 
-The existence of such a minimum constrains the model parameters, in
-particular the sigma mass \(m_\sigma\), which controls the curvature
-of the effective potential. If \(m_\sigma\) is chosen too small, the
-potential may fail to develop a stable minimum at
-\(\sigma \approx f_\pi\), and the model no longer provides a
-consistent description of the vacuum.
+The existence of such a local minimum constrains the model parameters, in
+particular the sigma mass \(m_\sigma\), which controls the curvature of the
+effective potential near \(\sigma=f_\pi\). If \(m_\sigma\) is chosen too small,
+the potential may fail to develop a metastable local minimum at
+\(\sigma \approx f_\pi\), and the model no longer provides a consistent
+description of the vacuum used in the stellar calculation.
 
 To determine the range of acceptable parameter values, the vacuum
 effective potential \(\Omega(\sigma)\) is evaluated for different
@@ -685,31 +688,31 @@ Fig.~\ref{fig:qs_vacuum_scan}.
 the sigma mass \(m_\sigma = 300, 350, 400, 500, 600, 700~\mathrm{MeV}\).
 The vertical dashed line indicates the physical vacuum value
 \(\sigma = f_\pi = 93~\mathrm{MeV}\). Curves shown with dashed lines
-correspond to parameter choices that do not exhibit a stable minimum at
+correspond to parameter choices that do not exhibit a local minimum at
 \(\sigma = f_\pi\) and are therefore excluded.}
 \label{fig:qs_vacuum_scan}
 \end{figure}
 
-The figure shows that the existence of a physically acceptable vacuum
-depends sensitively on the value of \(m_\sigma\). For sufficiently
-small values, the point \(\sigma=f_\pi\) is no longer a stable minimum
-of the effective potential. The stationarity condition
-\(\partial\Omega/\partial\sigma = 0\) may still be satisfied at this
-point, but the curvature is not positive, so the extremum is not a
-minimum. The corresponding parameter choices therefore do not define a
-stable vacuum state and are excluded from the stellar calculation. In
-the present setup, this occurs for \(m_\sigma \lesssim 395~\mathrm{MeV}\).
+The figure shows that the existence of a physically acceptable metastable
+vacuum depends sensitively on the value of \(m_\sigma\). For sufficiently
+small values, the point \(\sigma=f_\pi\) is no longer a local minimum of the
+effective potential. The stationarity condition
+\(\partial\Omega/\partial\sigma = 0\) may still be satisfied at this point, but
+the curvature is not positive, so the extremum is not a minimum. The
+corresponding parameter choices therefore do not define an acceptable
+metastable vacuum state and are excluded from the stellar calculation. In the
+present setup, this occurs for \(m_\sigma \lesssim 395~\mathrm{MeV}\).
 
 Based on this analysis, we restrict the parameter space to values of
-\(m_\sigma\) above this threshold. In the following, we consider the
-representative choices
-\begin{equation}
-m_\sigma = 400,\; 500,\; 600~\mathrm{MeV},
-\end{equation}
-which correspond to the lowest values for which a stable vacuum
-solution is obtained. These values provide a controlled range for
-studying the impact of the effective potential on the thermodynamic
-and stellar properties of the model.
+\(m_\sigma\) above this threshold. The representative choices
+\[
+    m_\sigma = 400,\; 500,\; 600~\mathrm{MeV}
+\]
+are not fitted uniquely, but are chosen as reasonable values in the expected
+sigma-mass range that also produce a local metastable minimum at
+\(\sigma=f_\pi\). Using several such values allows us to study how the sigma
+mass changes the vacuum effective potential and how these changes propagate to
+the thermodynamic and stellar properties of the model.
 
 As in the simple equation of state of the previous section, the
 renormalized thermodynamic potential is nonzero in the vacuum, and a
@@ -739,16 +742,16 @@ varying smoothly across the transition.
 
 This is the situation a Maxwell construction is designed to handle.
 The non-monotonic segment of \(P(\mu_q)\) is replaced by a horizontal
-plateau at the transition pressure \(P_t\), determined by the
-condition that the two coexisting phases share the same pressure and
-chemical potential. The location of \(P_t\) is fixed by the
-equal-area rule: the two regions enclosed between the raw S-curve and
-the horizontal plateau must have equal area, which is equivalent to
-the condition of equal Gibbs free energy for the two coexisting
-phases. In the \(\varepsilon(P)\) representation, the construction
-appears as a vertical jump in energy density at \(P_t\), with the
-intermediate values corresponding to mixed-phase configurations.
-The procedure is illustrated schematically in
+plateau at the transition pressure \(P_t\), determined by the condition
+that the two phases have the same pressure and chemical potential. The
+location of \(P_t\) is fixed by the equal-area rule: the two regions
+enclosed between the raw \(S\)-curve and the horizontal plateau must
+have equal area, which is equivalent to equal Gibbs free energy for the
+two phases. In the \(\varepsilon(P)\) plane, the construction appears as
+a vertical jump in energy density at \(P_t\). The intermediate values of
+\(\varepsilon\) are not part of the Maxwell-constructed equation of state;
+instead, the system jumps discontinuously from the low-density phase to
+the high-density phase. The procedure is illustrated schematically in
 Fig.~\ref{fig:qs_maxwell_schematic}.
 
 \begin{figure}[htbp]
@@ -756,15 +759,16 @@ Fig.~\ref{fig:qs_maxwell_schematic}.
 \includegraphics[width=\textwidth]{figures/quark_stars/qm_stars/maxwell_construction_schematic.pdf}
 \caption{Schematic illustration of the Maxwell construction for a
 first-order phase transition. Left panel: the raw pressure curve
-\(P(\mu_q)\) (dashed) contains a region of negative slope; the
-constructed curve (solid) follows the raw result outside the unstable
-region and connects the two stable branches by a horizontal plateau
-at the transition pressure \(P_t\). Right panel: in the
-\(\varepsilon(P)\) representation, the raw result is multi-valued in
-\(P\) (dashed); the construction replaces this by a vertical jump in
-energy density at \(P_t\) (solid), corresponding to phase coexistence
-between the low- and high-density phases. The curves are schematic
-and not based on the QM model.}
+\(P(\mu_q)\) forms an \(S\)-curve. The grey dashed parts have
+\(dP/d\mu_q \geq 0\), while the red dashed part has \(dP/d\mu_q < 0\)
+and is mechanically unstable. The constructed curve (solid) follows the
+stable branches and connects them by a horizontal plateau at the
+transition pressure \(P_t\). Right panel: in the \(\varepsilon(P)\) plane,
+the raw result is multi-valued in \(P\) (dashed), with the unstable
+segment again shown in red. The Maxwell construction replaces this
+region by a vertical jump in energy density at \(P_t\), corresponding to
+a discontinuous transition between the low- and high-density phases. The
+curves are generic and not based on the QM model.}
 \label{fig:qs_maxwell_schematic}
 \end{figure}
 
@@ -818,9 +822,9 @@ that the system becomes increasingly dominated by relativistic quark
 degrees of freedom. In this regime, the constituent quark masses
 become small compared with the chemical potentials, and the equation
 of state approaches that of an ultrarelativistic ideal Fermi gas.
-Correspondingly, the different curves tend toward the limiting
-relation \(\varepsilon = 3P\). This is the standard high-density
-behavior of a gas of weakly interacting relativistic fermions
+Correspondingly, the different curves tend toward the limiting relation
+\(\varepsilon = 3P\). This is the standard high-density behavior of an
+ideal gas of massless relativistic fermions
 \cite{Buballa2005,Schmitt2010}.
 
 \subsection*{Stellar structure and mass--radius relations}
@@ -910,7 +914,7 @@ ordinary nuclear matter \cite{Bodmer1971,Witten1984,FarhiJaffe1984}.
 The present model contains only two quark flavors, so this should not be
 interpreted as a calculation of absolutely stable strange matter.
 Instead, we use the same zero-pressure energy-per-baryon condition as a
-phenomenological benchmark for fixing an additional bag-like shift of
+phenomenological criterion for fixing an additional bag-like shift of
 the two-flavor equation of state.
 
 For each value of \(m_\sigma\), we introduce a constant shift \(B\)
@@ -930,7 +934,7 @@ This condition fixes the point at which the shifted equation of state
 terminates at zero pressure. Since the shift lowers the pressure by a
 constant amount, the zero-pressure surface no longer coincides with the
 vacuum-normalized point of the original equation of state. Instead, it
-occurs at a finite density whenever the shifted curve reaches
+occurs at a finite density when the shifted curve reaches
 \(P=0\). This is the sense in which the Bodmer--Witten construction
 changes the surface condition of the stellar sequence.
 
@@ -1017,26 +1021,28 @@ The quark-matter equations of state constructed above were based on the
 ordinary two-flavor Quark--Meson model. In that description the only
 mean field was the chiral condensate, and the main microscopic effect was
 the density dependence of the constituent quark mass. At sufficiently high
-density, however, another instability may become relevant. Quarks occupy
-states up to a Fermi surface, and an attractive interaction between quarks
-near this surface can lead to the formation of Cooper pairs. A Cooper pair
-is a correlated two-fermion state which behaves as a bosonic degree of
-freedom, allowing many such pairs to occupy the same quantum state and
-form a condensate. This is the same basic mechanism as in
-Bardeen-Cooper-Schrieffer (BCS) superconductivity, but the pairs are now
-formed from quarks rather than electrons. Since quarks carry color charge, the corresponding paired phase
-is called a color-superconducting phase \cite{Shovkovy2005}.
+density, however, another instability becomes relevant. Quarks occupy
+states up to a Fermi surface, and an attractive interaction between
+fermions near this surface makes the normal Fermi sea unstable toward
+Cooper pairing. This is the Cooper instability, which underlies
+Bardeen--Cooper--Schrieffer (BCS) superconductivity
+\cite{Cooper1956,Bardeen1957}. In quark matter the paired objects are
+diquarks rather than electron pairs. Since quarks carry color charge, a
+diquark condensate breaks color gauge symmetry and the resulting paired
+phase is called color superconducting \cite{Shovkovy2005,Alford2008}.
 
 The microscopic origin of the pairing can be illustrated by quark--quark
 scattering through one-gluon exchange, shown schematically in
 Fig.~\ref{fig:qq_one_gluon_exchange}. In QCD, this interaction is
-attractive in the antisymmetric color-antitriplet channel. This makes the
-normal quark Fermi surface unstable toward diquark condensation
-\cite{Shovkovy2005}. In this sense, the pairing mechanism is more direct
-than in ordinary electronic superconductivity: for electrons, single-photon
-exchange is repulsive, and the effective attraction responsible for Cooper
-pairing arises from the interaction with the medium, usually through
-phonon exchange.
+attractive in the antisymmetric color-antitriplet channel, which is the
+channel relevant for scalar diquark condensation. This differs from
+ordinary electronic superconductivity, where the direct electromagnetic
+interaction between electrons is repulsive and the effective attraction
+in conventional superconductors is generated by the medium, usually
+through phonon exchange. Thus the analogy with BCS superconductivity is
+the Fermi-surface pairing mechanism, while the microscopic interaction
+and the quantum numbers of the condensate are specific to QCD
+\cite{Shovkovy2005,Alford2008}.
 
 \begin{figure}[htbp]
 \centering
@@ -1903,34 +1909,30 @@ cut off at a large momentum, as described below, only as a convergence
 procedure.
 
 Although \(\Omega_{1,\mathrm{num}}\) is finite, it is not necessarily
-small. This can already be seen analytically in the deep 2SC limit,
-where \(\phi_0\simeq0\) and \(d=g_\Delta\Delta_0\) is finite. For
-\(\bar{\mu}\gg d\), the leading part of the integrand is obtained by
-setting \(d\to0\) in the quasiparticle energies,
+small. This can already be seen analytically at large chemical
+potential. In this regime the chiral condensate is driven toward zero,
+so we take the limit \(\phi_0=0\). Keeping only the leading
+high-density contribution, the gap scale may then be neglected in the
+quasiparticle energies, giving
 \begin{equation}
 E^\Delta_+(p)+E^\Delta_-(p)-2E_\Delta(p)
 \longrightarrow
 (p+\bar{\mu})+|p-\bar{\mu}|-2p .
 \end{equation}
 This expression vanishes for \(p>\bar{\mu}\), while for
-\(0<p<\bar{\mu}\) it equals \(2(\bar{\mu}-p)\). Therefore
+\(0<p<\bar{\mu}\) it equals \(2(\bar{\mu}-p)\). The leading contribution
+to the residual integral is therefore
 \begin{equation}
 \Omega_{1,\mathrm{num}}
 =
 -\frac{2}{\pi^2}
-\int_0^{\bar{\mu}} dp\,p^2\,2(\bar{\mu}-p)
-+
-\mathcal{O}\!\left(\bar{\mu}^2 d^2
-\log\frac{\bar{\mu}}{d}\right),
+\int_0^{\bar{\mu}} dp\,p^2\,2(\bar{\mu}-p),
 \end{equation}
-or
+which gives
 \begin{equation}
 \Omega_{1,\mathrm{num}}
 =
--\frac{\bar{\mu}^4}{3\pi^2}
-+
-\mathcal{O}\!\left(\bar{\mu}^2 d^2
-\log\frac{\bar{\mu}}{d}\right).
+-\frac{\bar{\mu}^4}{3\pi^2}.
 \end{equation}
 Thus the residual integral contributes at order \(\bar{\mu}^4\), the
 same leading order as the dominant quark pressure terms. This suggests
@@ -2039,7 +2041,7 @@ background is required to neutralize the matter.
 
 The 2SC phase introduces an additional constraint. Since red and green
 quarks participate in pairing while blue quarks remain unpaired, the
-paired state can carry nonzero color charge associated with the diagonal
+paired state carry nonzero color charge associated with the diagonal
 color generator \(T_8\). We therefore introduce a color chemical
 potential \(\mu_8\) and impose
 \begin{equation}
