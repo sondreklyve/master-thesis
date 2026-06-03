@@ -191,11 +191,10 @@ def _make_updated_combined_figure(
                     linestyle="--",
                 )
         ax.set_xlabel(r"Radius $R\;(\mathrm{km})$")
+        ax.set_ylabel(r"Mass $M\;(M_\odot)$")
         ax.set_xlim(7, 15)
         ax.set_ylim(0.4, 2.2)
         ax.legend()
-
-    axes[0].set_ylabel(r"Mass $M\;(M_\odot)$")
     fig.tight_layout()
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path)

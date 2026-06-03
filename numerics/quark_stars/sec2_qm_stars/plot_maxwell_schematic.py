@@ -91,32 +91,29 @@ eps_B = float(eps_raw(np.array([MU_B]))[0])   # ε at transition end
 # ---------------------------------------------------------------------------
 # Figure
 # ---------------------------------------------------------------------------
-COLOR_MX  = "#1f4e79"
-COLOR_RAW = "#888888"
-COLOR_DOT = "#333333"
+COLOR_MX       = "#1f4e79"
+COLOR_RAW      = "#888888"
+COLOR_UNSTABLE = "#c0392b"   # highlights dP/dμ < 0 region
+COLOR_DOT      = "#333333"
 LW_RAW = 1.8
 LW_MX  = 2.2
+
+# Masks for the three segments of the raw curve
+mask_stable_l  = mu <= MU_TP_L
+mask_unstable  = (mu >= MU_TP_L) & (mu <= MU_TP_R)
+mask_stable_r  = mu >= MU_TP_R
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.0, 5.0))
 
 # ── Left panel: P(μ_q) ──────────────────────────────────────────────────────
-ax1.plot(mu, P_r,  "--", color=COLOR_RAW, lw=LW_RAW, label=r"Raw",                   zorder=2)
+# Stable segments in gray, unstable segment (dP/dμ < 0) in red
+ax1.plot(mu[mask_stable_l],  P_r[mask_stable_l],  "--", color=COLOR_RAW,      lw=LW_RAW, label=r"Raw",                  zorder=2)
+ax1.plot(mu[mask_unstable],  P_r[mask_unstable],  "--", color=COLOR_UNSTABLE, lw=LW_RAW, label=r"Raw ($\mathrm{d}P/\mathrm{d}\mu_q < 0$)", zorder=2)
+ax1.plot(mu[mask_stable_r],  P_r[mask_stable_r],  "--", color=COLOR_RAW,      lw=LW_RAW, zorder=2)
 ax1.plot(mu, P_mx, "-",  color=COLOR_MX,  lw=LW_MX,  label=r"Maxwell construction",  zorder=3)
 
 # Transition pressure reference line
 ax1.axhline(P_T, color=COLOR_DOT, lw=0.9, ls=":", zorder=1)
-
-# Unstable-region annotation with arrow pointing to mid-S
-mu_ann = MU0
-P_ann  = P_raw(np.array([mu_ann]))[0]
-ax1.annotate(
-    r"$\dfrac{\mathrm{d}P}{\mathrm{d}\mu_q} < 0$",
-    xy=(mu_ann, P_ann),
-    xytext=(mu_ann - 0.62, P_ann - 0.24),
-    fontsize=16,
-    color=COLOR_RAW,
-    arrowprops=dict(arrowstyle="->", color=COLOR_RAW, lw=0.9),
-)
 
 ax1.set_xlabel(r"Chemical potential $\mu_q$")
 ax1.set_ylabel(r"Pressure $P$")
@@ -133,8 +130,10 @@ ax1.text(0.025, P_T, r"$P_t$", ha="left", va="bottom", fontsize=16,
 ax1.legend(loc="upper left", framealpha=0.85)
 
 # ── Right panel: ε(P) ───────────────────────────────────────────────────────
-# Raw parametric curve
-ax2.plot(P_r, eps_r, "--", color=COLOR_RAW, lw=LW_RAW, label=r"Raw", zorder=2)
+# Raw parametric curve – stable segments in gray, unstable segment in red
+ax2.plot(P_r[mask_stable_l], eps_r[mask_stable_l], "--", color=COLOR_RAW,      lw=LW_RAW, label=r"Raw",                  zorder=2)
+ax2.plot(P_r[mask_unstable], eps_r[mask_unstable], "--", color=COLOR_UNSTABLE, lw=LW_RAW, label=r"Raw ($\mathrm{d}P/\mathrm{d}\mu_q < 0$)", zorder=2)
+ax2.plot(P_r[mask_stable_r], eps_r[mask_stable_r], "--", color=COLOR_RAW,      lw=LW_RAW, zorder=2)
 
 # Maxwell-constructed curve: two stable branches + vertical jump
 ax2.plot(
