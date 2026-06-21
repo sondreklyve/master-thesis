@@ -2,8 +2,6 @@
 
 **Mass-Radius Sequences and Parameter Sensitivity in the Quark-Meson-Diquark Model**
 
-Master's thesis by Sondre Klyve, NTNU (2026).
-
 This repository contains the full LaTeX source and all numerical code used to
 produce the results and figures in the thesis.
 
